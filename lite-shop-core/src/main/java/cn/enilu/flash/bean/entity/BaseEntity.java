@@ -33,10 +33,10 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "create_by",columnDefinition="bigint COMMENT '创建人'")
     @CreatedBy
     private Long createBy;
-    @JoinColumn(name="create_by", referencedColumnName = "id",  columnDefinition = "BIGINT COMMENT '借据ID'", insertable = false, updatable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue)
-    private User creator;
+//    @JoinColumn(name="create_by", referencedColumnName = "id",  columnDefinition = "BIGINT COMMENT '借据ID'", insertable = false, updatable = false)
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue)
+//    private User creator;
     @LastModifiedDate
     @Column(name = "modify_time",columnDefinition="DATETIME COMMENT '最后更新时间'")
     private Date modifyTime;

@@ -24,8 +24,8 @@ public class OrderItem extends ShopBaseEntity {
     private Goods goods;
     @Column(columnDefinition = "VARCHAR(16) COMMENT '单价'")
     private BigDecimal price;
-    @Column(columnDefinition = "VARCHAR COMMENT '数量'")
-    private BigDecimal count;
+    @Column(columnDefinition = "VARCHAR(16) COMMENT '数量'")
+    private BigDecimal amount;
     @Column(columnDefinition = "VARCHAR(16) COMMENT '合计'")
     private BigDecimal totalPrice;
 }

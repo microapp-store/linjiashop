@@ -1,7 +1,7 @@
 package cn.enilu.flash.bean.vo.query;
 
 import cn.enilu.flash.utils.Lists;
-import org.apache.commons.lang3.StringUtils;
+import cn.enilu.flash.utils.StringUtil;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.*;
@@ -25,7 +25,7 @@ public class DynamicSpecifications {
                     List<Predicate> predicates = Lists.newArrayList();
                     for (SearchFilter filter : filters) {
                         // nested path translate, 如Task的名为"user.name"的filedName, 转换为Task.user.name属性
-                        String[] names = StringUtils.split(filter.fieldName, ".");
+                        String[] names = StringUtil.split(filter.fieldName, ".");
                         Path expression = root.get(names[0]);
                         for (int i = 1; i < names.length; i++) {
                             expression = expression.get(names[i]);

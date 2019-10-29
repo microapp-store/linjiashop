@@ -11,6 +11,7 @@ import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 
 import cn.enilu.flash.utils.Maps;
+import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.utils.ToolUtil;
 import cn.enilu.flash.utils.factory.Page;
 
@@ -46,7 +47,7 @@ public class OrderItemController {
 	@RequestMapping(method = RequestMethod.DELETE)
 	@BussinessLog(value = "删除订单明细", key = "id",dict= CommonDict.class)
 	public Object remove(Long id){
-		if (ToolUtil.isEmpty(id)) {
+		if (id == null) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
 		}
 		orderItemService.delete(id);

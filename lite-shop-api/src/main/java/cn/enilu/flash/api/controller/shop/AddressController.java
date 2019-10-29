@@ -46,7 +46,7 @@ public class AddressController {
 	@RequestMapping(method = RequestMethod.DELETE)
 	@BussinessLog(value = "删除收货地址", key = "id",dict= CommonDict.class)
 	public Object remove(Long id){
-		if (ToolUtil.isEmpty(id)) {
+		if (id == null) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
 		}
 		addressService.delete(id);

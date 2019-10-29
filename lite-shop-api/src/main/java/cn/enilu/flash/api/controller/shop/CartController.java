@@ -46,7 +46,7 @@ public class CartController {
 	@RequestMapping(method = RequestMethod.DELETE)
 	@BussinessLog(value = "删除购物车", key = "id",dict= CommonDict.class)
 	public Object remove(Long id){
-		if (ToolUtil.isEmpty(id)) {
+		if (id == null) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
 		}
 		cartService.delete(id);

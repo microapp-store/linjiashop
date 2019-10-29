@@ -2,7 +2,7 @@ package cn.enilu.flash.core.factory;
 
 import cn.enilu.flash.bean.dictmap.base.AbstractDictMap;
 import cn.enilu.flash.utils.DateUtil;
-import cn.enilu.flash.utils.StringUtils;
+import cn.enilu.flash.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,7 +82,7 @@ public class Contrast {
                 PropertyDescriptor pd = new PropertyDescriptor(field.getName(), clazz);
                 Method getMethod = pd.getReadMethod();
                 Object o1 = getMethod.invoke(pojo1);
-                Object o2 = pojo2.get(StringUtils.firstCharToLowerCase(getMethod.getName().substring(3)));
+                Object o2 = pojo2.get(StringUtil.firstCharToLowerCase(getMethod.getName().substring(3)));
                 if (o1 == null || o2 == null) {
                     continue;
                 }
@@ -137,13 +137,13 @@ public class Contrast {
                 }
                 Method getMethod = null;
                 try {
-                    getMethod = clazz.getDeclaredMethod(prefix + StringUtils.firstCharToUpperCase(field.getName()));
+                    getMethod = clazz.getDeclaredMethod(prefix + StringUtil.firstCharToUpperCase(field.getName()));
                 } catch (java.lang.NoSuchMethodException e) {
                     System.err.println("this className:" + clazz.getName() + " is not methodName: " + e.getMessage());
                     continue;
                 }
                 Object o1 = getMethod.invoke(pojo1);
-                Object o2 = pojo2.get(StringUtils.firstCharToLowerCase(getMethod.getName().substring(prefixLength)));
+                Object o2 = pojo2.get(StringUtil.firstCharToLowerCase(getMethod.getName().substring(prefixLength)));
                 if (o1 == null || o2 == null) {
                     continue;
                 }
@@ -193,7 +193,7 @@ public class Contrast {
                     sb.append(dictMap.get(item) + "=" + value + ",");
                 }
             }
-            return StringUtils.removeSuffix(sb.toString(), ",");
+            return StringUtil.removeSuffix(sb.toString(), ",");
         } else {
             String fieldWarpperMethodName = dictMap.getFieldWarpperMethodName(key);
             String value = requests.get(key);

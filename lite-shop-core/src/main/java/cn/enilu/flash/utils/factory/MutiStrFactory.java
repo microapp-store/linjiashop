@@ -1,8 +1,7 @@
 package cn.enilu.flash.utils.factory;
 
 
-import cn.enilu.flash.utils.StringUtils;
-import cn.enilu.flash.utils.ToolUtil;
+import cn.enilu.flash.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,11 +48,11 @@ public class MutiStrFactory {
      * @Date 2017/4/27 16:44
      */
     public static List<Map<String,String>> parseKeyValue(String mutiString){
-        if(ToolUtil.isEmpty(mutiString)){
+        if(StringUtil.isEmpty(mutiString)){
             return new ArrayList<>();
         }else{
             ArrayList<Map<String,String>> results = new ArrayList<>();
-            String[] items = StringUtils.split(StringUtils.removeSuffix(mutiString, ITEM_SPLIT), ITEM_SPLIT);
+            String[] items = StringUtil.split(StringUtil.removeSuffix(mutiString, ITEM_SPLIT), ITEM_SPLIT);
             for (String item : items) {
                 String[] attrs = item.split(ATTR_SPLIT);
                 HashMap<String, String> itemMap = new HashMap<>(100);
@@ -72,11 +71,11 @@ public class MutiStrFactory {
      * @Date 2017/4/28 11:06
      */
     public static List<Map<String,String>> parseIdKeyValue(String mutiString){
-        if(ToolUtil.isEmpty(mutiString)){
+        if(StringUtil.isEmpty(mutiString)){
             return new ArrayList<>();
         }else{
             ArrayList<Map<String,String>> results = new ArrayList<>();
-            String[] items = StringUtils.split(StringUtils.removeSuffix(mutiString, ITEM_SPLIT), ITEM_SPLIT);
+            String[] items = StringUtil.split(StringUtil.removeSuffix(mutiString, ITEM_SPLIT), ITEM_SPLIT);
             for (String item : items) {
                 String[] attrs = item.split(ATTR_SPLIT);
                 HashMap<String, String> itemMap = new HashMap<>(100);

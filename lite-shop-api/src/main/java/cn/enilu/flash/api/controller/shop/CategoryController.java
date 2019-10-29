@@ -46,7 +46,7 @@ public class CategoryController {
 	@RequestMapping(method = RequestMethod.DELETE)
 	@BussinessLog(value = "删除商品类别", key = "id",dict= CommonDict.class)
 	public Object remove(Long id){
-		if (ToolUtil.isEmpty(id)) {
+		if (id == null) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
 		}
 		categoryService.delete(id);

@@ -11,10 +11,10 @@ import cn.enilu.flash.security.ShiroFactroy;
 import cn.enilu.flash.service.system.AccountService;
 import cn.enilu.flash.service.system.MenuService;
 import cn.enilu.flash.service.system.UserService;
-import cn.enilu.flash.utils.HttpKit;
+import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.MD5;
 import cn.enilu.flash.utils.Maps;
-import cn.enilu.flash.utils.StringUtils;
+import cn.enilu.flash.utils.StringUtil;
 import org.nutz.mapl.Mapl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,7 +75,7 @@ public class AccountController extends BaseController{
             Map<String, String> result = new HashMap<>(1);
             logger.info("token:{}",token);
             result.put("token", token);
-            LogManager.me().executeLog(LogTaskFactory.loginLog(user.getId(), HttpKit.getIp()));
+            LogManager.me().executeLog(LogTaskFactory.loginLog(user.getId(), HttpUtil.getIp()));
             return Rets.success(result);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -93,7 +93,7 @@ public class AccountController extends BaseController{
         String token = this.getToken(request);
         accountService.logout(token);
         Long idUser = getIdUser(request);
-        LogManager.me().executeLog(LogTaskFactory.exitLog(idUser, HttpKit.getIp()));
+        LogManager.me().executeLog(LogTaskFactory.exitLog(idUser, HttpUtil.getIp()));
         return Rets.success();
     }
 
@@ -107,7 +107,7 @@ public class AccountController extends BaseController{
         }
         if(idUser!=null){
             User user =  userService.get(idUser);
-            if(StringUtils.isEmpty(user.getRoleid())){
+            if(StringUtil.isEmpty(user.getRoleid())){
                 return Rets.failure("该用户未配置权限");
             }
             ShiroUser shiroUser = ShiroFactroy.me().shiroUser(user);
@@ -128,7 +128,7 @@ public class AccountController extends BaseController{
     @RequestMapping(value = "/updatePwd",method = RequestMethod.POST)
     public Object updatePwd( String oldPassword,String password, String rePassword){
         try {
-            User user = userService.get(getIdUser(HttpKit.getRequest()));
+            User user = userService.get(getIdUser(HttpUtil.getRequest()));
             if(ApiConstants.ADMIN_ACCOUNT.equals(user.getAccount())){
                 return Rets.failure("不能修改超级管理员密码");
             }

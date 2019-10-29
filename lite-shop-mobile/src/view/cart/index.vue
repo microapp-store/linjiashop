@@ -1,10 +1,5 @@
 <template>
   <div>
-    <van-nav-bar
-            left-text="返回"
-            left-arrow
-            @click-left="onClickLeft"
-    />
     <van-checkbox-group class="card-goods" v-model="checkedGoods">
       <van-checkbox
         class="card-goods__item"
@@ -27,12 +22,17 @@
       :button-text="submitBarText"
       @submit="onSubmit"
     />
-
+    <van-tabbar v-model="activeFooter">
+      <van-tabbar-item icon="home-o"  replace to="/index">首页</van-tabbar-item>
+      <van-tabbar-item icon="search"  replace to="/search">发现</van-tabbar-item>
+      <van-tabbar-item icon="cart-o"  replace to="/cart">订单</van-tabbar-item>
+      <van-tabbar-item icon="user-o"  replace to="/user">我的</van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 
 <script>
-import { Checkbox, CheckboxGroup, Card, SubmitBar, Toast, NavBar } from 'vant';
+import { Checkbox, CheckboxGroup, Card, SubmitBar, Toast, NavBar, Tabbar, TabbarItem } from 'vant';
 
 export default {
   components: {
@@ -40,11 +40,14 @@ export default {
     [Checkbox.name]: Checkbox,
     [SubmitBar.name]: SubmitBar,
     [CheckboxGroup.name]: CheckboxGroup,
-    [NavBar.name]: NavBar
+    [NavBar.name]: NavBar,
+    [Tabbar.name]: Tabbar,
+    [TabbarItem.name]: TabbarItem
   },
 
   data() {
     return {
+      activeFooter: 2,
       checkedGoods: ['1', '2', '3'],
       goods: [{
         id: '1',
@@ -83,9 +86,6 @@ export default {
   },
 
   methods: {
-    onClickLeft(){
-      this.$router.go(-1)
-    },
     formatPrice(price) {
       return (price / 100).toFixed(2);
     },
@@ -98,8 +98,10 @@ export default {
 </script>
 
 <style lang="less">
+  .van-submit-bar{
+   bottom:48px;
+  }
 .card-goods {
-  padding: 10px 0;
   background-color: #fff;
 
   &__item {

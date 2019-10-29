@@ -3,11 +3,11 @@
   "codeConfig": {
     "type": "cn.enilu.flash.code.CodeConfig",
     "fields": {
-      entityModel: "flash-core",
-      daoModel: "flash-core",
-      serviceModel: "flash-core",
-      controllerModel: "flash-api",
-      viewModel: "flash-vue-admin"
+      entityModel: "lite-shop-core",
+      daoModel: "lite-shop-core",
+      serviceModel: "lite-shop-core",
+      controllerModel: "lite-shop-api",
+      viewModel: "lite-shop-admin"
     }
   }
 }

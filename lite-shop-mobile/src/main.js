@@ -4,8 +4,8 @@ import { router } from './router';
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload, {
   preLoad: 1.3,
-  error: 'dist/error.png',
-  loading: 'dist/loading.gif',
+  error: 'svg/loading.svg',
+  loading: 'svg/loading.svg',
   attempt: 1
 })
 new Vue({

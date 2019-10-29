@@ -4,10 +4,10 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 const routes = [
-  // {
-  //   path: '/',
-  //   redirect: 'index'
-  // },
+  {
+    path: '*',
+    redirect: '/index'
+  },
   {
     name: 'index',
     component: () => import('./view/index'),

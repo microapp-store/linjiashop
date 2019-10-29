@@ -1,5 +1,6 @@
 package cn.enilu.flash.bean.entity;
 
+import cn.enilu.flash.bean.entity.shop.ShopUser;
 import cn.enilu.flash.bean.entity.system.User;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -13,16 +14,15 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-
-
 /**
- * 后端业务实体基类
- * Created  on 2019/1/8 0002.
- * @author enilu
+ * 前端业务实体基类
+ * @author ：enilu
+ * @date ：Created in 2019/10/29 19:09
  */
+
 @MappedSuperclass
 @Data
-public abstract class BaseEntity implements Serializable {
+public abstract class ShopBaseEntity implements Serializable {
 
     @Id
     @GeneratedValue
@@ -36,7 +36,7 @@ public abstract class BaseEntity implements Serializable {
     @JoinColumn(name="create_by", referencedColumnName = "id",  columnDefinition = "BIGINT COMMENT '借据ID'", insertable = false, updatable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     @JSONField(serialzeFeatures = SerializerFeature.WriteMapNullValue)
-    private User creator;
+    private ShopUser creator;
     @LastModifiedDate
     @Column(name = "modify_time",columnDefinition="DATETIME COMMENT '最后更新时间'")
     private Date modifyTime;

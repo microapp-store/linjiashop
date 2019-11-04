@@ -1,4 +1,4 @@
-
+import { getAllCategories } from '@/api/login'
 import {
     Card,
     Cell,
@@ -12,7 +12,8 @@ import {
     Tab,
     Tabbar,
     TabbarItem,
-    Tabs
+    Tabs,
+    Toast
 } from 'vant';
 
 export default {
@@ -29,6 +30,7 @@ export default {
         [Tab.name]: Tab,
         [Tabs.name]: Tabs,
         [Card.name]: Card,
+        [Toast.name]: Toast,
         Lazyload
 
 
@@ -92,7 +94,19 @@ export default {
             activeNav: 0
         }
     },
+    mounted() {
+        this.init()
+    },
     methods: {
+        init() {
+            getAllCategories().then(response => {
+                console.log(response)
+
+
+            }).catch((err) => {
+                Toast(err);
+            })
+        },
         clickNav(index,title){
             this.$router.push({path:'category',query:{index:index,title:title}})
         },

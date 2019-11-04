@@ -1,4 +1,4 @@
-package cn.enilu.flash.api.interceptor;
+package cn.enilu.flash.security;
 
 import cn.enilu.flash.security.JwtToken;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;

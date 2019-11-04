@@ -1,6 +1,6 @@
 package cn.enilu.flash.security;
 
-import cn.enilu.flash.bean.entity.system.User;
+import cn.enilu.flash.bean.vo.JwtUser;
 import cn.enilu.flash.utils.HttpUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -68,13 +68,13 @@ public class JwtUtil {
      * @param user 用户
      * @return 加密的token
      */
-    public static String sign(User user) {
+    public static String sign(JwtUser user) {
         try {
             Date date = new Date(System.currentTimeMillis()+EXPIRE_TIME);
             Algorithm algorithm = Algorithm.HMAC256(user.getPassword());
             // 附带username信息
             return JWT.create()
-                    .withClaim("username", user.getAccount())
+                    .withClaim("username", user.getUserName())
                     .withClaim("userId",user.getId())
                     .withExpiresAt(date)
                     .sign(algorithm);

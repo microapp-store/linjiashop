@@ -3,7 +3,7 @@ package cn.enilu.flash.api.controller.system;
 import cn.enilu.flash.api.controller.BaseController;
 import cn.enilu.flash.bean.constant.state.MenuStatus;
 import cn.enilu.flash.bean.core.BussinessLog;
-import cn.enilu.flash.bean.core.ShiroUser;
+import cn.enilu.flash.bean.core.AuthorizationUser;
 import cn.enilu.flash.bean.dictmap.MenuDict;
 import cn.enilu.flash.bean.entity.system.Menu;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
@@ -51,7 +51,7 @@ public class MenuController extends BaseController {
     @RequestMapping(value = "/listForRouter", method = RequestMethod.GET)
     @RequiresPermissions(value = {Permission.MENU})
     public Object listForRouter() {
-        ShiroUser shiroUser = tokenCache.getUser(HttpUtil.getToken());
+        AuthorizationUser shiroUser = tokenCache.getUser(HttpUtil.getToken());
 
         List<RouterMenu> list = menuService.getSideBarMenus(shiroUser.getRoleList());
         return Rets.success(list);

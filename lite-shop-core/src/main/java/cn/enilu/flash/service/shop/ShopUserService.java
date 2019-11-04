@@ -16,5 +16,8 @@ public class ShopUserService extends BaseService<ShopUser,Long,ShopUserRepositor
     @Autowired
     private ShopUserRepository shopUserRepository;
 
+    public ShopUser findByMobile(String mobile) {
+        return shopUserRepository.findByMobile(mobile);
+    }
 }
 

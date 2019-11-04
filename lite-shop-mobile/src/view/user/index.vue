@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img class="user-poster" src="https://img.yzcdn.cn/public_files/2017/10/23/8690bb321356070e0b8c4404d087f8fd.png">
+    <img class="user-poster" src="@/assets/img/banner.jpg" >
     <van-row class="user-links">
       <van-col span="6">
         <van-icon name="pending-payment" />
@@ -66,7 +66,6 @@ export default {
 .user {
   &-poster {
     width: 100%;
-    height: 53vw;
     display: block;
   }
 

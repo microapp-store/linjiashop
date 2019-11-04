@@ -1,6 +1,6 @@
 package cn.enilu.flash.cache;
 
-import cn.enilu.flash.bean.core.ShiroUser;
+import cn.enilu.flash.bean.core.AuthorizationUser;
 import cn.enilu.flash.cache.impl.EhcacheDao;
 import cn.enilu.flash.utils.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +30,10 @@ public   class TokenCache {
         ehcacheDao.hdel(EhcacheDao.SESSION,token+"user");
     }
 
-    public void setUser(String token, ShiroUser shiroUser){
+    public void setUser(String token, AuthorizationUser shiroUser){
         ehcacheDao.hset(EhcacheDao.SESSION,token+"user",shiroUser);
     }
-    public ShiroUser getUser(String token){
-        return ehcacheDao.hget(EhcacheDao.SESSION,token+"user",ShiroUser.class);
+    public AuthorizationUser getUser(String token){
+        return ehcacheDao.hget(EhcacheDao.SESSION,token+"user", AuthorizationUser.class);
     }
 }

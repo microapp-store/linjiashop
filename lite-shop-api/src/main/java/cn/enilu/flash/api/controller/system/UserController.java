@@ -14,7 +14,7 @@ import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.core.factory.UserFactory;
-import cn.enilu.flash.service.system.UserService;
+import cn.enilu.flash.service.system.ManagerService;
 import cn.enilu.flash.utils.*;
 import cn.enilu.flash.utils.factory.Page;
 import cn.enilu.flash.warpper.UserWarpper;
@@ -39,7 +39,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController extends BaseController {
     @Autowired
-    private UserService userService;
+    private ManagerService managerService;
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @RequiresPermissions(value = {Permission.USER})
     public Object list(@RequestParam(required = false) String account,
@@ -52,7 +52,7 @@ public class UserController extends BaseController {
             page.addFilter(SearchFilter.build("account", SearchFilter.Operator.LIKE, account));
         }
         page.addFilter(SearchFilter.build("status",SearchFilter.Operator.GT,0));
-        page = userService.queryPage(page);
+        page = managerService.queryPage(page);
         List list = (List) new UserWarpper(BeanUtil.objectsToMaps(page.getRecords())).warp();
         page.setRecords(list);
         return Rets.success(page);
@@ -63,7 +63,7 @@ public class UserController extends BaseController {
     public Object save( @Valid UserDto user,BindingResult result){
         if(user.getId()==null) {
             // 判断账号是否重复
-            User theUser = userService.findByAccount(user.getAccount());
+            User theUser = managerService.findByAccount(user.getAccount());
             if (theUser != null) {
                 throw new ApplicationException(BizExceptionEnum.USER_ALREADY_REG);
             }
@@ -71,10 +71,10 @@ public class UserController extends BaseController {
             user.setSalt(RandomUtil.getRandomString(5));
             user.setPassword(MD5.md5(user.getPassword(), user.getSalt()));
             user.setStatus(ManagerStatus.OK.getCode());
-            userService.insert(UserFactory.createUser(user, new User()));
+            managerService.insert(UserFactory.createUser(user, new User()));
         }else{
-            User oldUser = userService.get(user.getId());
-            userService.update(UserFactory.updateUser(user,oldUser));
+            User oldUser = managerService.get(user.getId());
+            managerService.update(UserFactory.updateUser(user,oldUser));
         }
         return Rets.success();
     }
@@ -89,9 +89,9 @@ public class UserController extends BaseController {
         if(userId.intValue()<=2){
             return Rets.failure("不能删除初始用户");
         }
-        User user = userService.get(userId);
+        User user = managerService.get(userId);
         user.setStatus(ManagerStatus.DELETED.getCode());
-        userService.update(user);
+        managerService.update(user);
         return Rets.success();
     }
     @BussinessLog(value="设置用户角色",key="userId",dict=UserDict.class)
@@ -105,9 +105,9 @@ public class UserController extends BaseController {
         if (userId.equals(Const.ADMIN_ID)) {
             throw new ApplicationException(BizExceptionEnum.CANT_CHANGE_ADMIN);
         }
-        User user = userService.get(userId);
+        User user = managerService.get(userId);
         user.setRoleid(roleIds);
-        userService.update(user);
+        managerService.update(user);
         return Rets.success();
     }
 

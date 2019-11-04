@@ -1,15 +1,16 @@
 package cn.enilu.flash.api.controller;
 
 import cn.enilu.flash.api.utils.ApiConstants;
-import cn.enilu.flash.bean.core.ShiroUser;
+import cn.enilu.flash.bean.core.AuthorizationUser;
 import cn.enilu.flash.bean.entity.system.User;
+import cn.enilu.flash.bean.vo.JwtUser;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.core.log.LogManager;
 import cn.enilu.flash.core.log.LogTaskFactory;
 import cn.enilu.flash.security.JwtUtil;
-import cn.enilu.flash.security.ShiroFactroy;
+import cn.enilu.flash.security.UserService;
 import cn.enilu.flash.service.system.AccountService;
-import cn.enilu.flash.service.system.UserService;
+import cn.enilu.flash.service.system.ManagerService;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.MD5;
 import cn.enilu.flash.utils.Maps;
@@ -39,7 +40,7 @@ public class AccountController extends BaseController{
     private Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     @Autowired
-    private UserService userService;
+    private ManagerService managerService;
     @Autowired
     private AccountService accountService;
     /**
@@ -57,7 +58,7 @@ public class AccountController extends BaseController{
         try {
             logger.info("用户登录:" + userName + ",密码:" + password);
             //1,
-            User user = userService.findByAccount(userName);
+            User user = managerService.findByAccount(userName);
             if (user == null) {
                 return Rets.failure("该用户不存在");
             }
@@ -67,7 +68,7 @@ public class AccountController extends BaseController{
                 return Rets.failure("输入的密码错误");
             }
 
-            String token = JwtUtil.sign(user);
+            String token = JwtUtil.sign(new JwtUser(user));
             Map<String, String> result = new HashMap<>(1);
             logger.info("token:{}",token);
             result.put("token", token);
@@ -103,11 +104,11 @@ public class AccountController extends BaseController{
             return Rets.expire();
         }
         if(idUser!=null){
-            User user =  userService.get(idUser);
+            User user =  managerService.get(idUser);
             if(StringUtil.isEmpty(user.getRoleid())){
                 return Rets.failure("该用户未配置权限");
             }
-            ShiroUser shiroUser = ShiroFactroy.me().shiroUser(user);
+            AuthorizationUser shiroUser = UserService.me().getAuthorizationInfo(user.getAccount());
             Map map = Maps.newHashMap("name",user.getName(),"role","admin","roles", shiroUser.getRoleCodes());
             map.put("permissions",shiroUser.getUrls());
             Map profile = (Map) Mapl.toMaplist(user);
@@ -122,7 +123,7 @@ public class AccountController extends BaseController{
     @RequestMapping(value = "/updatePwd",method = RequestMethod.POST)
     public Object updatePwd( String oldPassword,String password, String rePassword){
         try {
-            User user = userService.get(getIdUser(HttpUtil.getRequest()));
+            User user = managerService.get(getIdUser(HttpUtil.getRequest()));
             if(ApiConstants.ADMIN_ACCOUNT.equals(user.getAccount())){
                 return Rets.failure("不能修改超级管理员密码");
             }
@@ -135,7 +136,7 @@ public class AccountController extends BaseController{
                 return Rets.failure("新密码前后不一致");
             }
             user.setPassword(MD5.md5(password, user.getSalt()));
-            userService.update(user);
+            managerService.update(user);
             return Rets.success();
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

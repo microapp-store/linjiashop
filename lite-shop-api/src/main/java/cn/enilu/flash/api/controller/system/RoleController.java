@@ -15,7 +15,7 @@ import cn.enilu.flash.bean.vo.node.ZTreeNode;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.system.LogObjectHolder;
 import cn.enilu.flash.service.system.RoleService;
-import cn.enilu.flash.service.system.UserService;
+import cn.enilu.flash.service.system.ManagerService;
 import cn.enilu.flash.service.system.impl.ConstantFactory;
 import cn.enilu.flash.utils.*;
 import cn.enilu.flash.warpper.RoleWarpper;
@@ -41,7 +41,7 @@ public class RoleController extends BaseController {
     @Autowired
     private RoleService roleService;
     @Autowired
-    private UserService userService;
+    private ManagerService managerService;
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @RequiresPermissions(value = {Permission.ROLE})
     public Object list(String name){
@@ -76,7 +76,7 @@ public class RoleController extends BaseController {
         if(roleId.intValue()<2){
             return Rets.failure("不能删除初始角色");
         }
-        List<User> userList = userService.queryAll(SearchFilter.build("roleid", SearchFilter.Operator.EQ,String.valueOf(roleId)));
+        List<User> userList = managerService.queryAll(SearchFilter.build("roleid", SearchFilter.Operator.EQ,String.valueOf(roleId)));
         if(!userList.isEmpty()){
             return Rets.failure("有用户使用该角色，禁止删除");
         }
@@ -109,7 +109,7 @@ public class RoleController extends BaseController {
     @RequestMapping(value = "/roleTreeListByIdUser", method = RequestMethod.GET)
     @RequiresPermissions(value = {Permission.ROLE})
     public Object roleTreeListByIdUser(Long idUser) {
-        User user = userService.get(idUser);
+        User user = managerService.get(idUser);
         String roleIds = user.getRoleid();
         List<ZTreeNode> roleTreeList = null;
         if (StringUtil.isEmpty(roleIds)) {

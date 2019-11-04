@@ -1,4 +1,4 @@
-package cn.enilu.flash.api.config;
+package cn.enilu.flash.config;
 
 import cn.enilu.flash.security.JwtFilter;
 import cn.enilu.flash.security.ApiRealm;

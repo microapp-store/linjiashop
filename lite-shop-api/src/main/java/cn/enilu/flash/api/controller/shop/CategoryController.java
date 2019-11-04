@@ -1,5 +1,6 @@
 package cn.enilu.flash.api.controller.shop;
 
+import cn.enilu.flash.api.controller.BaseController;
 import cn.enilu.flash.bean.entity.shop.Category;
 import cn.enilu.flash.service.shop.CategoryService;
 
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/shop/category")
-public class CategoryController {
+public class CategoryController extends BaseController {
 	private  Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private CategoryService categoryService;

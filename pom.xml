@@ -12,6 +12,7 @@
         <module>lite-shop-core</module>
         <module>lite-shop-generator</module>
         <module>lite-shop-api</module>
+        <module>lite-h5-api</module>
     </modules>
 
     <properties>

@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
 public class AccountService {
     @Autowired
     private TokenCache tokenCache;
-    @Autowired
-    private UserService userService;
 
 
 

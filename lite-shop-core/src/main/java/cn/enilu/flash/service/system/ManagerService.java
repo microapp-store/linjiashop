@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * @author enilu
  */
 @Service
-public class UserService  extends BaseService<User,Long,UserRepository> {
+public class ManagerService extends BaseService<User,Long,UserRepository> {
     @Autowired
     private UserRepository userRepository;
     @Autowired

@@ -1,7 +1,7 @@
 {
-  "name": "flash-vue-admin",
+  "name": "lite-shop-admin",
   "version": "4.1.0",
-  "description": "A web-flash Admin with Element UI & axios & iconfont & permission control & lint",
+  "description": "A lite shop Admin with Element UI & axios & iconfont & permission control & lint",
   "author": "enilu<enilut@qq.com>",
   "license": "MIT",
   "scripts": {

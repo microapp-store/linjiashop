@@ -3,8 +3,8 @@
  
  
  ```sql
- CREATE DATABASE IF NOT EXISTS liteshop DEFAULT CHARSET utf8 COLLATE utf8_general_ci; 
-    CREATE USER 'liteshop'@'%' IDENTIFIED BY 'liteshop191028';
-    GRANT ALL privileges ON liteshop.* TO 'liteshop'@'%';
-    flush privileges;
+CREATE DATABASE IF NOT EXISTS liteshop DEFAULT CHARSET utf8 COLLATE utf8_general_ci; 
+CREATE USER 'liteshop'@'%' IDENTIFIED BY 'liteshop191028';
+GRANT ALL privileges ON liteshop.* TO 'liteshop'@'%';
+flush privileges;
 ```

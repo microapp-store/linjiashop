@@ -13,13 +13,21 @@
 
         <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
                   @current-change="handleCurrentChange">
-#foreach ($column in $table.LabeledColumns)
-            <el-table-column label="${column.label}">
+            <el-table-column label="名称">
                 <template slot-scope="scope">
-                    {{scope.row.${column.FieldName}}}
+                    {{scope.row.name}}
                 </template>
             </el-table-column>
-#end
+            <el-table-column label="链接地址">
+                <template slot-scope="scope">
+                    {{scope.row.url}}
+                </template>
+            </el-table-column>
+            <el-table-column label="图标">
+                <template slot-scope="scope">
+                    {{scope.row.icon}}
+                </template>
+            </el-table-column>
         </el-table>
 
         <el-pagination
@@ -40,13 +48,21 @@
                 width="70%">
             <el-form ref="form" :model="form" :rules="rules" label-width="150px">
                 <el-row>
-#foreach ($column in $table.LabeledColumns)
                     <el-col :span="12">
-                        <el-form-item label="${column.label}"  >
-                            <el-input v-model="form.${column.FieldName}" minlength=1></el-input>
+                        <el-form-item label="名称"  >
+                            <el-input v-model="form.name" minlength=1></el-input>
                         </el-form-item>
                     </el-col>
-#end
+                    <el-col :span="12">
+                        <el-form-item label="链接地址"  >
+                            <el-input v-model="form.url" minlength=1></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="图标"  >
+                            <el-input v-model="form.icon" minlength=1></el-input>
+                        </el-form-item>
+                    </el-col>
                 </el-row>
                 <el-form-item>
                     <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
@@ -58,7 +74,7 @@
     </div>
 </template>
 
-<script src="./${table.entityNameLowerFirstChar}.js"></script>
+<script src="./category.js"></script>
 
 
 <style rel="stylesheet/scss" lang="scss" scoped>

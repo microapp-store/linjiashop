@@ -1,16 +1,17 @@
-#set($refForm = "this.$refs['form']")
-import { remove, getList, save } from '@/api/${table.lastPackageName}/${table.entityNameLowerFirstChar}'
+import { remove, getList, save } from '@/api/shop/orderItem'
 
 export default {
   data() {
     return {
       formVisible: false,
-      formTitle: '添加${table.Label}',
+      formTitle: '添加订单明细',
       isAdd: true,
       form: {
-#foreach ($column in $table.LabeledColumns)
-        ${column.FieldName}:'',
-#end
+        idOrder:'',
+        idGoods:'',
+        price:'',
+        amount:'',
+        totalPrice:'',
         id: ''
       },
       listQuery: {
@@ -96,25 +97,29 @@ export default {
     },
     resetForm() {
       this.form = {
-#foreach ($column in $table.LabeledColumns)
-        ${column.FieldName}:'',
-#end
+        idOrder:'',
+        idGoods:'',
+        price:'',
+        amount:'',
+        totalPrice:'',
         id: ''
       }
     },
     add() {
       this.resetForm()
-      this.formTitle = '添加${table.Label}',
+      this.formTitle = '添加订单明细',
       this.formVisible = true
       this.isAdd = true
     },
     save() {
-      ${refForm}.validate((valid) => {
+      this.$refs['form'].validate((valid) => {
         if (valid) {
           save({
-#foreach ($column in $table.LabeledColumns)
-      ${column.FieldName}:this.form.${column.FieldName},
-#end
+      idOrder:this.form.idOrder,
+      idGoods:this.form.idGoods,
+      price:this.form.price,
+      amount:this.form.amount,
+      totalPrice:this.form.totalPrice,
             id: this.form.id
           }).then(response => {
             this.$message({
@@ -143,7 +148,7 @@ export default {
       if (this.checkSel()) {
         this.isAdd = false
         this.form = this.selRow
-        this.formTitle = '编辑${table.Label}'
+        this.formTitle = '编辑订单明细'
         this.formVisible = true
       }
     },

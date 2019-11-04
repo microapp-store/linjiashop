@@ -22,7 +22,7 @@ public class Goods extends BaseEntity {
     private String  gallery;
     @Column(name="id_category",columnDefinition = "BIGINT COMMENT '类别id'")
     private Long idCategory;
-    @JoinColumn(name="id_category", referencedColumnName = "id",  columnDefinition = "BIGINT COMMENT '类别id'", insertable = false, updatable = false)
+    @JoinColumn(name="id_category", insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
     @Column(columnDefinition = "TEXT COMMENT '产品详情'")

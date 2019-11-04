@@ -15,7 +15,6 @@ export default {
     loginLog: 'Login Log',
     log: 'Bussiness Log',
     cfg: 'Config',
-
     banner: 'Banner',
     article: 'Article',
     editArticle: 'Edit Article',
@@ -26,7 +25,13 @@ export default {
     swagger: 'Docs',
     msg: 'History',
     msgTpl: 'Template',
-    msgSender: 'Sender'
+    msgSender: 'Sender',
+    shopMgr:'Shop',
+    category:'Categories',
+    shopUser:'Customer',
+    goods:'Goods',
+    order:'Orders',
+    cart:'Carts'
   },
   navbar: {
     logOut: 'Log Out',

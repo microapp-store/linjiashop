@@ -1,16 +1,18 @@
-#set($refForm = "this.$refs['form']")
-import { remove, getList, save } from '@/api/${table.lastPackageName}/${table.entityNameLowerFirstChar}'
+import { remove, getList, save } from '@/api/shop/goods'
 
 export default {
   data() {
     return {
       formVisible: false,
-      formTitle: '添加${table.Label}',
+      formTitle: '添加商品',
       isAdd: true,
       form: {
-#foreach ($column in $table.LabeledColumns)
-        ${column.FieldName}:'',
-#end
+        name:'',
+        pic:'',
+        gallery:'',
+        idCategory:'',
+        detail:'',
+        specifications:'',
         id: ''
       },
       listQuery: {
@@ -96,25 +98,31 @@ export default {
     },
     resetForm() {
       this.form = {
-#foreach ($column in $table.LabeledColumns)
-        ${column.FieldName}:'',
-#end
+        name:'',
+        pic:'',
+        gallery:'',
+        idCategory:'',
+        detail:'',
+        specifications:'',
         id: ''
       }
     },
     add() {
       this.resetForm()
-      this.formTitle = '添加${table.Label}',
+      this.formTitle = '添加商品',
       this.formVisible = true
       this.isAdd = true
     },
     save() {
-      ${refForm}.validate((valid) => {
+      this.$refs['form'].validate((valid) => {
         if (valid) {
           save({
-#foreach ($column in $table.LabeledColumns)
-      ${column.FieldName}:this.form.${column.FieldName},
-#end
+      name:this.form.name,
+      pic:this.form.pic,
+      gallery:this.form.gallery,
+      idCategory:this.form.idCategory,
+      detail:this.form.detail,
+      specifications:this.form.specifications,
             id: this.form.id
           }).then(response => {
             this.$message({
@@ -143,7 +151,7 @@ export default {
       if (this.checkSel()) {
         this.isAdd = false
         this.form = this.selRow
-        this.formTitle = '编辑${table.Label}'
+        this.formTitle = '编辑商品'
         this.formVisible = true
       }
     },

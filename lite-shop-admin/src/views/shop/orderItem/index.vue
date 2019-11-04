@@ -13,13 +13,31 @@
 
         <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
                   @current-change="handleCurrentChange">
-#foreach ($column in $table.LabeledColumns)
-            <el-table-column label="${column.label}">
+            <el-table-column label="所属订单id">
                 <template slot-scope="scope">
-                    {{scope.row.${column.FieldName}}}
+                    {{scope.row.idOrder}}
                 </template>
             </el-table-column>
-#end
+            <el-table-column label="商品id">
+                <template slot-scope="scope">
+                    {{scope.row.idGoods}}
+                </template>
+            </el-table-column>
+            <el-table-column label="单价">
+                <template slot-scope="scope">
+                    {{scope.row.price}}
+                </template>
+            </el-table-column>
+            <el-table-column label="数量">
+                <template slot-scope="scope">
+                    {{scope.row.amount}}
+                </template>
+            </el-table-column>
+            <el-table-column label="合计">
+                <template slot-scope="scope">
+                    {{scope.row.totalPrice}}
+                </template>
+            </el-table-column>
         </el-table>
 
         <el-pagination
@@ -40,13 +58,31 @@
                 width="70%">
             <el-form ref="form" :model="form" :rules="rules" label-width="150px">
                 <el-row>
-#foreach ($column in $table.LabeledColumns)
                     <el-col :span="12">
-                        <el-form-item label="${column.label}"  >
-                            <el-input v-model="form.${column.FieldName}" minlength=1></el-input>
+                        <el-form-item label="所属订单id"  >
+                            <el-input v-model="form.idOrder" minlength=1></el-input>
                         </el-form-item>
                     </el-col>
-#end
+                    <el-col :span="12">
+                        <el-form-item label="商品id"  >
+                            <el-input v-model="form.idGoods" minlength=1></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="单价"  >
+                            <el-input v-model="form.price" minlength=1></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="数量"  >
+                            <el-input v-model="form.amount" minlength=1></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="合计"  >
+                            <el-input v-model="form.totalPrice" minlength=1></el-input>
+                        </el-form-item>
+                    </el-col>
                 </el-row>
                 <el-form-item>
                     <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
@@ -58,7 +94,7 @@
     </div>
 </template>
 
-<script src="./${table.entityNameLowerFirstChar}.js"></script>
+<script src="./orderItem.js"></script>
 
 
 <style rel="stylesheet/scss" lang="scss" scoped>

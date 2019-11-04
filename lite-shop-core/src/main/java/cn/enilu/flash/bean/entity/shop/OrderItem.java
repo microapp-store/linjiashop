@@ -19,7 +19,7 @@ public class OrderItem extends ShopBaseEntity {
     private Long idOrder;
     @Column(name="id_goods",columnDefinition = "BIGINT COMMENT '商品id'")
     private Long idGoods;
-    @JoinColumn(name="id_goods", referencedColumnName = "id",  columnDefinition = "BIGINT COMMENT '商品id'", insertable = false, updatable = false)
+    @JoinColumn(name="id_goods", insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
     private Goods goods;
     @Column(columnDefinition = "VARCHAR(16) COMMENT '单价'")

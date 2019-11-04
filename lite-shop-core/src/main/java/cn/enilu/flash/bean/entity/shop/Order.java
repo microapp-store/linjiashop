@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 public class Order extends ShopBaseEntity {
     @Column(name="id_user",columnDefinition = "BIGINT COMMENT '用户id'")
     private Long idUser;
-    @JoinColumn(name="id_user", referencedColumnName = "id",  columnDefinition = "BIGINT COMMENT '类别id'", insertable = false, updatable = false)
+    @JoinColumn(name="id_user", insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
     private ShopUser user;
     @Column(columnDefinition = "VARCHAR(32) COMMENT '订单号'")
@@ -26,7 +26,7 @@ public class Order extends ShopBaseEntity {
     private Integer status;
     @Column(name="id_address",columnDefinition = "BIGINT COMMENT '收货信息'")
     private Long idAddress;
-    @JoinColumn(name="id_address", referencedColumnName = "id",  columnDefinition = "BIGINT COMMENT '类别id'", insertable = false, updatable = false)
+    @JoinColumn(name="id_address",  insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
     private Address address;
     @Column(columnDefinition = "VARCHAR(64) COMMENT '订单备注'")

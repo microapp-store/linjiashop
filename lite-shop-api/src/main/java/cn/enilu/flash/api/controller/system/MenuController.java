@@ -49,6 +49,7 @@ public class MenuController extends BaseController {
     private TokenCache tokenCache;
 
     @RequestMapping(value = "/listForRouter", method = RequestMethod.GET)
+    @RequiresPermissions(value = {Permission.MENU})
     public Object listForRouter() {
         ShiroUser shiroUser = tokenCache.getUser(HttpUtil.getToken());
 
@@ -56,6 +57,7 @@ public class MenuController extends BaseController {
         return Rets.success(list);
     }
     @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequiresPermissions(value = {Permission.MENU})
     public Object list() {
         List<MenuNode> list = menuService.getMenus();
         return Rets.success(list);

@@ -16,12 +16,12 @@ import javax.persistence.*;
 public class Cart extends ShopBaseEntity {
     @Column(name="id_user",columnDefinition = "BIGINT COMMENT '用户id'")
     private Long idUser;
-    @JoinColumn(name="id_user", referencedColumnName = "id",  columnDefinition = "BIGINT COMMENT '类别id'", insertable = false, updatable = false)
+    @JoinColumn(name="id_user", insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
     private ShopUser user;
     @Column(name="id_goods",columnDefinition = "BIGINT COMMENT '商品id'")
     private Long idGoods;
-    @JoinColumn(name="id_goods", referencedColumnName = "id",  columnDefinition = "BIGINT COMMENT '商品id'", insertable = false, updatable = false)
+    @JoinColumn(name="id_goods", insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
     private Goods goods;
     @Column(columnDefinition = "VARCHAR(32) COMMENT '产品规格'")

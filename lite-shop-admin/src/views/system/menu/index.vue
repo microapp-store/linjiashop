@@ -97,7 +97,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="组件" prop="num">
+              <el-form-item label="组件">
                 <el-input v-model="form.component"></el-input>
               </el-form-item>
             </el-col>

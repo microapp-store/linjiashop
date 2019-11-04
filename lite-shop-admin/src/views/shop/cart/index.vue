@@ -13,13 +13,21 @@
 
         <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
                   @current-change="handleCurrentChange">
-#foreach ($column in $table.LabeledColumns)
-            <el-table-column label="${column.label}">
+            <el-table-column label="用户id">
                 <template slot-scope="scope">
-                    {{scope.row.${column.FieldName}}}
+                    {{scope.row.idUser}}
                 </template>
             </el-table-column>
-#end
+            <el-table-column label="商品id">
+                <template slot-scope="scope">
+                    {{scope.row.idGoods}}
+                </template>
+            </el-table-column>
+            <el-table-column label="产品规格">
+                <template slot-scope="scope">
+                    {{scope.row.specifications}}
+                </template>
+            </el-table-column>
         </el-table>
 
         <el-pagination
@@ -40,13 +48,21 @@
                 width="70%">
             <el-form ref="form" :model="form" :rules="rules" label-width="150px">
                 <el-row>
-#foreach ($column in $table.LabeledColumns)
                     <el-col :span="12">
-                        <el-form-item label="${column.label}"  >
-                            <el-input v-model="form.${column.FieldName}" minlength=1></el-input>
+                        <el-form-item label="用户id"  >
+                            <el-input v-model="form.idUser" minlength=1></el-input>
                         </el-form-item>
                     </el-col>
-#end
+                    <el-col :span="12">
+                        <el-form-item label="商品id"  >
+                            <el-input v-model="form.idGoods" minlength=1></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="产品规格"  >
+                            <el-input v-model="form.specifications" minlength=1></el-input>
+                        </el-form-item>
+                    </el-col>
                 </el-row>
                 <el-form-item>
                     <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
@@ -58,7 +74,7 @@
     </div>
 </template>
 
-<script src="./${table.entityNameLowerFirstChar}.js"></script>
+<script src="./cart.js"></script>
 
 
 <style rel="stylesheet/scss" lang="scss" scoped>

@@ -25,7 +25,13 @@ export default {
     messageMgr:'消息管理',
     msg:'历史消息',
     msgTpl:'消息模板',
-    msgSender:'消息发送器'
+    msgSender:'消息发送器',
+    shopMgr:'商城管理',
+    shopUser:'用户管理',
+    category:'商品类别',
+    goods:'商品管理',
+    order:'订单管理',
+    cart:'购物车'
   },
   navbar: {
     logOut: '退出登录',

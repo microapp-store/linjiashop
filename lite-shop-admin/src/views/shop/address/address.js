@@ -1,16 +1,21 @@
-#set($refForm = "this.$refs['form']")
-import { remove, getList, save } from '@/api/${table.lastPackageName}/${table.entityNameLowerFirstChar}'
+import { remove, getList, save } from '@/api/shop/address'
 
 export default {
   data() {
     return {
       formVisible: false,
-      formTitle: '添加${table.Label}',
+      formTitle: '添加收货地址',
       isAdd: true,
       form: {
-#foreach ($column in $table.LabeledColumns)
-        ${column.FieldName}:'',
-#end
+        idUser:'',
+        userName:'',
+        mobile:'',
+        province:'',
+        city:'',
+        district:'',
+        address:'',
+        postCode:'',
+        isDefault:'',
         id: ''
       },
       listQuery: {
@@ -96,25 +101,37 @@ export default {
     },
     resetForm() {
       this.form = {
-#foreach ($column in $table.LabeledColumns)
-        ${column.FieldName}:'',
-#end
+        idUser:'',
+        userName:'',
+        mobile:'',
+        province:'',
+        city:'',
+        district:'',
+        address:'',
+        postCode:'',
+        isDefault:'',
         id: ''
       }
     },
     add() {
       this.resetForm()
-      this.formTitle = '添加${table.Label}',
+      this.formTitle = '添加收货地址',
       this.formVisible = true
       this.isAdd = true
     },
     save() {
-      ${refForm}.validate((valid) => {
+      this.$refs['form'].validate((valid) => {
         if (valid) {
           save({
-#foreach ($column in $table.LabeledColumns)
-      ${column.FieldName}:this.form.${column.FieldName},
-#end
+      idUser:this.form.idUser,
+      userName:this.form.userName,
+      mobile:this.form.mobile,
+      province:this.form.province,
+      city:this.form.city,
+      district:this.form.district,
+      address:this.form.address,
+      postCode:this.form.postCode,
+      isDefault:this.form.isDefault,
             id: this.form.id
           }).then(response => {
             this.$message({
@@ -143,7 +160,7 @@ export default {
       if (this.checkSel()) {
         this.isAdd = false
         this.form = this.selRow
-        this.formTitle = '编辑${table.Label}'
+        this.formTitle = '编辑收货地址'
         this.formVisible = true
       }
     },

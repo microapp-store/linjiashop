@@ -46,9 +46,9 @@ public class Swagger2Configuration {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("web-flash api")
-                .description("快速构建web管理平台")
-                .termsOfServiceUrl("blog.enilu.cn")
+                .title("lite shop api")
+                .description("简洁，快捷的店铺系统")
+                .termsOfServiceUrl("http://micorapp.store")
                 .contact("blog.enilu.cn")
                 .version("1.0")
                 .build();

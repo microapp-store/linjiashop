@@ -9,7 +9,6 @@ import cn.enilu.flash.core.log.LogTaskFactory;
 import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.security.ShiroFactroy;
 import cn.enilu.flash.service.system.AccountService;
-import cn.enilu.flash.service.system.MenuService;
 import cn.enilu.flash.service.system.UserService;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.MD5;
@@ -26,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,14 +36,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("/account")
 public class AccountController extends BaseController{
-     private Logger logger = LoggerFactory.getLogger(AccountController.class);
+    private Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     @Autowired
     private UserService userService;
     @Autowired
     private AccountService accountService;
-    @Autowired
-    private MenuService menuService;
     /**
      * 用户登录<br>
      * 1，验证没有注册<br>
@@ -85,12 +81,12 @@ public class AccountController extends BaseController{
 
     /**
      * 退出登录
-     * @param request
      * @return
      */
     @RequestMapping(value = "/logout",method = RequestMethod.POST)
-    public Object logout(HttpServletRequest request){
-        String token = this.getToken(request);
+    public Object logout(){
+        HttpServletRequest request = HttpUtil.getRequest();
+        String token = this.getToken(HttpUtil.getRequest());
         accountService.logout(token);
         Long idUser = getIdUser(request);
         LogManager.me().executeLog(LogTaskFactory.exitLog(idUser, HttpUtil.getIp()));
@@ -98,10 +94,11 @@ public class AccountController extends BaseController{
     }
 
     @RequestMapping(value = "/info",method = RequestMethod.GET)
-    public Object info(HttpServletRequest request){
+    public Object info( ){
+        HttpServletRequest request = HttpUtil.getRequest();
         Long idUser = null;
         try {
-             idUser = getIdUser(request);
+            idUser = getIdUser(request);
         }catch (Exception e){
             return Rets.expire();
         }
@@ -112,9 +109,6 @@ public class AccountController extends BaseController{
             }
             ShiroUser shiroUser = ShiroFactroy.me().shiroUser(user);
             Map map = Maps.newHashMap("name",user.getName(),"role","admin","roles", shiroUser.getRoleCodes());
-
-            List menus = menuService.getMenusByRoleIds(shiroUser.getRoleList());
-            map.put("menus",menus);
             map.put("permissions",shiroUser.getUrls());
             Map profile = (Map) Mapl.toMaplist(user);
             profile.put("dept",shiroUser.getDeptName());

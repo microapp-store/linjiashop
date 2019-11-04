@@ -3,7 +3,7 @@
     <div class="block">
       <el-row>
         <el-col :span="24">
-          <el-button icon="el-icon-back" @click.native="back">{{ $t('button.back') }}</el-button>
+          <el-button icon="el-icon-back" size="mini" @click.native="back">{{ $t('button.back') }}</el-button>
         </el-col>
       </el-row>
     </div>
@@ -46,7 +46,7 @@
   </div>
 </template>
 
-<script src="./taskLog.js"></script>
+<script src="./log.js"></script>
 
 
 <style rel="stylesheet/scss" lang="scss" scoped>

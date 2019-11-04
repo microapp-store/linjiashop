@@ -14,7 +14,7 @@ export default {
       },
 
       listLoading: true,
-      expandAll: false,
+      expandAll: true,
       formTitle: '',
       formVisible: false,
       isAdd: false,
@@ -88,8 +88,8 @@ export default {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           const menuData = self.form
-          menuData.parent = null
-          menuData.children = null
+          delete menuData.parent
+          delete menuData.children
           save(menuData).then(response => {
             this.$message({
               message: '提交成功',
@@ -125,7 +125,6 @@ export default {
       this.isAdd = false
     },
     remove(row) {
-      console.log(row)
       this.$confirm('确定删除该记录?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

@@ -50,6 +50,7 @@ public class MenuNode implements Comparable {
      * 节点的url
      */
     private String url;
+     private String path;
 
     /**
      * 节点图标
@@ -60,6 +61,10 @@ public class MenuNode implements Comparable {
      */
     private String code;
     /**
+     * 組件配置
+     */
+    private String component;
+    /**
      * 子节点的集合
      */
     private List<MenuNode> children = new ArrayList<>(10);
@@ -68,6 +73,7 @@ public class MenuNode implements Comparable {
      * 查询子节点时候的临时集合
      */
     private List<MenuNode> linkedList = new ArrayList<MenuNode>();
+    private Boolean hidden;
 
     public MenuNode() {
         super();
@@ -139,6 +145,14 @@ public class MenuNode implements Comparable {
         this.url = url;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     public List<MenuNode> getChildren() {
         return children;
     }
@@ -180,12 +194,28 @@ public class MenuNode implements Comparable {
         this.status = status;
     }
 
+    public String getComponent() {
+        return component;
+    }
+
+    public void setComponent(String component) {
+        this.component = component;
+    }
+
     public String getStatusName() {
         return status == 1 ?"启用":"禁用";
     }
 
     public void setStatusName(String statusName) {
        this.statusName = statusName;
+    }
+
+    public Boolean getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(Boolean hidden) {
+        this.hidden = hidden;
     }
 
     @Override

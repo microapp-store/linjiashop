@@ -1,6 +1,6 @@
 package cn.enilu.flash.api.controller.shop;
 
-import cn.enilu.flash.api.controller.BaseController;
+import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.entity.shop.Category;
 import cn.enilu.flash.service.shop.CategoryService;
 
@@ -11,8 +11,6 @@ import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 
-import cn.enilu.flash.utils.Maps;
-import cn.enilu.flash.utils.ToolUtil;
 import cn.enilu.flash.utils.factory.Page;
 
 import org.slf4j.Logger;

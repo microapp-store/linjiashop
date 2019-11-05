@@ -26,4 +26,6 @@ public class Cart extends ShopBaseEntity {
     private Goods goods;
     @Column(columnDefinition = "VARCHAR(32) COMMENT '产品规格'")
     private String specifications;
+    @Column(columnDefinition = "INT COMMENT '数量'")
+    private Integer count;
 }

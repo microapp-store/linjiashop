@@ -1,6 +1,6 @@
 package cn.enilu.flash.api.controller.system;
 
-import cn.enilu.flash.api.controller.BaseController;
+import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.dictmap.DictMap;
 import cn.enilu.flash.bean.entity.system.Dict;
@@ -11,7 +11,6 @@ import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.service.system.DictService;
 import cn.enilu.flash.utils.BeanUtil;
 import cn.enilu.flash.utils.StringUtil;
-import cn.enilu.flash.utils.ToolUtil;
 import cn.enilu.flash.warpper.DictWarpper;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

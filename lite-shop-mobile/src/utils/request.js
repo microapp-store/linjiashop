@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import router from '../router'
 import { getToken } from '@/utils/auth'
 
 // create an axios instance
@@ -40,7 +40,7 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
-
+    console.log('response',response)
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000) {
       Message({
@@ -48,31 +48,37 @@ service.interceptors.response.use(
         type: 'error',
         duration: 5 * 1000
       })
-
-
-      // if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-      //   MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
-      //     confirmButtonText: 'Re-Login',
-      //     cancelButtonText: 'Cancel',
-      //     type: 'warning'
-      //   }).then(() => {
-      //     store.dispatch('user/resetToken').then(() => {
-      //       location.reload()
-      //     })
-      //   })
-      // }
       return Promise.reject(res.message || 'error')
     } else {
       return res
     }
   },
   error => {
-    console.log('err' + error) // for debug
-    Message({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000
-    })
+    //todo 未完成
+    console.log('失败，准备登录' ,error) // for debug
+    if (error.response) {
+      console.log('errres',error.response)
+      switch (error.response.status) {
+        case 401:
+           router.replace({
+            path: 'login'
+          })
+          break;
+        case 500:
+          return next('login')
+          this.$router.replace({path:'login'})
+          // router.replace({
+          //   path: 'login'
+          // })
+          break;
+      }
+    }
+    //todo 未完成
+    // Message({
+    //   message: error.message,
+    //   type: 'error',
+    //   duration: 5 * 1000
+    // })
     return Promise.reject(error)
   }
 )

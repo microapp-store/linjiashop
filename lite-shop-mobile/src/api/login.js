@@ -1,12 +1,12 @@
 import request from '@/utils/request'
 
-export function login(username, password) {
+export function login(mobile, password) {
   return request({
-    url: '/account/login',
+    url: '/user/loginOrReg',
     method: 'post',
     params: {
-      "username": username,
-      "password": password
+      "mobile": mobile,
+      "smsCode": smsCode
     }
   })
 }

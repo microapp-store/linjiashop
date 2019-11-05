@@ -1,6 +1,6 @@
 package cn.enilu.flash.api.controller.system;
 
-import cn.enilu.flash.api.controller.BaseController;
+import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.entity.system.LoginLog;
 import cn.enilu.flash.bean.enumeration.Permission;

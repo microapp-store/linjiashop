@@ -1,15 +1,11 @@
 package cn.enilu.flash.api.controller.front.shop;
 
-import cn.enilu.flash.api.controller.BaseController;
+import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.entity.shop.ShopUser;
-import cn.enilu.flash.bean.entity.system.User;
 import cn.enilu.flash.bean.vo.JwtUser;
 import cn.enilu.flash.bean.vo.front.Rets;
-import cn.enilu.flash.core.log.LogManager;
-import cn.enilu.flash.core.log.LogTaskFactory;
 import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.service.shop.ShopUserService;
-import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.MD5;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

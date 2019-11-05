@@ -3,7 +3,7 @@ package cn.enilu.flash.mobile.controller;
 import cn.enilu.flash.bean.entity.shop.Category;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.service.shop.CategoryService;
-import cn.enilu.flash.web.BaseController;
+import cn.enilu.flash.web.controller.BaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

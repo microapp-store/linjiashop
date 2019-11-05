@@ -1,6 +1,6 @@
 package cn.enilu.flash.api.controller.system;
 
-import cn.enilu.flash.api.controller.BaseController;
+import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.entity.system.Notice;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.service.system.NoticeService;

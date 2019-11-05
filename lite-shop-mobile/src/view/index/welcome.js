@@ -98,6 +98,8 @@ export default {
           })
         },
         clickNav(index,title){
+             this.$router.replace({path:'login'})
+            return
             this.activeNav = index;
             let idCategory = this.navList[index].id
             this.getGoods(idCategory)

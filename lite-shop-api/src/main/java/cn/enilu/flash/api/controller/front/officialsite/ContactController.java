@@ -1,6 +1,6 @@
 package cn.enilu.flash.api.controller.front.officialsite;
 
-import cn.enilu.flash.api.controller.BaseController;
+import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.entity.cms.Contacts;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.service.cms.ContactsService;

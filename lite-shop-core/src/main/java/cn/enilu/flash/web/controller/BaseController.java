@@ -1,10 +1,10 @@
-package cn.enilu.flash.api.controller;
+package cn.enilu.flash.web.controller;
 
 
-import cn.enilu.flash.api.utils.ApiConstants;
 import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.StringUtil;
+import cn.enilu.flash.web.ApiConstants;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;

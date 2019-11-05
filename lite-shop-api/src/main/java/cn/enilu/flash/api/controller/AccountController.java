@@ -1,6 +1,6 @@
 package cn.enilu.flash.api.controller;
 
-import cn.enilu.flash.api.utils.ApiConstants;
+import cn.enilu.flash.web.ApiConstants;
 import cn.enilu.flash.bean.core.AuthorizationUser;
 import cn.enilu.flash.bean.entity.system.User;
 import cn.enilu.flash.bean.vo.JwtUser;
@@ -15,6 +15,7 @@ import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.MD5;
 import cn.enilu.flash.utils.Maps;
 import cn.enilu.flash.utils.StringUtil;
+import cn.enilu.flash.web.controller.BaseController;
 import org.nutz.mapl.Mapl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +37,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/account")
-public class AccountController extends BaseController{
+public class AccountController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     @Autowired

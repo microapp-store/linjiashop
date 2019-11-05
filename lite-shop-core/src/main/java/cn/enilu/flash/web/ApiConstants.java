@@ -1,4 +1,4 @@
-package cn.enilu.flash.api.utils;
+package cn.enilu.flash.web;
 
 public class ApiConstants {
     public static  final String HTTP_METHOD_OPTIONS="OPTIONS";

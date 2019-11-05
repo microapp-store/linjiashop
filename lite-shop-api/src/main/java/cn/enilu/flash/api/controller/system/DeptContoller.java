@@ -1,6 +1,6 @@
 package cn.enilu.flash.api.controller.system;
 
-import cn.enilu.flash.api.controller.BaseController;
+import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.dictmap.DeptDict;
 import cn.enilu.flash.bean.entity.system.Dept;
@@ -12,7 +12,6 @@ import cn.enilu.flash.bean.vo.node.DeptNode;
 import cn.enilu.flash.service.system.DeptService;
 import cn.enilu.flash.service.system.LogObjectHolder;
 import cn.enilu.flash.utils.BeanUtil;
-import cn.enilu.flash.utils.ToolUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

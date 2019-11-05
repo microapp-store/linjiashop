@@ -18,15 +18,15 @@
       </van-cell>
     </van-cell-group>
 
-    <van-cell-group class="goods-cell-group">
-      <van-cell value="进入店铺" icon="shop-o" is-link @click="sorry">
-        <template slot="title">
-          <span class="van-cell-text">有赞的店</span>
-          <van-tag class="goods-tag" type="danger">官方</van-tag>
-        </template>
-      </van-cell>
-      <van-cell title="线下门店" icon="location-o" is-link @click="sorry" />
-    </van-cell-group>
+    <!--<van-cell-group class="goods-cell-group">-->
+      <!--<van-cell value="进入店铺" icon="shop-o" is-link @click="sorry">-->
+        <!--<template slot="title">-->
+          <!--<span class="van-cell-text">有赞的店</span>-->
+          <!--<van-tag class="goods-tag" type="danger">官方</van-tag>-->
+        <!--</template>-->
+      <!--</van-cell>-->
+      <!--<van-cell title="线下门店" icon="location-o" is-link @click="sorry" />-->
+    <!--</van-cell-group>-->
 
     <van-cell-group class="goods-cell-group">
       <van-cell title="查看商品评论" is-link @click="sorry" />
@@ -52,7 +52,7 @@
   </div>
 </template>
 
-<script src="./goods"></script>
+<script src="./goods.js"></script>
 
 <style lang="less">
 img{

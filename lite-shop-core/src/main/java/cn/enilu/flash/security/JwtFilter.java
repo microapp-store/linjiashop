@@ -1,6 +1,5 @@
 package cn.enilu.flash.security;
 
-import cn.enilu.flash.security.JwtToken;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,10 +62,10 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
                 executeLogin(request, response);
             } catch (Exception e) {
                 response401(request, response);
-                return true;
+                return false;
             }
         }
-        return true;
+        return false;
     }
 
     /**

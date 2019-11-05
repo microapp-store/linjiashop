@@ -19,5 +19,10 @@ public class ShopUserService extends BaseService<ShopUser,Long,ShopUserRepositor
     public ShopUser findByMobile(String mobile) {
         return shopUserRepository.findByMobile(mobile);
     }
+
+    public Boolean validateSmsCode(String mobile, String smsCode) {
+        //todo
+        return true;
+    }
 }
 

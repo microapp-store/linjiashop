@@ -8,6 +8,7 @@ import cn.enilu.flash.utils.CryptUtil;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.Maps;
 import cn.enilu.flash.utils.StringUtil;
+import cn.enilu.flash.web.controller.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

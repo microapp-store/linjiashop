@@ -16,13 +16,6 @@ const routes = [
     }
   },
   {
-    name: 'category',
-    component: () => import('./view/category'),
-    meta: {
-      title: '分类'
-    }
-  },
-  {
     name: 'search',
     component: () => import('./view/search'),
     meta: {

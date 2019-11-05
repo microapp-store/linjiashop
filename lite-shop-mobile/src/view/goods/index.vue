@@ -8,12 +8,13 @@
 
     <van-cell-group>
       <van-cell>
-        <div class="goods-title">{{ goods.title }}</div>
+        <div class="goods-title">{{ goods.name }}</div>
+        <div class="goods-desc">{{ goods.descript }}</div>
         <div class="goods-price">{{ formatPrice(goods.price) }}</div>
       </van-cell>
       <van-cell class="goods-express">
-        <van-col span="10">运费：{{ goods.express }}</van-col>
-        <van-col span="14">剩余：{{ goods.remain }}</van-col>
+        <van-col span="10">运费：免运费</van-col>
+        <van-col span="14">剩余：{{ goods.num }}</van-col>
       </van-cell>
     </van-cell-group>
 
@@ -28,9 +29,11 @@
     </van-cell-group>
 
     <van-cell-group class="goods-cell-group">
-      <van-cell title="查看商品详情" is-link @click="sorry" />
+      <van-cell title="查看商品评论" is-link @click="sorry" />
     </van-cell-group>
-
+    <van-cell-group class="goods-cell-group">
+      <p class="goods-detail" v-html="goods.detail"></p>
+    </van-cell-group>
     <van-goods-action>
       <van-goods-action-icon icon="home-o" @click="toHome">
         主页
@@ -49,90 +52,33 @@
   </div>
 </template>
 
-<script>
-import {
-  Tag,
-  Col,
-  Icon,
-  Cell,
-  CellGroup,
-  Swipe,
-  Toast,
-  SwipeItem,
-  GoodsAction,
-  GoodsActionIcon,
-  GoodsActionButton,
-  Tabbar,
-  TabbarItem
-} from 'vant';
-
-export default {
-  components: {
-    [Tag.name]: Tag,
-    [Col.name]: Col,
-    [Icon.name]: Icon,
-    [Cell.name]: Cell,
-    [CellGroup.name]: CellGroup,
-    [Swipe.name]: Swipe,
-    [SwipeItem.name]: SwipeItem,
-    [GoodsAction.name]: GoodsAction,
-    [GoodsActionIcon.name]: GoodsActionIcon,
-    [GoodsActionButton.name]: GoodsActionButton,
-    [Tabbar.name]: Tabbar,
-    [TabbarItem.name]: TabbarItem
-  },
-
-  data() {
-    return {
-      goods: {
-        title: '美国伽力果（约680g/3个）',
-        price: 2680,
-        express: '免运费',
-        remain: 19,
-        thumb: [
-          'https://img.yzcdn.cn/public_files/2017/10/24/e5a5a02309a41f9f5def56684808d9ae.jpeg',
-          'https://img.yzcdn.cn/public_files/2017/10/24/1791ba14088f9c2be8c610d0a6cc0f93.jpeg'
-        ]
-      }
-    };
-  },
-  created(){
-    this.init()
-  },
-  methods: {
-    init(){
-      let id = this.$route.query.id
-      console.log(id)
-    },
-    toHome(){
-      this.$router.push('index')
-    },
-    formatPrice() {
-      return '¥' + (this.goods.price / 100).toFixed(2);
-    },
-
-    onClickCart() {
-      this.$router.push('cart');
-    },
-
-    sorry() {
-      Toast('暂无后续逻辑~');
-    }
-  }
-};
-</script>
+<script src="./goods"></script>
 
 <style lang="less">
+img{
+  width:100%;
+}
 .goods {
   padding-bottom: 50px;
 
   &-swipe {
     img {
       width: 100%;
+      height:250px;
       display: block;
     }
   }
-
+  &-desc{
+    font-size: 12px;
+    color: #999999;
+    letter-spacing: 0;
+    line-height: 18px;
+    margin: 6px 0;
+  }
+  &-detail{
+    padding:15px;
+    font-size:14px;
+  }
   &-title {
     font-size: 16px;
   }

@@ -1,7 +1,7 @@
 <template>
     <div>
         <van-tabs v-model="activeNav" @click="clickNav">
-            <van-tab v-for="nav in navList" :title="nav.text">
+            <van-tab v-for="nav in navList" :title="nav.name" v-bind:key="nav.id">
             </van-tab>
         </van-tabs>
         <van-swipe :autoplay="3000" style="height: 200px;">
@@ -12,8 +12,8 @@
         <van-card v-for="(goods,index) in goodsList" :key="index"
                   :num="goods.num"
                   :price="goods.price"
-                  :desc="goods.desc"
-                  :title="goods.title"
+                  :desc="goods.descript"
+                  :title="goods.name"
                   :thumb="goods.img"
                   :thumb-link="goods.link"
                   @click="viewGoodsDetail(goods.id)"
@@ -29,7 +29,7 @@
     </div>
 </template>
 
-<script src="./index.js"></script>
+<script src="./welcome.js"></script>
 
 <style lang="less">
     .user {

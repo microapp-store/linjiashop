@@ -25,9 +25,15 @@ public class Goods extends BaseEntity {
     @JoinColumn(name="id_category", insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
+    @Column(columnDefinition = "VARCHAR(64) COMMENT '产品简介'")
+    private String descript;
     @Column(columnDefinition = "TEXT COMMENT '产品详情'")
     private String detail;
     @Column(columnDefinition = "TEXT COMMENT '产品规格'")
     private String specifications;
+    @Column(columnDefinition = "INT COMMENT '库存数量'")
+    private Integer num;
+    @Column(columnDefinition = "TEXT COMMENT '价格'")
+    private String price;
 
 }

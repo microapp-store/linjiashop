@@ -39,14 +39,14 @@ public class Swagger2Configuration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("cn.enilu.flash.api.controller"))
+                .apis(RequestHandlerSelectors.basePackage("cn.enilu.flash.mobile.controller"))
                 .paths(PathSelectors.any())
                 .build().globalOperationParameters(pars);
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("lite shop api")
+                .title("lite shop mobile api")
                 .description("简洁，快捷的店铺系统")
                 .termsOfServiceUrl("http://micorapp.store")
                 .contact("blog.enilu.cn")

@@ -28,6 +28,9 @@ export default {
                 console.log('err',err.response)
                 this.$router.replace({path:'login',query:{redirect:'user'}})
             })
+        },
+        toOrder(status){
+            this.$router.push({path:'order',query:{status:status}})
         }
     }
 }

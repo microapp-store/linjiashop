@@ -1,9 +1,11 @@
 import { queryByUser } from '@/api/cart'
 import {getOrders } from '@/api/orders'
-import { Checkbox, CheckboxGroup, Card, SubmitBar, Toast, NavBar, Tab,Tabs,Tabbar, TabbarItem,Panel   } from 'vant';
+import { Row, Col,Checkbox, CheckboxGroup, Card, SubmitBar, Toast, NavBar, Tab,Tabs,Tabbar, TabbarItem,Panel   } from 'vant';
 
 export default {
     components: {
+        [Row.name]: Row,
+        [Col.name]: Col,
         [Card.name]: Card,
         [Checkbox.name]: Checkbox,
         [SubmitBar.name]: SubmitBar,
@@ -30,14 +32,22 @@ export default {
             activeFooter: 3,
             checkedGoods: ['1'],
             goods: [ ],
+            imgUrl:'/dev-api/file/getImgStream?idFile=',
             listQuery: {
                 page: 1,
                 limit: 20,
-                status: undefined
+                status: 1
             }
         };
     },
     mounted(){
+        if(this.$route.query){
+            let status = this.$route.query.status
+            console.log('status',status)
+            //使用状态减一作为导航栏的序号，如果状态值改变，则不能使用该方法
+            this.activeNav = parseInt(status)-1
+            this.listQuery.status = status
+        }
       this.init()
     },
     computed: {
@@ -50,38 +60,24 @@ export default {
     methods: {
         init(){
 
-            if(this.$router.query){
-                let id = this.$router.query.id
-                console.log('new Id',id)
-            }
+            this.getData()
+
+        },
+        getData(){
             getOrders(this.listQuery).then( response => {
                 let orderList = response.data.records
                 console.log('orderList',orderList)
                 for(var index in  orderList){
                     let orders = orderList[index]
-                    orders.title='订单日期:'+orders.createTime
-                    orders.descript = '订单编号：'+orders.orderSn
+                    orders.title=''+orders.createTime
+                    orders.descript = ''+orders.orderSn
 
 
                 }
-            this.orderList = orderList
+                this.orderList = orderList
             }).catch( (err) => {
 
             })
-          // queryByUser().then( response => {
-          //     let goodsList = response.data
-          //     let totalPrice = 0
-          //     for(var index in goodsList){
-          //         goodsList[index].thumb = '/dev-api/file/getImgStream?idFile=' + goodsList[index].goods.pic
-          //         totalPrice += goodsList[index].count*parseInt(goodsList[index].goods.price)
-          //     }
-          //     this.goods = goodsList
-          // }).catch((err) => {
-          //     Toast(err)
-          // })
-        },
-        onSubmit() {
-            Toast('点击结算');
         },
         formatPrice(price) {
             return (price / 100).toFixed(2);
@@ -89,8 +85,10 @@ export default {
         onClickLeft(){
             this.$router.go(-1)
         },
-        clickNav(){
-
+        clickNav(index,title){
+            this.activeNav = index;
+            this.listQuery.status = this.navList[index].id
+            this.getData()
         }
     }
 };

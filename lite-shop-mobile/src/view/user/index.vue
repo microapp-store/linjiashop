@@ -3,19 +3,19 @@
     <img class="user-poster" src="@/assets/img/banner.jpg" >
     <van-row class="user-links">
       <van-col span="6">
-        <van-icon name="pending-payment" />
+        <van-icon name="pending-payment" @click="toOrder(1)"/>
         待付款
       </van-col>
       <van-col span="6">
-        <van-icon name="tosend" />
+        <van-icon name="tosend" @click="toOrder(2)"/>
         待发货
       </van-col>
       <van-col span="6">
-        <van-icon name="logistics" />
+        <van-icon name="logistics" @click="toOrder(3)"/>
         已发货
       </van-col>
       <van-col span="6">
-        <van-icon name="bag-o" />
+        <van-icon name="bag-o" @click="toOrder(4)"/>
         已完成
       </van-col>
     </van-row>

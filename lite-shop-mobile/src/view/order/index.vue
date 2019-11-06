@@ -13,7 +13,20 @@
 
 
     <van-panel :title="item.title" :desc="item.descript" :status="item.statusName"   v-for="(item,index) in orderList" :key="index">
-      <div>{{item.orderSn}}</div>
+      <div style="background-color: #fafafa">
+        <div v-for="(orderItem,index2) in item.items" :key="index2" >
+          <van-row>
+            <van-col span="4" style="padding:5px;"><img style="width:100%;" :src="imgUrl+orderItem.goods.pic" ></van-col>
+            <van-col span="20">{{orderItem.goods.name}}
+            <span style="color:lightgrey;font-size:14px;">{{orderItem.goods.descript}}</span>
+              <br><br>
+
+            </van-col>
+          </van-row>
+
+        </div>
+        <span>共{{item.items.length}}商品 合计 {{formatPrice(item.totalPrice)}}元</span><br><br>
+      </div>
     </van-panel>
 
 

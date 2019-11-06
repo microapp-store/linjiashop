@@ -51,9 +51,7 @@ export default {
     methods: {
         init(){
             let id = this.$route.query.id
-            console.log(id)
             getGoods(id).then( response => {
-                console.log('response',response.data)
                 let goods = response.data
                 goods.thumb = new Array()
                 const gallery = response.data.gallery.split(',')
@@ -69,15 +67,17 @@ export default {
             this.$router.push('index')
         },
         formatPrice() {
-            return '¥' +this.goods.price
+            return '¥' + (this.goods.price / 100).toFixed(2)
         },
 
-        onClickCart() {
+        goToCart() {
             this.$router.push('cart');
         },
-
+        addCart() {
+            this.$router.push({path:'cart',query:{type:'add',id:this.goods.id}});
+        },
         sorry() {
-            Toast('暂无后续逻辑~');
+            Toast('开发中~');
         }
     }
 };

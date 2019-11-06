@@ -1,10 +1,13 @@
 import Cookies from 'js-cookie'
+import { setToken } from '@/utils/auth'
 
 const state = {
     device: 'desktop',
     language: Cookies.get('language') || 'zh',
     size: Cookies.get('size') || 'medium',
-    category:[]
+    category:[],
+    user:{},
+    token:''
 }
 
 
@@ -13,8 +16,15 @@ const mutations = {
         state.device = device
     },
     TOGGLE_CATEGORY: (state, category) => {
-        console.log(2,category)
         state.category = category
+    },
+    TOGGLE_USER: (state, user) => {
+        state.user = user
+    },
+    TOGGLE_TOKEN: (state, token) => {
+        state.token = token
+        setToken(token)
+
     }
 }
 
@@ -24,9 +34,14 @@ const actions = {
         commit('TOGGLE_DEVICE', device)
     },
     toggleCategory({ commit }, category) {
-        console.log(1,category)
         commit('TOGGLE_CATEGORY', category)
-    }
+    },
+    toggleUser({ commit }, user) {
+        commit('TOGGLE_USER', user)
+    },
+    toggleToken({ commit }, token) {
+        commit('TOGGLE_TOKEN', token)
+    },
 }
 
 export default {

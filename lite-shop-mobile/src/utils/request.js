@@ -1,4 +1,5 @@
 import axios from 'axios'
+// import router from '@/router'
 import router from '../router'
 import { getToken } from '@/utils/auth'
 
@@ -12,10 +13,10 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   config => {
-    // do something before request is sent
-    var token = getToken()
-    if (token) {
-      config.headers['Authorization'] = token // 让每个请求携带自定义token 请根据实际情况自行修改
+
+    if (getToken()) {
+      // 让每个请求携带自定义token 请根据实际情况自行修改
+      config.headers['Authorization'] = getToken()
     }
     return config
   },
@@ -54,10 +55,11 @@ service.interceptors.response.use(
     }
   },
   error => {
+    let me = this
     //todo 未完成
     console.log('失败，准备登录' ,error) // for debug
     if (error.response) {
-      console.log('errres',error.response)
+      console.log('error',error.response)
       switch (error.response.status) {
         case 401:
            router.replace({
@@ -65,8 +67,9 @@ service.interceptors.response.use(
           })
           break;
         case 500:
-          return next('login')
-          this.$router.replace({path:'login'})
+          console.log('准备跳转到登录',500)
+
+            router.replace('login')
           // router.replace({
           //   path: 'login'
           // })

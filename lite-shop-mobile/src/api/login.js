@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export function login(mobile, password) {
+export function loginOrReg(mobile, smsCode) {
   return request({
-    url: '/user/loginOrReg',
+    url: '/loginOrReg',
     method: 'post',
     params: {
       "mobile": mobile,
@@ -10,20 +10,13 @@ export function login(mobile, password) {
     }
   })
 }
-
-
-export function logout() {
-  console.log('logout')
+export function loginByPassword(mobile, password) {
   return request({
-    url: '/account/logout',
-    method: 'post'
-  })
-}
-
-export function updatePwd(params) {
-  return request({
-    url: '/account/updatePwd',
+    url: '/loginByPass',
     method: 'post',
-    params
+    params: {
+      "mobile": mobile,
+      "password": password
+    }
   })
 }

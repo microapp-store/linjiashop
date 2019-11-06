@@ -14,7 +14,7 @@
             </van-cell-group>
             <van-cell-group v-show="show1">
                 <van-field
-                        v-model="sms"
+                        v-model="smsCode"
                         center
                         clearable
                         label="短信验证码"
@@ -38,7 +38,7 @@
 
             <van-button type="info" size="large"   v-show="show1" @click="toLoginByPassword">用户名密码登录</van-button>
 
-            <van-button type="warning" size="large"  v-show="show2"  @click="loginByPassword">登录</van-button>
+            <van-button type="warning" size="large"  v-show="show2"  @click="loginByPass">登录</van-button>
 
 
         <van-button type="info" size="large"  v-show="show2" @click="toRegister">手机短信登录/注册</van-button>
@@ -46,56 +46,13 @@
         <van-tabbar v-model="activeFooter">
             <van-tabbar-item icon="home-o"  replace to="/index">首页</van-tabbar-item>
             <van-tabbar-item icon="search"  replace to="/search">发现</van-tabbar-item>
-            <van-tabbar-item icon="cart-o"  replace to="/cart">订单</van-tabbar-item>
+            <van-tabbar-item icon="cart-o"  replace to="/cart">购物车</van-tabbar-item>
             <van-tabbar-item icon="user-o"  replace to="/user">我的</van-tabbar-item>
         </van-tabbar>
     </div>
 </template>
 
-<script>
-    import { Row, Col, Icon, Cell, CellGroup,Field,Button,
-        Tabbar,
-        TabbarItem} from 'vant';
-
-    export default {
-        components: {
-            [Row.name]: Row,
-            [Col.name]: Col,
-            [Icon.name]: Icon,
-            [Cell.name]: Cell,
-            [CellGroup.name]: CellGroup,
-            [Tabbar.name]: Tabbar,
-            [TabbarItem.name]: TabbarItem,
-            [Field.name]: Field,
-            [Button.name]: Button
-    },
-        data() {
-            return {
-                mobile:'',
-                password:'',
-                activeFooter:3,
-                show1:true,
-                show2:false,
-            }
-        },
-        methods:{
-            toLoginByPassword(){
-                this.show1 = false;
-                this.show2 = true;
-            },
-            toRegister(){
-                this.show2 = false;
-                this.show1 = true;
-            },
-            loginOrRegister(){
-
-            },
-            loginByPassword(){
-
-            }
-        }
-    };
-</script>
+<script src="./login.js"></script>
 
 <style lang="less">
     .button-group{

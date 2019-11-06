@@ -65,7 +65,6 @@ export default {
     methods: {
         init() {
             let category = store.state.app.category
-            console.log('category',category)
             if(!category ||category.length==0 ){
                 let platform = navigator.platform
                 store.dispatch('app/toggleDevice',platform)
@@ -84,9 +83,7 @@ export default {
         getGoods(idCategory) {
           this.listQuery['idCategory'] = idCategory
           queryGoods(this.listQuery).then(response => {
-              console.log('goods',response.data)
               let list = response.data.records
-
               for(var index in  list){
                   const item = list[index]
                   item.img = '/dev-api/file/getImgStream?idFile=' + item.pic
@@ -98,8 +95,6 @@ export default {
           })
         },
         clickNav(index,title){
-             this.$router.replace({path:'login'})
-            return
             this.activeNav = index;
             let idCategory = this.navList[index].id
             this.getGoods(idCategory)
@@ -109,8 +104,12 @@ export default {
             console.log(p2)
         },
         viewGoodsDetail(id){
-            console.log(id)
+
             this.$router.push({path:'/goods',query:{id:id}})
-        }
+        },
+        formatPrice(price) {
+            return '¥' + (price / 100).toFixed(2)
+        },
+
     }
 };

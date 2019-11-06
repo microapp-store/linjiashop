@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Table(appliesTo = "t_shop_order_item",comment = "订单明细")
 @Entity(name="t_shop_order_item")
 public class OrderItem extends ShopBaseEntity {
-    @Column(columnDefinition = "BIGINT COMMENT '所属订单id'")
+    @Column(name="id_order",columnDefinition = "BIGINT COMMENT '所属订单id'")
     private Long idOrder;
     @Column(name="id_goods",columnDefinition = "BIGINT COMMENT '商品id'")
     private Long idGoods;

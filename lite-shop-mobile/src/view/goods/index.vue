@@ -38,10 +38,10 @@
       <van-goods-action-icon icon="home-o" @click="toHome">
         主页
       </van-goods-action-icon>
-      <van-goods-action-icon icon="cart-o" @click="onClickCart">
+      <van-goods-action-icon icon="cart-o" @click="goToCart">
         购物车
       </van-goods-action-icon>
-      <van-goods-action-button type="warning" @click="sorry">
+      <van-goods-action-button type="warning" @click="addCart">
         加入购物车
       </van-goods-action-button>
       <van-goods-action-button type="danger" @click="sorry">

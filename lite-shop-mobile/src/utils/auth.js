@@ -1,15 +1,15 @@
 import Cookies from 'js-cookie'
 
-const TokenKey = 'vue_admin_template_token'
-
+const COOKIE_KEY_PRE="lite-shop-mobile-"
+const tokenKey = COOKIE_KEY_PRE+"token"
 export function getToken() {
-  return Cookies.get(TokenKey)
+  return Cookies.get(tokenKey)
 }
 
 export function setToken(token) {
-  return Cookies.set(TokenKey, token)
+  return Cookies.set(tokenKey, token)
 }
 
 export function removeToken() {
-  return Cookies.remove(TokenKey)
+  return Cookies.remove(tokenKey)
 }

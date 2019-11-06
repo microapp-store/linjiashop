@@ -15,7 +15,7 @@
         <van-tabbar v-model="activeFooter">
             <van-tabbar-item icon="home-o"  replace to="/index">首页</van-tabbar-item>
             <van-tabbar-item icon="search"  replace to="/search">发现</van-tabbar-item>
-            <van-tabbar-item icon="cart-o"  replace to="/cart">订单</van-tabbar-item>
+            <van-tabbar-item icon="cart-o"  replace to="/cart">购物车</van-tabbar-item>
             <van-tabbar-item icon="user-o"  replace to="/user">我的</van-tabbar-item>
         </van-tabbar>
     </div>

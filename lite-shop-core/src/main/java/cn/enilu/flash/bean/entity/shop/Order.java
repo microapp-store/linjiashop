@@ -1,11 +1,13 @@
 package cn.enilu.flash.bean.entity.shop;
 
 import cn.enilu.flash.bean.entity.ShopBaseEntity;
+import cn.enilu.flash.bean.enumeration.shop.OrderEnum;
 import lombok.Data;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author ：enilu
@@ -29,6 +31,9 @@ public class Order extends ShopBaseEntity {
     @JoinColumn(name="id_address",  insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
     private Address address;
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "id_order")
+    private List<OrderItem> items;
     @Column(columnDefinition = "VARCHAR(64) COMMENT '订单备注'")
     private String message;
     @Column(columnDefinition = "VARCHAR(32) COMMENT '总金额'")
@@ -37,5 +42,10 @@ public class Order extends ShopBaseEntity {
     private BigDecimal couponPrice;
     @Column(columnDefinition = "VARCHAR(32) COMMENT '实付金额'")
     private BigDecimal realPrice;
+
+
+    public String getStatusName(){
+        return OrderEnum.get(status).getValue();
+    }
 
 }

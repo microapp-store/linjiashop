@@ -7,10 +7,6 @@
         待付款
       </van-col>
       <van-col span="6">
-        <van-icon name="records" />
-        待接单
-      </van-col>
-      <van-col span="6">
         <van-icon name="tosend" />
         待发货
       </van-col>
@@ -18,10 +14,14 @@
         <van-icon name="logistics" />
         已发货
       </van-col>
+      <van-col span="6">
+        <van-icon name="bag-o" />
+        已完成
+      </van-col>
     </van-row>
 
     <van-cell-group class="user-group">
-      <van-cell icon="records" title="全部订单" is-link />
+      <van-cell icon="records" title="全部订单" is-link to="order" />
     </van-cell-group>
 
     <van-cell-group>
@@ -33,34 +33,13 @@
     <van-tabbar v-model="activeFooter">
       <van-tabbar-item icon="home-o"  replace to="/index">首页</van-tabbar-item>
       <van-tabbar-item icon="search"  replace to="/search">发现</van-tabbar-item>
-      <van-tabbar-item icon="cart-o"  replace to="/cart">订单</van-tabbar-item>
+      <van-tabbar-item icon="cart-o"  replace to="/cart">购物车</van-tabbar-item>
       <van-tabbar-item icon="user-o"  replace to="/user">我的</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
 
-<script>
-import { Row, Col, Icon, Cell, CellGroup,
-  Tabbar,
-  TabbarItem} from 'vant';
-
-export default {
-  components: {
-    [Row.name]: Row,
-    [Col.name]: Col,
-    [Icon.name]: Icon,
-    [Cell.name]: Cell,
-    [CellGroup.name]: CellGroup,
-    [Tabbar.name]: Tabbar,
-    [TabbarItem.name]: TabbarItem
-  },
-  data() {
-    return {
-      activeFooter:3
-    }
-  }
-};
-</script>
+<script src="./user.js"></script>
 
 <style lang="less">
 .user {

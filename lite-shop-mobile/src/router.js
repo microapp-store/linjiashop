@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store'
+import { getToken } from '@/utils/auth'
 Vue.use(Router);
 
 const routes = [
@@ -33,7 +34,16 @@ const routes = [
     name: 'user',
     component: () => import('./view/user'),
     meta: {
+      requireAuth:true,
       title: '会员中心'
+    }
+  },
+  {
+    name: 'order',
+    component: () => import('./view/order'),
+    meta: {
+      requireAuth:true,
+      title: '我的订单'
     }
   },
   {
@@ -80,7 +90,10 @@ router.beforeEach((to, from, next) => {
     document.title = title;
   }
   if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
-    if (store.state.token) {  // 通过vuex state获取当前的token是否存在
+    console.log('requireauth',to.meta.requireAuth)
+
+    console.log('token',getToken())
+    if (getToken()) {
       next();
     }
     else {
@@ -95,6 +108,11 @@ router.beforeEach((to, from, next) => {
   }
   //next();
 });
+
+// export default new Router({
+// mode:'history',
+//   route:router
+// })
 
 export {
   router

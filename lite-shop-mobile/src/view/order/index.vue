@@ -1,27 +1,23 @@
 <template>
   <div>
-    <van-checkbox-group class="card-goods" v-model="checkedGoods">
-      <van-checkbox
-        class="card-goods__item"
-        v-for="item in goods"
-        :key="item.id"
-        :name="item.id"
-      >
-        <van-card
-          :title="item.goods.name"
-          :desc="item.goods.descript"
-          :num="item.count"
-          :price="formatPrice(item.goods.price)"
-          :thumb="item.thumb"
-        />
-      </van-checkbox>
-    </van-checkbox-group>
-    <van-submit-bar
-      :price="totalPrice"
-      :disabled="!checkedGoods.length"
-      :button-text="submitBarText"
-      @submit="onSubmit"
+    <van-nav-bar
+            title="我的订单"
+            left-arrow
+            @click-left="onClickLeft"
     />
+    <van-tabs v-model="activeNav" @click="clickNav">
+      <van-tab v-for="nav in navList" :title="nav.name" v-bind:key="nav.id">
+      </van-tab>
+    </van-tabs>
+
+
+
+    <van-panel :title="item.title" :desc="item.descript" :status="item.statusName"   v-for="(item,index) in orderList" :key="index">
+      <div>{{item.orderSn}}</div>
+    </van-panel>
+
+
+
     <van-tabbar v-model="activeFooter">
       <van-tabbar-item icon="home-o"  replace to="/index">首页</van-tabbar-item>
       <van-tabbar-item icon="search"  replace to="/search">发现</van-tabbar-item>
@@ -31,7 +27,7 @@
   </div>
 </template>
 
-<script src="./cart.js"></script>
+<script src="./orders.js"></script>
 
 <style lang="less">
   .van-submit-bar{

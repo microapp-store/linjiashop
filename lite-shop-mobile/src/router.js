@@ -90,9 +90,6 @@ router.beforeEach((to, from, next) => {
     document.title = title;
   }
   if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
-    console.log('requireauth',to.meta.requireAuth)
-
-    console.log('token',getToken())
     if (getToken()) {
       next();
     }
@@ -109,10 +106,7 @@ router.beforeEach((to, from, next) => {
   //next();
 });
 
-// export default new Router({
-// mode:'history',
-//   route:router
-// })
+
 
 export {
   router

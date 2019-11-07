@@ -1,7 +1,5 @@
 package cn.enilu.flash.bean.entity.shop;
 
-import cn.enilu.flash.bean.entity.BaseEntity;
-import cn.enilu.flash.bean.entity.ShopBaseEntity;
 import lombok.Data;
 import org.hibernate.annotations.Table;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -19,7 +18,7 @@ import java.util.Date;
 @Data
 @Table(appliesTo = "t_shop_user",comment = "用户")
 @Entity(name="t_shop_user")
-public class ShopUser     {
+public class ShopUser  implements Serializable {
     @Id
     @GeneratedValue
     private Long id;

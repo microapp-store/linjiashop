@@ -1,4 +1,5 @@
 import { getGoods } from '@/api/goods'
+import cart from '@/api/cart'
 import {
     Tag,
     Col,
@@ -74,7 +75,12 @@ export default {
             this.$router.push('cart');
         },
         addCart() {
-            this.$router.push({path:'cart',query:{type:'add',id:this.goods.id}});
+            cart.add(this.goods.id,1).then( response => {
+                this.$router.push('cart');
+            }).then( (err) => {
+                Toast(err)
+            })
+
         },
         sorry() {
             Toast('开发中~');

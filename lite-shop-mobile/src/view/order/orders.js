@@ -1,4 +1,4 @@
-import { queryByUser } from '@/api/cart'
+import api from '@/api/cart'
 import {getOrders } from '@/api/orders'
 import { Row, Col,Checkbox, CheckboxGroup, Card, SubmitBar, Toast, NavBar, Tab,Tabs,Tabbar, TabbarItem,Panel   } from 'vant';
 
@@ -59,7 +59,7 @@ export default {
 
     methods: {
         init(){
-
+            console.log('router1111', this.$router)
             this.getData()
 
         },

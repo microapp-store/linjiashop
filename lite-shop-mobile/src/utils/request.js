@@ -1,8 +1,6 @@
 import axios from 'axios'
-// import router from '@/router'
-import router from '../router'
+import { router } from '@/router';
 import { getToken } from '@/utils/auth'
-
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
@@ -22,7 +20,7 @@ service.interceptors.request.use(
   },
   error => {
     // do something with request error
-    console.log(error) // for debug
+    console.log('error111'.error) // for debug
     return Promise.reject(error)
   }
 )
@@ -41,14 +39,10 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
-    console.log('response',response)
+    // console.log('response',response)
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000) {
-      Message({
-        message: res.message || 'error',
-        type: 'error',
-        duration: 5 * 1000
-      })
+      console.log('error',res)
       return Promise.reject(res.message || 'error')
     } else {
       return res
@@ -56,10 +50,9 @@ service.interceptors.response.use(
   },
   error => {
     let me = this
+
     //todo 未完成
-    console.log('失败，准备登录' ,error) // for debug
     if (error.response) {
-      console.log('error',error.response)
       switch (error.response.status) {
         case 401:
            router.replace({
@@ -67,22 +60,13 @@ service.interceptors.response.use(
           })
           break;
         case 500:
-          console.log('准备跳转到登录',500)
-
-            router.replace('login')
-          // router.replace({
-          //   path: 'login'
-          // })
+          router.replace({
+            path: 'login',
+            redirect:router.currentRoute.path
+          })
           break;
       }
     }
-    //todo 未完成
-    // Message({
-    //   message: error.message,
-    //   type: 'error',
-    //   duration: 5 * 1000
-    // })
-    return Promise.reject(error)
   }
 )
 

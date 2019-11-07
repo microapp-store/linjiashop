@@ -1,27 +1,36 @@
 <template>
   <div>
     <van-checkbox-group class="card-goods" v-model="checkedGoods">
+      <div   v-for="item in cartList"
+             :key="item.id"    class="card-goods__item">
       <van-checkbox
-        class="card-goods__item"
-        v-for="item in goods"
-        :key="item.id"
         :name="item.id"
-      >
+      ></van-checkbox>
         <van-card
+                style="margin-left:15px;"
           :title="item.goods.name"
           :desc="item.goods.descript"
           :num="item.count"
           :price="formatPrice(item.goods.price)"
           :thumb="item.thumb"
-        />
-      </van-checkbox>
+        >
+
+          <div slot="footer">
+            <van-stepper v-model="item.count" @change="stepperEvent(item,arguments)" disableInput/>
+          </div>
+        </van-card>
+      </div>
+
     </van-checkbox-group>
     <van-submit-bar
       :price="totalPrice"
       :disabled="!checkedGoods.length"
       :button-text="submitBarText"
-      @submit="onSubmit"
-    />
+      @submit="submit"
+    >
+      <van-checkbox v-model="checkedAll" @click="checkAll" style="padding: 0 10px;">全选</van-checkbox>
+    </van-submit-bar>
+
     <van-tabbar v-model="activeFooter">
       <van-tabbar-item icon="home-o"  replace to="/index">首页</van-tabbar-item>
       <van-tabbar-item icon="search"  replace to="/search">发现</van-tabbar-item>

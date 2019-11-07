@@ -1,12 +1,4 @@
-# 前言
- 一个轻量，简单的商城系统
- 
- ### 初始化数据库
-
-执行lite-shop-api/src/main/resources/import.sql语句初始化测试数据
-
-
-# 前言
+ # 前言
 [![Spring Boot](https://img.shields.io/badge/spring--boot-2.1.1.1.RELEASE-brightgreen)](https://github.com/spring-projects/spring-boot)
 [![vue](https://img.shields.io/badge/vue-2.6.10-brightgreen.svg)](https://github.com/vuejs/vue)
 [![element-ui](https://img.shields.io/badge/element--ui-2.11.0-brightgreen.svg)](https://github.com/ElemeFE/element)

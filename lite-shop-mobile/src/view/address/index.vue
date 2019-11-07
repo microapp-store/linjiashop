@@ -17,56 +17,7 @@
     </div>
 </template>
 
-<script>
-    import {AddressList, Col, Icon, NavBar, Row, Toast} from 'vant';
-
-    export default {
-        components: {
-            [AddressList.name]: AddressList,
-            [Toast.name]: Toast,
-            [Row.name]: Row,
-            [Col.name]: Col,
-            [Icon.name]: Icon,
-
-            [NavBar.name]: NavBar
-        },
-        data() {
-            return {
-                activeFooter: 3,
-                chosenAddressId: '1',
-                list: [
-                    {
-                        id: '1',
-                        name: '张三',
-                        tel: '13000000000',
-                        address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室'
-                    },
-                    {
-                        id: '2',
-                        name: '李四',
-                        tel: '1310000000',
-                        address: '浙江省杭州市拱墅区莫干山路 50 号'
-                    }
-                ]
-            }
-        },
-        methods: {
-            onAdd() {
-                Toast('新增地址');
-                this.$router.push('address/edit')
-            },
-
-            onEdit(item, index) {
-                Toast('编辑地址:' + index);
-                console.log(item)
-                this.$router.push({path:'address/edit',query:{id:item.id}})
-            },
-            onClickLeft() {
-                this.$router.go(-1)
-            }
-        }
-    };
-</script>
+<script src="./address.js"></script>
 
 <style lang="less">
     .user {

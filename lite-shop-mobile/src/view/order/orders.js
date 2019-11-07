@@ -1,5 +1,5 @@
 import api from '@/api/cart'
-import {getOrders } from '@/api/orders'
+import order  from '@/api/orders'
 import { Row, Col,Checkbox, CheckboxGroup, Card, SubmitBar, Toast, NavBar, Tab,Tabs,Tabbar, TabbarItem,Panel   } from 'vant';
 
 export default {
@@ -64,7 +64,7 @@ export default {
 
         },
         getData(){
-            getOrders(this.listQuery).then( response => {
+            order.getOrders(this.listQuery).then( response => {
                 let orderList = response.data.records
                 console.log('orderList',orderList)
                 for(var index in  orderList){

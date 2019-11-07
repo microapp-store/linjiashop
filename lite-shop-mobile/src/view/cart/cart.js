@@ -49,15 +49,13 @@ export default {
           })
         },
         submit() {
-            Toast('点击结算');
+            this.$router.push('checkout')
         },
         formatPrice(price) {
             return (price / 100).toFixed(2);
         },
         stepperEvent(item, arg) {
             let count = arg[0];
-            console.log('id',item.id)
-            console.log('num',count)
             cart.update({id:item.id,count:count})
         },
         checkAll( ) {

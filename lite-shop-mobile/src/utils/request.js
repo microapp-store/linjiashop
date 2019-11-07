@@ -49,23 +49,24 @@ service.interceptors.response.use(
     }
   },
   error => {
-    let me = this
 
+    console.log('1error',error.data)
     //todo 未完成
     if (error.response) {
       switch (error.response.status) {
         case 401:
-           router.replace({
-            path: 'login'
-          })
-          break;
-        case 500:
+          console.log(401)
           router.replace({
             path: 'login',
             redirect:router.currentRoute.path
           })
+          return
+          break;
+        case 500:
+          console.log(500)
           break;
       }
+      return Promise.reject(error)
     }
   }
 )

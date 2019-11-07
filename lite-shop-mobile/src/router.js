@@ -47,6 +47,14 @@ const routes = [
     }
   },
   {
+    name: 'checkout',
+    component: () => import('./view/order/checkout'),
+    meta: {
+      requireAuth:true,
+      title: '提交订单'
+    }
+  },
+  {
     name: 'address',
     component: () => import('./view/address'),
     meta: {

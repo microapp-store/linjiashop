@@ -56,16 +56,16 @@ public class ApiRealm extends AuthorizingRealm {
         // 解密获得username，用于和数据库进行对比
         String username = JwtUtil.getUsername(token);
         if (username == null) {
-            throw new AuthenticationException("token invalid");
+            throw new AuthenticationException("token invalid,please relogin");
         }
 
         AuthorizationUser userBean =  UserService.me().getAuthorizationInfo(username);
         if (userBean == null) {
-            throw new AuthenticationException("User didn't existed!");
+            throw new AuthenticationException("User didn't existed!please relogin");
         }
 
         if (! JwtUtil.verify(token, username, userBean.getPassword())) {
-            throw new AuthenticationException("Username or password error");
+            throw new AuthenticationException("Username or password error,please relogin");
         }
 
         return new SimpleAuthenticationInfo(token, token, "my_realm");

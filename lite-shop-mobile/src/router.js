@@ -10,6 +10,14 @@ const routes = [
     redirect: '/index'
   },
   {
+    name: 'error',
+    component: () => import('./view/common/error'),
+    meta: {
+      requireAuth:true,
+      title: '系统异常'
+    }
+  },
+  {
     name: 'login',
     component: () => import('./view/login'),
     meta: {
@@ -52,6 +60,14 @@ const routes = [
     meta: {
       requireAuth:true,
       title: '提交订单'
+    }
+  },
+  {
+    name: 'payment',
+    component: () => import('./view/order/payment'),
+    meta: {
+      requireAuth:true,
+      title: '收银台'
     }
   },
   {

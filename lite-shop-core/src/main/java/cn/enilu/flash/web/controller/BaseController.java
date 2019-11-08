@@ -24,7 +24,15 @@ import java.net.URLDecoder;
  */
 public class BaseController {
     private static Logger logger = LoggerFactory.getLogger(BaseController.class);
+    public Long getIdUser( ) {
+        String token = HttpUtil.getRequest().getHeader("Authorization");
 
+        Long idUser = JwtUtil.getUserId(token);
+        if (idUser == null) {
+            throw new RuntimeException("用户不存在");
+        }
+        return idUser;
+    }
     /**
      * 根据token获取用户id，如果不存在则抛出异常
      *

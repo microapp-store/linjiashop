@@ -20,7 +20,7 @@ export default {
             checkeAllCarts:[],
             cartList: [],
             checkedAll: true
-        };
+        }
     },
     mounted(){
       this.init()

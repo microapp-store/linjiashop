@@ -5,7 +5,7 @@ import { getToken } from '@/utils/auth'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
-  timeout: 5000 // request timeout
+  timeout: 15000 // request timeout
 })
 
 // request interceptor
@@ -50,7 +50,7 @@ service.interceptors.response.use(
   },
   error => {
 
-    console.log('1error',error.data)
+    console.log('1error',error.response.data.message)
     //todo 未完成
     if (error.response) {
       switch (error.response.status) {
@@ -58,12 +58,23 @@ service.interceptors.response.use(
           console.log(401)
           router.replace({
             path: 'login',
-            redirect:router.currentRoute.path
+            query:{redirect:router.currentRoute.path}
           })
           return
           break;
         case 500:
           console.log(500)
+          if(error.response.data.message && error.response.data.message.indexOf('relogin')>-1){
+            router.replace({
+              path: 'login',
+              query:{redirect:router.currentRoute.path}
+            })
+          }else{
+            router.replace({
+              path: 'error',
+              query:{message:error.response.data.message}
+            })
+          }
           break;
       }
       return Promise.reject(error)

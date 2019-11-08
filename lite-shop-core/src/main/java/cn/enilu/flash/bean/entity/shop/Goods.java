@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * @author ：enilu
@@ -33,7 +34,7 @@ public class Goods extends BaseEntity {
     private String specifications;
     @Column(columnDefinition = "INT COMMENT '库存数量'")
     private Integer num;
-    @Column(columnDefinition = "TEXT COMMENT '价格'")
-    private String price;
+    @Column(columnDefinition = "VARCHAR(16) COMMENT '价格'")
+    private BigDecimal price;
 
 }

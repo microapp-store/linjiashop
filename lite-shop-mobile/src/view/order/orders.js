@@ -1,6 +1,6 @@
 import api from '@/api/cart'
 import order  from '@/api/orders'
-import { Row, Col,Checkbox, CheckboxGroup, Card, SubmitBar, Toast, NavBar, Tab,Tabs,Tabbar, TabbarItem,Panel   } from 'vant';
+import { Row, Col,Checkbox, CheckboxGroup, Card, SubmitBar, Toast, NavBar, Tab,Tabs,Tabbar, TabbarItem,Panel,List    } from 'vant';
 
 export default {
     components: {
@@ -15,9 +15,10 @@ export default {
         [Tabbar.name]: Tabbar,
         [Tabs.name]: Tabs,
         [TabbarItem.name]: TabbarItem,
-        [Panel.name]: Panel
+        [Panel.name]: Panel,
+        [List.name]:List
 
-    },
+},
 
     data() {
         return {
@@ -43,7 +44,6 @@ export default {
     mounted(){
         if(this.$route.query){
             let status = this.$route.query.status
-            console.log('status',status)
             //使用状态减一作为导航栏的序号，如果状态值改变，则不能使用该方法
             this.activeNav = parseInt(status)-1
             this.listQuery.status = status
@@ -59,15 +59,13 @@ export default {
 
     methods: {
         init(){
-            console.log('router1111', this.$router)
             this.getData()
 
         },
         getData(){
             order.getOrders(this.listQuery).then( response => {
                 let orderList = response.data.records
-                console.log('orderList',orderList)
-                for(var index in  orderList){
+                for(let index in  orderList){
                     let orders = orderList[index]
                     orders.title=''+orders.createTime
                     orders.descript = ''+orders.orderSn

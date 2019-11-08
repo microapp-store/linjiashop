@@ -8,6 +8,6 @@ package cn.enilu.flash.service;
 public interface CrudService <T, ID> extends
         InsertService<T, ID>,
         UpdateService<T,ID>,
-        DeleteService<ID>,
+        DeleteService<T,ID>,
         SelectService<T, ID> {
 }

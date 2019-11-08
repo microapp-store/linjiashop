@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -31,11 +32,11 @@ public class CartController extends BaseController {
     }
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public Object add(@RequestParam("idGoods") Long idGoods,
-                          @RequestParam("count") Integer count){
+                          @RequestParam("count") String count){
         Long idUser = getIdUser(HttpUtil.getRequest());
         Cart cart = new Cart();
         cart.setIdGoods(idGoods);
-        cart.setCount(count);
+        cart.setCount(new BigDecimal(count));
         cart.setIdUser(idUser);
         cartService.insert(cart);
         return Rets.success();
@@ -43,9 +44,9 @@ public class CartController extends BaseController {
 
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public Object update(@RequestParam("id") Long id,
-                          @RequestParam("count") Integer count){
+                          @RequestParam("count") String count){
         Cart cart = cartService.get(id);
-        cart.setCount(count);
+        cart.setCount(new BigDecimal(count));
         cartService.update(cart);
         return Rets.success();
     }

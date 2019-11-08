@@ -21,7 +21,8 @@ export default {
             checkeAllCarts: [],
             cartList: [],
             checkedAll: true,
-            addr: undefined
+            addr: undefined,
+            message:''
         };
     },
     mounted() {
@@ -59,6 +60,10 @@ export default {
             })
         },
         submit() {
+            order.save({idAddress:this.addr.id,message:this.message}).then( response => {
+                let order = response.data
+                this.$router.push({path:'payment',query:{orderNo:order.orderNo,totalPrice:order.totalPrice}})
+            })
             Toast('点击结算');
         },
         formatPrice(price) {
@@ -66,8 +71,6 @@ export default {
         },
         stepperEvent(item, arg) {
             let count = arg[0];
-            console.log('id', item.id)
-            console.log('num', count)
             cart.update({id: item.id, count: count})
         },
         checkAll() {

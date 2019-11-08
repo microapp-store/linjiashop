@@ -3,9 +3,9 @@ package cn.enilu.flash.bean.entity.shop;
 import cn.enilu.flash.bean.entity.ShopBaseEntity;
 import lombok.Data;
 import org.hibernate.annotations.Table;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * @author ：enilu
@@ -14,7 +14,6 @@ import javax.persistence.*;
 @Data
 @Table(appliesTo = "t_shop_cart",comment = "购物车")
 @Entity(name="t_shop_cart")
-@EntityListeners(AuditingEntityListener.class)
 public class Cart extends ShopBaseEntity {
     @Column(name="id_user",columnDefinition = "BIGINT COMMENT '用户id'")
     private Long idUser;
@@ -28,6 +27,6 @@ public class Cart extends ShopBaseEntity {
     private Goods goods;
     @Column(columnDefinition = "VARCHAR(32) COMMENT '产品规格'")
     private String specifications;
-    @Column(columnDefinition = "INT COMMENT '数量'")
-    private Integer count;
+    @Column(columnDefinition = "varchar(16) COMMENT '数量'")
+    private BigDecimal count;
 }

@@ -41,7 +41,7 @@ public class BannerMgrController extends BaseController {
     @BussinessLog(value = "删除banner", key = "id", dict = CommonDict.class)
     @RequiresPermissions(value = {Permission.BANNER_DEL})
     public Object remove(Long id) {
-        bannerService.delete(id);
+        bannerService.deleteById(id);
         return Rets.success();
     }
 

@@ -8,6 +8,12 @@ export default {
             params
         })
     },
+    remove:function(id){
+      return request({
+          url:'/user/order/cancel/'+id,
+          method:'post'
+      })
+    },
      getOrders:function(params) {
         return request({
             url: '/user/order/getOrders',

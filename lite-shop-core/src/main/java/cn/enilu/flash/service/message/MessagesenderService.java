@@ -30,7 +30,7 @@ public class MessagesenderService extends BaseService<MessageSender,Long,Message
         messageSenderRepository.save(messageSender);
     }
     @Override
-    public void  delete(Long id){
+    public void  deleteById(Long id){
         List<MessageTemplate> templateList = messagetemplateRepository.findByIdMessageSender(id);
         if(templateList.isEmpty()) {
             messageSenderRepository.deleteById(id);

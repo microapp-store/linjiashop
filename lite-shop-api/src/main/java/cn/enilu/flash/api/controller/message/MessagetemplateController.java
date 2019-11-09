@@ -9,7 +9,6 @@ import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.service.message.MessagetemplateService;
-import cn.enilu.flash.utils.ToolUtil;
 import cn.enilu.flash.utils.factory.Page;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +53,7 @@ public class MessagetemplateController {
         if (id == null) {
             throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
         }
-        messagetemplateService.delete(id);
+        messagetemplateService.deleteById(id);
         return Rets.success();
     }
 }

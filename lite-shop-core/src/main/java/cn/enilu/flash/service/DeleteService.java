@@ -6,13 +6,17 @@ package cn.enilu.flash.service;
  * @date ：Created in 2019/6/29 22:29
  */
 public interface DeleteService<T,ID> {
-
+    /**
+     * 删除指定实体
+     * @param record
+     */
+    void  delete(T record);
     /**
      * 根据主键删除记录
      *
      * @param id 主键
      */
-    void delete(ID id);
+    void deleteById(ID id);
 
     /**
      * 根据主键删除记录

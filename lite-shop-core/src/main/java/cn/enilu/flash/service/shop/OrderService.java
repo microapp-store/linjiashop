@@ -42,5 +42,17 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
         }
         orderItemRepository.saveAll(itemList);
     }
+
+    /**
+     * 取消订单
+     * @param id
+     */
+    public void cancel(Long id) {
+        Order order = get(id);
+        List<OrderItem> itemList = order.getItems();
+        delete(order);
+        orderItemRepository.deleteInBatch(itemList);
+
+    }
 }
 

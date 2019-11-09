@@ -44,7 +44,7 @@
       <van-goods-action-button type="warning" @click="addCart">
         加入购物车
       </van-goods-action-button>
-      <van-goods-action-button type="danger" @click="sorry">
+      <van-goods-action-button type="danger" @click="buy">
         立即购买
       </van-goods-action-button>
     </van-goods-action>

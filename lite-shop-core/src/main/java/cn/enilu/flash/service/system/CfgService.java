@@ -31,8 +31,8 @@ public class CfgService  extends BaseService<Cfg,Long,CfgRepository> {
         return cfg;
     }
     @Override
-    public void delete(Long id) {
-        super.delete(id);
+    public void deleteById(Long id) {
+        super.deleteById(id);
         configCache.cache();
     }
 

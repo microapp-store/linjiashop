@@ -75,7 +75,7 @@ public class TaskController extends BaseController {
     @BussinessLog(value = "删除定时任务", key = "taskId",dict = TaskDict.class)
     @RequiresPermissions(value = {Permission.TASK_DEL})
     public Object delete(@RequestParam Long id) {
-        taskService.delete(id);
+        taskService.deleteById(id);
         return Rets.success();
     }
 

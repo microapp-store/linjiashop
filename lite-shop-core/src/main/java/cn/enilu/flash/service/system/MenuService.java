@@ -29,7 +29,7 @@ public class MenuService extends BaseService<Menu, Long, MenuRepository> {
     private MenuRepository menuRepository;
 
     @Override
-    public void delete(Long menuId) {
+    public void deleteById(Long menuId) {
         //删除菜单
         menuRepository.deleteById(menuId);
         //删除关联的relation
@@ -43,7 +43,7 @@ public class MenuService extends BaseService<Menu, Long, MenuRepository> {
         List<Menu> menus = menuRepository.findByPcodesLike("%[" + menu.getCode() + "]%");
         menuRepository.deleteAll(menus);
         //删除当前菜单
-        delete(menuId);
+        deleteById(menuId);
 
     }
 

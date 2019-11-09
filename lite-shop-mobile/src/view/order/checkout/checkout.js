@@ -64,7 +64,6 @@ export default {
                 let order = response.data
                 this.$router.push({path:'payment',query:{orderNo:order.orderNo,totalPrice:order.totalPrice}})
             })
-            Toast('点击结算');
         },
         formatPrice(price) {
             return (price / 100).toFixed(2);

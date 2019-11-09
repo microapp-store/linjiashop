@@ -1,6 +1,5 @@
-import api from '@/api/cart'
-import order  from '@/api/orders'
-import { Row, Col,Checkbox, CheckboxGroup, Card, SubmitBar, Toast, NavBar, Tab,Tabs,Tabbar, TabbarItem,Panel,List    } from 'vant';
+ import order  from '@/api/orders'
+import { Row, Col,Checkbox, CheckboxGroup, Card, SubmitBar, Toast, NavBar, Tab,Tabs,Tabbar, TabbarItem,Panel,List,Button    } from 'vant';
 
 export default {
     components: {
@@ -16,13 +15,15 @@ export default {
         [Tabs.name]: Tabs,
         [TabbarItem.name]: TabbarItem,
         [Panel.name]: Panel,
-        [List.name]:List
+        [List.name]:List,
+        [Button.name]:Button
 
 },
 
     data() {
         return {
             navList: [
+                {name:'全部',id:0},
                 {name:'待付款',id:1},
                 {name:'待发货',id:2},
                 {name:'已发货',id:3},
@@ -37,8 +38,10 @@ export default {
             listQuery: {
                 page: 1,
                 limit: 20,
-                status: 1
-            }
+                status: 0
+            },
+            loading: false,
+            finished: false
         };
     },
     mounted(){
@@ -69,10 +72,9 @@ export default {
                     let orders = orderList[index]
                     orders.title=''+orders.createTime
                     orders.descript = ''+orders.orderSn
-
-
                 }
                 this.orderList = orderList
+                this.loading = false
             }).catch( (err) => {
 
             })
@@ -87,6 +89,21 @@ export default {
             this.activeNav = index;
             this.listQuery.status = this.navList[index].id
             this.getData()
+        },
+        toOrderDetail(id){
+            Toast('查看订单详情'+id)
+        },
+        cancelOrder(orderInfo){
+            order.remove(orderInfo.id).then( response => {
+                this.getData()
+            }).catch( (err) => {
+
+            })
+
+        },
+        handleOrder(orderInfo){
+            this.$router.push({path:'payment',query:{orderNo:order.orderNo,totalPrice:order.totalPrice}})
+
         }
     }
-};
+}

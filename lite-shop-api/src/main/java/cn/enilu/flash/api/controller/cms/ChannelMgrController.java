@@ -42,7 +42,7 @@ public class ChannelMgrController extends BaseController {
     @BussinessLog(value = "删除栏目", key = "id", dict = CommonDict.class)
     @RequiresPermissions(value = {Permission.CHANNEL_DEL})
     public Object remove(Long id) {
-        channelService.delete(id);
+        channelService.deleteById(id);
         return Rets.success();
     }
 

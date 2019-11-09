@@ -18,10 +18,7 @@ import cn.enilu.flash.utils.factory.Page;
 import cn.enilu.flash.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -45,7 +42,7 @@ public class OrderController extends BaseController {
         Page<Order> page = new PageFactory<Order>().defaultPage();
         page.addFilter(SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser));
         page.setSort(Sort.by(Sort.Direction.DESC,"id"));
-        if(status!=null){
+        if(status!=null &&status!=0){
             page.addFilter(SearchFilter.build("status", SearchFilter.Operator.EQ,status));
         }
         page = orderService.queryPage(page);
@@ -90,5 +87,10 @@ public class OrderController extends BaseController {
         orderService.save(order,itemList);
         cartService.deleteAll(cartList);
         return Rets.success(order);
+    }
+    @RequestMapping(value = "cancel/{id}",method = RequestMethod.POST)
+    public Object cancel(@PathVariable("id") Long id){
+        orderService.cancel(id);
+        return Rets.success();
     }
 }

@@ -1,5 +1,5 @@
 import { getAllCategories } from '@/api/category'
-import { queryGoods } from '@/api/goods'
+import goods from '@/api/goods'
 import store from '@/store'
 import {
     Card,
@@ -82,7 +82,7 @@ export default {
         },
         getGoods(idCategory) {
           this.listQuery['idCategory'] = idCategory
-          queryGoods(this.listQuery).then(response => {
+          goods.queryGoods(this.listQuery).then(response => {
               let list = response.data.records
               for(var index in  list){
                   const item = list[index]

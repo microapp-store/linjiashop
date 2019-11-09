@@ -28,10 +28,13 @@ public abstract class BaseService<T, ID extends Serializable, R extends BaseRepo
         implements CrudService<T, ID> {
     @Autowired
     private R dao;
-
+    @Override
+    public void delete(T record){
+        dao.delete(record);
+    }
     @Override
     @CacheEvict(value = Cache.APPLICATION, key = "#root.targetClass.simpleName+':'+#id")
-    public void delete(ID id) {
+    public void deleteById(ID id) {
         dao.deleteById(id);
     }
 

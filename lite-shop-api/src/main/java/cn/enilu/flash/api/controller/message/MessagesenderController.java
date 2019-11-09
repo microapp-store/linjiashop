@@ -52,7 +52,7 @@ public class MessagesenderController {
     public Object remove(Long id) {
 
         try {
-            messagesenderService.delete(id);
+            messagesenderService.deleteById(id);
             return Rets.success();
         } catch (Exception e) {
             return Rets.failure(e.getMessage());

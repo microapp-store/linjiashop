@@ -3,7 +3,6 @@ package cn.enilu.flash.bean.constant.factory;
 import cn.enilu.flash.bean.constant.state.Order;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.StringUtil;
-import cn.enilu.flash.utils.ToolUtil;
 import cn.enilu.flash.utils.factory.Page;
 import org.springframework.data.domain.Sort;
 
@@ -20,8 +19,15 @@ public class PageFactory<T> {
     public Page<T> defaultPage() {
         HttpServletRequest request = HttpUtil.getRequest();
         //每页多少条数据
-        int limit = Integer.valueOf(request.getParameter("limit"));
-        String pageNum = request.getParameter("page");
+        int limit = 10;
+        if(request.getParameter("limit")!=null) {
+            limit = Integer.valueOf(request.getParameter("limit"));
+        }
+        String pageNum = "1";
+
+        if(request.getParameter("page")!=null){
+            pageNum = request.getParameter("page");
+        }
         //每页的偏移量(本页当前有多少条)
         int offset = 0;
         if (StringUtil.isNotEmpty(pageNum)) {

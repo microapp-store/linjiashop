@@ -1,4 +1,4 @@
-import { getGoods } from '@/api/goods'
+import goods from '@/api/goods'
 import cart from '@/api/cart'
 import {
     Tag,
@@ -49,10 +49,15 @@ export default {
     created(){
         this.init()
     },
+    computed:{
+        cartCount(){
+            return 2
+        }
+    },
     methods: {
         init(){
             let id = this.$route.query.id
-            getGoods(id).then( response => {
+            goods.getGoods(id).then( response => {
                 let goods = response.data
                 goods.thumb = new Array()
                 const gallery = response.data.gallery.split(',')
@@ -76,14 +81,23 @@ export default {
         },
         addCart() {
             cart.add(this.goods.id,1).then( response => {
-                this.$router.push('cart');
-            }).then( (err) => {
-                Toast(err)
+                console.log('response',response)
+                Toast('已经加入到购物车')
+            }).catch((err) => {
+                console.log('err22',err)
+                Toast.fail(err);
             })
 
         },
-        sorry() {
-            Toast('开发中~');
+        buy() {
+            cart.add(this.goods.id,1).then( response => {
+                this.$router.push('cart');
+            }).catch( (err) => {
+                Toast.fail(err)
+            })
+        },
+        sorry(){
+            Toast('开发中...')
         }
     }
 };

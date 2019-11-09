@@ -9,25 +9,47 @@
       <van-tab v-for="nav in navList" :title="nav.name" v-bind:key="nav.id">
       </van-tab>
     </van-tabs>
+    <div class="order_list">
+    <van-list v-model="loading"
+              :finished="finished"
+              :immediate-check="false"
+              finished-text="没有更多了"
+              @load="getData">
+      <van-panel v-for="(item, index) in orderList"
+                 :key="index"
+                 :title="'订单编号: ' + item.orderSn"
+                 :status="item.statusName"
+                 @click.native="toOrderDetail(item.id)"
+      >
+        <van-card v-for="(orderItem, index2) in item.items"
+                  :key="index2"
+                  :title="orderItem.goods.name"
+                  :num="orderItem.count"
+                  :thumb="imgUrl+orderItem.goods.pic">
+          <!--<div slot="desc">-->
+            <!--<div class="desc">-->
+              <!--<van-tag plain-->
+                       <!--style="margin-right:6px;"-->
+                       <!--v-for="(spec, index) in goods.specifications"-->
+                       <!--:key="index">-->
+                <!--{{spec}}-->
+              <!--</van-tag>-->
+            <!--</div>-->
+          <!--</div>-->
+        </van-card>
+        <div class="total">合计: {{formatPrice(item.totalPrice)}} </div>
 
-
-
-    <van-panel :title="item.title" :desc="item.descript" :status="item.statusName"   v-for="(item,index) in orderList" :key="index">
-      <div style="background-color: #fafafa">
-        <div v-for="(orderItem,index2) in item.items" :key="index2" >
-          <van-row>
-            <van-col span="4" style="padding:5px;"><img style="width:100%;" :src="imgUrl+orderItem.goods.pic" ></van-col>
-            <van-col span="20">{{orderItem.goods.name}}
-            <span style="color:lightgrey;font-size:14px;">{{orderItem.goods.descript}}</span>
-              <br><br>
-
-            </van-col>
-          </van-row>
+        <div slot="footer"
+             class="footer_btn">
+          <van-button size="small" @click.stop="cancelOrder(item)"  v-show="item.statusName === '待付款'" type="default">取消订单</van-button>
+          <van-button size="small" @click.stop="handleOrder(item)"  type="danger">{{item.statusName}}</van-button>
 
         </div>
-        <span>共{{item.items.length}}商品 合计 {{formatPrice(item.totalPrice)}}元</span><br><br>
-      </div>
-    </van-panel>
+
+      </van-panel>
+
+    </van-list>
+    </div>
 
 
 
@@ -43,34 +65,25 @@
 <script src="./orders.js"></script>
 
 <style lang="less">
-  .van-submit-bar{
-   bottom:48px;
-  }
-.card-goods {
-  background-color: #fff;
-
-  &__item {
-    position: relative;
-    background-color: #fafafa;
-
-    .van-checkbox__label {
-      width: 100%;
-      height: auto; // temp
-      padding: 0 10px 0 15px;
-      box-sizing: border-box;
+  .order_list {
+    .van-panel {
+      margin-top: 5px;
     }
 
-    .van-checkbox__icon {
-      top: 50%;
-      left: 10px;
-      z-index: 1;
-      position: absolute;
-      margin-top: -10px;
+    .van-card {
+      background-color: #fff;
     }
 
-    .van-card__price {
-      color: #f44;
+    .total {
+      text-align: right;
+      padding: 10px;
+    }
+
+    .footer_btn {
+      text-align: right;
+      .van-button {
+        margin-left: 10px;
+      }
     }
   }
-}
 </style>

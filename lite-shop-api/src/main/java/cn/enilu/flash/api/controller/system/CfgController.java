@@ -101,7 +101,7 @@ public class CfgController extends BaseController {
         if (id == null) {
             throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
         }
-        cfgService.delete(id);
+        cfgService.deleteById(id);
         return Rets.success();
     }
 }

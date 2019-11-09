@@ -50,7 +50,7 @@ public class ArticleMgrController extends BaseController {
     @BussinessLog(value = "删除文章",key="id",dict = CommonDict.class)
     @RequiresPermissions(value = {Permission.ARTICLE_DEL})
     public Object remove(Long id){
-        articleService.delete(id);
+        articleService.deleteById(id);
         return Rets.success();
     }
     @RequestMapping(method = RequestMethod.GET)

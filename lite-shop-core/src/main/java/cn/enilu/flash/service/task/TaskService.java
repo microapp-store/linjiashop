@@ -94,7 +94,7 @@ public class TaskService extends BaseService<Task,Long,TaskRepository> {
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void deleteById(Long id) {
 		Task task = get(id);
 		task.setDisabled(true);
 		taskRepository.delete(task);

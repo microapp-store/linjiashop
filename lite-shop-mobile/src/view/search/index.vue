@@ -1,17 +1,21 @@
 <template>
     <div>
 
-        <van-search placeholder="请输入搜索关键词" v-model="searchKey" />
+        <van-search placeholder="请输入搜索关键词" v-model="listQuery.key"    @search="searchGoods" />
+        <van-divider dashed>热门商品</van-divider>
+        <van-list v-model="loading"
+                  :immediate-check="false"
+                  >
 
         <van-card v-for="(goods,index) in goodsList" :key="index"
                   :num="goods.num"
                   :price="goods.price"
-                  :desc="goods.desc"
-                  :title="goods.title"
+                  :desc="goods.descript"
+                  :title="goods.name"
                   :thumb="goods.img"
+                  @click="viewGoodsDetail(goods.id)"
         />
-
-
+        </van-list>
         <van-tabbar v-model="activeFooter">
             <van-tabbar-item icon="home-o"  replace to="/index">首页</van-tabbar-item>
             <van-tabbar-item icon="search"  replace to="/search">发现</van-tabbar-item>
@@ -22,10 +26,14 @@
 </template>
 
 <script>
+    import goods from '@/api/goods'
     import {
-        Card,
+        Divider,
+        List,
+        Toast,
         Cell,
         CellGroup,
+        Card,
         Col,
         Icon,
         Lazyload,
@@ -39,6 +47,9 @@
 
     export default {
         components: {
+            [Divider.name]: Divider,
+            [List.name]: List,
+            [Toast.name]:Toast,
             [Row.name]: Row,
             [Col.name]: Col,
             [Icon.name]: Icon,
@@ -57,52 +68,57 @@
         data() {
             return {
                 searchKey:'',
-                navList: [
-                    {text: '日用杂品'},
-                    {text: '水果生鲜', url: '/#/goods'},
-                    {text: '干果零食', url: '/#/user'},
-                    {text: '家用电器', url: '/#/cart'},
-
-                ],
-
-                goodsList: [{
-                    num: 21,
-                    price: "2.00",
-                    desc: "描述信息",
-                    title: "商品标题",
-                    img: "https://img.yzcdn.cn/vant/t-thirt.jpg"
-                },
-                    {
-                        num: 200,
-                        price: "2.00",
-                        desc: "描述信息",
-                        title: "商品标题",
-                        img: "https://img.yzcdn.cn/vant/t-thirt.jpg"
-                    },
-                    {
-                        num: 200,
-                        price: "2.00",
-                        desc: "描述信息",
-                        title: "商品标题",
-                        img: "https://img.yzcdn.cn/vant/t-thirt.jpg"
-                    },
-                    {
-                        num: 200,
-                        price: "2.00",
-                        desc: "描述信息",
-                        title: "商品标题",
-                        img: "https://img.yzcdn.cn/vant/t-thirt.jpg"
-                    }
-                ],
+                loading:false,
+                finished:false,
+                goodsList: [],
                 activeFooter: 1,
-                activeNav: 0
+                listQuery: {
+                    page: 1,
+                    limit: 20,
+                    key:''
+                },
             }
         },
+        mounted(){
+            this.init()
+        },
         methods: {
-            clickSwipe(index, p2) {
-                console.log(index)
-                console.log(p2)
-            }
+            init(){
+                this.searchHot()
+            },
+            searchGoods(){
+                goods.search(this.listQuery).then( response => {
+                    let list = response.data.records
+                    for(var index in  list){
+                        const item = list[index]
+                        item.img = '/dev-api/file/getImgStream?idFile=' + item.pic
+                    }
+                    this.goodsList = list
+                    this.loading=false
+
+                }).catch( (err) => {
+                    Toast.fail(err)
+                    this.loading=false
+                })
+
+            },
+            searchHot(){
+                goods.searchHot().then( response =>{
+                    let list = response.data.records
+                    for(var index in  list){
+                        const item = list[index]
+                        item.img = '/dev-api/file/getImgStream?idFile=' + item.pic
+                    }
+                    this.goodsList = list
+                    this.loading=false
+                }).catch( (err) => {
+                    Toast.fail(err)
+                    this.loading=false
+                })
+            },
+            viewGoodsDetail(id){
+                this.$router.push({path:'/goods',query:{id:id}})
+            },
         }
     };
 </script>

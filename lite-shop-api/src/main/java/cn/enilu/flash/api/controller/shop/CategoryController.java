@@ -48,7 +48,7 @@ public class CategoryController extends BaseController {
 		if (id == null) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
 		}
-		categoryService.delete(id);
+		categoryService.deleteById(id);
 		return Rets.success();
 	}
 }

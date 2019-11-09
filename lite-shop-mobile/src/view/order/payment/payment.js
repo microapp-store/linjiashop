@@ -29,7 +29,7 @@ export default {
             this.order ={order:orderNo,totalPrice:totalPrice}
         },
         pay() {
-            let payTypeName = this.payType == '1' ? '微信支付' : '支付宝'
+            let payTypeName = this.payType == 'wxpay' ? '微信支付' : '支付宝'
             Toast('准备使用' + payTypeName + '支付')
         },
         formatPrice(price) {

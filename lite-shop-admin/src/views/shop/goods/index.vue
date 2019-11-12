@@ -20,29 +20,22 @@
             </el-table-column>
             <el-table-column label="小图">
                 <template slot-scope="scope">
-                    {{scope.row.pic}}
+                  <img :src="apiUrl+ '/file/getImgStream?idFile=' +scope.row.pic" style="width:50px;">
+
                 </template>
             </el-table-column>
-            <el-table-column label="大图相册列表,以逗号分隔">
+
+            <el-table-column label="类别">
                 <template slot-scope="scope">
-                    {{scope.row.gallery}}
+                    {{scope.row.category.name}}
                 </template>
             </el-table-column>
-            <el-table-column label="类别id">
+            <el-table-column label="产品简介">
                 <template slot-scope="scope">
-                    {{scope.row.idCategory}}
+                    {{scope.row.descript}}
                 </template>
             </el-table-column>
-            <el-table-column label="产品详情">
-                <template slot-scope="scope">
-                    {{scope.row.detail}}
-                </template>
-            </el-table-column>
-            <el-table-column label="产品规格">
-                <template slot-scope="scope">
-                    {{scope.row.specifications}}
-                </template>
-            </el-table-column>
+
         </el-table>
 
         <el-pagination
@@ -74,7 +67,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item label="大图相册列表,以逗号分隔"  >
+                        <el-form-item label="大图相册列表"  >
                             <el-input v-model="form.gallery" minlength=1></el-input>
                         </el-form-item>
                     </el-col>
@@ -85,14 +78,10 @@
                     </el-col>
                     <el-col :span="12">
                         <el-form-item label="产品详情"  >
-                            <el-input v-model="form.detail" minlength=1></el-input>
+                            <el-input v-model="form.descript" minlength=1></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="产品规格"  >
-                            <el-input v-model="form.specifications" minlength=1></el-input>
-                        </el-form-item>
-                    </el-col>
+
                 </el-row>
                 <el-form-item>
                     <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>

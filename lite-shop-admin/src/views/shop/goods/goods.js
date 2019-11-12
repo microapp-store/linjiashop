@@ -1,5 +1,5 @@
 import { remove, getList, save } from '@/api/shop/goods'
-
+import { getApiUrl } from '@/utils/utils'
 export default {
   data() {
     return {
@@ -23,7 +23,8 @@ export default {
       total: 0,
       list: null,
       listLoading: true,
-      selRow: {}
+      selRow: {},
+      apiUrl:getApiUrl()
     }
   },
   filters: {
@@ -149,6 +150,8 @@ export default {
     },
     edit() {
       if (this.checkSel()) {
+        this.$router.push({path:'goodsEdit',query:{id:this.selRow.id}})
+        return
         this.isAdd = false
         this.form = this.selRow
         this.formTitle = '编辑商品'

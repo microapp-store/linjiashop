@@ -93,83 +93,9 @@ export default {
     handleCurrentChange(currentRow, oldCurrentRow) {
       this.selRow = currentRow
     },
-    resetForm() {
-      this.form = {
-        idUser:'',
-        idGoods:'',
-        specifications:'',
-        id: ''
-      }
+    formatPrice(price) {
+      return '¥' + (price / 100).toFixed(2)
     },
-    add() {
-      this.resetForm()
-      this.formTitle = '添加购物车',
-      this.formVisible = true
-      this.isAdd = true
-    },
-    save() {
-      this.$refs['form'].validate((valid) => {
-        if (valid) {
-          save({
-      idUser:this.form.idUser,
-      idGoods:this.form.idGoods,
-      specifications:this.form.specifications,
-            id: this.form.id
-          }).then(response => {
-            this.$message({
-              message: this.$t('common.optionSuccess'),
-              type: 'success'
-            })
-            this.fetchData()
-            this.formVisible = false
-          })
-        } else {
-          return false
-        }
-      })
-    },
-    checkSel() {
-      if (this.selRow && this.selRow.id) {
-        return true
-      }
-      this.$message({
-        message: this.$t('common.mustSelectOne'),
-        type: 'warning'
-      })
-      return false
-    },
-    edit() {
-      if (this.checkSel()) {
-        this.isAdd = false
-        this.form = this.selRow
-        this.formTitle = '编辑购物车'
-        this.formVisible = true
-      }
-    },
-    remove() {
-      if (this.checkSel()) {
-        var id = this.selRow.id
-        this.$confirm(this.$t('common.deleteConfirm'), this.$t('common.tooltip'), {
-          confirmButtonText: this.$t('button.submit'),
-          cancelButtonText: this.$t('button.cancel'),
-          type: 'warning'
-        }).then(() => {
-          remove(id).then(response => {
-            this.$message({
-              message: this.$t('common.optionSuccess'),
-              type: 'success'
-            })
-            this.fetchData()
-          }).catch( err=> {
-            this.$notify.error({
-              title: '错误',
-              message: err
-            })
-          })
-        }).catch(() => {
-        })
-      }
-    }
 
   }
 }

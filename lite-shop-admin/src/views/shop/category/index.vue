@@ -18,16 +18,6 @@
                     {{scope.row.name}}
                 </template>
             </el-table-column>
-            <el-table-column label="链接地址">
-                <template slot-scope="scope">
-                    {{scope.row.url}}
-                </template>
-            </el-table-column>
-            <el-table-column label="图标">
-                <template slot-scope="scope">
-                    {{scope.row.icon}}
-                </template>
-            </el-table-column>
         </el-table>
 
         <el-pagination
@@ -53,16 +43,7 @@
                             <el-input v-model="form.name" minlength=1></el-input>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="链接地址"  >
-                            <el-input v-model="form.url" minlength=1></el-input>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="12">
-                        <el-form-item label="图标"  >
-                            <el-input v-model="form.icon" minlength=1></el-input>
-                        </el-form-item>
-                    </el-col>
+
                 </el-row>
                 <el-form-item>
                     <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>

@@ -1,16 +1,12 @@
 import editorImage from '@/components/Tinymce'
-import { Loading } from 'element-ui'
 import plugins from '@/components/editContainer/plugins'
 import toolbar from '@/components/editContainer/toolbar'
-import { save, get } from '@/api/cms/article'
-import { getList } from '@/api/cms/channel'
+import { get, getList, save } from '@/api/shop/goods'
+import { getCategories } from '@/api/shop/category'
 import { getApiUrl } from '@/utils/utils'
-import { getToken } from '@/utils/auth'
-
 export default {
-  name: 'Tinymce',
   components: { editorImage },
-  props: {
+  props:{
     id: {
       type: String,
       default: function() {
@@ -40,38 +36,45 @@ export default {
   },
   data() {
     return {
-      uploadUrl: '',
-      uploadFileId: '',
-      uploadHeaders: {
-        'Authorization': ''
-      },
-      loadingInstance: {},
       form: {
-        title: '',
-        author: '',
-        idChannel: '1',
-        content: '',
-        img: ''
+        name:'',
+        pic:'',
+        gallery:'',
+        idCategory:'',
+        detail:'',
+        specifications:'',
+        id: ''
       },
-      articleImg: '',
-      ifUpload: true,
-      options: [
-      ],
-      hasChange: false,
-      hasInit: false,
+      form2:{},
+      form3:{},
+      form4:{},
+      id:'',
+      active:0,
+      categories:[],
       tinymceId: this.id,
       fullscreen: false,
       languageTypeList: {
         'en': 'en',
         'zh': 'zh_CN'
-      }
+      },
+      apiUrl:getApiUrl()
     }
   },
   computed: {
     language() {
       return this.languageTypeList[this.$store.getters.language]
+    },
+    //表单验证
+    rules() {
+      return {
+        // cfgName: [
+        //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
+        //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
+        // ]
+      }
     }
   },
+
   watch: {
     value(val) {
       if (!this.hasChange && this.hasInit) {
@@ -99,21 +102,50 @@ export default {
   },
   methods: {
     init() {
-      this.uploadUrl = getApiUrl() + '/file'
-      this.uploadHeaders['Authorization'] = getToken()
-      const id = this.$route.query.id
-      if (id) {
-        get(id).then(response => {
-          this.form = response.data
-          this.setContent(response.data.content)
-          this.articleImg = this.uploadUrl + '/getImgStream?idFile=' + response.data.img
-          this.ifUpload = false
-        })
-      }
-      getList().then(response => {
-        this.options = response.data
+      this.id = this.$route.query.id
+      this.fetchData()
+    },
+    fetchData() {
+      this.listLoading = true
+      get(this.id).then(response => {
+        this.form = response.data
+      })
+      getCategories().then( response => {
+        this.categories = response.data
       })
     },
+    prev(){
+      if(this.active>0){
+        this.active -= 1
+      }
+    },
+    save() {
+      if (this.active++ > 2) this.active = 0
+      return
+      this.$refs['form'].validate((valid) => {
+        if (valid) {
+          save({
+      name:this.form.name,
+      pic:this.form.pic,
+      gallery:this.form.gallery,
+      idCategory:this.form.idCategory,
+      detail:this.form.detail,
+      specifications:this.form.specifications,
+            id: this.form.id
+          }).then(response => {
+            this.$message({
+              message: this.$t('common.optionSuccess'),
+              type: 'success'
+            })
+            this.fetchData()
+            this.formVisible = false
+          })
+        } else {
+          return false
+        }
+      })
+    },
+
     initTinymce() {
       const _this = this
       window.tinymce.init({
@@ -176,61 +208,6 @@ export default {
         window.tinymce.get(_this.tinymceId).insertContent(`<img class="wscnph" src="${v.url}" >`)
       })
     },
-    save() {
-      this.$refs['form'].validate((valid) => {
-        if (valid) {
-          const content = this.form.content.split('%').join('%25')
-          save({
-            id: this.form.id,
-            title: this.form.title,
-            author: this.form.author,
-            idChannel: this.form.idChannel,
-            content: content,
-            img: this.form.img
-          }).then(response => {
-            this.$message({
-              message: this.$t('common.optionSuccess'),
-              type: 'success'
-            })
-            this.back()
-          })
-        } else {
-          return false
-        }
-      })
-    },
-    back() {
-      this.$router.go(-1)
-    },
 
-    handleBeforeUpload() {
-      if (this.uploadFileId !== '') {
-        this.$message({
-          message: this.$t('common.mustSelectOne'),
-          type: 'warning'
-        })
-        return false
-      }
-      this.loadingInstance = Loading.service({
-        lock: true,
-        text: this.$t('common.uploading'),
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      })
-    },
-    handleUploadSuccess(response, raw) {
-      this.loadingInstance.close()
-      if (response.code === 20000) {
-        this.form.img = response.data.id
-      } else {
-        this.$message({
-          message: this.$t('common.uploadError'),
-          type: 'error'
-        })
-      }
-    },
-    uploadImg() {
-      this.ifUpload = !this.ifUpload
-    }
   }
 }

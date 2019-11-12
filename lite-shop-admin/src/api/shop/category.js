@@ -8,6 +8,12 @@ export function getList(params) {
     })
 }
 
+export function getCategories() {
+  return request({
+    url: '/shop/category/getAll',
+    method: 'get'
+  })
+}
 
 export function save(params) {
     return request({

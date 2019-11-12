@@ -16,5 +16,11 @@ public class GoodsService extends BaseService<Goods,Long,GoodsRepository>  {
     @Autowired
     private GoodsRepository goodsRepository;
 
+    @Override
+    public void deleteById(Long id) {
+        Goods goods = get(id);
+        goods.setIsDelete(true);
+        update(goods);
+    }
 }
 

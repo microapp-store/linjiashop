@@ -26,3 +26,13 @@ export function remove(id) {
         }
     })
 }
+export function get(id) {
+  return request({
+    url: '/shop/goods',
+    method: 'get',
+    params: {
+      id: id
+    }
+  })
+}
+

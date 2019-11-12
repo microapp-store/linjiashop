@@ -36,5 +36,7 @@ public class Goods extends BaseEntity {
     private Integer num;
     @Column(columnDefinition = "VARCHAR(16) COMMENT '价格'")
     private BigDecimal price;
+    @Column(columnDefinition = "tinyint COMMENT '是否删除'")
+    private Boolean isDelete= false;
 
 }

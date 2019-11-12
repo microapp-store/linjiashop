@@ -30,6 +30,7 @@ export default {
     category:'Categories',
     shopUser:'Customer',
     goods:'Goods',
+    goodsEdit:'Edit Goods',
     order:'Orders',
     cart:'Carts'
   },

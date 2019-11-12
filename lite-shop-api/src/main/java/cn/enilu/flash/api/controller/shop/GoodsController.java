@@ -49,4 +49,11 @@ public class GoodsController {
 		goodsService.deleteById(id);
 		return Rets.success();
 	}
+	@RequestMapping(method = RequestMethod.GET)
+	public Object get(Long id){
+		if (id == null) {
+			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+		}
+		return Rets.success(goodsService.get(id));
+	}
 }

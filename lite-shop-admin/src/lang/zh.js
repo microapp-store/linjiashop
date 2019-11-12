@@ -30,6 +30,7 @@ export default {
     shopUser:'用户管理',
     category:'商品类别',
     goods:'商品管理',
+    goodsEdit:'商品编辑',
     order:'订单管理',
     cart:'购物车'
   },

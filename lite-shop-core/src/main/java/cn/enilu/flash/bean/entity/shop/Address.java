@@ -36,6 +36,7 @@ public class Address extends ShopBaseEntity {
     private String postCode;
     @Column(columnDefinition = "tinyint COMMENT '是否默认'")
     private Boolean isDefault=false;
+    @Column(columnDefinition = "tinyint COMMENT '是否删除'")
     private Boolean isDelete= false;
 
 }

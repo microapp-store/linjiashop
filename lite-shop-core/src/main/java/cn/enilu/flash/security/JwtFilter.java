@@ -62,13 +62,13 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
                 executeLogin(request, response);
             } catch (Exception e) {
                 response401(request, response);
-                return false;
+                return true;
             }
         }
         //todo 没有生效，待解决问题
         HttpServletResponse resp = (HttpServletResponse) response;
         resp.setHeader("www-authenticate","");
-        return false;
+        return true;
     }
 
     /**

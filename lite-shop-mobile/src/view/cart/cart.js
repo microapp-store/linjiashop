@@ -45,7 +45,7 @@ export default {
               }
               this.cartList = cartList
           }).catch((err) => {
-              Toast(err)
+
           })
         },
         submit() {

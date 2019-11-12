@@ -26,3 +26,11 @@ export function remove(id) {
         }
     })
 }
+
+
+export function getUser(id) {
+  return request({
+    url: '/shop/user/'+id,
+    method: 'get'
+  })
+}

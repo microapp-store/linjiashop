@@ -1,20 +1,9 @@
-import { remove, getList, save } from '@/api/shop/goods'
-import { getApiUrl } from '@/utils/utils'
+import {getList, remove, save} from '@/api/shop/goods'
+import {getApiUrl} from '@/utils/utils'
+
 export default {
   data() {
     return {
-      formVisible: false,
-      formTitle: '添加商品',
-      isAdd: true,
-      form: {
-        name:'',
-        pic:'',
-        gallery:'',
-        idCategory:'',
-        detail:'',
-        specifications:'',
-        id: ''
-      },
       listQuery: {
         page: 1,
         limit: 20,
@@ -24,7 +13,7 @@ export default {
       list: null,
       listLoading: true,
       selRow: {},
-      apiUrl:getApiUrl()
+      apiUrl: getApiUrl()
     }
   },
   filters: {
@@ -35,18 +24,6 @@ export default {
         deleted: 'danger'
       }
       return statusMap[status]
-    }
-  },
-  computed: {
-
-    //表单验证
-    rules() {
-      return {
-        // cfgName: [
-        //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
-        //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
-        // ]
-      }
     }
   },
   created() {
@@ -97,47 +74,6 @@ export default {
     handleCurrentChange(currentRow, oldCurrentRow) {
       this.selRow = currentRow
     },
-    resetForm() {
-      this.form = {
-        name:'',
-        pic:'',
-        gallery:'',
-        idCategory:'',
-        detail:'',
-        specifications:'',
-        id: ''
-      }
-    },
-    add() {
-      this.resetForm()
-      this.formTitle = '添加商品',
-      this.formVisible = true
-      this.isAdd = true
-    },
-    save() {
-      this.$refs['form'].validate((valid) => {
-        if (valid) {
-          save({
-      name:this.form.name,
-      pic:this.form.pic,
-      gallery:this.form.gallery,
-      idCategory:this.form.idCategory,
-      detail:this.form.detail,
-      specifications:this.form.specifications,
-            id: this.form.id
-          }).then(response => {
-            this.$message({
-              message: this.$t('common.optionSuccess'),
-              type: 'success'
-            })
-            this.fetchData()
-            this.formVisible = false
-          })
-        } else {
-          return false
-        }
-      })
-    },
     checkSel() {
       if (this.selRow && this.selRow.id) {
         return true
@@ -148,40 +84,6 @@ export default {
       })
       return false
     },
-    edit() {
-      if (this.checkSel()) {
-        this.$router.push({path:'goodsEdit',query:{id:this.selRow.id}})
-        return
-        this.isAdd = false
-        this.form = this.selRow
-        this.formTitle = '编辑商品'
-        this.formVisible = true
-      }
-    },
-    remove() {
-      if (this.checkSel()) {
-        var id = this.selRow.id
-        this.$confirm(this.$t('common.deleteConfirm'), this.$t('common.tooltip'), {
-          confirmButtonText: this.$t('button.submit'),
-          cancelButtonText: this.$t('button.cancel'),
-          type: 'warning'
-        }).then(() => {
-          remove(id).then(response => {
-            this.$message({
-              message: this.$t('common.optionSuccess'),
-              type: 'success'
-            })
-            this.fetchData()
-          }).catch( err=> {
-            this.$notify.error({
-              title: '错误',
-              message: err
-            })
-          })
-        }).catch(() => {
-        })
-      }
-    }
 
   }
 }

@@ -29,9 +29,11 @@ export default {
     shopMgr:'Shop',
     category:'Categories',
     shopUser:'Customer',
+    shopUserDetail:'Customer Detail',
     goods:'Goods',
     goodsEdit:'Edit Goods',
     order:'Orders',
+    orderDetail:'Order Detail',
     cart:'Carts'
   },
   navbar: {

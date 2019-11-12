@@ -109,6 +109,7 @@ export default {
       this.listLoading = true
       get(this.id).then(response => {
         this.form = response.data
+        this.setContent(response.data.detail)
       })
       getCategories().then( response => {
         this.categories = response.data

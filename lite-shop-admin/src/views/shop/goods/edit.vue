@@ -51,17 +51,17 @@
       </el-row>
     </el-form>
 
-    <el-form ref="form" :model="form2" :rules="rules" label-width="150px" v-show="active==1">
+    <el-form ref="form" label-width="150px" v-show="active==1">
       <el-row>
 
         <el-col :span="24">
           <el-form-item label="小图">
-            <el-input v-model="form2.pic" minlength=1></el-input>
+            <el-input v-model="form.pic" minlength=1></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="24">
           <el-form-item label="大图相册列表">
-            <el-input v-model="form2.gallery" minlength=1></el-input>
+            <el-input v-model="form.gallery" minlength=1></el-input>
           </el-form-item>
         </el-col>
 
@@ -75,17 +75,17 @@
         <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK"/>
       </div>
     </div>
-    <el-form ref="form" :model="form4" :rules="rules" label-width="150px" v-show="active==3">
+    <el-form ref="form" label-width="150px" v-show="active==3">
       <el-row>
 
         <el-col :span="24">
           <el-form-item label="价格">
-            <el-input v-model="form4.price" minlength=1 type="number"></el-input>
+            <el-input v-model="form.price" minlength=1 type="number"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="24">
           <el-form-item label="数量">
-            <el-input v-model="form4.num" minlength=1 type="number"></el-input>
+            <el-input v-model="form.num" minlength=1 type="number"></el-input>
           </el-form-item>
         </el-col>
 

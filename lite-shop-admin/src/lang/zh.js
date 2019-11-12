@@ -28,10 +28,12 @@ export default {
     msgSender:'消息发送器',
     shopMgr:'商城管理',
     shopUser:'用户管理',
+    shopUserDetail:'用户详情',
     category:'商品类别',
     goods:'商品管理',
     goodsEdit:'商品编辑',
     order:'订单管理',
+    orderDetail:'订单详情',
     cart:'购物车'
   },
   navbar: {

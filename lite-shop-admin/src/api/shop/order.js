@@ -26,3 +26,10 @@ export function remove(id) {
         }
     })
 }
+
+export function getOrder(orderSn) {
+  return request({
+    url: '/shop/order/'+orderSn,
+    method: 'get'
+  })
+}

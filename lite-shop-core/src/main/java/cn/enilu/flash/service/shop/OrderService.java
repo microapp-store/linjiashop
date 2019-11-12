@@ -3,6 +3,7 @@ package cn.enilu.flash.service.shop;
 
 import cn.enilu.flash.bean.entity.shop.Order;
 import cn.enilu.flash.bean.entity.shop.OrderItem;
+import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.dao.shop.OrderItemRepository;
 import cn.enilu.flash.dao.shop.OrderRepository;
 import cn.enilu.flash.service.BaseService;
@@ -53,6 +54,10 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
         delete(order);
         orderItemRepository.deleteInBatch(itemList);
 
+    }
+
+    public Order getByOrderSn(String orderSn) {
+        return get(SearchFilter.build("orderSn", SearchFilter.Operator.EQ,orderSn));
     }
 }
 

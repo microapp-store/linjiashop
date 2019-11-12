@@ -1,4 +1,4 @@
-import { remove, getList, save } from '@/api/shop/shopUser'
+import {getList, remove, save} from '@/api/shop/shopUser'
 
 export default {
   data() {
@@ -7,11 +7,11 @@ export default {
       formTitle: '添加用户',
       isAdd: true,
       form: {
-        mobile:'',
-        salt:'',
-        password:'',
-        nickName:'',
-        avatar:'',
+        mobile: '',
+        salt: '',
+        password: '',
+        nickName: '',
+        avatar: '',
         id: ''
       },
       listQuery: {
@@ -97,29 +97,29 @@ export default {
     },
     resetForm() {
       this.form = {
-        mobile:'',
-        salt:'',
-        password:'',
-        nickName:'',
-        avatar:'',
+        mobile: '',
+        salt: '',
+        password: '',
+        nickName: '',
+        avatar: '',
         id: ''
       }
     },
     add() {
       this.resetForm()
       this.formTitle = '添加用户',
-      this.formVisible = true
+        this.formVisible = true
       this.isAdd = true
     },
     save() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           save({
-      mobile:this.form.mobile,
-      salt:this.form.salt,
-      password:this.form.password,
-      nickName:this.form.nickName,
-      avatar:this.form.avatar,
+            mobile: this.form.mobile,
+            salt: this.form.salt,
+            password: this.form.password,
+            nickName: this.form.nickName,
+            avatar: this.form.avatar,
             id: this.form.id
           }).then(response => {
             this.$message({
@@ -166,7 +166,7 @@ export default {
               type: 'success'
             })
             this.fetchData()
-          }).catch( err=> {
+          }).catch(err => {
             this.$notify.error({
               title: '错误',
               message: err

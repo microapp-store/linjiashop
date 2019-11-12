@@ -12,10 +12,7 @@ import cn.enilu.flash.utils.factory.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/shop/user")
@@ -39,6 +36,14 @@ public class ShopUserController {
 			shopUserService.update(tShopUser);
 		}
 		return Rets.success();
+	}
+
+	@RequestMapping(value="{id}",method = RequestMethod.GET)
+	public Object get(@PathVariable("id") Long id){
+		if (id == null) {
+			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+		}
+		return Rets.success(shopUserService.get(id));
 	}
 	@RequestMapping(method = RequestMethod.DELETE)
 	@BussinessLog(value = "删除用户", key = "id",dict= CommonDict.class)

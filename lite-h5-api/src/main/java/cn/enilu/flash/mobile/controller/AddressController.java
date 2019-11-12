@@ -5,12 +5,10 @@ import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.AddressService;
 import cn.enilu.flash.utils.HttpUtil;
+import cn.enilu.flash.utils.Lists;
 import cn.enilu.flash.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,23 +22,68 @@ import java.util.List;
 public class AddressController extends BaseController {
     @Autowired
     private AddressService addressService;
+    @RequestMapping(value = "{id}",method = RequestMethod.GET)
+    public Object get(@PathVariable("id") Long id){
+        Long idUser = getIdUser();
+        Address address = addressService.get(idUser,id);
+        return Rets.success(address);
+
+    }
+    @RequestMapping(value = "{id}",method = RequestMethod.DELETE)
+    public Object remove(@PathVariable("id") Long id){
+        Long idUser = getIdUser();
+        addressService.delete(idUser,id);
+        return Rets.success( );
+
+    }
+    @RequestMapping(value = "{id}/{isDefault}",method = RequestMethod.POST)
+    public Object changeDefault(@PathVariable("id") Long id,@PathVariable("isDefault") Boolean isDefault){
+        Long idUser = getIdUser();
+        Address defaultAddr = addressService.getDefaultAddr(idUser);
+        if(defaultAddr!=null){
+            if(defaultAddr.getId().intValue() == id.intValue()){
+
+                defaultAddr.setIsDefault(isDefault);
+                addressService.update(defaultAddr);
+                return Rets.success();
+
+            }else{
+                if(isDefault) {
+                    defaultAddr.setIsDefault(false);
+                    addressService.update(defaultAddr);
+                }
+            }
+        }
+
+        Address address = addressService.get(idUser,id);
+        address.setIsDefault(isDefault);
+        addressService.update(address);
+        return Rets.success(address);
+
+    }
     @RequestMapping(value = "/queryByUser",method = RequestMethod.GET)
     public Object getByUser(){
         Long idUser = getIdUser(HttpUtil.getRequest());
-        List<Address> list = addressService.queryAll(SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser));
+        List<SearchFilter> filters = Lists.newArrayList(
+                SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser),
+                SearchFilter.build("isDelete", SearchFilter.Operator.EQ,false)
+        );
+        List<Address> list = addressService.queryAll(filters);
         return Rets.success(list);
     }
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public Object add(@ModelAttribute @Valid Address address){
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    public Object save(@ModelAttribute @Valid Address addressInfo){
         Long idUser = getIdUser(HttpUtil.getRequest());
-        address.setIdUser(idUser);
-        addressService.insert(address);
+        addressInfo.setIdUser(idUser);
+        if(addressInfo.getId()!=null){
+            Address old = addressService.get(idUser,addressInfo.getId());
+            addressInfo.setCreateTime(old.getCreateTime());
+            addressService.update(addressInfo);
+        }else{
+            addressService.insert(addressInfo);
+        }
+
         return Rets.success();
     }
 
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public Object update(@ModelAttribute @Valid Address address){
-        addressService.update(address);
-        return Rets.success();
-    }
 }

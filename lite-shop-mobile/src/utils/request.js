@@ -70,14 +70,11 @@ service.interceptors.response.use(
               query:{redirect:router.currentRoute.path}
             })
           }else{
-            router.replace({
-              path: 'error',
-              query:{message:error.response.data.message}
-            })
+            return Promise.reject(error.response.data.message)
           }
           break;
       }
-      return Promise.reject(error)
+      return Promise.reject(error.response.data.message)
     }
   }
 )

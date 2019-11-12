@@ -84,8 +84,7 @@ export default {
                 console.log('response',response)
                 Toast('已经加入到购物车')
             }).catch((err) => {
-                console.log('err22',err)
-                Toast.fail(err);
+                Toast.fail(err)
             })
 
         },

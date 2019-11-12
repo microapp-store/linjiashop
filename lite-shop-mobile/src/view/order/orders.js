@@ -75,6 +75,7 @@ export default {
                 }
                 this.orderList = orderList
                 this.loading = false
+                this.finished= (response.data.total === 0 || (response.data.current === response.data.pages))
             }).catch( (err) => {
 
             })

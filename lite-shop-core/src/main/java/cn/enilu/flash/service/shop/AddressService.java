@@ -32,5 +32,19 @@ public class AddressService extends BaseService<Address,Long,AddressRepository> 
         return get(filterList);
     }
 
+    public Address get(Long idUser,Long id){
+        return get(Lists.newArrayList(
+                SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser),
+                SearchFilter.build("id", SearchFilter.Operator.EQ,id)
+        ));
+    }
+    public void delete(Long idUser, Long id) {
+        Address address = get(Lists.newArrayList(
+                SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser),
+                SearchFilter.build("id", SearchFilter.Operator.EQ,id)
+        ));
+        address.setIsDelete(true);
+        update(address);
+    }
 }
 

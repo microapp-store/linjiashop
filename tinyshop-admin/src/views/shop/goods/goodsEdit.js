@@ -1,15 +1,17 @@
 import editorImage from '@/components/Tinymce'
 import plugins from '@/components/editContainer/plugins'
 import toolbar from '@/components/editContainer/toolbar'
-import { get, getList, save } from '@/api/shop/goods'
-import { getCategories } from '@/api/shop/category'
-import { getApiUrl } from '@/utils/utils'
+import {get, getList, save} from '@/api/shop/goods'
+import {getCategories} from '@/api/shop/category'
+import {getApiUrl} from '@/utils/utils'
+import {getToken} from '@/utils/auth'
+
 export default {
-  components: { editorImage },
-  props:{
+  components: {editorImage},
+  props: {
     id: {
       type: String,
-      default: function() {
+      default: function () {
         return 'vue-tinymce-' + +new Date() + ((Math.random() * 1000).toFixed(0) + '')
       }
     },
@@ -36,28 +38,26 @@ export default {
   },
   data() {
     return {
-      form: {
-        name:'',
-        pic:'',
-        gallery:'',
-        idCategory:'',
-        detail:'',
-        specifications:'',
-        id: ''
+      form: {},
+      form2: {},
+      form3: {},
+      form4: {},
+      uploadUrl: '',
+      uploadFileId: '',
+      uploadHeaders: {
+        'Authorization': ''
       },
-      form2:{},
-      form3:{},
-      form4:{},
-      id:'',
-      active:0,
-      categories:[],
+      id: '',
+      active: 0,
+      categories: [],
       tinymceId: this.id,
       fullscreen: false,
       languageTypeList: {
         'en': 'en',
         'zh': 'zh_CN'
       },
-      apiUrl:getApiUrl()
+      galleryList: [],
+      apiUrl: getApiUrl()
     }
   },
   computed: {
@@ -102,6 +102,8 @@ export default {
   },
   methods: {
     init() {
+      this.uploadUrl = getApiUrl() + '/file'
+      this.uploadHeaders['Authorization'] = getToken()
       this.id = this.$route.query.id
       this.fetchData()
     },
@@ -109,14 +111,22 @@ export default {
       this.listLoading = true
       get(this.id).then(response => {
         this.form = response.data
+        let galleryList = new Array()
+        let galleryArr = response.data.gallery.split(',')
+        for (let i = 0; i < galleryArr.length; i++) {
+          this.galleryList.push({
+            id: galleryArr[i],
+            url: this.apiUrl + '/file/getImgStream?idFile=' + galleryArr[i]
+          })
+        }
         this.setContent(response.data.detail)
       })
-      getCategories().then( response => {
+      getCategories().then(response => {
         this.categories = response.data
       })
     },
-    prev(){
-      if(this.active>0){
+    prev() {
+      if (this.active > 0) {
         this.active -= 1
       }
     },
@@ -126,12 +136,12 @@ export default {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           save({
-      name:this.form.name,
-      pic:this.form.pic,
-      gallery:this.form.gallery,
-      idCategory:this.form.idCategory,
-      detail:this.form.detail,
-      specifications:this.form.specifications,
+            name: this.form.name,
+            pic: this.form.pic,
+            gallery: this.form.gallery,
+            idCategory: this.form.idCategory,
+            detail: this.form.detail,
+            specifications: this.form.specifications,
             id: this.form.id
           }).then(response => {
             this.$message({
@@ -146,11 +156,51 @@ export default {
         }
       })
     },
+    handleOverwrite(response, raw) {
 
+    },
+    handleRemove: function (file, fileList) {
+      console.log('file',file)
+      for (var i = 0; i < this.galleryList.length; i++) {
+        var url = file.url
+        if (this.galleryList[i] === url) {
+          this.galleryList.splice(i, 1)
+        }
+      }
+      console.log('gallery',this.galleryList)
+    },
+    handleUploadPicSuccess(response, raw) {
+      if (response.code === 20000) {
+        console.log(response.data)
+        this.form.pic = response.data.id
+        console.log('pic',this.form.pic)
+      } else {
+        this.$message({
+          message: this.$t('common.uploadError'),
+          type: 'error'
+        })
+      }
+    },
+    handleUploadGallerySuccess(response, raw) {
+      if (response.code === 20000) {
+        this.galleryList.push(
+          {
+            id: response.data.id,
+            url: this.apiUrl + '/file/getImgStream?idFile=' + response.data.id
+          }
+        )
+        console.log('gallery',this.galleryList)
+      } else {
+        this.$message({
+          message: this.$t('common.uploadError'),
+          type: 'error'
+        })
+      }
+    },
     initTinymce() {
       const _this = this
       window.tinymce.init({
-        value: 'aaaaaa',
+        value: '',
         language: this.language,
         selector: `#${this.tinymceId}`,
         height: this.height,

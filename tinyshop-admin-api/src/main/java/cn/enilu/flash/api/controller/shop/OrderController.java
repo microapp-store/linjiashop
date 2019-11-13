@@ -5,6 +5,7 @@ import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.dictmap.CommonDict;
 import cn.enilu.flash.bean.entity.shop.Order;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
+import cn.enilu.flash.bean.enumeration.shop.OrderEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.service.shop.OrderService;
@@ -27,14 +28,12 @@ public class OrderController {
 		page = orderService.queryPage(page);
 		return Rets.success(page);
 	}
-	@RequestMapping(method = RequestMethod.POST)
-	@BussinessLog(value = "编辑订单", key = "name",dict= CommonDict.class)
-	public Object save(@ModelAttribute Order tShopOrder){
-		if(tShopOrder.getId()==null){
-			orderService.insert(tShopOrder);
-		}else {
-			orderService.update(tShopOrder);
-		}
+	@RequestMapping(value="/sendOut/{id}",method = RequestMethod.POST)
+	@BussinessLog(value = "发货", key = "name",dict= CommonDict.class)
+	public Object sendOut(@PathVariable("id") Long id){
+	 	Order order = orderService.get(id);
+	 	order.setStatus(OrderEnum.OrderStatusEnum.SENDED.getId());
+	 	orderService.update(order);
 		return Rets.success();
 	}
 	@RequestMapping(method = RequestMethod.DELETE)

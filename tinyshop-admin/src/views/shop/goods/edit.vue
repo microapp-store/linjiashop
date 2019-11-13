@@ -3,8 +3,8 @@
     <div class="block">
       <el-row>
         <el-col :span="24">
-          <el-button type="primary" @click="save">下一步</el-button>
-          <el-button @click="prev" v-show="active>0">上一步</el-button>
+          <el-button type="primary" @click="save" size="mini">{{active==3?"提交":"下一步"}}</el-button>
+          <el-button @click="prev" v-show="active>0" size="mini">上一步</el-button>
         </el-col>
       </el-row>
     </div>
@@ -55,13 +55,33 @@
       <el-row>
 
         <el-col :span="24">
-          <el-form-item label="小图">
-            <el-input v-model="form.pic" minlength=1></el-input>
+          <el-form-item label="商品相册">
+            <el-upload
+              :headers="uploadHeaders"
+              :action="uploadUrl"
+              :show-file-list="false"
+              :on-success="handleUploadPicSuccess"
+              class="avatar-uploader"
+              accept=".jpg,.jpeg,.png,.gif">
+              <img v-if="form.pic" :src="apiUrl+ '/file/getImgStream?idFile=' +form.pic" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon"/>
+            </el-upload>
+
           </el-form-item>
         </el-col>
         <el-col :span="24">
-          <el-form-item label="大图相册列表">
-            <el-input v-model="form.gallery" minlength=1></el-input>
+          <el-form-item label="商品相册">
+              <el-upload
+                list-type="picture-card"
+                :action="uploadUrl"
+                :headers="uploadHeaders"
+                :file-list="galleryList"
+                :on-exceed="handleOverwrite"
+                :on-remove="handleRemove"
+                :on-success="handleUploadGallerySuccess">
+                <i class="el-icon-plus"></i>
+              </el-upload>
+
           </el-form-item>
         </el-col>
 
@@ -79,8 +99,8 @@
       <el-row>
 
         <el-col :span="24">
-          <el-form-item label="价格">
-            <el-input v-model="form.price" minlength=1 type="number"></el-input>
+          <el-form-item label="价格(分)">
+            <el-input v-model="form.price" minlength=1 type="number" placeholder="精确到分"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="24">
@@ -96,8 +116,8 @@
     <div class="block">
       <el-row>
         <el-col :span="24">
-          <el-button type="primary" @click="save">下一步</el-button>
-          <el-button @click="prev" v-show="active>0">上一步</el-button>
+          <el-button type="primary" @click="save" size="mini">{{active==3?"提交":"下一步"}}</el-button>
+          <el-button @click="prev" v-show="active>0" size="mini">上一步</el-button>
         </el-col>
       </el-row>
     </div>
@@ -137,6 +157,30 @@
 
   .editor-upload-btn {
     display: inline-block;
+  }
+
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #20a0ff;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+  }
+  .avatar {
+    width: 145px;
+    height: 145px;
+    display: block;
   }
 </style>
 

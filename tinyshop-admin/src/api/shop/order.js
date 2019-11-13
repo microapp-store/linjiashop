@@ -9,11 +9,10 @@ export function getList(params) {
 }
 
 
-export function save(params) {
+export function sendOut(id) {
     return request({
-        url: '/shop/order',
-        method: 'post',
-        params
+        url: '/shop/order/sendOut/'+id,
+        method: 'post'
     })
 }
 

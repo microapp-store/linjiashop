@@ -81,6 +81,9 @@ export default {
         type: 'warning'
       })
       return false
+    },
+    formatPrice(price) {
+      return (price / 100).toFixed(2);
     }
   }
 }

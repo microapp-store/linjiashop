@@ -38,5 +38,7 @@ public class Goods extends BaseEntity {
     private BigDecimal price;
     @Column(columnDefinition = "tinyint COMMENT '是否删除'")
     private Boolean isDelete= false;
+    @Column(columnDefinition = "tinyint COMMENT '是否上架'")
+    private Boolean isOnSale = true;
 
 }

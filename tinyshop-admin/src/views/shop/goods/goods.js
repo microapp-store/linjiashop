@@ -84,6 +84,16 @@ export default {
       })
       return false
     },
+    edit() {
+      if (this.checkSel()) {
+        this.$router.push({path:'goodsEdit',query:{id:this.selRow.id}})
+        return
+        this.isAdd = false
+        this.form = this.selRow
+        this.formTitle = '编辑商品'
+        this.formVisible = true
+      }
+    }
 
   }
 }

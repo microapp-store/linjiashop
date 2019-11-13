@@ -43,7 +43,7 @@
       </el-table-column>
       <el-table-column label="总金额">
         <template slot-scope="scope">
-          {{scope.row.totalPrice}}
+          {{formatPrice(scope.row.totalPrice)}}
         </template>
       </el-table-column>
     </el-table>

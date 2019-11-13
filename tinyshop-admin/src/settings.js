@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'web-flash Admin',
+  title: 'Tiny Shop Admin',
 
   /**
    * @type {boolean} true | false

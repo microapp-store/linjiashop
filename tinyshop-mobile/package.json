@@ -1,8 +1,8 @@
 {
-  "name": "vant-demo",
+  "name": "tinyshop-mobile",
   "version": "1.0.0",
-  "description": "Collection of vant demos.",
-  "author": "neverland <chenjiahan@neverl.com>",
+  "description": "tiny shop mobile",
+  "author": "enilu <enluzt@qq.com>",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",

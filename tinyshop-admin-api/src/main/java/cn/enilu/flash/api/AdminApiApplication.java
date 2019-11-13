@@ -23,14 +23,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages="cn.enilu.flash.bean.entity")
 @EnableJpaRepositories(basePackages = "cn.enilu.flash.dao", repositoryFactoryBeanClass = BaseRepositoryFactoryBean.class)
 @EnableJpaAuditing
-public class ApiApplication extends SpringBootServletInitializer {
+public class AdminApiApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(ApiApplication.class);
+        return application.sources(AdminApiApplication.class);
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(ApiApplication.class);
+        SpringApplication.run(AdminApiApplication.class);
     }
 }

@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.enilu</groupId>
-    <artifactId>lite-shop</artifactId>
+    <artifactId>tinyshop</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
-        <module>lite-shop-core</module>
-        <module>lite-shop-generator</module>
-        <module>lite-shop-api</module>
-        <module>lite-h5-api</module>
+        <module>tinyshop-core</module>
+        <module>tinyshop-generator</module>
+        <module>tinyshop-mobile-api</module>
+        <module>tinyshop-admin-api</module>
     </modules>
 
     <properties>

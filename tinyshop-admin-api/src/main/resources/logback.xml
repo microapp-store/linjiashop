@@ -15,7 +15,7 @@
 	<!-- 向文件输出日志 -->
 	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>/data/app/lite-shop/runtime/log/api_%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>/data/app/tinyshop/runtime/log/api_%d{yyyy-MM-dd}.log</fileNamePattern>
 			<maxHistory>1000</maxHistory>
 		</rollingPolicy>
 		<encoder>

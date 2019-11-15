@@ -3,20 +3,22 @@ package cn.enilu.flash.api.controller.shop;
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.dictmap.CommonDict;
+import cn.enilu.flash.bean.entity.cms.Banner;
 import cn.enilu.flash.bean.entity.shop.Category;
+import cn.enilu.flash.bean.entity.shop.CategoryBannerRel;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
+import cn.enilu.flash.bean.vo.query.SearchFilter;
+import cn.enilu.flash.service.shop.CategoryBannerRelService;
 import cn.enilu.flash.service.shop.CategoryService;
+import cn.enilu.flash.utils.Lists;
 import cn.enilu.flash.utils.factory.Page;
 import cn.enilu.flash.web.controller.BaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +28,8 @@ public class CategoryController extends BaseController {
 	private  Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private CategoryBannerRelService categoryBannerRelService;
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public Object list() {
@@ -57,5 +61,18 @@ public class CategoryController extends BaseController {
 		}
 		categoryService.deleteById(id);
 		return Rets.success();
+	}
+	@RequestMapping(value="/getBanners/{idCategory}",method = RequestMethod.GET)
+	public Object getBanners(@PathVariable("idCategory") Long idCategory){
+		if (idCategory == null) {
+			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+		}
+		List<CategoryBannerRel> relList = categoryBannerRelService.queryAll(SearchFilter.build("idCategory", SearchFilter.Operator.EQ,idCategory));
+		List<Banner> bannerList = Lists.newArrayList();
+		relList.forEach( item->{
+			bannerList.add(item.getBanner());
+		});
+
+		return Rets.success(bannerList);
 	}
 }

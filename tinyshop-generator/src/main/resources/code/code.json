@@ -3,11 +3,11 @@
   "codeConfig": {
     "type": "cn.enilu.flash.code.CodeConfig",
     "fields": {
-      entityModel: "lite-shop-core",
-      daoModel: "lite-shop-core",
-      serviceModel: "lite-shop-core",
-      controllerModel: "lite-shop-api",
-      viewModel: "lite-shop-admin"
+      entityModel: "tinyshop-core",
+      daoModel: "tinyshop-core",
+      serviceModel: "tinyshop-core",
+      controllerModel: "tinyshop-admin-api",
+      viewModel: "tinyshop-admin"
     }
   }
 }

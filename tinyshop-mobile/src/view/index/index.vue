@@ -5,8 +5,8 @@
             </van-tab>
         </van-tabs>
         <van-swipe :autoplay="3000" style="height: 200px;">
-            <van-swipe-item v-for="(image, index) in images" :key="index" @click="clickSwipe">
-                <a :href="image.link"><img v-lazy="image.path"/></a>
+            <van-swipe-item v-for="(image, index) in banners" :key="index" @click="clickSwipe">
+                <a :href="image.url"><img v-lazy="image.path" style="width:100%;"/></a>
             </van-swipe-item>
         </van-swipe>
         <van-card v-for="(goods,index) in goodsList" :key="index"
@@ -18,7 +18,7 @@
                   :thumb-link="goods.link"
                   @click="viewGoodsDetail(goods.id)"
         />
-
+<br><br>
 
         <van-tabbar v-model="activeFooter">
             <van-tabbar-item icon="home-o"  replace to="/index">首页</van-tabbar-item>

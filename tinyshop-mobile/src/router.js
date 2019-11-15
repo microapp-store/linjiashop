@@ -92,6 +92,7 @@ const routes = [
     }
   },
   {
+    path:'/goods/:id',
     name: 'goods',
     component: () => import('./view/goods'),
     meta: {

@@ -5,34 +5,32 @@
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
-      <el-dropdown class="avatar-container" trigger="click">
-        <template>
-          <a target="_blank" href="https://www.aliyun.com/1111/2019/home?userCode=alts44ap" style="vertical-align: text-bottom;color:lightblue;">2019双11All in cloud低至一折</a>
-        </template>
-        <template>
-          <lang-select class="international right-menu-item"/>
-        </template>
-        <el-dropdown class="avatar-container right-menu-item" trigger="click">
-          <div class="avatar-wrapper">
-            <img class="user-avatar" src="@/assets/img/avatar.gif">
-            <i class="el-icon-caret-bottom"/>
-          </div>
-          <el-dropdown-menu slot="dropdown">
-            <router-link to="/account/profile">
-              <el-dropdown-item>
-                {{ $t('navbar.profile') }}
-              </el-dropdown-item>
-            </router-link>
-            <router-link to="/account/updatePwd">
-              <el-dropdown-item>
-                {{ $t('navbar.updatePwd') }}
-              </el-dropdown-item>
-            </router-link>
-            <el-dropdown-item divided>
-              <span style="display:block;" @click="logout">{{ $t('navbar.logOut') }}</span>
+      <template>
+        <a target="_blank" href="https://www.aliyun.com/1111/2019/home?userCode=alts44ap" style="vertical-align: text-bottom;color:lightblue;">2019双11All in cloud低至一折</a>
+      </template>
+      <template>
+        <lang-select class="international right-menu-item"/>
+      </template>
+      <el-dropdown class="avatar-container right-menu-item" trigger="click">
+        <div class="avatar-wrapper">
+          <img class="user-avatar" src="@/assets/img/avatar.gif">
+          <i class="el-icon-caret-bottom"/>
+        </div>
+        <el-dropdown-menu slot="dropdown">
+          <router-link to="/account/profile">
+            <el-dropdown-item>
+              {{ $t('navbar.profile') }}
             </el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+          </router-link>
+          <router-link to="/account/updatePwd">
+            <el-dropdown-item>
+              {{ $t('navbar.updatePwd') }}
+            </el-dropdown-item>
+          </router-link>
+          <el-dropdown-item divided>
+            <span style="display:block;" @click="logout">{{ $t('navbar.logOut') }}</span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
       </el-dropdown>
     </div>
   </div>

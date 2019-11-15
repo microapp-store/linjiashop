@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <van-search placeholder="请输入搜索关键词" v-model="listQuery.key"    @search="searchGoods" />
+        <van-search placeholder="搜商品名称" v-model="listQuery.key"    @search="searchGoods" />
         <van-divider dashed>热门商品</van-divider>
         <van-list v-model="loading"
                   :immediate-check="false"
@@ -9,7 +9,7 @@
 
         <van-card v-for="(goods,index) in goodsList" :key="index"
                   :num="goods.num"
-                  :price="goods.price"
+                  :price="formatPrice(goods.price)"
                   :desc="goods.descript"
                   :title="goods.name"
                   :thumb="goods.img"
@@ -117,8 +117,11 @@
                 })
             },
             viewGoodsDetail(id){
-                this.$router.push({path:'/goods',query:{id:id}})
+                this.$router.push({path:'/goods/'+id})
             },
+            formatPrice(price) {
+                return (price / 100).toFixed(2)
+            }
         }
     };
 </script>

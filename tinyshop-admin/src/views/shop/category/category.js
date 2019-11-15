@@ -1,5 +1,5 @@
-import { remove, getList, save } from '@/api/shop/category'
-
+import {getList, remove, save, getBanners,removeBanner} from '@/api/shop/category'
+import {getApiUrl} from '@/utils/utils'
 export default {
   data() {
     return {
@@ -7,9 +7,9 @@ export default {
       formTitle: '添加商品类别',
       isAdd: true,
       form: {
-        name:'',
-        url:'',
-        icon:'',
+        name: '',
+        url: '',
+        icon: '',
         id: ''
       },
       listQuery: {
@@ -20,7 +20,14 @@ export default {
       total: 0,
       list: null,
       listLoading: true,
-      selRow: {}
+      selRow: {},
+      apiUrl:getApiUrl(),
+      banner: {
+        idCategory:'',
+        activeName:'first',
+        visible: false,
+        list:[]
+      }
     }
   },
   filters: {
@@ -95,25 +102,25 @@ export default {
     },
     resetForm() {
       this.form = {
-        name:'',
-        url:'',
-        icon:'',
+        name: '',
+        url: '',
+        icon: '',
         id: ''
       }
     },
     add() {
       this.resetForm()
       this.formTitle = '添加商品类别',
-      this.formVisible = true
+        this.formVisible = true
       this.isAdd = true
     },
     save() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           save({
-      name:this.form.name,
-      url:this.form.url,
-      icon:this.form.icon,
+            name: this.form.name,
+            url: this.form.url,
+            icon: this.form.icon,
             id: this.form.id
           }).then(response => {
             this.$message({
@@ -160,7 +167,7 @@ export default {
               type: 'success'
             })
             this.fetchData()
-          }).catch( err=> {
+          }).catch(err => {
             this.$notify.error({
               title: '错误',
               message: err
@@ -169,7 +176,24 @@ export default {
         }).catch(() => {
         })
       }
+    },
+    bannerMgr(idCategory) {
+      this.banner.visible = true
+      this.banner.idCategory = idCategory
+      getBanners(idCategory).then( response=>{
+        this.banner.list = response.data
+        console.log('banner',this.banner)
+      })
+    },
+    bannerRemove(item) {
+      console.log('item',item)
+      removeBanner(idCategory,item.id)
+
+    },
+    bannerEdit() {
+
     }
+
 
   }
 }

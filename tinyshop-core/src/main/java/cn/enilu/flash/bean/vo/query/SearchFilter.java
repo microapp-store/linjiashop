@@ -19,6 +19,9 @@ public class SearchFilter {
     public String fieldName;
     public Object value;
     public Operator operator;
+    public  static SearchFilter build(String fieldName, Object value){
+        return  new SearchFilter(fieldName,Operator.EQ,value);
+    }
     public  static SearchFilter build(String fieldName, Operator operator, Object value){
         return  new SearchFilter(fieldName,operator,value);
     }

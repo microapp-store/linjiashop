@@ -41,7 +41,8 @@ public class FileService extends BaseService<FileInfo,Long,FileInfoRepository> {
      */
     public FileInfo upload(MultipartFile multipartFile){
         String uuid = UUID.randomUUID().toString();
-        String realFileName =   uuid +"."+ multipartFile.getOriginalFilename().split("\\.")[1];
+        String originalFileName = multipartFile.getOriginalFilename();
+        String realFileName =   uuid +"."+ originalFileName.split("\\.")[originalFileName.split("\\.").length-1];
         try {
 
             File file = new File(configCache.get(ConfigKeyEnum.SYSTEM_FILE_UPLOAD_PATH.getValue()) + File.separator+realFileName);

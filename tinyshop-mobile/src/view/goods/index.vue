@@ -58,13 +58,16 @@
 img{
   width:100%;
 }
+.section-detail{
+  margin-top:-4px;
+}
 .goods {
   padding-bottom: 50px;
 
   &-swipe {
     img {
       width: 100%;
-      height:250px;
+      height:450px;
       display: block;
     }
   }

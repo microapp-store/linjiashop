@@ -56,7 +56,7 @@ export default {
     },
     methods: {
         init(){
-            let id = this.$route.query.id
+            let id = this.$route.params.id
             goods.getGoods(id).then( response => {
                 let goods = response.data
                 goods.thumb = new Array()
@@ -70,14 +70,14 @@ export default {
             })
         },
         toHome(){
-            this.$router.push('index')
+            this.$router.push('/index')
         },
         formatPrice() {
             return '¥' + (this.goods.price / 100).toFixed(2)
         },
 
         goToCart() {
-            this.$router.push('cart');
+            this.$router.push('/cart');
         },
         addCart() {
             cart.add(this.goods.id,1).then( response => {
@@ -90,7 +90,7 @@ export default {
         },
         buy() {
             cart.add(this.goods.id,1).then( response => {
-                this.$router.push('cart');
+                this.$router.push('/cart');
             }).catch( (err) => {
                 Toast.fail(err)
             })

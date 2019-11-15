@@ -15,6 +15,12 @@ export function getCategories() {
   })
 }
 
+export function getBanners(id) {
+  return request({
+    url: '/shop/category/getBanners/'+id,
+    method: 'get'
+  })
+}
 export function save(params) {
     return request({
         url: '/shop/category',

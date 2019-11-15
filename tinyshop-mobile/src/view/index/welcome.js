@@ -1,4 +1,4 @@
-import { getAllCategories } from '@/api/category'
+import category from '@/api/category'
 import goods from '@/api/goods'
 import store from '@/store'
 import {
@@ -40,14 +40,22 @@ export default {
     data() {
         return {
             navList: [],
-            images: [{
-                link: '/#/user', path:
-                    './img/banner.jpg'
-            },
-                {
-                    link: 'http://www.baidu.com', path:
-                        './img/banner.jpg'
-                }
+            banners: [
+            //     {
+            //     link: '/#/user', path:
+            //         './img/banner/banner_mobile1.jpg'
+            // }, {
+            //     link: 'http://www.baidu.com', path:
+            //         './img/banner/banner_mobile2.jpg'
+            // },
+            //     {
+            //         link: 'http://www.baidu.com', path:
+            //             './img/banner/banner_mobile3.jpg'
+            //     },
+            //     {
+            //         link: 'http://www.baidu.com', path:
+            //             './img/banner/banner_notebook1.jpg'
+            //     }
             ],
             goodsList: [],
             activeFooter: 0,
@@ -64,51 +72,71 @@ export default {
     },
     methods: {
         init() {
-            let category = store.state.app.category
-            if(!category ||category.length==0 ){
+            let categoryData = store.state.app.category
+            if (!categoryData || categoryData.length == 0) {
+
                 let platform = navigator.platform
-                store.dispatch('app/toggleDevice',platform)
-                getAllCategories().then(response => {
+                store.dispatch('app/toggleDevice', platform)
+                category.getAllCategories().then(response => {
                     this.navList = response.data
-                    store.dispatch('app/toggleCategory',response.data)
+                    this.getBanners(0)
+
+                    store.dispatch('app/toggleCategory', response.data)
                     this.getGoods(response.data[0].id)
                 }).catch((err) => {
-                    Toast(err);
+                    Toast.fail(err);
                 })
-            }else{
-                this.navList = category
-                this.getGoods(category[0].id)
+            } else {
+                console.log('categoryData',categoryData)
+                this.navList = categoryData
+                this.getBanners(0)
+                this.getGoods(categoryData[0].id)
             }
+
+        },
+        getBanners(categoryIndex){
+            let bannerList = this.navList[categoryIndex].bannerList
+            console.log(categoryIndex,bannerList)
+            let imgList = new Array()
+            for(let i=0;i<bannerList.length;i++){
+                imgList.push({
+                    url:bannerList[i].url,
+                    path:'/dev-api/file/getImgStream?idFile=' + bannerList[i].idFile
+                })
+            }
+            this.banners = imgList
         },
         getGoods(idCategory) {
-          this.listQuery['idCategory'] = idCategory
-          goods.queryGoods(this.listQuery).then(response => {
-              let list = response.data.records
-              for(var index in  list){
-                  const item = list[index]
-                  item.img = '/dev-api/file/getImgStream?idFile=' + item.pic
-              }
-              this.goodsList = list
+            this.listQuery['idCategory'] = idCategory
+            goods.queryGoods(this.listQuery).then(response => {
+                let list = response.data.records
+                for (var index in  list) {
+                    const item = list[index]
+                    item.img = '/dev-api/file/getImgStream?idFile=' + item.pic
+                }
+                this.goodsList = list
 
-          }).catch((err) => {
-              Toast(err)
-          })
+            }).catch((err) => {
+                Toast(err)
+            })
         },
-        clickNav(index,title){
+        clickNav(index, title) {
             this.activeNav = index;
             let idCategory = this.navList[index].id
+            this.getBanners(index)
             this.getGoods(idCategory)
+
         },
         clickSwipe(index, p2) {
             console.log(index)
             console.log(p2)
         },
-        viewGoodsDetail(id){
+        viewGoodsDetail(id) {
 
-            this.$router.push({path:'/goods',query:{id:id}})
+            this.$router.push({path: '/goods/'+id})
         },
         formatPrice(price) {
-            return '¥' + (price / 100).toFixed(2)
+            return (price / 100).toFixed(2)
         },
 
     }

@@ -18,6 +18,11 @@
                     {{scope.row.name}}
                 </template>
             </el-table-column>
+          <el-table-column label="Banner管理">
+            <template slot-scope="scope">
+              <el-button type="primary" size="mini"  icon="el-icon-edit" @click.native="bannerMgr(scope.row.id)">管理</el-button>
+            </template>
+          </el-table-column>
         </el-table>
 
         <el-pagination
@@ -43,7 +48,6 @@
                             <el-input v-model="form.name" minlength=1></el-input>
                         </el-form-item>
                     </el-col>
-
                 </el-row>
                 <el-form-item>
                     <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
@@ -52,6 +56,45 @@
 
             </el-form>
         </el-dialog>
+      <el-dialog
+        title="Banner管理"
+        :visible.sync="banner.visible"
+        width="70%">
+        <el-tabs v-model="banner.activeName">
+          <el-tab-pane label="管理" name="first">
+            <el-table :data="banner.list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row>
+              <el-table-column label="标题">
+                <template slot-scope="scope">
+                  {{scope.row.title}}
+                </template>
+              </el-table-column>
+              <el-table-column label="url">
+                <template slot-scope="scope">
+                  {{scope.row.url}}
+                </template>
+              </el-table-column>
+              <el-table-column label="图片">
+                <template slot-scope="scope">
+                  <img :src="apiUrl+ '/file/getImgStream?idFile=' +scope.row.idFile" style="width:100px;">
+                </template>
+              </el-table-column>
+              <el-table-column label="操作">
+                <template slot-scope="scope">
+                  <el-button type="danger" size="mini"  icon="el-icon-delete" @click.native="bannerRemove(scope.row)">删除</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
+          <el-tab-pane label="预览" name="second">
+            <el-carousel indicator-position="outside">
+              <el-carousel-item v-for="item in banner.list" :key="item">
+                <img :src="apiUrl+ '/file/getImgStream?idFile=' +item.idFile" style="width:100%;">
+              </el-carousel-item>
+            </el-carousel>
+          </el-tab-pane>
+
+        </el-tabs>
+      </el-dialog>
     </div>
 </template>
 

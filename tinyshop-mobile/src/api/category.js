@@ -1,8 +1,10 @@
 import request from '@/utils/request'
 
-export function getAllCategories() {
-  return request({
-    url: '/category/list',
-    method: 'get'
-  })
+export default {
+  getAllCategories:function(){
+    return request({
+      url: '/category/list',
+      method: 'get'
+    })
+  }
 }

@@ -38,6 +38,15 @@
           {{scope.row.descript}}
         </template>
       </el-table-column>
+      <el-table-column label="上架">
+        <template slot-scope="scope">
+          <el-switch
+            v-model="scope.row.isOnSale"
+            :change="changeIsOnSale"
+          >
+          </el-switch>
+        </template>
+      </el-table-column>
 
     </el-table>
 

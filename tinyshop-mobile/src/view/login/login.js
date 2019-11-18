@@ -23,8 +23,8 @@ export default {
             smsCode:'',
             password:'',
             activeFooter:3,
-            show1:true,
-            show2:false,
+            show1:false,
+            show2:true,
             redirect:''
         }
     },

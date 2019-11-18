@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Tiny Shop Admin',
+  title: '邻家小铺后台管理',
 
   /**
    * @type {boolean} true | false

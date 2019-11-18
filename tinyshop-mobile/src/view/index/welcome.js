@@ -1,6 +1,7 @@
 import category from '@/api/category'
 import goods from '@/api/goods'
 import store from '@/store'
+const baseApi = process.env.VUE_APP_BASE_API
 import {
     Card,
     Cell,
@@ -101,7 +102,7 @@ export default {
             for(let i=0;i<bannerList.length;i++){
                 imgList.push({
                     url:bannerList[i].url,
-                    path:'/dev-api/file/getImgStream?idFile=' + bannerList[i].idFile
+                    path:baseApi+'/file/getImgStream?idFile=' + bannerList[i].idFile
                 })
             }
             this.banners = imgList
@@ -112,7 +113,7 @@ export default {
                 let list = response.data.records
                 for (var index in  list) {
                     const item = list[index]
-                    item.img = '/dev-api/file/getImgStream?idFile=' + item.pic
+                    item.img = baseApi+'/file/getImgStream?idFile=' + item.pic
                 }
                 this.goodsList = list
 

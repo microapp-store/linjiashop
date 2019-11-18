@@ -8,7 +8,7 @@ const port = 8080 // dev port
 const name = 'lite-shop'
 module.exports = {
   outputDir: 'dist',
-  publicPath: process.env.NODE_ENV === 'production' ? '/lite-shop-mobile/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
   lintOnSave: false,
   productionSourceMap: false,
   devServer: {

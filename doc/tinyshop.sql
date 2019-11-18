@@ -1,17 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : localhost
-Source Server Version : 50725
-Source Host           : localhost:3306
-Source Database       : liteshop
-
-Target Server Type    : MYSQL
-Target Server Version : 50725
-File Encoding         : 65001
-
-Date: 2019-11-15 13:36:25
-*/
 
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -31,22 +17,13 @@ CREATE TABLE `t_cms_article` (
   `img` varchar(64) DEFAULT NULL COMMENT '文章题图ID',
   `title` varchar(128) DEFAULT NULL COMMENT '标题',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='文章';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='文章';
 
 -- ----------------------------
 -- Records of t_cms_article
 -- ----------------------------
 INSERT INTO `t_cms_article` VALUES ('1', '1', '2019-03-09 16:24:58', '1', '2019-05-10 13:22:49', 'enilu', '<div id=\"articleContent\" class=\"content\">\n<div class=\"ad-wrap\">\n<p style=\"margin: 0 0 10px 0;\">一般我们都有这样的需求：我需要知道库中的数据是由谁创建，什么时候创建，最后一次修改时间是什么时候，最后一次修改人是谁。web-flash最新代码已经实现该需求，具体实现方式网上有很多资料，这里做会搬运工，将web-flash的实现步骤罗列如下：%%</p>\n</div>\n<p>在Spring jpa中可以通过在实体bean的属性或者方法上添加以下注解来实现上述需求@CreatedDate、@CreatedBy、@LastModifiedDate、@LastModifiedBy。</p>\n<ul class=\" list-paddingleft-2\">\n<li>\n<p>@CreatedDate 表示该字段为创建时间时间字段，在这个实体被insert的时候，会设置值</p>\n</li>\n<li>\n<p>@CreatedBy 表示该字段为创建人，在这个实体被insert的时候，会设置值</p>\n</li>\n<li>\n<p>@LastModifiedDate 最后修改时间 实体被update的时候会设置</p>\n</li>\n<li>\n<p>@LastModifiedBy 最后修改人 实体被update的时候会设置</p>\n</li>\n</ul>\n<h2>使用方式</h2>\n<h3>实体类添加注解</h3>\n<ul class=\" list-paddingleft-2\">\n<li>\n<p>首先在实体中对应的字段加上上述4个注解</p>\n</li>\n<li>\n<p>在web-flash中我们提取了一个基础实体类BaseEntity，并将对应的字段添加上述4个注解,所有需要记录维护信息的表对应的实体都集成该类</p>\n</li>\n</ul>\n<pre>import&nbsp;org.springframework.data.annotation.CreatedBy;\nimport&nbsp;org.springframework.data.annotation.CreatedDate;\nimport&nbsp;org.springframework.data.annotation.LastModifiedBy;\nimport&nbsp;org.springframework.data.annotation.LastModifiedDate;\nimport&nbsp;javax.persistence.Column;\nimport&nbsp;javax.persistence.GeneratedValue;\nimport&nbsp;javax.persistence.Id;\nimport&nbsp;javax.persistence.MappedSuperclass;\nimport&nbsp;java.io.Serializable;\nimport&nbsp;java.util.Date;\n@MappedSuperclass\n@Data\npublic&nbsp;abstract&nbsp;class&nbsp;BaseEntity&nbsp;implements&nbsp;Serializable&nbsp;{\n&nbsp;&nbsp;&nbsp;&nbsp;@Id\n&nbsp;&nbsp;&nbsp;&nbsp;@GeneratedValue\n&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Long&nbsp;id;\n&nbsp;&nbsp;&nbsp;&nbsp;@CreatedDate\n&nbsp;&nbsp;&nbsp;&nbsp;@Column(name&nbsp;=&nbsp;\"create_time\",columnDefinition=\"DATETIME&nbsp;COMMENT&nbsp;\'创建时间/注册时间\'\")\n&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Date&nbsp;createTime;\n&nbsp;&nbsp;&nbsp;&nbsp;@Column(name&nbsp;=&nbsp;\"create_by\",columnDefinition=\"bigint&nbsp;COMMENT&nbsp;\'创建人\'\")\n&nbsp;&nbsp;&nbsp;&nbsp;@CreatedBy\n&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Long&nbsp;createBy;\n&nbsp;&nbsp;&nbsp;&nbsp;@LastModifiedDate\n&nbsp;&nbsp;&nbsp;&nbsp;@Column(name&nbsp;=&nbsp;\"modify_time\",columnDefinition=\"DATETIME&nbsp;COMMENT&nbsp;\'最后更新时间\'\")\n&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Date&nbsp;modifyTime;\n&nbsp;&nbsp;&nbsp;&nbsp;@LastModifiedBy\n&nbsp;&nbsp;&nbsp;&nbsp;@Column(name&nbsp;=&nbsp;\"modify_by\",columnDefinition=\"bigint&nbsp;COMMENT&nbsp;\'最后更新人\'\")\n&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Long&nbsp;modifyBy;\n}</pre>\n<h3>实现AuditorAware接口返回操作人员的id</h3>\n<p>配置完上述4个注解后，在jpa.save方法被调用的时候，时间字段会自动设置并插入数据库，但是CreatedBy和LastModifiedBy并没有赋值 这两个信息需要实现AuditorAware接口来返回操作人员的id</p>\n<ul class=\" list-paddingleft-2\">\n<li>\n<p>首先需要在项目启动类添加@EnableJpaAuditing 注解来启用审计功能</p>\n</li>\n</ul>\n<pre>@SpringBootApplication\n@EnableJpaAuditing\npublic&nbsp;class&nbsp;AdminApplication&nbsp;extends&nbsp;WebMvcConfigurerAdapter&nbsp;{\n&nbsp;//省略\n}</pre>\n<ul class=\" list-paddingleft-2\">\n<li>\n<p>然后实现AuditorAware接口返回操作人员的id</p>\n</li>\n</ul>\n<pre>@Configuration\npublic&nbsp;class&nbsp;UserIDAuditorConfig&nbsp;implements&nbsp;AuditorAware&lt;Long&gt;&nbsp;{\n&nbsp;&nbsp;&nbsp;&nbsp;@Override\n&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;Long&nbsp;getCurrentAuditor()&nbsp;{\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ShiroUser&nbsp;shiroUser&nbsp;=&nbsp;ShiroKit.getUser();\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(shiroUser!=null){\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;shiroUser.getId();\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;\n&nbsp;&nbsp;&nbsp;&nbsp;}\n}</pre>\n</div>', '1', '1', 'web-flash 将所有表增加维护人员和维护时间信息');
 INSERT INTO `t_cms_article` VALUES ('2', '1', '2019-03-09 16:24:58', '1', '2019-03-23 23:12:16', 'enilu.cn', '<div id=\"articleContent\" class=\"content\">\n<div class=\"ad-wrap\">\n<p style=\"margin: 0 0 10px 0;\"><a style=\"color: #a00; font-weight: bold;\" href=\"https://my.oschina.net/u/3985214/blog/3018099?tdsourcetag=s_pcqq_aiomsg\" target=\"_blank\" rel=\"noopener\" data-traceid=\"news_detail_above_text_link_1\" data-tracepid=\"news_detail_above_text_link\">开发十年，就只剩下这套架构体系了！ &gt;&gt;&gt;</a>&nbsp;&nbsp;<img style=\"max-height: 32px; max-width: 32px;\" src=\"https://www.oschina.net/img/hot3.png\" align=\"\" /></p>\n</div>\n<h3>国际化</h3>\n<ul class=\" list-paddingleft-2\">\n<li>\n<p>web-flash实现国际化了.</p>\n</li>\n<li>\n<p>不了解上面两个的区别的同学可以再回顾下这个<a href=\"http://www.enilu.cn/web-flash/base/web-flash.html\">文档</a></p>\n</li>\n<li>\n<p>web-flash实现国际化的方式参考vue-element-admin的&nbsp;<a href=\"https://panjiachen.github.io/vue-element-admin-site/zh/guide/advanced/i18n.html\" target=\"_blank\" rel=\"noopener\">官方文档</a>,这里不再赘述,强烈建议你先把文档读了之后再看下面的内容。</p>\n</li>\n</ul>\n<h3>默认约定</h3>\n<p>针对网站资源进行国际园涉及到的国际化资源的管理维护，这里给出一些web-flash的资源分类建议，当然，你也可以根据你的实际情况进行调整。</p>\n<ul class=\" list-paddingleft-2\">\n<li>\n<p>src/lang/为国际化资源目录,目前提供了英文（en.js）和中文(zh.js)的两种语言实现。</p>\n</li>\n<li>\n<p>目前资源语言资源文件中是json配置主要有以下几个节点：</p>\n</li>\n<ul class=\" list-paddingleft-2\" style=\"list-style-type: square;\">\n<li>\n<p>route 左侧菜单资源</p>\n</li>\n<li>\n<p>navbar 顶部导航栏资源</p>\n</li>\n<li>\n<p>button 公共的按钮资源，比如：添加、删除、修改、确定、取消之类等等</p>\n</li>\n<li>\n<p>common 其他公共的资源，比如一些弹出框标题、提示信息、label等等</p>\n</li>\n<li>\n<p>login 登录页面资源</p>\n</li>\n<li>\n<p>config 参数管理界面资源</p>\n</li>\n</ul>\n<li>\n<p>目前针对具体的页面资源只做了登录和参数管理两个页面，其他具体业务界面仅针对公共的按钮做了国际化，你可以参考config页面资源进行配置进行进一步配置：/src/views/cfg/</p>\n</li>\n<li>\n<p>如果你有其他资源在上面对应的节点添加即可，针对每个页面特有的资源以页面名称作为几点进行维护，这样方便记忆和维护，不容易出错。</p>\n</li>\n</ul>\n<h3>添加新的语言支持</h3>\n<p>如果英文和中文两种语言不够，那么你可以通过下面步骤添加语言支持</p>\n<ul class=\" list-paddingleft-2\">\n<li>\n<p>在src/lang/目录下新增对应的资源文件</p>\n</li>\n<li>\n<p>在src/lang/index.js中import对应的资源文件</p>\n</li>\n<li>\n<p>在src/lang/index.js中的messages变量中加入新的语言声明</p>\n</li>\n<li>\n<p>在src/components/LangSelect/index.vue的语言下拉框中增加新的语言选项</p>\n</li>\n</ul>\n<h3>演示地址</h3>\n<ul class=\" list-paddingleft-2\">\n<li>\n<p>vue版本后台管理&nbsp;<a href=\"http://106.75.35.53:8082/vue/#/login\" target=\"_blank\" rel=\"noopener\">http://106.75.35.53:8082/vue/#/login</a></p>\n</li>\n<li>CMS内容管理系统的h5前端demo:<a href=\"http://106.75.35.53:8082/mobile/#/index\" target=\"_blank\" rel=\"noopener\">http://106.75.35.53:8082/mobile/#/index</a></li>\n</ul>\n</div>', '1', '2', 'web-flash1.0.1 发布，增加国际化和定时任务管理功能');
-INSERT INTO `t_cms_article` VALUES ('3', '1', '2019-03-09 16:24:58', '1', '2019-04-28 17:39:52', 'enilu.cn', '<div class=\"content\" id=\"articleContent\">\r\n                        <div class=\"ad-wrap\">\r\n                                                    <p style=\"margin:0 0 10px 0;\"><a data-traceid=\"news_detail_above_text_link_1\" data-tracepid=\"news_detail_above_text_link\" style=\"color:#A00;font-weight:bold;\" href=\"https://my.oschina.net/u/3985214/blog/3018099?tdsourcetag=s_pcqq_aiomsg\" target=\"_blank\">开发十年，就只剩下这套架构体系了！ &gt;&gt;&gt;</a>&nbsp;&nbsp;<img src=\"https://www.oschina.net/img/hot3.png\" align=\"\" style=\"max-height: 32px; max-width: 32px;\"></p>\r\n                                    </div>\r\n                        <p>web-flash使用的Spring Boot从1.5.1升级到2.1.1</p><p>下面为升级过程</p><ul class=\" list-paddingleft-2\"><li><p>版本升级</p><pre>&lt;spring.boot.version&gt;2.1.1.RELEASE&lt;/spring.boot.version&gt;\r\n&lt;springframework.version&gt;5.1.3.RELEASE&lt;springframework.version&gt;</pre></li><li><p>配置增加</p><pre>spring.main.allow-bean-definition-overriding=true\r\nspring.jpa.hibernate.use-new-id-generator-mappings=false</pre></li></ul><ul class=\" list-paddingleft-2\"><li><p>审计功能调整，调整后代码:</p><pre>@Configuration\r\npublic&nbsp;class&nbsp;UserIDAuditorConfig&nbsp;implements&nbsp;AuditorAware&lt;Long&gt;&nbsp;{\r\n&nbsp;&nbsp;&nbsp;&nbsp;@Override\r\n&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;Optional&lt;Long&gt;&nbsp;getCurrentAuditor()&nbsp;{\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ShiroUser&nbsp;shiroUser&nbsp;=&nbsp;ShiroKit.getUser();\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(shiroUser!=null){\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;Optional.of(shiroUser.getId());\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;\r\n&nbsp;&nbsp;&nbsp;&nbsp;}\r\n}</pre></li><li><p>repository调整</p></li><ul class=\" list-paddingleft-2\" style=\"list-style-type: square;\"><li><p>之前的 delete(Long id)方法没有了，替换为：deleteById(Long id)</p></li><li><p>之前的 T findOne(Long id)方法没有了，替换为：		</p><pre>Optional&lt;T&gt;&nbsp;optional&nbsp;=&nbsp;***Repository.findById(id);\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(optional.isPresent())&nbsp;{\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;optional.get();\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;</pre></li></ul><li><p>随着这次Spring Boot的升级也顺便做了一些其他内容的调整和重构</p></li><ul class=\" list-paddingleft-2\" style=\"list-style-type: square;\"><li><p>springframework也从4.3.5.RELEASE升级到5.1.3.RELEASE</p></li><li><p>为减小复杂度service去掉接口和实现类的结构，基础功能的service直接使用实现类；当然具体业务中如果有需求你也可以这没用</p></li><li><p>去掉了一些暂时用不到的maven依赖</p></li><li><p>完善了基础功能的审计功能(之前有介绍审计功能的实现翻番，后续会专门发一篇文档来说明审计功能在系统总的具体用法，当然聪明的你看代码就知道了)</p></li></ul></ul>\r\n                    </div>', '1', '1', 'web-flash 升级 Spring Boot 到 2.1.1 版本');
-INSERT INTO `t_cms_article` VALUES ('4', '1', '2019-03-09 16:24:58', '1', '2019-04-28 00:34:21', 'enilu.cn', 'H5通用官网系统', '2', '17', 'H5通用官网系统');
-INSERT INTO `t_cms_article` VALUES ('5', '1', '2019-03-09 16:24:58', '1', '2019-04-28 00:34:36', 'enilu.cn', 'H5通用论坛系统', '2', '18', 'H5通用论坛系统');
-INSERT INTO `t_cms_article` VALUES ('6', '1', '2019-03-09 16:24:58', '1', '2019-04-28 00:38:33', 'enilu.cn', '官网建设方案', '3', '19', '官网建设方案');
-INSERT INTO `t_cms_article` VALUES ('7', '1', '2019-03-09 16:24:58', '1', '2019-04-28 00:39:48', 'enilu.cn', '论坛建设方案', '3', '22', '论坛建设方案');
-INSERT INTO `t_cms_article` VALUES ('8', '1', '2019-03-09 16:24:58', '1', '2019-04-28 17:39:52', 'enilu.cn', '案例1', '4', '3', '案例1');
-INSERT INTO `t_cms_article` VALUES ('9', '1', '2019-03-09 16:24:58', '1', '2019-04-28 00:39:11', 'enilu.cn', '案例2', '4', '20', '案例2');
-INSERT INTO `t_cms_article` VALUES ('14', '1', '2019-03-09 16:24:58', '1', '2019-04-28 00:39:25', 'test5', '<p>aaaaa<img class=\"wscnph\" src=\"http://127.0.0.1:8082/file/download?idFile=12\" /></p>', '4', '21', 'IDEA的代码生成插件发布啦');
-INSERT INTO `t_cms_article` VALUES ('15', '1', '2019-04-28 17:39:52', '1', '2019-05-05 15:36:57', 'enilu', '<p><img class=\"wscnph\" src=\"http://127.0.0.1:8082/file/download?idFile=24\" /></p>', '1', '25', '程序员头冷');
 
 -- ----------------------------
 -- Table structure for `t_cms_banner`
@@ -68,21 +45,18 @@ CREATE TABLE `t_cms_banner` (
 -- ----------------------------
 -- Records of t_cms_banner
 -- ----------------------------
-INSERT INTO `t_cms_banner` VALUES ('1', '1', '2019-03-09 16:29:03', null, null, '1', '不打开链接', 'index', 'javascript:');
-INSERT INTO `t_cms_banner` VALUES ('2', '1', '2019-03-09 16:29:03', null, null, '2', '打打开站内链接', 'index', '/contact');
-INSERT INTO `t_cms_banner` VALUES ('3', '1', '2019-03-09 16:29:03', null, null, '6', '打开外部链接', 'index', 'http://www.baidu.com');
-INSERT INTO `t_cms_banner` VALUES ('4', '1', '2019-03-09 16:29:03', null, null, '1', '不打开链接', 'product', 'javascript:');
-INSERT INTO `t_cms_banner` VALUES ('5', '1', '2019-03-09 16:29:03', null, null, '2', '打打开站内链接', 'product', '/contact');
-INSERT INTO `t_cms_banner` VALUES ('6', '1', '2019-03-09 16:29:03', null, null, '6', '打开外部链接', 'product', 'http://www.baidu.com');
-INSERT INTO `t_cms_banner` VALUES ('7', '1', '2019-03-09 16:29:03', null, null, '1', '不打开链接', 'solution', 'javascript:');
+INSERT INTO `t_cms_banner` VALUES ('1', '1', '2019-03-09 16:29:03', null, null, '143', '红米Rote8,打开外部链接', 'index', 'https://m.mi.com/commodity/detail/10000180');
+INSERT INTO `t_cms_banner` VALUES ('2', '1', '2019-03-09 16:29:03', null, null, '144', '红米8A', 'index', '/#/goods/1');
+INSERT INTO `t_cms_banner` VALUES ('3', '1', '2019-03-09 16:29:03', null, null, '145', '打开外部链接', 'index', 'https://m.mi.com/commodity/detail/10000180');
+INSERT INTO `t_cms_banner` VALUES ('4', '1', '2019-03-09 16:29:03', null, null, '146', '不打开链接', 'product', '/#/goods/15');
+INSERT INTO `t_cms_banner` VALUES ('5', '1', '2019-03-09 16:29:03', null, null, '147', '打打开站内链接', 'product', '/#/goods/16');
+INSERT INTO `t_cms_banner` VALUES ('6', '1', '2019-03-09 16:29:03', null, null, '148', '打开外部链接', 'product', '/#/goods/11');
+INSERT INTO `t_cms_banner` VALUES ('7', '1', '2019-03-09 16:29:03', null, null, '149', '不打开链接', 'solution', 'https://s1.mi.com/m/app/hd/index.html?id=11868');
 INSERT INTO `t_cms_banner` VALUES ('8', '1', '2019-03-09 16:29:03', null, null, '2', '打打开站内链接', 'solution', '/contact');
 INSERT INTO `t_cms_banner` VALUES ('9', '1', '2019-03-09 16:29:03', null, null, '6', '打开外部链接', 'solution', 'http://www.baidu.com');
 INSERT INTO `t_cms_banner` VALUES ('10', '1', '2019-03-09 16:29:03', null, null, '1', '不打开链接', 'case', 'javascript:');
 INSERT INTO `t_cms_banner` VALUES ('11', '1', '2019-03-09 16:29:03', null, null, '2', '打打开站内链接', 'case', '/contact');
 INSERT INTO `t_cms_banner` VALUES ('12', '1', '2019-03-09 16:29:03', null, null, '6', '打开外部链接', 'case', 'http://www.baidu.com');
-INSERT INTO `t_cms_banner` VALUES ('14', '1', '2019-03-09 16:29:03', null, null, '1', '不打开链接', 'news', 'javascript:');
-INSERT INTO `t_cms_banner` VALUES ('15', '1', '2019-03-09 16:29:03', null, null, '2', '打打开站内链接', 'news', '/contact');
-INSERT INTO `t_cms_banner` VALUES ('16', '1', '2019-03-09 16:29:03', null, null, '6', '打开外部链接', 'news', 'http://www.baidu.com');
 
 -- ----------------------------
 -- Table structure for `t_cms_channel`
@@ -280,6 +254,32 @@ INSERT INTO `t_shop_category` VALUES ('3', null, null, null, null, '', '笔记�
 INSERT INTO `t_shop_category` VALUES ('4', null, null, null, null, '', '家电', '');
 
 -- ----------------------------
+-- Table structure for `t_shop_category_banner_rel`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_shop_category_banner_rel`;
+CREATE TABLE `t_shop_category_banner_rel` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `create_by` bigint(20) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间/注册时间',
+  `modify_by` bigint(20) DEFAULT NULL COMMENT '最后更新人',
+  `modify_time` datetime DEFAULT NULL COMMENT '最后更新时间',
+  `id_banner` bigint(20) DEFAULT NULL COMMENT 'banner id',
+  `id_category` bigint(20) DEFAULT NULL COMMENT '类别id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='类别banner关联表';
+
+-- ----------------------------
+-- Records of t_shop_category_banner_rel
+-- ----------------------------
+INSERT INTO `t_shop_category_banner_rel` VALUES ('1', null, null, null, null, '1', '1');
+INSERT INTO `t_shop_category_banner_rel` VALUES ('2', null, null, null, null, '2', '1');
+INSERT INTO `t_shop_category_banner_rel` VALUES ('3', null, null, null, null, '3', '1');
+INSERT INTO `t_shop_category_banner_rel` VALUES ('4', null, null, null, null, '6', '2');
+INSERT INTO `t_shop_category_banner_rel` VALUES ('5', null, null, null, null, '4', '3');
+INSERT INTO `t_shop_category_banner_rel` VALUES ('6', null, null, null, null, '5', '3');
+INSERT INTO `t_shop_category_banner_rel` VALUES ('7', null, null, null, null, '7', '4');
+
+-- ----------------------------
 -- Table structure for `t_shop_goods`
 -- ----------------------------
 DROP TABLE IF EXISTS `t_shop_goods`;
@@ -301,7 +301,7 @@ CREATE TABLE `t_shop_goods` (
   `is_delete` tinyint(4) DEFAULT NULL COMMENT '是否删除',
   `is_on_sale` tinyint(4) DEFAULT NULL COMMENT '是否上架',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='商品';
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='商品';
 
 -- ----------------------------
 -- Records of t_shop_goods
@@ -369,7 +369,9 @@ CREATE TABLE `t_shop_order_item` (
   `id_order` bigint(20) DEFAULT NULL COMMENT '所属订单id',
   `price` varchar(16) DEFAULT NULL COMMENT '单价',
   `total_price` varchar(16) DEFAULT NULL COMMENT '合计',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `FKa8kiyc9h5f6bn5617tdh6li9h` (`id_order`),
+  CONSTRAINT `FKa8kiyc9h5f6bn5617tdh6li9h` FOREIGN KEY (`id_order`) REFERENCES `t_shop_order` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='订单明细';
 
 -- ----------------------------
@@ -419,7 +421,7 @@ CREATE TABLE `t_sys_cfg` (
 -- ----------------------------
 -- Records of t_sys_cfg
 -- ----------------------------
-INSERT INTO `t_sys_cfg` VALUES ('1', null, null, '-1', '2019-11-15 13:30:00', 'update by 2019-11-15 13:30:00', 'system.app.name', 'web-flash');
+INSERT INTO `t_sys_cfg` VALUES ('1', null, null, '-1', '2019-11-18 13:30:00', 'update by 2019-11-18 13:30:00', 'system.app.name', 'web-flash');
 INSERT INTO `t_sys_cfg` VALUES ('2', null, null, '1', '2019-11-13 16:05:21', '系统默认上传文件路径', 'system.file.upload.path', 'd://data/lite-shop/runtime/upload');
 INSERT INTO `t_sys_cfg` VALUES ('3', null, null, '1', '2019-04-15 21:36:17', '腾讯sms接口appid', 'api.tencent.sms.appid', '1400219425');
 INSERT INTO `t_sys_cfg` VALUES ('4', null, null, '1', '2019-04-15 21:36:17', '腾讯sms接口appkey', 'api.tencent.sms.appkey', '5f71ed5325f3b292946530a1773e997a');
@@ -503,7 +505,7 @@ CREATE TABLE `t_sys_file_info` (
   `original_file_name` varchar(255) DEFAULT NULL,
   `real_file_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8 COMMENT='文件';
+) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8 COMMENT='文件';
 
 -- ----------------------------
 -- Records of t_sys_file_info
@@ -625,6 +627,13 @@ INSERT INTO `t_sys_file_info` VALUES ('139', '1', '2019-11-14 22:45:18', null, n
 INSERT INTO `t_sys_file_info` VALUES ('140', '1', '2019-11-14 22:48:08', null, null, '吸油烟机1.jpg', '502be2c9-bbf0-40ed-af89-4bd5c1df94d5.jpg');
 INSERT INTO `t_sys_file_info` VALUES ('141', '1', '2019-11-14 22:48:11', null, null, '吸油烟机2.jpg', 'f98cf0d2-2a08-4709-b393-831315659efa.jpg');
 INSERT INTO `t_sys_file_info` VALUES ('142', '1', '2019-11-14 22:48:14', null, null, '吸油烟机3.jpg', '2508b502-db36-45c5-92af-00ab7a7ef61a.jpg');
+INSERT INTO `t_sys_file_info` VALUES ('143', '1', '2019-11-15 14:55:09', null, null, 'banner_mobile1.jpg', '75b1e658-161e-4b12-83b0-abd2c1bead39.jpg');
+INSERT INTO `t_sys_file_info` VALUES ('144', '1', '2019-11-15 14:55:11', null, null, 'banner_mobile2.jpg', 'cfd733e0-4a8a-4b87-8f30-fb909025c647.jpg');
+INSERT INTO `t_sys_file_info` VALUES ('145', '1', '2019-11-15 14:55:14', null, null, 'banner_mobile3.jpg', '2ba1e87f-f04e-40b5-8d99-63e035a9d752.jpg');
+INSERT INTO `t_sys_file_info` VALUES ('146', '1', '2019-11-15 15:39:58', null, null, 'banner-笔记本1.jpg', '00950b78-0fc6-4e88-b663-07dc46a2b6df.jpg');
+INSERT INTO `t_sys_file_info` VALUES ('147', '1', '2019-11-15 15:40:00', null, null, 'banner-笔记本2.jpg', '8974ee52-c261-440a-84d3-8f8c1bd43a6a.jpg');
+INSERT INTO `t_sys_file_info` VALUES ('148', '1', '2019-11-15 15:44:22', null, null, 'banner电视.jpg', '14f9ce27-f133-4321-aeb5-aed470b794d6.jpg');
+INSERT INTO `t_sys_file_info` VALUES ('149', '1', '2019-11-15 15:46:49', null, null, 'banner-家电.jpg', '0cbeb359-39de-42a9-9d19-96e9887a819e.jpg');
 
 -- ----------------------------
 -- Table structure for `t_sys_login_log`
@@ -639,38 +648,11 @@ CREATE TABLE `t_sys_login_log` (
   `succeed` varchar(255) DEFAULT NULL,
   `userid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8 COMMENT='登录日志';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='登录日志';
 
 -- ----------------------------
 -- Records of t_sys_login_log
 -- ----------------------------
-INSERT INTO `t_sys_login_log` VALUES ('71', '2019-05-10 13:17:43', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('72', '2019-05-12 13:36:56', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('73', '2019-11-04 16:20:07', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('74', '2019-11-04 18:50:41', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('75', '2019-11-04 20:55:04', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('76', '2019-11-04 20:57:44', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('77', '2019-11-05 11:06:50', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('78', '2019-11-12 17:24:26', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('79', '2019-11-12 17:24:48', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('80', '2019-11-12 17:24:52', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('81', '2019-11-12 18:48:13', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('82', '2019-11-12 20:38:16', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('83', '2019-11-12 20:38:16', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('84', '2019-11-12 20:38:23', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('85', '2019-11-12 21:48:23', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('86', '2019-11-13 11:26:22', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('87', '2019-11-13 13:15:58', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('88', '2019-11-13 14:57:25', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('89', '2019-11-13 15:59:59', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('90', '2019-11-14 11:04:06', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('91', '2019-11-14 13:51:05', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('92', '2019-11-14 14:57:09', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('93', '2019-11-14 16:00:06', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('94', '2019-11-14 17:06:35', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('95', '2019-11-14 21:10:49', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('96', '2019-11-14 22:19:26', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('97', '2019-11-15 10:22:14', '127.0.0.1', '登录日志', null, '成功', '1');
 
 -- ----------------------------
 -- Table structure for `t_sys_menu`
@@ -819,33 +801,11 @@ CREATE TABLE `t_sys_operation_log` (
   `succeed` varchar(255) DEFAULT NULL,
   `userid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='操作日志';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作日志';
 
 -- ----------------------------
 -- Records of t_sys_operation_log
 -- ----------------------------
-INSERT INTO `t_sys_operation_log` VALUES ('1', 'cn.enilu.flash.api.controller.cms.ArticleMgrController', '2019-05-10 13:22:49', '添加参数', '业务日志', '参数名称=system.app.name', 'upload', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('2', 'cn.enilu.flash.api.controller.cms.ArticleMgrController', '2019-06-10 13:31:09', '修改参数', '业务日志', '参数名称=system.app.name', 'upload', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('3', 'cn.enilu.flash.api.controller.cms.ArticleMgrController', '2019-07-10 13:22:49', '编辑文章', '业务日志', '参数名称=system.app.name', 'upload', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('4', 'cn.enilu.flash.api.controller.cms.ArticleMgrController', '2019-08-10 13:31:09', '编辑栏目', '业务日志', '参数名称=system.app.name', 'upload', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('5', 'cn.enilu.flash.api.controller.system.MenuController', '2019-11-04 17:01:24', '编辑菜单', '业务日志', '菜单名称=商城管理;;;', 'save', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('6', 'cn.enilu.flash.api.controller.system.MenuController', '2019-11-04 17:06:15', '编辑菜单', '业务日志', '菜单名称=用户管理;;;', 'save', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('7', 'cn.enilu.flash.api.controller.system.RoleController', '2019-11-04 17:06:37', '配置角色权限', '业务日志', '角色名称=超级管理员', 'setAuthority', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('8', 'cn.enilu.flash.api.controller.system.MenuController', '2019-11-04 17:06:54', '编辑菜单', '业务日志', '菜单名称=用户管理;;;', 'save', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('9', 'cn.enilu.flash.api.controller.system.MenuController', '2019-11-04 17:09:29', '编辑菜单', '业务日志', '菜单名称=商城管理;;;', 'save', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('10', 'cn.enilu.flash.api.controller.system.MenuController', '2019-11-04 17:09:34', '编辑菜单', '业务日志', '菜单名称=系统管理;;;', 'save', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('11', 'cn.enilu.flash.api.controller.system.MenuController', '2019-11-04 19:01:20', '编辑菜单', '业务日志', '菜单名称=商品管理;;;', 'save', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('12', 'cn.enilu.flash.api.controller.system.MenuController', '2019-11-04 19:07:13', '编辑菜单', '业务日志', '菜单名称=订单管理;;;', 'save', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('13', 'cn.enilu.flash.api.controller.system.MenuController', '2019-11-04 19:07:49', '编辑菜单', '业务日志', '菜单名称=商品类别;;;', 'save', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('14', 'cn.enilu.flash.api.controller.system.MenuController', '2019-11-04 19:08:51', '编辑菜单', '业务日志', '菜单名称=购物车;;;', 'save', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('15', 'cn.enilu.flash.api.controller.system.RoleController', '2019-11-04 19:09:07', '配置角色权限', '业务日志', '角色名称=超级管理员', 'setAuthority', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('16', 'cn.enilu.flash.api.controller.system.MenuController', '2019-11-04 19:10:44', '编辑菜单', '业务日志', '菜单名称=商品类别;;;', 'save', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('17', 'cn.enilu.flash.api.controller.shop.CategoryController', '2019-11-04 19:31:51', '编辑商品类别', '业务日志', '名称=日用杂品;;;', 'save', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('18', 'cn.enilu.flash.api.controller.shop.CategoryController', '2019-11-04 19:31:57', '编辑商品类别', '业务日志', '名称=水果生鲜;;;', 'save', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('19', 'cn.enilu.flash.api.controller.shop.CategoryController', '2019-11-04 19:32:08', '编辑商品类别', '业务日志', '名称=干果零食;;;', 'save', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('20', 'cn.enilu.flash.api.controller.shop.CategoryController', '2019-11-04 19:32:20', '编辑商品类别', '业务日志', '名称=家用五金;;;', 'save', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('21', 'cn.enilu.flash.api.controller.shop.OrderController', '2019-11-13 13:37:30', '发货', '业务日志', '名称=null', 'sendOut', '成功', '1');
-INSERT INTO `t_sys_operation_log` VALUES ('22', 'cn.enilu.flash.api.controller.system.CfgController', '2019-11-13 16:05:22', '编辑参数', '业务日志', '参数名称=system.file.upload.path;;;字段名称:null,旧值:/data/lite-shop/runtime/upload,新值:d://data/lite-shop/runtime/upload', 'save', '成功', '1');
 
 -- ----------------------------
 -- Table structure for `t_sys_relation`
@@ -1005,7 +965,7 @@ CREATE TABLE `t_sys_task` (
 -- ----------------------------
 -- Records of t_sys_task
 -- ----------------------------
-INSERT INTO `t_sys_task` VALUES ('1', '1', '2018-12-28 09:54:00', '-1', '2019-11-15 13:30:00', '0', '0 0/30 * * * ?', '{\n\"appname\": \"web-flash\",\n\"version\":1\n}\n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            ', '0', '2019-11-15 13:30:00', '执行成功', 'cn.enilu.flash.service.task.job.HelloJob', 'default', '测试任务', '测试任务,每30分钟执行一次');
+INSERT INTO `t_sys_task` VALUES ('1', '1', '2018-12-28 09:54:00', '-1', '2019-11-18 13:30:00', '0', '0 0/30 * * * ?', '{\n\"appname\": \"web-flash\",\n\"version\":1\n}\n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            ', '0', '2019-11-18 13:30:00', '执行成功', 'cn.enilu.flash.service.task.job.HelloJob', 'default', '测试任务', '测试任务,每30分钟执行一次');
 
 -- ----------------------------
 -- Table structure for `t_sys_task_log`
@@ -1019,104 +979,11 @@ CREATE TABLE `t_sys_task_log` (
   `job_exception` varchar(500) DEFAULT NULL COMMENT '抛出异常',
   `name` varchar(50) DEFAULT NULL COMMENT '任务名',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
 
 -- ----------------------------
 -- Records of t_sys_task_log
 -- ----------------------------
-INSERT INTO `t_sys_task_log` VALUES ('1', '2019-11-04 17:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('2', '2019-11-04 17:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('3', '2019-11-04 18:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('4', '2019-11-04 18:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('5', '2019-11-04 19:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('6', '2019-11-04 19:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('7', '2019-11-04 20:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('8', '2019-11-04 20:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('9', '2019-11-04 21:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('10', '2019-11-04 21:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('11', '2019-11-05 00:02:03', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('12', '2019-11-05 00:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('13', '2019-11-05 01:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('14', '2019-11-05 01:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('15', '2019-11-05 02:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('16', '2019-11-05 02:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('17', '2019-11-05 03:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('18', '2019-11-05 03:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('19', '2019-11-05 04:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('20', '2019-11-05 04:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('21', '2019-11-05 05:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('22', '2019-11-05 05:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('23', '2019-11-05 10:03:23', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('24', '2019-11-05 10:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('25', '2019-11-05 11:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('26', '2019-11-05 11:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('27', '2019-11-05 12:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('28', '2019-11-05 12:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('29', '2019-11-05 13:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('30', '2019-11-05 13:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('31', '2019-11-05 14:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('32', '2019-11-05 14:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('33', '2019-11-05 15:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('34', '2019-11-05 15:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('35', '2019-11-05 16:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('36', '2019-11-05 16:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('37', '2019-11-05 17:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('38', '2019-11-05 17:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('39', '2019-11-05 18:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('40', '2019-11-05 18:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('41', '2019-11-05 19:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('42', '2019-11-05 19:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('43', '2019-11-12 16:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('44', '2019-11-12 17:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('45', '2019-11-12 17:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('46', '2019-11-12 18:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('47', '2019-11-12 18:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('48', '2019-11-12 19:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('49', '2019-11-12 19:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('50', '2019-11-12 20:21:41', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('51', '2019-11-12 20:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('52', '2019-11-12 21:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('53', '2019-11-12 21:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('54', '2019-11-12 22:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('55', '2019-11-13 11:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('56', '2019-11-13 12:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('57', '2019-11-13 12:30:59', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('58', '2019-11-13 13:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('59', '2019-11-13 13:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('60', '2019-11-13 14:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('61', '2019-11-13 14:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('62', '2019-11-13 15:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('63', '2019-11-13 15:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('64', '2019-11-13 16:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('65', '2019-11-13 16:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('66', '2019-11-13 17:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('67', '2019-11-13 17:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('68', '2019-11-13 18:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('69', '2019-11-13 18:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('70', '2019-11-14 11:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('71', '2019-11-14 11:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('72', '2019-11-14 12:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('73', '2019-11-14 12:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('74', '2019-11-14 13:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('75', '2019-11-14 13:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('76', '2019-11-14 14:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('77', '2019-11-14 14:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('78', '2019-11-14 15:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('79', '2019-11-14 15:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('80', '2019-11-14 16:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('81', '2019-11-14 16:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('82', '2019-11-14 17:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('83', '2019-11-14 20:52:54', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('84', '2019-11-14 21:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('85', '2019-11-14 21:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('86', '2019-11-14 22:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('87', '2019-11-14 22:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('88', '2019-11-15 10:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('89', '2019-11-15 11:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('90', '2019-11-15 12:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('91', '2019-11-15 12:30:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('92', '2019-11-15 13:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('93', '2019-11-15 13:30:00', '1', '1', null, '测试任务');
 
 -- ----------------------------
 -- Table structure for `t_sys_user`

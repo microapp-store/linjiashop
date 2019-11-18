@@ -9,13 +9,13 @@ import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.service.shop.GoodsService;
 import cn.enilu.flash.utils.factory.Page;
+import org.nutz.json.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/shop/goods")
@@ -32,7 +32,9 @@ public class GoodsController {
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	@BussinessLog(value = "编辑商品", key = "name",dict= CommonDict.class)
-	public Object save(@ModelAttribute Goods tShopGoods){
+	public Object save(@RequestBody @Valid Goods tShopGoods){
+		logger.info(Json.toJson(tShopGoods));
+
 		if(tShopGoods.getId()==null){
 			goodsService.insert(tShopGoods);
 		}else {

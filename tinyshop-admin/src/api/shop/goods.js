@@ -13,7 +13,7 @@ export function save(params) {
     return request({
         url: '/shop/goods',
         method: 'post',
-        params
+        data : params
     })
 }
 

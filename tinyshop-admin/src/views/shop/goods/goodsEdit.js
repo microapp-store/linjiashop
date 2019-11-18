@@ -38,19 +38,20 @@ export default {
   },
   data() {
     return {
-      form: {},
-      form2: {},
-      form3: {},
-      form4: {},
+      form: {
+        pic:'',
+        gallery:[],
+        idCategory:''
+      },
       uploadUrl: '',
       uploadFileId: '',
       uploadHeaders: {
         'Authorization': ''
       },
-      id: '',
+      idGoods: '',
       active: 0,
       categories: [],
-      tinymceId: this.id,
+      tinymceId: 'tinymceId',
       fullscreen: false,
       languageTypeList: {
         'en': 'en',
@@ -64,15 +65,6 @@ export default {
     language() {
       return this.languageTypeList[this.$store.getters.language]
     },
-    //表单验证
-    rules() {
-      return {
-        // cfgName: [
-        //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
-        //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
-        // ]
-      }
-    }
   },
 
   watch: {
@@ -104,23 +96,26 @@ export default {
     init() {
       this.uploadUrl = getApiUrl() + '/file'
       this.uploadHeaders['Authorization'] = getToken()
-      this.id = this.$route.query.id
+      this.idGoods = this.$route.query.id
       this.fetchData()
     },
     fetchData() {
       this.listLoading = true
-      get(this.id).then(response => {
-        this.form = response.data
-        let galleryList = new Array()
-        let galleryArr = response.data.gallery.split(',')
-        for (let i = 0; i < galleryArr.length; i++) {
-          this.galleryList.push({
-            id: galleryArr[i],
-            url: this.apiUrl + '/file/getImgStream?idFile=' + galleryArr[i]
-          })
-        }
-        this.setContent(response.data.detail)
-      })
+      if(this.idGoods) {
+        get(this.idGoods).then(response => {
+          this.form = response.data
+          let galleryArr = response.data.gallery.split(',')
+          for (let i = 0; i < galleryArr.length; i++) {
+            if (galleryArr[i] != '') {
+              this.galleryList.push({
+                id: galleryArr[i],
+                url: this.apiUrl + '/file/getImgStream?idFile=' + galleryArr[i]
+              })
+            }
+          }
+          this.setContent(response.data.detail)
+        })
+      }
       getCategories().then(response => {
         this.categories = response.data
       })
@@ -131,49 +126,60 @@ export default {
       }
     },
     save() {
-      if (this.active++ > 2) this.active = 0
-      return
-      this.$refs['form'].validate((valid) => {
-        if (valid) {
-          save({
-            name: this.form.name,
-            pic: this.form.pic,
-            gallery: this.form.gallery,
-            idCategory: this.form.idCategory,
-            detail: this.form.detail,
-            specifications: this.form.specifications,
-            id: this.form.id
-          }).then(response => {
-            this.$message({
-              message: this.$t('common.optionSuccess'),
-              type: 'success'
-            })
-            this.fetchData()
-            this.formVisible = false
-          })
-        } else {
-          return false
-        }
+      if (this.active < 3) {
+        this.active++
+        return
+      }
+      const content = this.getContent()
+      const gallery = this.getGallery()
+
+      save({
+        name: this.form.name,
+        pic: this.form.pic,
+        gallery: gallery,
+        idCategory: this.form.idCategory,
+        descript: this.form.descript,
+        detail: content,
+        specifications: this.form.specifications,
+        num: this.form.num,
+        price: this.form.price,
+        isDelete: this.form.isDelete,
+        isOnSale: this.form.isOnSale,
+        id: this.form.id
+      }).then(response => {
+        this.$message({
+          message: this.$t('common.optionSuccess'),
+          type: 'success'
+        })
+        this.$router.push('/goods')
       })
-    },
-    handleOverwrite(response, raw) {
 
     },
+    getGallery() {
+      let gallery = ''
+      for (let i = 0; i < this.galleryList.length; i++) {
+        if (i == 0) {
+          gallery = this.galleryList[i].id
+        } else {
+          gallery += (',' + this.galleryList[i].id)
+        }
+
+      }
+      return gallery
+    },
     handleRemove: function (file, fileList) {
-      console.log('file',file)
       for (var i = 0; i < this.galleryList.length; i++) {
-        var url = file.url
-        if (this.galleryList[i] === url) {
+        if (this.galleryList[i].id === file.id) {
           this.galleryList.splice(i, 1)
         }
       }
-      console.log('gallery',this.galleryList)
+
     },
     handleUploadPicSuccess(response, raw) {
+      console.log('response',response)
       if (response.code === 20000) {
-        console.log(response.data)
         this.form.pic = response.data.id
-        console.log('pic',this.form.pic)
+        console.log('form.pic',this.form.pic)
       } else {
         this.$message({
           message: this.$t('common.uploadError'),
@@ -182,6 +188,8 @@ export default {
       }
     },
     handleUploadGallerySuccess(response, raw) {
+      console.log('response',response)
+      console.log('gallerylist',this.galleryList)
       if (response.code === 20000) {
         this.galleryList.push(
           {
@@ -189,7 +197,6 @@ export default {
             url: this.apiUrl + '/file/getImgStream?idFile=' + response.data.id
           }
         )
-        console.log('gallery',this.galleryList)
       } else {
         this.$message({
           message: this.$t('common.uploadError'),
@@ -197,6 +204,7 @@ export default {
         })
       }
     },
+
     initTinymce() {
       const _this = this
       window.tinymce.init({
@@ -251,7 +259,7 @@ export default {
       window.tinymce.get(this.tinymceId).setContent(value)
     },
     getContent() {
-      window.tinymce.get(this.tinymceId).getContent()
+      return window.tinymce.get(this.tinymceId).getContent()
     },
     imageSuccessCBK(arr) {
       const _this = this

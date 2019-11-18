@@ -1,5 +1,6 @@
 import goods from '@/api/goods'
 import cart from '@/api/cart'
+const baseApi = process.env.VUE_APP_BASE_API
 import {
     Tag,
     Col,
@@ -62,7 +63,7 @@ export default {
                 goods.thumb = new Array()
                 const gallery = response.data.gallery.split(',')
                 for(var index in gallery){
-                     goods.thumb.push('/dev-api/file/getImgStream?idFile=' + gallery[index])
+                     goods.thumb.push(baseApi+'/file/getImgStream?idFile=' + gallery[index])
                 }
                 this.goods = goods
             }).catch((err) =>{

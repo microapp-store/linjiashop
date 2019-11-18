@@ -1,6 +1,6 @@
 import cart from '@/api/cart'
 import { Checkbox, CheckboxGroup, Card, SubmitBar, Toast, NavBar, Tabbar, TabbarItem,Stepper } from 'vant';
-
+const baseApi = process.env.VUE_APP_BASE_API
 export default {
     components: {
         [Card.name]: Card,
@@ -40,7 +40,7 @@ export default {
             cart.queryByUser().then( response => {
               let cartList = response.data
               for(var index in cartList){
-                  cartList[index].thumb = '/dev-api/file/getImgStream?idFile=' + cartList[index].goods.pic
+                  cartList[index].thumb = baseApi+ '/file/getImgStream?idFile=' + cartList[index].goods.pic
                   this.checkedGoods.push(cartList[index].id+'')
               }
               this.cartList = cartList

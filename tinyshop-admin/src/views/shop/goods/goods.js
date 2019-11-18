@@ -84,15 +84,17 @@ export default {
       })
       return false
     },
+    add() {
+      this.$router.push('goodsEdit')
+    },
     edit() {
       if (this.checkSel()) {
         this.$router.push({path:'goodsEdit',query:{id:this.selRow.id}})
-        return
-        this.isAdd = false
-        this.form = this.selRow
-        this.formTitle = '编辑商品'
-        this.formVisible = true
       }
+    },
+    changeIsOnSale(p1,p2){
+      console.log('p1',p1)
+      console.log('p2',p2)
     }
 
   }

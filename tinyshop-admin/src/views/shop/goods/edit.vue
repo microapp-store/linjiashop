@@ -19,7 +19,7 @@
     </div>
 
 
-    <el-form ref="form" :model="form" :rules="rules" label-width="150px" v-show="active==0">
+    <el-form  :model="form"   label-width="150px" v-show="active==0">
       <el-row>
         <el-col :span="24">
           <el-form-item label="名称">
@@ -51,7 +51,7 @@
       </el-row>
     </el-form>
 
-    <el-form ref="form" label-width="150px" v-show="active==1">
+    <el-form  label-width="150px" v-show="active==1">
       <el-row>
 
         <el-col :span="24">
@@ -76,7 +76,6 @@
                 :action="uploadUrl"
                 :headers="uploadHeaders"
                 :file-list="galleryList"
-                :on-exceed="handleOverwrite"
                 :on-remove="handleRemove"
                 :on-success="handleUploadGallerySuccess">
                 <i class="el-icon-plus"></i>
@@ -90,12 +89,12 @@
     </el-form>
 
     <div :class="{fullscreen:fullscreen}" class="tinymce-container editor-container" v-show="active==2">
-      <textarea :id="tinymceId" class="tinymce-textarea"/>
+      <textarea id="tinymceId" class="tinymce-textarea"/>
       <div class="editor-custom-btn-container">
         <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK"/>
       </div>
     </div>
-    <el-form ref="form" label-width="150px" v-show="active==3">
+    <el-form  label-width="150px" v-show="active==3">
       <el-row>
 
         <el-col :span="24">

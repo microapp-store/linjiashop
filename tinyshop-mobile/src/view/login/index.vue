@@ -8,8 +8,8 @@
                     v-model="mobile"
                     required
                     clearable
-                    label="手机号"
-                    placeholder="请输入手机号"
+                    label="账号"
+                    placeholder="测试账号:15011112222"
             />
             </van-cell-group>
             <van-cell-group v-show="show1">
@@ -28,7 +28,7 @@
                     v-model="password"
                     type="password"
                     label="密码"
-                    placeholder="请输入密码"
+                    placeholder="测试密码：admin"
                     required
             />
 

@@ -7,8 +7,6 @@
           </el-button>
           <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}
           </el-button>
-          <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}
-          </el-button>
         </el-col>
       </el-row>
     </div>
@@ -42,7 +40,7 @@
         <template slot-scope="scope">
           <el-switch
             v-model="scope.row.isOnSale"
-            :change="changeIsOnSale"
+            @change="changeIsOnSale(scope.row)"
           >
           </el-switch>
         </template>

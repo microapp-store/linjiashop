@@ -34,3 +34,10 @@ export function getUser(id) {
     method: 'get'
   })
 }
+
+export function getUserInfo(id) {
+  return request({
+    url: '/shop/user/info/'+id,
+    method: 'get'
+  })
+}

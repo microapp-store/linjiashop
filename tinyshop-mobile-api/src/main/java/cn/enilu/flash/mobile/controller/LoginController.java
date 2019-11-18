@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -87,6 +88,8 @@ public class LoginController extends BaseController {
             }
             String token = JwtUtil.sign(new JwtUser(user));
             Map<String, Object> result = new HashMap<>(1);
+            user.setLastLoginTime(new Date());
+            shopUserService.update(user);
             UserInfo userInfo = new UserInfo();
             BeanUtils.copyProperties(user,userInfo);
             logger.info("token:{}",token);

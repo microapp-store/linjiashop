@@ -30,6 +30,7 @@ public class GoodsController extends BaseController {
     public Object queryGoods(@RequestParam("idCategory") Long idCategory){
         Page<Goods> page = new PageFactory<Goods>().defaultPage();
         page.addFilter(SearchFilter.build("idCategory", SearchFilter.Operator.EQ,idCategory));
+        page.addFilter(SearchFilter.build("isOnSale",true));
         page = goodsService.queryPage(page);
         return Rets.success(page);
     }
@@ -45,6 +46,7 @@ public class GoodsController extends BaseController {
         if(StringUtil.isNotEmpty(key)) {
             page.addFilter(SearchFilter.build("name", SearchFilter.Operator.LIKE, key));
         }
+        page.addFilter(SearchFilter.build("isOnSale",true));
         page = goodsService.queryPage(page);
         return Rets.success(page);
     }
@@ -57,6 +59,7 @@ public class GoodsController extends BaseController {
     @RequestMapping(value = "/searchHot",method = RequestMethod.GET)
     public Object searchHot(){
         Page<Goods> page = new PageFactory<Goods>().defaultPage();
+        page.addFilter(SearchFilter.build("isOnSale",true));
         page = goodsService.queryPage(page);
         return Rets.success(page);
     }

@@ -22,5 +22,16 @@ public class GoodsService extends BaseService<Goods,Long,GoodsRepository>  {
         goods.setIsDelete(true);
         update(goods);
     }
+
+    /**
+     * 商品上架或者下架
+     * @param id
+     * @param isOnSale
+     */
+    public void changeIsOnSale(Long id, Boolean isOnSale) {
+        Goods goods = get(id);
+        goods.setIsOnSale(isOnSale);
+        update(goods);
+    }
 }
 

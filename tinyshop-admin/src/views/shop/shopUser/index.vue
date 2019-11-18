@@ -1,6 +1,19 @@
 <template>
   <div class="app-container">
-
+    <div class="block">
+      <el-row  :gutter="20">
+        <el-col :span="6">
+          <el-input v-model="listQuery.mobile" size="mini" placeholder="手机号"></el-input>
+        </el-col>
+        <el-col :span="6">
+          <el-input v-model="listQuery.nickName" size="mini"  placeholder="昵称"></el-input>
+        </el-col>
+        <el-col :span="6">
+          <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
+        </el-col>
+      </el-row>
+    </div>
     <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
               @current-change="handleCurrentChange">
       <el-table-column label="手机号">
@@ -21,6 +34,11 @@
           {{scope.row.avatar}}
         </template>
       </el-table-column>
+      <el-table-column label="最后登陆时间">
+        <template slot-scope="scope">
+          {{scope.row.lastLoginTime}}
+        </template>
+      </el-table-column>
     </el-table>
 
     <el-pagination
@@ -35,45 +53,6 @@
       @next-click="fetchNext">
     </el-pagination>
 
-    <el-dialog
-      :title="formTitle"
-      :visible.sync="formVisible"
-      width="70%">
-      <el-form ref="form" :model="form" :rules="rules" label-width="150px">
-        <el-row>
-          <el-col :span="12">
-            <el-form-item label="手机号">
-              <el-input v-model="form.mobile" minlength=1></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="密码盐">
-              <el-input v-model="form.salt" minlength=1></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="密码">
-              <el-input v-model="form.password" minlength=1></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="昵称">
-              <el-input v-model="form.nickName" minlength=1></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="头像">
-              <el-input v-model="form.avatar" minlength=1></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-form-item>
-          <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
-          <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>
-        </el-form-item>
-
-      </el-form>
-    </el-dialog>
   </div>
 </template>
 

@@ -4,36 +4,39 @@
 
     <el-form ref="form" :model="form" :rules="rules" label-width="150px">
       <el-row>
-        <el-col :span="12">
+        <el-col :span="24">
           <el-form-item label="手机号">
-            <el-input v-model="form.mobile" minlength=1></el-input>
+           <span>{{userInfo.info.mobile}}</span>
           </el-form-item>
         </el-col>
-        <el-col :span="12">
-          <el-form-item label="密码盐">
-            <el-input v-model="form.salt" minlength=1></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="密码">
-            <el-input v-model="form.password" minlength=1></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="昵称">
-            <el-input v-model="form.nickName" minlength=1></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        <el-col :span="24">
           <el-form-item label="头像">
-            <el-input v-model="form.avatar" minlength=1></el-input>
+            <img :src="apiUrl+ '/file/getImgStream?idFile=' + userInfo.info.avatar" style="width:100px;">
           </el-form-item>
         </el-col>
+        <el-col :span="24">
+          <el-form-item label="昵称">
+            <span>{{userInfo.info.nickName}}</span>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="最后登陆时间">
+           <span>{{userInfo.info.lastLoginTime}}</span>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="订单量">
+            <span>{{userInfo.orderCount}}</span>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="购物车数量">
+            <span>{{userInfo.cartCount}}</span>
+          </el-form-item>
+        </el-col>
+
+
       </el-row>
-      <el-form-item>
-        <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
-        <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>
-      </el-form-item>
 
     </el-form>
   </div>

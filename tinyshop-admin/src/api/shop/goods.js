@@ -35,4 +35,14 @@ export function get(id) {
     }
   })
 }
+export function changeIsOnSale(id,isOnSale){
+  return request({
+    url:'/shop/goods/changeIsOnSale',
+    method:'post',
+    params:{
+      id:id,
+      isOnSale:isOnSale
+    }
+  })
+}
 

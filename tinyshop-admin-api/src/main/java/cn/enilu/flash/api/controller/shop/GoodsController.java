@@ -58,4 +58,12 @@ public class GoodsController {
 		}
 		return Rets.success(goodsService.get(id));
 	}
+	@RequestMapping(value="/changeIsOnSale",method = RequestMethod.POST)
+	public Object changeIsOnSale(@RequestParam("id")  Long id,@RequestParam("isOnSale") Boolean isOnSale){
+		if (id == null) {
+			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+		}
+		goodsService.changeIsOnSale(id,isOnSale);
+		return Rets.success(goodsService.get(id));
+	}
 }

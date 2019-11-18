@@ -1,4 +1,4 @@
-import {getList, remove, save} from '@/api/shop/goods'
+import {getList, remove, save,changeIsOnSale} from '@/api/shop/goods'
 import {getApiUrl} from '@/utils/utils'
 
 export default {
@@ -92,9 +92,16 @@ export default {
         this.$router.push({path:'goodsEdit',query:{id:this.selRow.id}})
       }
     },
-    changeIsOnSale(p1,p2){
-      console.log('p1',p1)
-      console.log('p2',p2)
+    changeIsOnSale(sel){
+      console.log('id',sel.id)
+      console.log('isOnSale',sel.isOnSale)
+      changeIsOnSale(sel.id,sel.isOnSale).then( response =>{
+        this.$message({
+          message: this.$t('common.optionSuccess'),
+          type: 'success'
+        })
+      })
+
     }
 
   }

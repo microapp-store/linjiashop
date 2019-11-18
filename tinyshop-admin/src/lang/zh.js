@@ -47,7 +47,7 @@ export default {
     size: '布局大小'
   },
   login: {
-    title: 'tiny shop',
+    title: '邻家小铺',
     errorAccount:'请输入5到32位的数字和字母',
     errorPassword:'密码至少位5位',
     logIn: '登录',

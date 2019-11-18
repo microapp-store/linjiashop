@@ -17,7 +17,8 @@ export default {
       listQuery: {
         page: 1,
         limit: 20,
-        id: undefined
+        mobile: undefined,
+        nickName:undefined
       },
       total: 0,
       list: null,
@@ -33,18 +34,6 @@ export default {
         deleted: 'danger'
       }
       return statusMap[status]
-    }
-  },
-  computed: {
-
-    //表单验证
-    rules() {
-      return {
-        // cfgName: [
-        //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
-        //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
-        // ]
-      }
     }
   },
   created() {
@@ -66,7 +55,8 @@ export default {
       this.fetchData()
     },
     reset() {
-      this.listQuery.id = ''
+      this.listQuery.mobile = ''
+      this.listQuery.nickName = ''
       this.fetchData()
     },
     handleFilter() {
@@ -95,45 +85,6 @@ export default {
     handleCurrentChange(currentRow, oldCurrentRow) {
       this.selRow = currentRow
     },
-    resetForm() {
-      this.form = {
-        mobile: '',
-        salt: '',
-        password: '',
-        nickName: '',
-        avatar: '',
-        id: ''
-      }
-    },
-    add() {
-      this.resetForm()
-      this.formTitle = '添加用户',
-        this.formVisible = true
-      this.isAdd = true
-    },
-    save() {
-      this.$refs['form'].validate((valid) => {
-        if (valid) {
-          save({
-            mobile: this.form.mobile,
-            salt: this.form.salt,
-            password: this.form.password,
-            nickName: this.form.nickName,
-            avatar: this.form.avatar,
-            id: this.form.id
-          }).then(response => {
-            this.$message({
-              message: this.$t('common.optionSuccess'),
-              type: 'success'
-            })
-            this.fetchData()
-            this.formVisible = false
-          })
-        } else {
-          return false
-        }
-      })
-    },
     checkSel() {
       if (this.selRow && this.selRow.id) {
         return true
@@ -143,38 +94,6 @@ export default {
         type: 'warning'
       })
       return false
-    },
-    edit() {
-      if (this.checkSel()) {
-        this.isAdd = false
-        this.form = this.selRow
-        this.formTitle = '编辑用户'
-        this.formVisible = true
-      }
-    },
-    remove() {
-      if (this.checkSel()) {
-        var id = this.selRow.id
-        this.$confirm(this.$t('common.deleteConfirm'), this.$t('common.tooltip'), {
-          confirmButtonText: this.$t('button.submit'),
-          cancelButtonText: this.$t('button.cancel'),
-          type: 'warning'
-        }).then(() => {
-          remove(id).then(response => {
-            this.$message({
-              message: this.$t('common.optionSuccess'),
-              type: 'success'
-            })
-            this.fetchData()
-          }).catch(err => {
-            this.$notify.error({
-              title: '错误',
-              message: err
-            })
-          })
-        }).catch(() => {
-        })
-      }
     }
 
   }

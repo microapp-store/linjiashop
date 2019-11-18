@@ -38,3 +38,19 @@ export function remove(id) {
         }
     })
 }
+
+
+
+export function removeBanner(id,idBanner) {
+  return request({
+    url: '/shop/category/removeBanner/'+id+'/'+idBanner,
+    method: 'delete'
+  })
+}
+
+export function setCategoryBanner(id,idBanner) {
+  return request({
+    url: '/shop/category/setBanner/'+id+'/'+idBanner,
+    method: 'post'
+  })
+}

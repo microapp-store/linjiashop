@@ -1,4 +1,5 @@
 import { remove, getList, save } from '@/api/cms/banner'
+import {setCategoryBanner} from '@/api/shop/category'
 import { getToken } from '@/utils/auth'
 import { Loading } from 'element-ui'
 import { getApiUrl } from '@/utils/utils'
@@ -36,7 +37,12 @@ export default {
       },
       list: null,
       listLoading: true,
-      selRow: {}
+      selRow: {},
+      shopCategory:{
+        id:undefined,
+        show:false,
+        disabled:true
+      }
     }
   },
   computed: {
@@ -52,6 +58,8 @@ export default {
     }
   },
   created() {
+    this.shopCategory.id = this.$route.query.idCategory
+    console.log(this.shopCategory.id)
     this.init()
   },
   methods: {
@@ -59,6 +67,9 @@ export default {
       this.uploadUrl = getApiUrl() + '/file'
       this.uploadHeaders['Authorization'] = getToken()
       this.fetchData()
+      if(this.shopCategory.id){
+        this.shopCategory.show = true
+      }
     },
     fetchData() {
       this.listLoading = true
@@ -67,7 +78,6 @@ export default {
         for (var index in this.list) {
           let item = this.list[index]
           item.img = getApiUrl() + '/file/getImgStream?idFile=' + item.idFile
-          console.log(item)
         }
 
         this.listLoading = false
@@ -132,6 +142,26 @@ export default {
         type: 'warning'
       })
       return false
+    },
+    clickRow(row){
+      this.shopCategory.disabled=false
+      this.shopCategory.idBanner = row.id
+    },
+    setBanner(){
+      if( this.shopCategory.idBanner) {
+        setCategoryBanner(this.shopCategory.id, this.shopCategory.idBanner).then(response => {
+          this.$message({
+            message: '设置成功',
+            type: 'success'
+          })
+          this.shopCategory.disabled = true
+        })
+      }else{
+        this.$message({
+          message: '请先选中要设置的banner',
+          type: 'warnging'
+        })
+      }
     },
     remove() {
       if (this.checkSel()) {

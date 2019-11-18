@@ -15,6 +15,8 @@
       <el-row>
         <el-col :span="24">
           <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
+
+          <el-button type="success" size="mini" icon="el-icon-edit" @click.native="setBanner" v-show="shopCategory.show" :disabled="shopCategory.disabled">选中banner</el-button>
           <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
         </el-col>
       </el-row>
@@ -22,7 +24,8 @@
 
 
     <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
-              @current-change="handleCurrentChange">
+              @current-change="handleCurrentChange"
+    @row-click="clickRow">
 
       <el-table-column label="ID">
         <template slot-scope="scope">

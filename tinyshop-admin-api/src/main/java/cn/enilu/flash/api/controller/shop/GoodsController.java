@@ -7,6 +7,7 @@ import cn.enilu.flash.bean.entity.shop.Goods;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
+import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.GoodsService;
 import cn.enilu.flash.utils.factory.Page;
 import org.nutz.json.Json;
@@ -25,8 +26,9 @@ public class GoodsController {
 	private GoodsService goodsService;
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
-	public Object list() {
+	public Object list(@RequestParam(value = "name",required = false) String name) {
 	Page<Goods> page = new PageFactory<Goods>().defaultPage();
+		page.addFilter("name", SearchFilter.Operator.LIKE,name);
 		page = goodsService.queryPage(page);
 		return Rets.success(page);
 	}

@@ -75,4 +75,39 @@ public class CategoryController extends BaseController {
 
 		return Rets.success(bannerList);
 	}
+	@RequestMapping(value="/removeBanner/{idCategory}/{idBanner}",method = RequestMethod.DELETE)
+	public Object removeBanner(@PathVariable("idCategory") Long idCategory,
+							@PathVariable("idBanner") Long idBanner){
+		if (idCategory == null) {
+			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+		}
+		CategoryBannerRel rel = categoryBannerRelService.get(Lists.newArrayList(
+				SearchFilter.build("idCategory",idCategory),
+				SearchFilter.build("idBanner",idBanner)
+		));
+		if(rel!=null){
+			categoryBannerRelService.delete(rel);
+		}
+		return Rets.success();
+	}
+	@RequestMapping(value="/setBanner/{idCategory}/{idBanner}",method = RequestMethod.POST)
+	public Object setBanner(@PathVariable("idCategory") Long idCategory,
+							@PathVariable("idBanner") Long idBanner){
+		if (idCategory == null) {
+			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+		}
+		CategoryBannerRel rel = categoryBannerRelService.get(Lists.newArrayList(
+				SearchFilter.build("idCategory",idCategory),
+				SearchFilter.build("idBanner",idBanner)
+		));
+		if(rel!=null){
+			return Rets.success();
+		}
+		rel = new CategoryBannerRel();
+		rel.setIdCategory(idCategory);
+		rel.setIdBanner(idBanner);
+		categoryBannerRelService.insert(rel);
+		return Rets.success();
+	}
+
 }

@@ -7,7 +7,7 @@ export default {
       listQuery: {
         page: 1,
         limit: 20,
-        id: undefined
+        name: undefined
       },
       total: 0,
       list: null,

@@ -41,7 +41,7 @@
                 :title="formTitle"
                 :visible.sync="formVisible"
                 width="70%">
-            <el-form ref="form" :model="form" :rules="rules" label-width="150px">
+            <el-form ref="form" :model="form"   label-width="150px">
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="名称"  >
@@ -62,6 +62,7 @@
         width="70%">
         <el-tabs v-model="banner.activeName">
           <el-tab-pane label="管理" name="first">
+            <el-button type="primary" size="mini"  icon="el-icon-plus" @click.native="addBanner">添加</el-button>
             <el-table :data="banner.list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row>
               <el-table-column label="标题">
                 <template slot-scope="scope">
@@ -80,7 +81,7 @@
               </el-table-column>
               <el-table-column label="操作">
                 <template slot-scope="scope">
-                  <el-button type="danger" size="mini"  icon="el-icon-delete" @click.native="bannerRemove(scope.row)">删除</el-button>
+                  <el-button type="danger" size="mini"  icon="el-icon-delete" @click.native="bannerRemove(scope.row.id)">删除</el-button>
                 </template>
               </el-table-column>
             </el-table>

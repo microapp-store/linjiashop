@@ -40,18 +40,6 @@ export default {
       return statusMap[status]
     }
   },
-  computed: {
-
-    //表单验证
-    rules() {
-      return {
-        // cfgName: [
-        //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
-        //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
-        // ]
-      }
-    }
-  },
   created() {
     this.init()
   },
@@ -185,13 +173,22 @@ export default {
         console.log('banner',this.banner)
       })
     },
-    bannerRemove(item) {
-      console.log('item',item)
-      removeBanner(idCategory,item.id)
+    bannerRemove(id) {
+      console.log('item',id)
+      removeBanner(this.banner.idCategory,id).then( response =>{
+        this.$message({
+          message: this.$t('common.optionSuccess'),
+          type: 'success'
+        })
+        this.bannerMgr(this.banner.idCategory)
+      })
 
     },
     bannerEdit() {
 
+    },
+    addBanner(){
+      this.$router.push({path:'banner',query:{idCategory:this.banner.idCategory}})
     }
 
 

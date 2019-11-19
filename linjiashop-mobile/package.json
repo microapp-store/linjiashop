@@ -1,8 +1,8 @@
 {
   "name": "linjiashop-mobile",
   "version": "1.0.0",
-  "description": "tiny shop mobile",
-  "author": "enilu <enluzt@qq.com>",
+  "description": "shop mobile",
+  "author": "enilu <eniluzt@qq.com>",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",

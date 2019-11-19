@@ -1,8 +1,8 @@
 {
   "name": "linjiashop-admin",
   "version": "4.1.0",
-  "description": "A tiny shop Admin with Element UI & axios & iconfont & permission control & lint",
-  "author": "enilu<enilut@qq.com>",
+  "description": "A  shop Admin with Element UI & axios & iconfont & permission control & lint",
+  "author": "enilu<eniluzt@qq.com>",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",

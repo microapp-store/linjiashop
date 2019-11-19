@@ -46,7 +46,7 @@ public class Swagger2Configuration {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("lite shop api")
+                .title("linjiashop api")
                 .description("简洁，快捷的店铺系统")
                 .termsOfServiceUrl("http://micorapp.store")
                 .contact("blog.enilu.cn")

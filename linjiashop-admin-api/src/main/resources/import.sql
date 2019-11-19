@@ -119,7 +119,7 @@ INSERT INTO `t_shop_user` VALUES ('1', '1', null, '15011112222', 'enilu', 'b5a51
 -- Records of t_sys_cfg
 -- ----------------------------
 INSERT INTO `t_sys_cfg` VALUES ('1', null, null, '-1', '2019-11-19 16:30:00', 'update by 2019-11-19 16:30:00', 'system.app.name', 'web-flash');
-INSERT INTO `t_sys_cfg` VALUES ('2', null, null, '1', '2019-11-13 16:05:21', '系统默认上传文件路径', 'system.file.upload.path', 'd://data/linjiashop/runtime/upload');
+INSERT INTO `t_sys_cfg` VALUES ('2', null, null, '1', '2019-11-13 16:05:21', '系统默认上传文件路径', 'system.file.upload.path', '/data/linjiashop/runtime/upload');
 INSERT INTO `t_sys_cfg` VALUES ('3', null, null, '1', '2019-04-15 21:36:17', '腾讯sms接口appid', 'api.tencent.sms.appid', '1400219425');
 INSERT INTO `t_sys_cfg` VALUES ('4', null, null, '1', '2019-04-15 21:36:17', '腾讯sms接口appkey', 'api.tencent.sms.appkey', '5f71ed5325f3b292946530a1773e997a');
 INSERT INTO `t_sys_cfg` VALUES ('5', null, null, '1', '2019-04-15 21:36:17', '腾讯sms接口签名参数', 'api.tencent.sms.sign', '需要去申请咯');

@@ -60,18 +60,23 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 ## 快速开始
 - 克隆本项目
 - 导入idea或者eclipse
+- 确保开发工具下载并安装了lombok插件
 - 创建数据库：linjiashop
      ```sql
     CREATE DATABASE IF NOT EXISTS linjiashop DEFAULT CHARSET utf8 COLLATE utf8_general_ci; 
     CREATE USER 'linjiashop'@'%' IDENTIFIED BY 'linjiashop191028';
     GRANT ALL privileges ON linjiashop.* TO 'linjiashop'@'%';
     flush privileges;
-    ``` 
-- 导入测试语句:linjiashop-admin-api/src/main/resources/linjiashop.sql    
-- 确保开发工具下载了lombok插件
+    ```     
+
 - 启动后台管理
-    -启动后台管理api服务:linjiashop-admin-api
+    - 启动后台管理api服务:linjiashop-admin-api
         - 修改linjiashop-admin-api中数据库连接配置
+            ```properties
+            ## 首次启动需要设置下列配置项设置为create，以便系统可以自动创建表并导入./import.sql测试数据文件
+            ## 如果下面配置无法自动建表并导入测试数据文件；则可以手动初始化数据库，手动使用的初始化文件文件位于：doc/database.sql
+            spring.jpa.hibernate.ddl-auto=create
+            ```                    
         - 启动linjiashop-admin-api主类：cn.enilu.flash.api.AdminApiApplication，访问http://localhost:8082/swagger-ui.html ， 保证api服务启动成功
     - 启动后台管理的前端界面:linjiashop-admin
         - 运行 npm install --registry=https://registry.npm.taobao.org
@@ -88,6 +93,7 @@ linjiashop包含了后台管理功能和手机端商城业务功能
  
 
 ## 在线文档
-- 该项目克隆并扩展自[web-flash](https://github.com/enilu/web-flash),所以开发的时候多看看web-flash的[在线文档](http://enilu.gitee.io/web-flash) 
+- 该项目克隆并扩展自[web-flash](https://github.com/enilu/web-flash),所以开发的时候多看看web-flash的[在线文档](http://enilu.gitee.io/web-flash)
+- 该项目手机端linjiashop-mobile使用有赞Vant组件库，开发过程可以参考Vant的[在线文档](https://youzan.github.io/vant/#/zh-CN/intro) 
 - 该项目的业务功能参考[litemall](https://github.com/linlinjava/litemall)，感谢[linlinjava](https://github.com/linlinjava)
  

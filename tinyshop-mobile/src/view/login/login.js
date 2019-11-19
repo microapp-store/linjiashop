@@ -1,4 +1,4 @@
-import {loginByPassword,loginOrReg } from '@/api/login'
+import loginApi from '@/api/login'
 import store from '@/store'
 import { Row, Col, Icon, Cell, CellGroup,Field,Button,Toast,
     Tabbar,
@@ -47,10 +47,7 @@ export default {
             this.show1 = true;
         },
         loginOrRegister(){
-
-        },
-        loginByPass(){
-            loginByPassword(this.mobile,this.password).then( response=> {
+            loginApi.loginOrReg(this.mobile,this.smsCode).then( response=> {
                 store.dispatch('app/toggleToken',response.data.token)
                 store.dispatch('app/toggleUser',response.data.user)
                 if(this.redirect){
@@ -60,6 +57,25 @@ export default {
                 }
             }).then( (err) => {
                 // Toast.fail(err)
+            })
+        },
+        loginByPass(){
+            loginApi.loginByPassword(this.mobile,this.password).then( response=> {
+                store.dispatch('app/toggleToken',response.data.token)
+                store.dispatch('app/toggleUser',response.data.user)
+                if(this.redirect){
+                    this.$router.push({path: this.redirect})
+                }else {
+                    this.$router.push({path: '/index'})
+                }
+            }).then( (err) => {
+                // Toast.fail(err)
+            })
+        },
+        sendSms(){
+            loginApi.sendSmsCode(this.mobile).then( response => {
+                const smsCode = response.data
+                Toast('提示：测试阶段不是加发送短信验证码：'+smsCode)
             })
         }
     }

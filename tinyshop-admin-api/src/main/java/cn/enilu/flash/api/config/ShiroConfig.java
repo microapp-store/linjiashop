@@ -2,6 +2,7 @@ package cn.enilu.flash.api.config;
 
 import cn.enilu.flash.security.JwtFilter;
 import cn.enilu.flash.security.ApiRealm;
+import cn.enilu.flash.security.SystemLogoutFilter;
 import cn.enilu.flash.utils.Maps;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
@@ -53,6 +54,7 @@ public class ShiroConfig {
 
         factoryBean.setSecurityManager(securityManager);
         factoryBean.setUnauthorizedUrl("/401");
+        filterMap.put("logout", new SystemLogoutFilter());
 
         /*
          * 自定义url规则
@@ -62,6 +64,7 @@ public class ShiroConfig {
         // 所有请求通过我们自己的JWT Filter
         filterRuleMap.put("/**", "jwt");
         filterRuleMap.put("/account/**","anon");
+        filterRuleMap.put("/logout", "logout");
         // 访问401和404页面不通过我们的Filter
         filterRuleMap.put("/401", "anon");
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);

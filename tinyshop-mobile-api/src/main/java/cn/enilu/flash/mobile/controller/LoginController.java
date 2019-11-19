@@ -6,6 +6,7 @@ import cn.enilu.flash.bean.vo.UserInfo;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.service.shop.ShopUserService;
+import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.MD5;
 import cn.enilu.flash.web.controller.BaseController;
 import org.slf4j.Logger;
@@ -31,7 +32,12 @@ public class LoginController extends BaseController {
     @Autowired
     private ShopUserService shopUserService;
     private Logger logger = LoggerFactory.getLogger(LoginController.class);
-
+    @RequestMapping(value = "sendSmsCode",method = RequestMethod.POST)
+    public Object sendSmsCode(@RequestParam String mobile){
+        String smsCode = shopUserService.sendSmsCode(mobile);
+        //todo 测试环境直接返回验证码，生成环境切忌返回该验证码
+        return Rets.success(smsCode);
+    }
     /**
      * 使用手机号和短信验证码登录或者注册
      * @param mobile

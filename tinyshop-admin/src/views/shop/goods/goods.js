@@ -45,7 +45,7 @@ export default {
       this.fetchData()
     },
     reset() {
-      this.listQuery.id = ''
+      this.listQuery.name = ''
       this.fetchData()
     },
     handleFilter() {

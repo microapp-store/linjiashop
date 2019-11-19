@@ -25,6 +25,3 @@
 </template>
 
 <script src="./edit.js"></script>
-
-<style lang="less">
-</style>

@@ -1,15 +1,11 @@
 import areaData from './area.js'
 import address from '@/api/address'
-import {AddressEdit , Col, Icon, NavBar, Row, Toast} from 'vant';
+import {AddressEdit , NavBar, Toast} from 'vant'
 
 export default {
     components: {
         [AddressEdit .name]: AddressEdit ,
         [Toast.name]: Toast,
-        [Row.name]: Row,
-        [Col.name]: Col,
-        [Icon.name]: Icon,
-
         [NavBar.name]: NavBar
     },
     data() {

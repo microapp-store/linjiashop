@@ -1,22 +1,34 @@
 import request from '@/utils/request'
 
-export function loginOrReg(mobile, smsCode) {
-  return request({
-    url: '/loginOrReg',
-    method: 'post',
-    params: {
-      "mobile": mobile,
-      "smsCode": smsCode
-    }
-  })
-}
-export function loginByPassword(mobile, password) {
-  return request({
-    url: '/loginByPass',
-    method: 'post',
-    params: {
-      "mobile": mobile,
-      "password": password
-    }
-  })
+export default {
+  loginOrReg:function(mobile, smsCode) {
+    return request({
+      url: '/loginOrReg',
+      method: 'post',
+      params: {
+        "mobile": mobile,
+        "smsCode": smsCode
+      }
+    })
+  },
+  loginByPassword:function(mobile, password) {
+    return request({
+      url: '/loginByPass',
+      method: 'post',
+      params: {
+        "mobile": mobile,
+        "password": password
+      }
+    })
+  },
+  sendSmsCode:function(mobile) {
+    return request({
+      url: '/sendSmsCode',
+      method: 'post',
+      params: {
+        "mobile": mobile
+      }
+    })
+  },
+
 }

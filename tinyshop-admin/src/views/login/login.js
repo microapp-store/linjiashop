@@ -41,17 +41,19 @@ export default {
       }
     },
     handleLogin() {
+      let redirect = this.$route.query.redirect
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.loading = false
-            this.$router.push({ path: '/' })
+            if(redirect){
+              this.$router.push(redirect)
+            }else {
+              this.$router.push({path: '/'})
+            }
           }).catch((err) => {
-            this.$message({
-              message: err,
-              type: 'error'
-            })
+            console.log(err)
             this.loading = false
           })
         } else {

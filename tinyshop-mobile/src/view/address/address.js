@@ -1,5 +1,5 @@
 import address from '@/api/address'
-import {AddressList, Col, Icon, NavBar, Row, Toast} from 'vant';
+import {AddressList, Col, Icon, NavBar, Row, Toast} from 'vant'
 
 export default {
     components: {

@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.enilu</groupId>
-    <artifactId>tinyshop</artifactId>
+    <artifactId>linjiashop</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
-        <module>tinyshop-core</module>
-        <module>tinyshop-generator</module>
-        <module>tinyshop-mobile-api</module>
-        <module>tinyshop-admin-api</module>
+        <module>linjiashop-core</module>
+        <module>linjiashop-generator</module>
+        <module>linjiashop-mobile-api</module>
+        <module>linjiashop-admin-api</module>
     </modules>
 
     <properties>

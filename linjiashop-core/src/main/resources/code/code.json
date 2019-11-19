@@ -1,0 +1,13 @@
+//代码生成配置，具体用法参考：http://enilu.gitee.io/web-flash/ecosystem/code-generator.html
+{
+  "codeConfig": {
+    "type": "cn.enilu.flash.code.CodeConfig",
+    "fields": {
+      entityModel: "linjiashop-core",
+      daoModel: "linjiashop-core",
+      serviceModel: "linjiashop-core",
+      controllerModel: "linjiashop-admin-api",
+      viewModel: "linjiashop-admin"
+    }
+  }
+}

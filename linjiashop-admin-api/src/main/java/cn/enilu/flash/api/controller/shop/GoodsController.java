@@ -5,11 +5,13 @@ import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.dictmap.CommonDict;
 import cn.enilu.flash.bean.entity.shop.Goods;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
+import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.GoodsService;
 import cn.enilu.flash.utils.factory.Page;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.nutz.json.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +36,7 @@ public class GoodsController {
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	@BussinessLog(value = "编辑商品", key = "name",dict= CommonDict.class)
+	@RequiresPermissions(value = {Permission.GOODS_EDIT})
 	public Object save(@RequestBody @Valid Goods tShopGoods){
 		logger.info(Json.toJson(tShopGoods));
 
@@ -46,6 +49,7 @@ public class GoodsController {
 	}
 	@RequestMapping(method = RequestMethod.DELETE)
 	@BussinessLog(value = "删除商品", key = "id",dict= CommonDict.class)
+	@RequiresPermissions(value = {Permission.GOODS_EDIT})
 	public Object remove(Long id){
 		if (id == null) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
@@ -61,6 +65,7 @@ public class GoodsController {
 		return Rets.success(goodsService.get(id));
 	}
 	@RequestMapping(value="/changeIsOnSale",method = RequestMethod.POST)
+	@RequiresPermissions(value = {Permission.GOODS_EDIT})
 	public Object changeIsOnSale(@RequestParam("id")  Long id,@RequestParam("isOnSale") Boolean isOnSale){
 		if (id == null) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);

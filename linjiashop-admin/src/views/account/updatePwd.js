@@ -49,10 +49,7 @@ export default {
             this.$router.push('/dashboard')
 
           }).catch((err) => {
-            this.$message({
-              message: err,
-              type: 'error'
-            })
+
           })
         }
       })

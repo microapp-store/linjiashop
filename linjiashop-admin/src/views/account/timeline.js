@@ -26,10 +26,7 @@ export default {
             this.activities = response.data
 
           }).catch((err) => {
-            this.$message({
-              message: err,
-              type: 'error'
-            })
+
           })
     }
 

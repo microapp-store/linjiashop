@@ -57,6 +57,10 @@ public interface Permission {
     String CONTACTS = "contacts";
     String FILE = "file";
     String FILE_UPLOAD = "fileUpload";
+    //商城管理
+
+    String CATEGORY_EDIT="categoryEdit";
+    String GOODS_EDIT = "goodsEdit";
 
 
 }

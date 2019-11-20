@@ -7,6 +7,7 @@ import cn.enilu.flash.bean.entity.cms.Banner;
 import cn.enilu.flash.bean.entity.shop.Category;
 import cn.enilu.flash.bean.entity.shop.CategoryBannerRel;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
+import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
@@ -15,6 +16,7 @@ import cn.enilu.flash.service.shop.CategoryService;
 import cn.enilu.flash.utils.Lists;
 import cn.enilu.flash.utils.factory.Page;
 import cn.enilu.flash.web.controller.BaseController;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,7 @@ public class CategoryController extends BaseController {
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	@BussinessLog(value = "编辑商品类别", key = "name",dict= CommonDict.class)
+	@RequiresPermissions(value = {Permission.CATEGORY_EDIT})
 	public Object save(@ModelAttribute Category tShopCategory){
 		if(tShopCategory.getId()==null){
 			categoryService.insert(tShopCategory);
@@ -55,6 +58,7 @@ public class CategoryController extends BaseController {
 	}
 	@RequestMapping(method = RequestMethod.DELETE)
 	@BussinessLog(value = "删除商品类别", key = "id",dict= CommonDict.class)
+	@RequiresPermissions(value = {Permission.CATEGORY_EDIT})
 	public Object remove(Long id){
 		if (id == null) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
@@ -76,6 +80,7 @@ public class CategoryController extends BaseController {
 		return Rets.success(bannerList);
 	}
 	@RequestMapping(value="/removeBanner/{idCategory}/{idBanner}",method = RequestMethod.DELETE)
+	@RequiresPermissions(value = {Permission.CATEGORY_EDIT})
 	public Object removeBanner(@PathVariable("idCategory") Long idCategory,
 							@PathVariable("idBanner") Long idBanner){
 		if (idCategory == null) {
@@ -91,6 +96,7 @@ public class CategoryController extends BaseController {
 		return Rets.success();
 	}
 	@RequestMapping(value="/setBanner/{idCategory}/{idBanner}",method = RequestMethod.POST)
+	@RequiresPermissions(value = {Permission.CATEGORY_EDIT})
 	public Object setBanner(@PathVariable("idCategory") Long idCategory,
 							@PathVariable("idBanner") Long idBanner){
 		if (idCategory == null) {

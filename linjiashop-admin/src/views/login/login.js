@@ -53,7 +53,7 @@ export default {
               this.$router.push({path: '/'})
             }
           }).catch((err) => {
-            console.log(err)
+
             this.loading = false
           })
         } else {

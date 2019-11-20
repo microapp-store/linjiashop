@@ -55,9 +55,8 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 - linjiashop-generator 代码生成模块,配合IDEA 代码生成插件[webflash-generator](https://plugins.jetbrains.com/plugin/12648-webflash-generator)使用效果更好
 
 ## 演示
- 暂无
-
-
+- 手机版本：[http://linjiashop.microapp.store](http://linjiashop.microapp.store)
+- 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 请不要随意删除测试数据，谢谢
 
 ## 快速开始
 - 克隆本项目

@@ -18,10 +18,10 @@ import java.math.BigDecimal;
 @Entity(name="t_shop_goods")
 @EntityListeners(AuditingEntityListener.class)
 public class Goods extends BaseEntity {
-    @NotBlank(message = "商品名称并能为空")
+    @NotBlank(message = "商品名称不能为空")
     @Column(columnDefinition = "VARCHAR(32) COMMENT '名称'")
     private String name;
-    @NotBlank(message = "商品小图并能为空")
+    @NotBlank(message = "商品小图不能为空")
     @Column(columnDefinition = "VARCHAR(16) COMMENT '小图'")
     private String pic;
     @Column(columnDefinition = "VARCHAR(32) COMMENT '大图相册列表,以逗号分隔'")
@@ -32,7 +32,7 @@ public class Goods extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
     @Column(columnDefinition = "VARCHAR(64) COMMENT '产品简介'")
-    @NotBlank(message = "商品简介并能为空")
+    @NotBlank(message = "商品简介不能为空")
     private String descript;
     @Column(columnDefinition = "TEXT COMMENT '产品详情'")
     private String detail;

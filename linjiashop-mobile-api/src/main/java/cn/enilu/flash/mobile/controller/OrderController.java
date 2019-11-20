@@ -39,6 +39,11 @@ public class OrderController extends BaseController {
     private CartService cartService;
     @Autowired
     private AddressService addressService;
+    @RequestMapping(value ="{orderSn}",method = RequestMethod.GET)
+    public Object get(@PathVariable(value = "orderSn") String orderSn){
+        Order order = orderService.getByOrderSn(orderSn);
+        return Rets.success(order);
+    }
     @RequestMapping(value = "getOrders",method = RequestMethod.GET)
     public Object getOrders(@RequestParam(value = "status",required = false) Integer status){
         Long idUser = getIdUser(HttpUtil.getRequest());

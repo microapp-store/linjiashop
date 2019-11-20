@@ -92,8 +92,8 @@ export default {
             this.listQuery.status = this.navList[index].id
             this.getData()
         },
-        toOrderDetail(id){
-            Toast('查看订单详情'+id+'开发中')
+        toOrderDetail(orderSn){
+            this.$router.push('/order/detail/'+orderSn)
         },
         toGoods(id){
             this.$router.push({path: '/goods/'+id})
@@ -104,8 +104,24 @@ export default {
             })
 
         },
+        getHandlerText(statusName){
+            if(statusName==='已发货'){
+                return '确认收货'
+            }
+            if(statusName==='待付款') {
+                return '立即付款'
+            }
+            return statusName
+        },
         handleOrder(order){
-            this.$router.push({path:'payment',query:{orderSn:order.orderSn,totalPrice:order.totalPrice}})
+            if(order.statusName==='待付款'){
+                this.$router.push({path:'payment',query:{orderSn:order.orderSn,totalPrice:order.totalPrice}})
+            }
+            if(order.statusName==='已发货'){
+                Toast('确认收货开发中')
+            }
+
+
 
         }
     }

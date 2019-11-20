@@ -19,11 +19,13 @@
                  :key="index"
                  :title="'订单编号: ' + item.orderSn"
                  :status="item.statusName"
-                 @click.native="toOrderDetail(item.id)"
+                 @click.native="toOrderDetail(item.orderSn)"
       >
         <van-card v-for="(orderItem, index2) in item.items"
                   :key="index2"
                   :title="orderItem.goods.name"
+                  :desc="orderItem.goods.descript"
+                  :price="formatPrice(orderItem.price)"
                   :num="orderItem.count"
                   @click.stop="toGoods(orderItem.goods.id)"
                   :thumb="imgUrl+orderItem.goods.pic">
@@ -43,7 +45,9 @@
         <div slot="footer"
              class="footer_btn">
           <van-button size="small" @click.stop="cancelOrder(item)"  v-show="item.statusName === '待付款'" type="default">取消订单</van-button>
-          <van-button size="small" @click.stop="handleOrder(item)"  type="danger">{{item.statusName}}</van-button>
+          <van-button size="small" @click.stop="handleOrder(item)"  type="danger">
+            {{getHandlerText(item.statusName)}}
+          </van-button>
 
         </div>
 

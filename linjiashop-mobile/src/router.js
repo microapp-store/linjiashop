@@ -54,6 +54,14 @@ const routes = [
     }
   },
   {
+    name: 'order/detail/:orderSn',
+    component: () => import('./view/order/detail'),
+    meta: {
+      requireAuth:true,
+      title: '我的订单'
+    }
+  },
+  {
     name: 'checkout',
     component: () => import('./view/order/checkout'),
     meta: {

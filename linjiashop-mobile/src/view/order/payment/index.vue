@@ -4,7 +4,7 @@
                 title="收银台"
         />
         <van-cell-group>
-            <van-cell title="订单编号" :value="order.orderNo" />
+            <van-cell title="订单编号" :value="order.orderSn" />
             <van-cell title="应付金额">
                 <span class="red strong">￥{{formatPrice(order.totalPrice)}}</span>
             </van-cell>

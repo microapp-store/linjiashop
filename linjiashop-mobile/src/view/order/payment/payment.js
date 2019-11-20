@@ -24,13 +24,14 @@ export default {
 
     methods: {
         init() {
-            let orderNo = this.$route.query.orderNo
+            let orderSn = this.$route.query.orderSn
             let totalPrice = this.$route.query.totalPrice
-            this.order ={order:orderNo,totalPrice:totalPrice}
+            this.order ={orderSn:orderSn,totalPrice:totalPrice}
         },
         pay() {
             let payTypeName = this.payType == 'wxpay' ? '微信支付' : '支付宝'
             Toast('准备使用' + payTypeName + '支付')
+            this.$router.push('/')
         },
         formatPrice(price) {
             return (price / 100).toFixed(2);

@@ -25,6 +25,7 @@
                   :key="index2"
                   :title="orderItem.goods.name"
                   :num="orderItem.count"
+                  @click.stop="toGoods(orderItem.goods.id)"
                   :thumb="imgUrl+orderItem.goods.pic">
           <!--<div slot="desc">-->
             <!--<div class="desc">-->

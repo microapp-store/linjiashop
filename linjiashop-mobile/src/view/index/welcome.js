@@ -88,7 +88,6 @@ export default {
                     Toast.fail(err);
                 })
             } else {
-                console.log('categoryData',categoryData)
                 this.navList = categoryData
                 this.getBanners(0)
                 this.getGoods(categoryData[0].id)
@@ -97,7 +96,6 @@ export default {
         },
         getBanners(categoryIndex){
             let bannerList = this.navList[categoryIndex].bannerList
-            console.log(categoryIndex,bannerList)
             let imgList = new Array()
             for(let i=0;i<bannerList.length;i++){
                 imgList.push({

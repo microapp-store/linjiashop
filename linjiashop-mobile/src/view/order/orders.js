@@ -93,18 +93,19 @@ export default {
             this.getData()
         },
         toOrderDetail(id){
-            Toast('查看订单详情'+id)
+            Toast('查看订单详情'+id+'开发中')
+        },
+        toGoods(id){
+            this.$router.push({path: '/goods/'+id})
         },
         cancelOrder(orderInfo){
             order.remove(orderInfo.id).then( response => {
                 this.getData()
-            }).catch( (err) => {
-
             })
 
         },
-        handleOrder(orderInfo){
-            this.$router.push({path:'payment',query:{orderNo:order.orderNo,totalPrice:order.totalPrice}})
+        handleOrder(order){
+            this.$router.push({path:'payment',query:{orderSn:order.orderSn,totalPrice:order.totalPrice}})
 
         }
     }

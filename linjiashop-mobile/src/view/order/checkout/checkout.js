@@ -1,5 +1,6 @@
 import order  from '@/api/orders'
 import {Card, Cell, CellGroup, Checkbox, CheckboxGroup, NavBar, SubmitBar, Tabbar, TabbarItem, Toast} from 'vant';
+import {getCookie } from '@/utils/auth'
 const baseApi = process.env.VUE_APP_BASE_API
 export default {
     components: {
@@ -47,7 +48,9 @@ export default {
 
     methods: {
         init() {
-            order.prepareCheckout().then(response => {
+            const chosenAddressId = getCookie('chosenAddressId')
+            console.log('chosenAddressId',chosenAddressId)
+            order.prepareCheckout({chosenAddressId:chosenAddressId}).then(response => {
                 let cartList = response.data.list
                 this.addr = response.data.addr
                 for (var index in cartList) {
@@ -62,7 +65,7 @@ export default {
         submit() {
             order.save({idAddress:this.addr.id,message:this.message}).then( response => {
                 let order = response.data
-                this.$router.push({path:'payment',query:{orderNo:order.orderNo,totalPrice:order.totalPrice}})
+                this.$router.push({path:'payment',query:{orderNo:order.orderSn,totalPrice:order.totalPrice}})
             })
         },
         formatPrice(price) {
@@ -80,5 +83,8 @@ export default {
                 this.checkedGoods = this.checkeAllCarts
             }
         },
+        chooseAddress(){
+
+        }
     }
 };

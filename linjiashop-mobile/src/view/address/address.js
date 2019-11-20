@@ -1,6 +1,6 @@
 import address from '@/api/address'
 import {AddressList, Col, Icon, NavBar, Row, Toast} from 'vant'
-
+import {setCookie } from '@/utils/auth'
 export default {
     components: {
         [AddressList.name]: AddressList,
@@ -44,6 +44,7 @@ export default {
             this.$router.push({path:'address/edit',query:{id:item.id}})
         },
         onClickLeft() {
+            setCookie('chosenAddressId',this.chosenAddressId)
             this.$router.go(-1)
         }
     }

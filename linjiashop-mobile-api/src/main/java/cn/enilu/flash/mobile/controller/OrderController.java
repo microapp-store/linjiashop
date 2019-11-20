@@ -16,6 +16,8 @@ import cn.enilu.flash.utils.Lists;
 import cn.enilu.flash.utils.Maps;
 import cn.enilu.flash.utils.factory.Page;
 import cn.enilu.flash.web.controller.BaseController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +32,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user/order")
 public class OrderController extends BaseController {
+    private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private OrderService orderService ;
     @Autowired
@@ -50,10 +53,16 @@ public class OrderController extends BaseController {
     }
 
     @RequestMapping(value = "prepareCheckout",method = RequestMethod.GET)
-    public Object prepareCheckout(){
+    public Object prepareCheckout(@RequestParam(value = "chosenAddressId",required = false) Long chosenAddressId){
         Long idUser = getIdUser(HttpUtil.getRequest());
         List<Cart> list = cartService.queryAll(SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser));
-        Address address = addressService.getDefaultAddr(idUser);
+        Address address = null;
+        logger.info("chosenAddressId：{}",chosenAddressId);
+        if(chosenAddressId==null || chosenAddressId==0) {
+             address = addressService.getDefaultAddr(idUser);
+        }else{
+            address = addressService.get(chosenAddressId);
+        }
         return Rets.success(Maps.newHashMap(
                 "list",list,"addr",address
         ));

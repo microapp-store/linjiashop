@@ -22,9 +22,10 @@ export default {
         })
     },
 
-    prepareCheckout:function(){
+    prepareCheckout:function(params){
         return request({
             url: '/user/order/prepareCheckout',
+            params,
             method: 'get'
         })
     }

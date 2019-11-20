@@ -54,7 +54,11 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 - linjiashop-mobile-api 手机端商城的api服务
 - linjiashop-core 基础模块，包括工具类，dao，service，bean等内容
 - linjiashop-generator 代码生成模块,主要生成后台管理的前后端代码,配合IDEA 代码生成插件[webflash-generator](https://plugins.jetbrains.com/plugin/12648-webflash-generator)使用效果更好
-
+## 运行效果图
+- 手机端：
+![手机端](doc/mobile.gif)
+- 后台管理：
+![后台管理](doc/admin.gif)
 ## 演示
 - 手机版本：[http://linjiashop.microapp.store](http://linjiashop.microapp.store)
 - 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 请不要随意删除测试数据，谢谢

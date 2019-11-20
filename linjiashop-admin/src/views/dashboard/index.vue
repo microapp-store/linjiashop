@@ -9,9 +9,9 @@
             <svg-icon  icon-class="documentation" ></svg-icon>
           </el-col>
           <el-col :span="12" >
-            <div class="card-panel-text">{{ $t('dashboard.document') }}</div>
+            <div class="card-panel-text">订单数</div>
             <div class="card-panel-num">
-              <a href="http://enilu.gitee.io/web-flash" target="_blank">Document</a>
+               110
             </div>
           </el-col>
         </el-card>

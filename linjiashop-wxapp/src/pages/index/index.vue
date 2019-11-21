@@ -9,8 +9,7 @@
               :price="formatPrice(goods.price)"
               :desc="goods.descript"
               :title="goods.name"
-              :thumb="goods.img"
-              :thumb-link="goods.link"
+              :thumb="'http://linjiashop.microapp.store/prod-api/file/getImgStream?idFile='+goods.pic"
               @click="viewGoodsDetail(goods.id)"
     />
   </div>
@@ -18,7 +17,7 @@
 
 <script>
   import card from '@/components/card'
-
+  import goodsData from './goodslist.json'
   export default {
     data() {
       return {
@@ -41,7 +40,7 @@
           }
         ],
         banners: [],
-        goodsList: [],
+        goodsList: goodsData.data.records,
         activeFooter: 0,
         activeNav: 0,
         listQuery: {
@@ -51,16 +50,18 @@
         }
       }
     },
-
     components: {
       card
     },
-
     methods: {
       clickNav() {
 
+      },
+      formatPrice(price) {
+        return (price / 100).toFixed(2)
       }
     },
+
     created() {
       // let app = getApp()
     }

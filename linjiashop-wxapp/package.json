@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "mpvue": "^2.0.0",
+    "vant-weapp": "^0.5.23",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

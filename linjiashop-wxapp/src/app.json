@@ -1,4 +1,20 @@
 {
+  "usingComponents": {
+    "van-cell": "/static/vant/cell/index",
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-icon": "/static/vant/icon/index",
+    "van-row": "/static/vant/row/index",
+    "van-col": "/static/vant/col/index",
+    "van-popup": "/static/vant/popup/index",
+    "van-button": "/static/vant/button/index",
+    "van-field": "/static/vant/field/index",
+    "van-search": "/static/vant/search/index",
+    "van-toast": "/static/vant/toast/index",
+    "van-tab": "/static/vant/tab/index",
+    "van-tabs": "/static/vant/tabs/index",
+    "van-card": "/static/vant/card/index"
+
+  },
   "pages": [
     "pages/index/main",
     "pages/logs/main",
@@ -22,10 +38,20 @@
       "iconPath": "static/tabs/home.png",
       "selectedIconPath": "static/tabs/home-active.png"
     }, {
-      "text": "订单",
+      "text": "发现",
       "pagePath": "pages/logs/main",
-      "iconPath": "static/tabs/orders.png",
-      "selectedIconPath": "static/tabs/orders-active.png"
+      "iconPath": "static/tabs/search.png",
+      "selectedIconPath": "static/tabs/search-active.png"
+    },  {
+      "text": "购物车",
+      "pagePath": "pages/logs/main",
+      "iconPath": "static/tabs/cart.png",
+      "selectedIconPath": "static/tabs/cart-active.png"
+    },{
+      "text": "我的",
+      "pagePath": "pages/logs/main",
+      "iconPath": "static/tabs/me.png",
+      "selectedIconPath": "static/tabs/me-active.png"
     }],
 
     "items": [{

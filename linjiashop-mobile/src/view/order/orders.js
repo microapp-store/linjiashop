@@ -99,7 +99,7 @@ export default {
             this.$router.push({path: '/goods/'+id})
         },
         cancelOrder(orderInfo){
-            order.remove(orderInfo.id).then( response => {
+            order.remove(orderInfo.orderSn).then( response => {
                 this.getData()
             })
 
@@ -118,7 +118,7 @@ export default {
                 this.$router.push({path:'payment',query:{orderSn:order.orderSn,totalPrice:order.totalPrice}})
             }
             if(order.statusName==='已发货'){
-                Toast('确认收货开发中')
+                Toast('确认收货敬请期待')
             }
 
 

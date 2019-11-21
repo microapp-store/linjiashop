@@ -3,6 +3,7 @@ package cn.enilu.flash.service.shop;
 
 import cn.enilu.flash.bean.entity.shop.Order;
 import cn.enilu.flash.bean.entity.shop.OrderItem;
+import cn.enilu.flash.bean.enumeration.shop.OrderEnum;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.dao.shop.OrderItemRepository;
 import cn.enilu.flash.dao.shop.OrderRepository;
@@ -45,11 +46,12 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
     }
 
     /**
-     * 取消订单
-     * @param id
+     * 取消订单<br>
+     * 目前逻辑简单直接删除，真正上线可以采用逻辑删除而
+     * @param orderSn
      */
-    public void cancel(Long id) {
-        Order order = get(id);
+    public void cancel(String orderSn) {
+        Order order = getByOrderSn(orderSn);
         List<OrderItem> itemList = order.getItems();
         delete(order);
         orderItemRepository.deleteInBatch(itemList);
@@ -58,6 +60,17 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
 
     public Order getByOrderSn(String orderSn) {
         return get(SearchFilter.build("orderSn", SearchFilter.Operator.EQ,orderSn));
+    }
+
+    /**
+     * 确认收货
+     * @param orderSn
+     */
+    public Order confirmReceive(String orderSn) {
+        Order order = getByOrderSn(orderSn);
+        order.setStatus(OrderEnum.OrderStatusEnum.FINISHED.getId());
+        update(order);
+        return order;
     }
 }
 

@@ -102,9 +102,14 @@ public class OrderController extends BaseController {
         cartService.deleteAll(cartList);
         return Rets.success(order);
     }
-    @RequestMapping(value = "cancel/{id}",method = RequestMethod.POST)
-    public Object cancel(@PathVariable("id") Long id){
-        orderService.cancel(id);
+    @RequestMapping(value = "cancel/{orderSn}",method = RequestMethod.POST)
+    public Object cancel(@PathVariable("orderSn") String orderSn){
+        orderService.cancel(orderSn);
         return Rets.success();
     }
+     @RequestMapping(value = "confirm/{orderSn}",method = RequestMethod.POST)
+    public Object confirm(@PathVariable("orderSn") String orderSn){
+        Order order = orderService.confirmReceive(orderSn);
+        return Rets.success(order);
+     }
 }

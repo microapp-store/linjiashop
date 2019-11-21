@@ -28,7 +28,7 @@ export default {
             activeFooter: 3,
             title:'',
             imgUrl:baseApi+'/file/getImgStream?idFile=',
-            order:{orderSn:''}
+            order:{orderSn:'',address:{name:''}}
         };
     },
     mounted(){
@@ -52,13 +52,16 @@ export default {
             this.$router.push({path: '/goods/'+id})
         },
         confirmReceive(){
-            Toast('开发中')
+            Toast('敬请期待')
+            order.confirm(this.order.orderSn).then( response => {
+                this.order = response.data
+            })
         },
         payment(){
             this.$router.push({path:'/payment',query:{orderSn:this.order.orderSn,totalPrice:this.order.totalPrice}})
         },
         contact(){
-          Toast('开发中')
+          Toast('敬请期待')
         },
         onClickLeft(){
             this.$router.go(-1)

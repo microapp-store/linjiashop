@@ -97,7 +97,7 @@ export default {
             })
         },
         sorry(){
-            Toast('开发中...')
+            Toast('敬请期待...')
         }
     }
 };

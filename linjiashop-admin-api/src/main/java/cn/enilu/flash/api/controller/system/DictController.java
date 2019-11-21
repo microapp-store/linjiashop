@@ -73,7 +73,7 @@ public class DictController extends BaseController {
 
     @RequestMapping(method = RequestMethod.DELETE)
     @BussinessLog(value = "删除字典", key = "id",dict=DictMap.class)
-    @RequiresPermissions(value = {Permission.DICT_EDIT})
+    @RequiresPermissions(value = {Permission.DICT_DEL})
     public Object delete(@RequestParam Long id) {
         dictService.delteDict(id);
         return Rets.success();

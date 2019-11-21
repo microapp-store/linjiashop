@@ -14,6 +14,7 @@ public interface Permission {
     String CFG_DEL = "cfgDelete";
     String DICT = "dict";
     String DICT_EDIT = "dictEdit";
+    String DICT_DEL = "dictDelete";
     String LOG = "log";
     String LOG_CLEAR = "logClear";
     String LOGIN_LOG = "loginLog";
@@ -29,10 +30,10 @@ public interface Permission {
     String MENU_DEL = "menuDelete";
     String USER = "mgr";
     String USER_EDIT = "mgrEdit";
-    String USER_DEL = "mgrEelete";
+    String USER_DEL = "mgrDelete";
     String DEPT = "dept";
     String DEPT_EDIT = "deptEdit";
-    String DEPT_DEL = "deptEelete";
+    String DEPT_DEL = "deptDelete";
 
     //消息管理
     String MSG = "msg";

@@ -18,7 +18,12 @@ export function formatTime (date) {
   return `${t1} ${t2}`
 }
 
+export function formatPrice (price) {
+  return (price / 100).toFixed(2)
+}
+
 export default {
   formatNumber,
-  formatTime
+  formatTime,
+  formatPrice
 }

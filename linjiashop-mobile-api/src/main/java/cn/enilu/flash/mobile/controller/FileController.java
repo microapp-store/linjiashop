@@ -35,6 +35,7 @@ public class FileController extends BaseController {
     @RequestMapping(method = RequestMethod.POST)
     @RequiresPermissions(value = {Permission.FILE_UPLOAD})
     public Object upload(@RequestPart("file") MultipartFile multipartFile) {
+        Long idUse = getIdUser();
 
         try {
             FileInfo fileInfo = fileService.upload(multipartFile);

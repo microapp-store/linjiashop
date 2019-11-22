@@ -63,7 +63,7 @@ public class AddressController extends BaseController {
     }
     @RequestMapping(value = "/queryByUser",method = RequestMethod.GET)
     public Object getByUser(){
-        Long idUser = getIdUser(HttpUtil.getRequest());
+        Long idUser = getIdUser();
         List<SearchFilter> filters = Lists.newArrayList(
                 SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser),
                 SearchFilter.build("isDelete", SearchFilter.Operator.EQ,false)
@@ -73,7 +73,7 @@ public class AddressController extends BaseController {
     }
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     public Object save(@ModelAttribute @Valid Address addressInfo){
-        Long idUser = getIdUser(HttpUtil.getRequest());
+        Long idUser = getIdUser();
         addressInfo.setIdUser(idUser);
         if(addressInfo.getId()!=null){
             Address old = addressService.get(idUser,addressInfo.getId());

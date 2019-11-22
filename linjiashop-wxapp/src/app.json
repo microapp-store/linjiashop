@@ -18,7 +18,8 @@
   "pages": [
     "pages/index/main",
     "pages/logs/main",
-    "pages/counter/main"
+    "pages/counter/main",
+    "pages/goods/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -54,17 +55,6 @@
       "selectedIconPath": "static/tabs/me-active.png"
     }],
 
-    "items": [{
-      "name": "首页",
-      "pagePath": "pages/index/main",
-      "icon": "static/tabs/home.png",
-      "activeIcon": "static/tabs/home-active.png"
-    }, {
-      "name": "订单",
-      "pagePath": "pages/logs/main",
-      "icon": "static/tabs/orders.png",
-      "activeIcon": "static/tabs/orders-active.png"
-    }],
     "position": "bottom"
   }
 }

@@ -22,17 +22,33 @@
       <van-col span="10">运费：免运费</van-col>
       <van-col span="14">剩余：{{ goods.num }}</van-col>
     </van-row>
-    <van-cell-group class="goods-cell-group">
-      <van-cell is-link
-                link-type="navigateTo"
-                url="/pages/index"
-                title="查看商品评论"/>
-    </van-cell-group>
     <van-row>
       <van-col span="24">
         <wxParse :content="goods.detail"></wxParse>
       </van-col>
     </van-row>
+
+    <van-goods-action>
+      <van-goods-action-icon
+        icon="home-o"
+        text="主页"
+        @click="toHome"
+      />
+      <van-goods-action-icon
+        icon="cart-o"
+        text="购物车"
+        bind:click="goToCart"
+      />
+      <van-goods-action-button
+        text="加入购物车"
+        type="warning"
+        bind:click="addCart"
+      />
+      <van-goods-action-button
+        text="立即购买"
+        bind:click="buy"
+      />
+    </van-goods-action>
   </div>
 </template>
 
@@ -65,8 +81,29 @@
         })
       },
       formatPrice(price) {
-        console.log('price', price)
         return utils.formatPrice(price)
+      },
+      toHome() {
+        wx.reLaunch({ url: '../index/main' })
+      },
+      goToCart() {
+        console.log('gotocart')
+      },
+      addCart() {
+        // cart.add(this.goods.id,1).then( response => {
+        //   console.log('response',response)
+        //   Toast('已经加入到购物车')
+        // }).catch((err) => {
+        //   Toast.fail(err)
+        // })
+
+      },
+      buy() {
+        // cart.add(this.goods.id,1).then( response => {
+        //   this.$router.push('/cart');
+        // }).catch( (err) => {
+        //   Toast.fail(err)
+        // })
       }
     },
 
@@ -85,7 +122,9 @@
     width: 100%;
     height: 400px;
   }
-
+  .goods{
+    padding:10px;
+  }
   .goods-desc {
     font-size: 12px;
     color: #999999;

@@ -1,9 +1,18 @@
 <template>
   <div>
-    <van-tabs :active="activeNav" bind:change="onChangeTab">
+    <van-tabs :active="activeNav" @change="changeTab">
       <van-tab v-for="nav in navList" :title="nav.name" v-bind:key="nav.id">
       </van-tab>
     </van-tabs>
+    <swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1000">
+      <block v-for="(item, index) in banners" :index="index" :key="key">
+        <swiper-item>
+          <navigator :url="item.url">
+            <image :src="item.imgUrl" class="slide-image" mode="aspectFill"/>
+          </navigator>
+        </swiper-item>
+      </block>
+    </swiper>
     <van-card v-for="(goods,index) in goodsList" :key="index"
               :num="goods.num"
               :price="goods.price"
@@ -17,31 +26,22 @@
 
 <script>
   import card from '@/components/card'
-  import goodsData from './goodslist.json'
   import utils from '@/utils/index.js'
 
   export default {
     data() {
       return {
-        navList: [
+        banners: [
           {
-            'name': '手机',
-            'id': 1
+            'url': '../goods/main?id=1',
+            'imgUrl': 'http://linjiashop.microapp.store/prod-api/file/getImgStream?idFile=143'
           },
           {
-            'name': '电视',
-            'id': 2
-          },
-          {
-            'name': '笔记本',
-            'id': 3
-          },
-          {
-            'name': '家电',
-            'id': 4
+            'url': '../goods/main?id=2',
+            'imgUrl': 'http://linjiashop.microapp.store/prod-api/file/getImgStream?idFile=145'
           }
         ],
-        banners: [],
+        navList: [],
         goodsList: [],
         activeNav: 0,
         listQuery: {
@@ -55,32 +55,47 @@
       card
     },
     methods: {
-      onChangeTab(event) {
-        let id = event.detail.index + 1
-        console.log('id', id)
+      changeTab(event) {
+        const index = event.mp.detail.index
+        const idCategory = this.navList[index].id
+        this.listQuery.idCategory = idCategory
+        this.banners = this.processBanners(this.navList[index].bannerList)
+        this.getGoodsList()
       },
-      formatPrice(price) {
-        return utils.formatPrice(price)
+      getGoodsList() {
+        this.$API.get('/goods/queryGoods?page=' + this.listQuery.page + '&limit=' + this.listQuery.limit + '&idCategory=' + this.listQuery.idCategory, this.listQuery).then(res => {
+          let goodsList = res.data.records
+          for (let i = 0; i < goodsList.length; i++) {
+            goodsList[i].price = utils.formatPrice(goodsList[i].price)
+          }
+          this.goodsList = goodsList
+        })
       },
       viewGoodsDetail(id) {
         const url = '../goods/main?id=' + id
         wx.navigateTo({url})
+      },
+      processBanners(banners) {
+        for (let i = 0; i < banners.length; i++) {
+          banners[i].imgUrl = 'http://linjiashop.microapp.store/prod-api/file/getImgStream?idFile=' + banners[i].idFile
+        }
+        return banners
       }
     },
 
     created() {
-      let goodsList = goodsData.data.records
-      for (let i = 0; i < goodsList.length; i++) {
-        goodsList[i].price = utils.formatPrice(goodsList[i].price)
-      }
-      this.goodsList = goodsList
-      console.log('goodsList', this.goodsList)
       // let app = getApp()
     },
-    onLoad() {
-      let activeNav = this.$root.$mp.query.activeNav
 
-      console.log('onload', activeNav)
+    onLoad() {
+      this.$API.get('/category/list').then(res => {
+        this.navList = res.data
+        this.banners = this.processBanners(res.data[0].bannerList)
+        this.listQuery.idCategory = res.data[0].id
+        this.getGoodsList()
+      }).catch(e => {
+        console.log('e', e)
+      })
     }
   }
 </script>

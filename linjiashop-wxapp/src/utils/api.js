@@ -1,4 +1,5 @@
 const host = 'http://linjiashop-mobile-api.microapp.store/'
+
 export default ($wx) => {
   let handler = {
     get(target, property) {

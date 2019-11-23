@@ -18,7 +18,7 @@
               :price="goods.price"
               :desc="goods.descript"
               :title="goods.name"
-              :thumb="'http://linjiashop.microapp.store/prod-api/file/getImgStream?idFile='+goods.pic"
+              :thumb="goods.imgUrl"
               @click="viewGoodsDetail(goods.id)"
     />
   </div>
@@ -31,16 +31,7 @@
   export default {
     data() {
       return {
-        banners: [
-          {
-            'url': '../goods/main?id=1',
-            'imgUrl': 'http://linjiashop.microapp.store/prod-api/file/getImgStream?idFile=143'
-          },
-          {
-            'url': '../goods/main?id=2',
-            'imgUrl': 'http://linjiashop.microapp.store/prod-api/file/getImgStream?idFile=145'
-          }
-        ],
+        banners: [],
         navList: [],
         goodsList: [],
         activeNav: 0,
@@ -67,6 +58,7 @@
           let goodsList = res.data.records
           for (let i = 0; i < goodsList.length; i++) {
             goodsList[i].price = utils.formatPrice(goodsList[i].price)
+            goodsList[i].imgUrl = utils.fileMgrUrl + goodsList[i].pic
           }
           this.goodsList = goodsList
         })
@@ -77,7 +69,7 @@
       },
       processBanners(banners) {
         for (let i = 0; i < banners.length; i++) {
-          banners[i].imgUrl = 'http://linjiashop.microapp.store/prod-api/file/getImgStream?idFile=' + banners[i].idFile
+          banners[i].imgUrl = utils.fileMgrUrl + banners[i].idFile
         }
         return banners
       }

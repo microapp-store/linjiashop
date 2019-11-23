@@ -1,9 +1,9 @@
-function formatNumber (n) {
+function formatNumber(n) {
   const str = n.toString()
   return str[1] ? str : `0${str}`
 }
 
-export function formatTime (date) {
+export function formatTime(date) {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -18,12 +18,17 @@ export function formatTime (date) {
   return `${t1} ${t2}`
 }
 
-export function formatPrice (price) {
+export function formatPrice(price) {
   return (price / 100).toFixed(2)
 }
+
+export const host = 'http://linjiashop-mobile-api.microapp.store/'
+export const fileMgrUrl = host + 'file/getImgStream?idFile='
 
 export default {
   formatNumber,
   formatTime,
-  formatPrice
+  formatPrice,
+  host,
+  fileMgrUrl
 }

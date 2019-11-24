@@ -15,14 +15,20 @@
     "van-card": "/static/vant/card/index",
     "van-goods-action": "/static/vant/goods-action/index",
     "van-goods-action-icon": "/static/vant/goods-action-icon/index",
-    "van-goods-action-button": "/static/vant/goods-action-button/index"
+    "van-goods-action-button": "/static/vant/goods-action-button/index",
+    "van-checkbox": "/static/vant/checkbox/index",
+    "van-checkbox-group": "/static/vant/checkbox-group/index",
+    "van-submit-bar": "/static/vant/submit-bar/index"
 
   },
   "pages": [
     "pages/index/main",
+    "pages/search/main",
+    "pages/profile/main",
+    "pages/cart/main",
+    "pages/goods/main",
     "pages/logs/main",
-    "pages/counter/main",
-    "pages/goods/main"
+    "pages/counter/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -43,17 +49,17 @@
       "selectedIconPath": "static/tabs/home-active.png"
     }, {
       "text": "发现",
-      "pagePath": "pages/logs/main",
+      "pagePath": "pages/search/main",
       "iconPath": "static/tabs/search.png",
       "selectedIconPath": "static/tabs/search-active.png"
     },  {
       "text": "购物车",
-      "pagePath": "pages/logs/main",
+      "pagePath": "pages/cart/main",
       "iconPath": "static/tabs/cart.png",
       "selectedIconPath": "static/tabs/cart-active.png"
     },{
       "text": "我的",
-      "pagePath": "pages/logs/main",
+      "pagePath": "pages/profile/main",
       "iconPath": "static/tabs/me.png",
       "selectedIconPath": "static/tabs/me-active.png"
     }],

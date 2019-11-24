@@ -1,13 +1,14 @@
 import { VantComponent } from '../common/component';
-import { safeArea } from '../mixins/safe-area';
 VantComponent({
-    mixins: [safeArea()],
     props: {
         show: Boolean,
         title: String,
         cancelText: String,
-        customStyle: String,
-        overlayStyle: String,
+        description: String,
+        round: {
+            type: Boolean,
+            value: true
+        },
         zIndex: {
             type: Number,
             value: 100
@@ -23,6 +24,14 @@ VantComponent({
         closeOnClickOverlay: {
             type: Boolean,
             value: true
+        },
+        closeOnClickAction: {
+            type: Boolean,
+            value: true
+        },
+        safeAreaInsetBottom: {
+            type: Boolean,
+            value: true
         }
     },
     methods: {
@@ -31,6 +40,9 @@ VantComponent({
             const item = this.data.actions[index];
             if (item && !item.disabled && !item.loading) {
                 this.$emit('select', item);
+                if (this.data.closeOnClickAction) {
+                    this.onClose();
+                }
             }
         },
         onCancel() {
@@ -38,6 +50,10 @@ VantComponent({
         },
         onClose() {
             this.$emit('close');
+        },
+        onClickOverlay() {
+            this.$emit('click-overlay');
+            this.onClose();
         }
     }
 });

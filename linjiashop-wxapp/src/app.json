@@ -18,7 +18,8 @@
     "van-goods-action-button": "/static/vant/goods-action-button/index",
     "van-checkbox": "/static/vant/checkbox/index",
     "van-checkbox-group": "/static/vant/checkbox-group/index",
-    "van-submit-bar": "/static/vant/submit-bar/index"
+    "van-submit-bar": "/static/vant/submit-bar/index",
+    "van-divider": "/static/vant/divider/index"
 
   },
   "pages": [
@@ -27,6 +28,7 @@
     "pages/profile/main",
     "pages/cart/main",
     "pages/goods/main",
+    "pages/order/main",
     "pages/logs/main",
     "pages/counter/main"
   ],

@@ -4,14 +4,14 @@ function getContext() {
     return pages[pages.length - 1];
 }
 const Dialog = options => {
-    options = Object.assign({}, Dialog.currentOptions, options);
+    options = Object.assign(Object.assign({}, Dialog.currentOptions), options);
     return new Promise((resolve, reject) => {
         const context = options.context || getContext();
         const dialog = context.selectComponent(options.selector);
         delete options.context;
         delete options.selector;
         if (dialog) {
-            dialog.set(Object.assign({ onCancel: reject, onConfirm: resolve }, options));
+            dialog.setData(Object.assign({ onCancel: reject, onConfirm: resolve }, options));
             queue.push(dialog);
         }
         else {
@@ -22,15 +22,17 @@ const Dialog = options => {
 Dialog.defaultOptions = {
     show: true,
     title: '',
+    width: null,
     message: '',
     zIndex: 100,
     overlay: true,
-    className: '',
-    customStyle: '',
-    asyncClose: false,
-    messageAlign: '',
-    transition: 'scale',
     selector: '#van-dialog',
+    className: '',
+    asyncClose: false,
+    transition: 'scale',
+    customStyle: '',
+    messageAlign: '',
+    overlayStyle: '',
     confirmButtonText: '确认',
     cancelButtonText: '取消',
     showConfirmButton: true,

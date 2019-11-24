@@ -1,16 +1,18 @@
 <wxs src="../wxs/utils.wxs" module="utils" />
 
 <van-cell
+  size="{{ size }}"
   icon="{{ leftIcon }}"
   title="{{ label }}"
   center="{{ center }}"
   border="{{ border }}"
   is-link="{{ isLink }}"
   required="{{ required }}"
-  custom-style="{{ customStyle }}"
+  clickable="{{ clickable }}"
   title-width="{{ titleWidth }}"
+  custom-style="{{ customStyle }}"
+  arrow-direction="{{ arrowDirection }}"
   custom-class="van-field"
-  size="{{ size }}"
 >
   <slot name="left-icon" slot="icon" />
   <slot name="label" slot="title" />
@@ -30,6 +32,7 @@
       cursor-spacing="{{ cursorSpacing }}"
       adjust-position="{{ adjustPosition }}"
       show-confirm-bar="{{ showConfirmBar }}"
+      hold-keyboard="{{ holdKeyboard }}"
       selection-end="{{ selectionEnd }}"
       selection-start="{{ selectionStart }}"
       bindinput="onInput"
@@ -51,6 +54,7 @@
       placeholder-class="{{ utils.bem('field__placeholder', { error }) }}"
       confirm-type="{{ confirmType }}"
       confirm-hold="{{ confirmHold }}"
+      hold-keyboard="{{ holdKeyboard }}"
       cursor-spacing="{{ cursorSpacing }}"
       adjust-position="{{ adjustPosition }}"
       selection-end="{{ selectionEnd }}"

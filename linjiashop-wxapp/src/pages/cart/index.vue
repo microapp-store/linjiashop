@@ -7,7 +7,6 @@
           :name="item.id"
         ></van-checkbox>
         <van-card
-          style="margin-left:15px;"
           :title="item.goods.name"
           :desc="item.goods.descript"
           :num="item.count"
@@ -111,7 +110,9 @@
     position: absolute;
     margin-top: -10px;
   }
-
+  .van-card{
+    margin-left:25px;
+  }
   .van-card__price {
     color: #f44;
   }

@@ -3,11 +3,11 @@ import { pickerProps } from '../picker/shared';
 const COLUMNSPLACEHOLDERCODE = '000000';
 VantComponent({
     classes: ['active-class', 'toolbar-class', 'column-class'],
-    props: Object.assign({}, pickerProps, { value: String, areaList: {
+    props: Object.assign(Object.assign({}, pickerProps), { value: String, areaList: {
             type: Object,
             value: {}
         }, columnsNum: {
-            type: [String, Number],
+            type: null,
             value: 3
         }, columnsPlaceholder: {
             type: Array,
@@ -33,7 +33,7 @@ VantComponent({
         },
         areaList: 'setValues',
         columnsNum(value) {
-            this.set({
+            this.setData({
                 displayColumns: this.data.columns.slice(0, +value)
             });
         }
@@ -82,12 +82,10 @@ VantComponent({
         onChange(event) {
             const { index, picker, value } = event.detail;
             this.code = value[index].code;
-            let getValues = picker.getValues();
-            getValues = this.parseOutputValues(getValues);
             this.setValues().then(() => {
                 this.$emit('change', {
                     picker,
-                    values: getValues,
+                    values: this.parseOutputValues(picker.getValues()),
                     index
                 });
             });
@@ -204,8 +202,8 @@ VantComponent({
             }
             return area;
         },
-        reset() {
-            this.code = '';
+        reset(code) {
+            this.code = code || '';
             return this.setValues();
         }
     }

@@ -8,10 +8,11 @@
     class="van-rate__item"
     wx:for="{{ count }}"
     wx:key="index"
-    style="font-size: {{ size}}px;"
+    style="padding-right: {{ index !== count - 1 ? gutterWithUnit : '' }}"
   >
     <van-icon
       name="{{ index + 1 <= innerValue ? icon : voidIcon }}"
+      size="{{ size }}"
       class="van-rate__icon"
       custom-class="icon-class"
       data-score="{{ index }}"
@@ -21,6 +22,7 @@
 
     <van-icon
       wx:if="{{ allowHalf }}"
+      size="{{ size }}"
       name="{{ index + 0.5 <= innerValue ? icon : voidIcon }}"
       class="{{ utils.bem('rate__icon', ['half']) }}"
       custom-class="icon-class"

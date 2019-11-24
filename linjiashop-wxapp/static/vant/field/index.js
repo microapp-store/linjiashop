@@ -21,12 +21,15 @@ VantComponent({
         password: Boolean,
         iconClass: String,
         clearable: Boolean,
+        clickable: Boolean,
         inputAlign: String,
+        placeholder: String,
         customStyle: String,
         confirmType: String,
         confirmHold: Boolean,
+        holdKeyboard: Boolean,
         errorMessage: String,
-        placeholder: String,
+        arrowDirection: String,
         placeholderStyle: String,
         errorMessageAlign: String,
         selectionEnd: {
@@ -73,23 +76,23 @@ VantComponent({
     methods: {
         onInput(event) {
             const { value = '' } = event.detail || {};
-            this.set({ value }, () => {
+            this.setData({ value }, () => {
                 this.emitChange(value);
             });
         },
         onFocus(event) {
-            this.set({ focused: true });
+            this.setData({ focused: true });
             this.$emit('focus', event.detail);
         },
         onBlur(event) {
-            this.set({ focused: false });
+            this.setData({ focused: false });
             this.$emit('blur', event.detail);
         },
         onClickIcon() {
             this.$emit('click-icon');
         },
         onClear() {
-            this.set({ value: '' }, () => {
+            this.setData({ value: '' }, () => {
                 this.emitChange('');
                 this.$emit('clear', '');
             });

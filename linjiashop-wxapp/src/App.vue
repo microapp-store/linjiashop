@@ -31,6 +31,7 @@ export default {
 </script>
 
 <style>
+  @import "../static/vant/common/index.wxss";
 .container {
   height: 100%;
   display: flex;

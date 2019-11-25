@@ -19,13 +19,16 @@
     "van-checkbox": "/static/vant/checkbox/index",
     "van-checkbox-group": "/static/vant/checkbox-group/index",
     "van-submit-bar": "/static/vant/submit-bar/index",
-    "van-divider": "/static/vant/divider/index"
+    "van-divider": "/static/vant/divider/index",
+    "van-image": "/static/vant/image/index"
 
   },
   "pages": [
     "pages/index/main",
     "pages/search/main",
-    "pages/profile/main",
+    "pages/profile/index/main",
+    "pages/profile/loginOption/main",
+    "pages/profile/loginAccount/main",
     "pages/cart/main",
     "pages/goods/main",
     "pages/order/main",
@@ -61,7 +64,7 @@
       "selectedIconPath": "static/tabs/cart-active.png"
     },{
       "text": "我的",
-      "pagePath": "pages/profile/main",
+      "pagePath": "pages/profile/index/main",
       "iconPath": "static/tabs/me.png",
       "selectedIconPath": "static/tabs/me-active.png"
     }],

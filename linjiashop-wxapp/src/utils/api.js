@@ -5,10 +5,13 @@ export default ($wx) => {
     get(target, property) {
       target[property] = (url, params = {}) => {
         return new Promise((resolve, reject) => {
+          console.log('params', params)
+          console.log('target', target)
+          console.log('property', property)
           $wx.request({
             url: host + url,
             method: property.toLocaleUpperCase(),
-            ...params,
+            data: params,
             success: res => {
               if (Number(res.statusCode) !== 200) {
                 $wx.showToast({title: '通讯错误，稍后再试', icon: 'none'})

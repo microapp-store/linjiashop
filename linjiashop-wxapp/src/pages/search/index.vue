@@ -42,8 +42,19 @@
     },
     methods: {
       onSearch(event) {
-        this.isHot = true
         console.log(event)
+        const key = ''
+        this.$API.get('/goods/search?page=1&limit=20&key=' + key).then(res => {
+          if (res.data.total > 0) {
+            this.isHot = false
+            let goodsList = res.data.records
+            for (let i = 0; i < goodsList.length; i++) {
+              goodsList[i].price = utils.formatPrice(goodsList[i].price)
+              goodsList[i].imgUrl = utils.fileMgrUrl + goodsList[i].pic
+            }
+            this.goodsList = goodsList
+          }
+        })
       },
       onCancel(event) {
         console.log(event)

@@ -1,6 +1,16 @@
 <template>
   <div class="search">
-    <van-search placeholder="搜索商品关键字" @search="onSearch" @cancel="onCancel"/>
+    <van-panel title="监听对应事件">
+      <van-field
+        left-icon="search"
+        :value="value"
+        placeholder="请输入搜索关键词"
+        confirm-type="search"
+        @blur="onChange"
+      >
+        <van-button slot="button" size="small" type="primary" @click="onSearch">搜索</van-button>
+      </van-field>
+    </van-panel>
     <van-divider contentPosition="center" v-show="isHot">热门商品</van-divider>
     <van-card v-for="(goods,index) in goodsList" :key="index"
               :num="goods.num"
@@ -20,9 +30,7 @@
   export default {
     data() {
       return {
-        listQuery: {
-          key: undefined
-        },
+        value: '',
         isHot: true,
         goodsList: []
       }
@@ -41,26 +49,29 @@
       this.getHotList()
     },
     methods: {
-      onSearch(event) {
-        console.log(event)
-        const key = ''
-        this.$API.get('/goods/search?page=1&limit=20&key=' + key).then(res => {
-          if (res.data.total > 0) {
-            this.isHot = false
-            let goodsList = res.data.records
-            for (let i = 0; i < goodsList.length; i++) {
-              goodsList[i].price = utils.formatPrice(goodsList[i].price)
-              goodsList[i].imgUrl = utils.fileMgrUrl + goodsList[i].pic
-            }
-            this.goodsList = goodsList
-          }
-        })
+      onChange(e) {
+        this.value = e.mp.detail.value
       },
-      onCancel(event) {
-        console.log(event)
+      onSearch() {
+        if (this.value) {
+          const key = this.value
+          this.$API.get('/goods/search?page=1&limit=20&key=' + key).then(res => {
+            if (res.data.total > 0) {
+              this.isHot = false
+              let goodsList = res.data.records
+              for (let i = 0; i < goodsList.length; i++) {
+                goodsList[i].price = utils.formatPrice(goodsList[i].price)
+                goodsList[i].imgUrl = utils.fileMgrUrl + goodsList[i].pic
+              }
+              this.goodsList = goodsList
+            }
+          })
+        } else {
+          this.getHotList()
+        }
       },
       getHotList() {
-        this.$API.get('/goods/searchHot', this.listQuery).then(res => {
+        this.$API.get('/goods/searchHot').then(res => {
           let goodsList = res.data.records
           for (let i = 0; i < goodsList.length; i++) {
             goodsList[i].price = utils.formatPrice(goodsList[i].price)

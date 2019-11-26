@@ -5,16 +5,17 @@
 
     <van-cell-group>
       <van-field
-        v-model="mobile"
+        :value="mobile"
         required
         clearable
         label="账号"
         placeholder="测试账号:15011112222"
+        @blur="changeMobile"
       />
     </van-cell-group>
     <van-cell-group v-if="show1">
       <van-field
-        v-model="smsCode"
+        :value="smsCode"
         center
         clearable
         label="短信验证码"
@@ -25,7 +26,8 @@
     </van-cell-group>
     <van-cell-group v-if="show2">
       <van-field
-        v-model="password"
+        @blur="changePassword"
+        :value="password"
         type="password"
         label="密码"
         placeholder="测试密码：admin"
@@ -48,14 +50,16 @@
   export default {
     data() {
       return {
-        mobile: '15011112222',
+        mobile: '',
         smsCode: '',
-        password: 'admin',
+        password: '',
         activeFooter: 3,
         show1: false,
         show2: true,
-        redirect: ''
+        redirect: undefined
       }
+    },
+    onLoad(options) {
     },
     methods: {
       toLoginByPassword() {
@@ -66,15 +70,17 @@
         this.show2 = false
         this.show1 = true
       },
+      changeMobile(e) {
+        this.mobile = e.mp.detail.value
+      },
+      changePassword(e) {
+        this.password = e.mp.detail.value
+      },
       loginOrRegister() {
         this.$API.get('/loginOrReg', {mobile: this.mobile, smsCode: this.smsCode}).then(res => {
-          // store.dispatch('app/toggleToken',response.data.token)
-          // store.dispatch('app/toggleUser',response.data.user)
-          if (this.redirect) {
-            this.$router.push({path: this.redirect})
-          } else {
-            this.$router.push({path: '/index'})
-          }
+          store.commit('setToken', res.data.token)
+          store.commit('setUser', res.data.user)
+          wx.navigateBack({delta: 2})
         })
       },
       loginByPass() {
@@ -82,13 +88,7 @@
         this.$API.post('/loginByPass?mobile=' + this.mobile + '&password=' + this.password).then(res => {
           store.commit('setToken', res.data.token)
           store.commit('setUser', res.data.user)
-          console.log('准备跳转')
           wx.navigateBack({delta: 2})
-          // if (this.redirect) {
-          //  this.$router.push({path: this.redirect})
-          // } else {
-          // this.$router.push({path: '/index'})
-          // }
         })
       },
       sendSms() {
@@ -105,7 +105,7 @@
 
 <style>
   .user-poster {
-    height: 340 rpx;
+    height: 300 rpx;
   }
 
   .user-links {

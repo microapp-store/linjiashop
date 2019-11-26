@@ -33,8 +33,7 @@
 </template>
 
 <script>
-  // Use Vuex
-  import store from './store'
+  import store from '@/utils/store.js'
   import cartData from './cart.json'
   import utils from '@/utils/index.js'
 
@@ -42,13 +41,10 @@
     data() {
       return {
         checkedGoods: [],
-        cartList: cartData.data
+        cartList: []
       }
     },
     computed: {
-      count() {
-        return store.state.count
-      },
       submitBarText() {
         const count = this.checkedGoods.length
         return '结算' + (count ? `(${count})` : '')
@@ -58,10 +54,18 @@
       }
     },
     onLoad() {
-      for (let index = 0; index < this.cartList.length; index++) {
-        this.cartList[index].goods.price = utils.formatPrice(this.cartList[index].goods.price)
-        this.cartList[index].thumb = utils.fileMgrUrl + this.cartList[index].goods.pic
-        this.checkedGoods.push(this.cartList[index].id + '')
+      const token = store.state.token
+      if (!token) {
+        const url = '../profile/loginOption/main'
+        wx.navigateTo({url})
+      } else {
+        const cartList = cartData.data
+        for (let index = 0; index < cartList.length; index++) {
+          cartList[index].goods.price = utils.formatPrice(cartList[index].goods.price)
+          cartList[index].thumb = utils.fileMgrUrl + cartList[index].goods.pic
+          this.checkedGoods.push(cartList[index].id + '')
+        }
+        this.cartList = cartList
       }
     },
     methods: {
@@ -110,9 +114,11 @@
     position: absolute;
     margin-top: -10px;
   }
-  .van-card{
-    margin-left:25px;
+
+  .van-card {
+    margin-left: 25px;
   }
+
   .van-card__price {
     color: #f44;
   }

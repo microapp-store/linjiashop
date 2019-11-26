@@ -8,7 +8,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     count: 0,
-    token: '',
+    token: undefined,
     user: {nickName: '立即登录'}
   },
   mutations: {

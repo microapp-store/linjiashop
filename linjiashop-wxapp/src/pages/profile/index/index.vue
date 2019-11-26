@@ -1,29 +1,30 @@
 <template>
   <div class="user">
+    <navigator url="../loginOption/main">
     <van-row class="user-poster">
       <van-col span="6">
-        <navigator url="../loginOption/main">
+
         <van-image
           round
           width="60"
           height="60"
           src="/static/img/logo.jpg"
         />
-        </navigator>
       </van-col>
       <van-col span="15">
         <div style="padding-top:25px;">
-          <navigator url="../loginOption/main">
+
           {{user.nickName}}
-          </navigator>
+
         </div>
       </van-col>
       <van-col span="3">
-        <navigator url="../loginOption/main">
+
         <van-icon name="arrow" style="padding-top:25px;"/>
-        </navigator>
+
       </van-col>
     </van-row>
+    </navigator>
     <!--<img class="user-poster" src="/static/img/banner.jpg">-->
     <div class="user-links">
       <van-row>
@@ -95,7 +96,7 @@
   }
 
   .user-links {
-    padding-bottom: 15px;
+    padding: 15px;
     text-align: center;
     background-color: #fff;
   }

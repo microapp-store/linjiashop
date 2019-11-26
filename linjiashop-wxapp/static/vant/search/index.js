@@ -58,6 +58,7 @@ VantComponent({
             }, 200);
         },
         onSearch() {
+            console.log('aaa',this.data)
             this.$emit('search', this.data.value);
         },
         onFocus() {

@@ -1,11 +1,22 @@
+import store from './store'
+
 const host = 'http://linjiashop-mobile-api.microapp.store/'
 
 export default ($wx) => {
+  let reqHeader = {
+    'content-type': 'application/json'
+  }
   let handler = {
     get(target, property) {
+      const token = store.state.token
+      console.log('token', token)
+      if (token) {
+        reqHeader['Authorization'] = token
+      }
       target[property] = (url, params = {}) => {
         return new Promise((resolve, reject) => {
           $wx.request({
+            header: reqHeader,
             url: host + url,
             method: property.toLocaleUpperCase(),
             data: params,

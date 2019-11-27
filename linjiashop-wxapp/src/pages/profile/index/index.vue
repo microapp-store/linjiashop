@@ -49,7 +49,7 @@
     <van-row>
       <van-col span="24">
         <van-cell-group class="user-group">
-          <van-cell icon="records" title="全部订单" is-link @click="toOrder(-1)"/>
+          <van-cell icon="records" title="全部订单" is-link @click="toOrder(0)"/>
         </van-cell-group>
       </van-col>
     </van-row>
@@ -80,8 +80,7 @@
     },
     methods: {
       toOrder(status) {
-        console.log('status', status)
-        const url = '../order/main?status=' + status
+        const url = '../../order/main?status=' + status
         wx.navigateTo({url})
       }
     }

@@ -50,9 +50,9 @@
   export default {
     data() {
       return {
-        mobile: '',
+        mobile: '15011112222',
         smsCode: '',
-        password: '',
+        password: 'admin',
         activeFooter: 3,
         show1: false,
         show2: true,
@@ -105,7 +105,7 @@
 
 <style>
   .user-poster {
-    height: 300 rpx;
+    height: 200px;
   }
 
   .user-links {

@@ -1,16 +1,14 @@
 <template>
   <div class="search">
-    <van-panel title="监听对应事件">
-      <van-field
-        left-icon="search"
-        :value="value"
-        placeholder="请输入搜索关键词"
-        confirm-type="search"
-        @blur="onChange"
-      >
-        <van-button slot="button" size="small" type="primary" @click="onSearch">搜索</van-button>
-      </van-field>
-    </van-panel>
+    <van-field
+      left-icon="search"
+      :value="value"
+      placeholder="搜索商品名称"
+      confirm-type="search"
+      @blur="onChange"
+    >
+      <van-button slot="button" size="small" type="primary" @click="onSearch">搜索</van-button>
+    </van-field>
     <van-divider contentPosition="center" v-show="isHot">热门商品</van-divider>
     <van-card v-for="(goods,index) in goodsList" :key="index"
               :num="goods.num"
@@ -67,11 +65,16 @@
             }
           })
         } else {
-          this.getHotList()
+          if (!this.isHot) {
+            this.getHotList()
+          } else {
+            wx.showToast({title: '请输入搜索关键字', icon: 'none'})
+          }
         }
       },
       getHotList() {
         this.$API.get('/goods/searchHot').then(res => {
+          this.isHot = true
           let goodsList = res.data.records
           for (let i = 0; i < goodsList.length; i++) {
             goodsList[i].price = utils.formatPrice(goodsList[i].price)
@@ -89,13 +92,7 @@
 </script>
 
 <style>
-  .log-list {
-    display: flex;
-    flex-direction: column;
-    padding: 40 rpx;
-  }
-
-  .log-item {
-    margin: 10 rpx;
+  .van-cell__left-icon-wrap {
+    margin-top: 4px;
   }
 </style>

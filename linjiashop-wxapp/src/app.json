@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "van-panel": "/static/vant/panel/index",
     "van-cell": "/static/vant/cell/index",
     "van-cell-group": "/static/vant/cell-group/index",
     "van-icon": "/static/vant/icon/index",

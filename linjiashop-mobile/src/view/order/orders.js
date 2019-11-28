@@ -120,9 +120,6 @@ export default {
             if(order.statusName==='已发货'){
                 Toast('确认收货敬请期待')
             }
-
-
-
         }
     }
 }

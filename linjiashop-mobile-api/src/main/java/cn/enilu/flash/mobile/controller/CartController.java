@@ -1,12 +1,18 @@
 package cn.enilu.flash.mobile.controller;
 
+import cn.enilu.flash.bean.core.BussinessLog;
+import cn.enilu.flash.bean.dictmap.CfgDict;
 import cn.enilu.flash.bean.entity.shop.Cart;
+import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
+import cn.enilu.flash.bean.enumeration.Permission;
+import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.CartService;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.Lists;
 import cn.enilu.flash.web.controller.BaseController;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,7 +47,9 @@ public class CartController extends BaseController {
         );
         Cart old  = cartService.get(searchFilters);
         if(old!=null){
-            return Rets.failure("请勿重复添加");
+            old.setCount(old.getCount().add(new BigDecimal(count)));
+            cartService.update(old);
+            return Rets.success();
         }
         Cart cart = new Cart();
         cart.setIdGoods(idGoods);
@@ -57,6 +65,15 @@ public class CartController extends BaseController {
         Cart cart = cartService.get(id);
         cart.setCount(new BigDecimal(count));
         cartService.update(cart);
+        return Rets.success();
+    }
+    @RequestMapping(method = RequestMethod.DELETE)
+    public Object remove(@RequestParam Long id){
+        Long idUser = getIdUser();
+        Cart cart = cartService.get(id);
+        if(cart.getIdUser().intValue() == idUser.intValue()){
+            cartService.delete(cart);
+        }
         return Rets.success();
     }
 }

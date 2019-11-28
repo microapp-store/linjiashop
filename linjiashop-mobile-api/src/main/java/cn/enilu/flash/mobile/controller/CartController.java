@@ -42,7 +42,7 @@ public class CartController extends BaseController {
                           @RequestParam("count") String count){
         Long idUser = getIdUser();
         List<SearchFilter> searchFilters = Lists.newArrayList(
-                SearchFilter.build("idUser", SearchFilter.Operator.EQ,idGoods),
+                SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser),
                 SearchFilter.build("idGoods", SearchFilter.Operator.EQ,idGoods)
         );
         Cart old  = cartService.get(searchFilters);

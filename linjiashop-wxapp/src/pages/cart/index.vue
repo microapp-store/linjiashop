@@ -5,6 +5,7 @@
            :key="item.id" class="cart-item">
         <van-checkbox
           :name="item.id"
+          @change="onChange"
         ></van-checkbox>
         <van-card
           :title="item.goods.name"
@@ -41,7 +42,8 @@
     data() {
       return {
         checkedGoods: [],
-        cartList: []
+        cartList: [],
+        isGetDataIng: false
       }
     },
     computed: {
@@ -59,18 +61,34 @@
         const url = '../profile/loginOption/main'
         wx.navigateTo({url})
       } else {
+        this.isGetDataIng = true
+        this.getCartData()
+      }
+    },
+    onShow() {
+      const token = store.state.token
+      if (token) {
+        if (this.cartList.length === 0 && this.isGetDataIng === false) {
+          this.getCartData()
+        }
+      }
+    },
+    methods: {
+      getCartData() {
         const cartList = cartData.data
         for (let index = 0; index < cartList.length; index++) {
           cartList[index].goods.price = utils.formatPrice(cartList[index].goods.price)
           cartList[index].thumb = utils.fileMgrUrl + cartList[index].goods.pic
           this.checkedGoods.push(cartList[index].id + '')
+          this.isGetDataIng = false
         }
         this.cartList = cartList
-      }
-    },
-    methods: {
-      increment() {
-        store.commit('increment')
+      },
+      onChange(event) {
+        console.log("event",event)
+      },
+      submit() {
+        console.log('提交订单')
       },
       decrement() {
         store.commit('decrement')

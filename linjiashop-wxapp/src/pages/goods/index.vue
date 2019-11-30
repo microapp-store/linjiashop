@@ -37,16 +37,16 @@
       <van-goods-action-icon
         icon="cart-o"
         text="购物车"
-        bind:click="goToCart"
+        @click="goToCart"
       />
       <van-goods-action-button
         text="加入购物车"
         type="warning"
-        bind:click="addCart"
+        @click="addCart"
       />
       <van-goods-action-button
         text="立即购买"
-        bind:click="buy"
+        @click="buy"
       />
     </van-goods-action>
   </div>
@@ -84,10 +84,12 @@
         return utils.formatPrice(price)
       },
       toHome() {
-        wx.reLaunch({ url: '../index/main' })
+        const url = '/pages/index/main'
+        wx.switchTab({ url })
       },
       goToCart() {
         console.log('gotocart')
+        wx.switchTab({ url: '/pages/cart/main' })
       },
       addCart() {
         // cart.add(this.goods.id,1).then( response => {

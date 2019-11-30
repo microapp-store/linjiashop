@@ -118,7 +118,10 @@ export default {
                 this.$router.push({path:'payment',query:{orderSn:order.orderSn,totalPrice:order.totalPrice}})
             }
             if(order.statusName==='已发货'){
-                Toast('确认收货敬请期待')
+                order.confirm(orderInfo.orderSn).then( response => {
+                    Toast('成功收货')
+                    this.getData()
+                })
             }
         }
     }

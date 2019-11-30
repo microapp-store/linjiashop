@@ -80,7 +80,6 @@
         wx.navigateTo({url})
       } else {
         const status = options.status
-        console.log('status', status)
         this.listQuery.status = status
         this.getData()
       }
@@ -114,6 +113,11 @@
       },
       cancelOrder(order) {
         console.log('cancel', order)
+        this.$API.post('user/order/cancel/' + order.orderSn).then(res => {
+          console.log('res', res)
+          wx.showToast({title: '取消成功', icon: 'none'})
+          this.getData()
+        })
       },
       getHandlerText(statusName) {
         if (statusName === '已发货') {
@@ -127,9 +131,15 @@
       handleOrder(order) {
         if (order.statusName === '待付款') {
           console.log('立即付款')
+          const url = '../payment/main?orderSn=' + order.orderSn + ' &totalPrice=' + order.totalPrice
+          wx.navigateTo({url})
         }
         if (order.statusName === '已发货') {
-          console.log('确认收货')
+          this.$API.post('user/order/confirm/' + order.orderSn).then(res => {
+            console.log('res', res)
+            wx.showToast({title: '成功收货', icon: 'none'})
+            this.getData()
+          })
         }
       }
     }

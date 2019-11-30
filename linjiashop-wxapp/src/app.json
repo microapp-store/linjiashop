@@ -21,7 +21,9 @@
     "van-checkbox-group": "/static/vant/checkbox-group/index",
     "van-submit-bar": "/static/vant/submit-bar/index",
     "van-divider": "/static/vant/divider/index",
-    "van-image": "/static/vant/image/index"
+    "van-image": "/static/vant/image/index",
+    "van-radio-group": "/static/vant/radio-group/index",
+    "van-radio": "/static/vant/radio/index"
 
   },
   "pages": [
@@ -34,7 +36,8 @@
     "pages/goods/main",
     "pages/order/main",
     "pages/logs/main",
-    "pages/counter/main"
+    "pages/counter/main",
+    "pages/payment/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

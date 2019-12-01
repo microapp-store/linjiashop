@@ -41,12 +41,13 @@ public class CartController extends BaseController {
         }
         Long idUser = getIdUser();
         List<SearchFilter> searchFilters = Lists.newArrayList(
-                SearchFilter.build("idUser", SearchFilter.Operator.EQ,idGoods),
+                SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser),
                 SearchFilter.build("idGoods", SearchFilter.Operator.EQ,idGoods)
         );
         Cart old  = cartService.get(searchFilters);
         if(old!=null){
             old.setCount(old.getCount().add(new BigDecimal(count)));
+            cartService.update(old);
             return Rets.success();
         }
         Cart cart = new Cart();
@@ -63,6 +64,15 @@ public class CartController extends BaseController {
         Cart cart = cartService.get(id);
         cart.setCount(new BigDecimal(count));
         cartService.update(cart);
+        return Rets.success();
+    }
+    @RequestMapping(method = RequestMethod.DELETE)
+    public Object remove(@RequestParam Long id){
+        Long idUser = getIdUser();
+        Cart cart = cartService.get(id);
+        if(cart.getIdUser().intValue() == idUser.intValue()){
+            cartService.delete(cart);
+        }
         return Rets.success();
     }
 }

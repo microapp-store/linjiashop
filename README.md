@@ -8,10 +8,8 @@
 
 
 - linjiashop 是一个基于[Spring Boot](https://spring.io/projects/spring-boot/)和[Vue.js](https://cn.vuejs.org)的web商城系统
-- linjiashop 包含了商城的后台管理系统
-- linjiashop 商城手机端
-- linjiashop 商城小程序版
-- linjiashop 商城app版(基于Flutter) 仓库地址[gitee](https://gitee.com/microapp/linjiashop-flutter),[github](https://github.com/microapp-store/linjiashop-flutter)
+- linjiashop 包含了商城的后台管理系统,手机h5，小程序版本
+- linjiashop 包含了app版本（基于flutter) 仓库地址[gitee](https://gitee.com/microapp/linjiashop-flutter),[github](https://github.com/microapp-store/linjiashop-flutter) 
  
 
 ## 功能模块

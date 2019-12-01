@@ -7,11 +7,11 @@
  
 
 
-- linjiashop是一个基于[Spring Boot](https://spring.io/projects/spring-boot/)和[Vue.js](https://cn.vuejs.org)的web商城系统
-- linjiashop包含了商城的后台管理系统
-- linjiashop提供了手机端的商城系统
-- linjiashop小程序版开发中
-- linjiashop app版(基于Flutter)开发中
+- linjiashop 是一个基于[Spring Boot](https://spring.io/projects/spring-boot/)和[Vue.js](https://cn.vuejs.org)的web商城系统
+- linjiashop 包含了商城的后台管理系统
+- linjiashop 商城手机端
+- linjiashop 商城小程序版
+- linjiashop 商城app版(基于Flutter) 仓库地址[gitee](https://gitee.com/microapp/linjiashop-flutter),[github](https://github.com/microapp-store/linjiashop-flutter)
  
 
 ## 功能模块
@@ -52,6 +52,7 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 - linjiashop-admin-api PC端后台管理的api服务
 - linjiashop-mobile 手机商城的前端网页
 - linjiashop-mobile-api 手机端商城的api服务
+- linjiashop-wxapp 商城小程序版，小程序版和手机版公用一个api服务(linjiashop-mobile-api)
 - linjiashop-core 基础模块，包括工具类，dao，service，bean等内容
 - linjiashop-generator 代码生成模块,主要生成后台管理的前后端代码,配合IDEA 代码生成插件[webflash-generator](https://plugins.jetbrains.com/plugin/12648-webflash-generator)使用效果更好
 ## 运行效果图

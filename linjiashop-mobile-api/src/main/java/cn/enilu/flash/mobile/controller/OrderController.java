@@ -75,7 +75,7 @@ public class OrderController extends BaseController {
     @RequestMapping(value = "save",method = RequestMethod.POST)
     public Object save(
             @RequestParam("idAddress") Long idAddress,
-            @RequestParam("message") String message
+            @RequestParam(value = "message",required = false) String message
     ){
 
         Long idUser = getIdUser();

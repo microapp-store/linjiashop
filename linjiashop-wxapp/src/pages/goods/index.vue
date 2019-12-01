@@ -85,31 +85,23 @@
       },
       toHome() {
         const url = '/pages/index/main'
-        wx.switchTab({ url })
+        wx.switchTab({url})
       },
       goToCart() {
         console.log('gotocart')
-        wx.switchTab({ url: '/pages/cart/main' })
+        wx.switchTab({url: '/pages/cart/main'})
       },
       addCart() {
-        // cart.add(this.goods.id,1).then( response => {
-        //   console.log('response',response)
-        //   Toast('已经加入到购物车')
-        // }).catch((err) => {
-        //   Toast.fail(err)
-        // })
-
+        console.log('addCart', this.goods.id)
+        this.$API.post('user/cart/add?idGoods=' + this.goods.id + '&count=1').then(res => {
+          wx.showToast({title: '已经加入到购物车', icon: 'success'})
+        })
       },
       buy() {
-        // cart.add(this.goods.id,1).then( response => {
-        //   this.$router.push('/cart');
-        // }).catch( (err) => {
-        //   Toast.fail(err)
-        // })
+        this.$API.post('user/cart/add?idGoods=' + this.goods.id + '&count=1').then(res => {
+          wx.switchTab({url: '/pages/cart/main'})
+        })
       }
-    },
-
-    created() {
     },
     onLoad(options) {
       let id = options.id
@@ -124,9 +116,11 @@
     width: 100%;
     height: 400px;
   }
-  .goods{
-    padding:10px;
+
+  .goods {
+    padding: 10px;
   }
+
   .goods-desc {
     font-size: 12px;
     color: #999999;

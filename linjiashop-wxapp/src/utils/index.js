@@ -22,6 +22,16 @@ export function formatPrice(price) {
   return (price / 100).toFixed(2)
 }
 
+export function startWith(src, str) {
+  const reg = new RegExp('^' + str)
+  return reg.test(src)
+}
+
+export function endWith(src, str) {
+  const reg = new RegExp(str + '$')
+  return reg.test(src)
+}
+
 export const host = 'http://linjiashop-mobile-api.microapp.store/'
 export const fileMgrUrl = host + 'file/getImgStream?idFile='
 
@@ -29,6 +39,8 @@ export default {
   formatNumber,
   formatTime,
   formatPrice,
+  startWith,
+  endWith,
   host,
   fileMgrUrl
 }

@@ -82,7 +82,6 @@ export default {
         },
         addCart() {
             cart.add(this.goods.id,1).then( response => {
-                console.log('response',response)
                 Toast('已经加入到购物车')
             }).catch((err) => {
                 Toast.fail(err)

@@ -6,6 +6,7 @@ import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.CartService;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.Lists;
+import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,11 @@ public class CartController extends BaseController {
     }
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public Object add(@RequestParam("idGoods") Long idGoods,
-                          @RequestParam("count") String count){
+                          @RequestParam(value = "count",required = false) String count){
+
+        if(StringUtil.isEmpty(count)){
+            count = "1";
+        }
         Long idUser = getIdUser();
         List<SearchFilter> searchFilters = Lists.newArrayList(
                 SearchFilter.build("idUser", SearchFilter.Operator.EQ,idGoods),
@@ -41,7 +46,8 @@ public class CartController extends BaseController {
         );
         Cart old  = cartService.get(searchFilters);
         if(old!=null){
-            return Rets.failure("请勿重复添加");
+            old.setCount(old.getCount().add(new BigDecimal(count)));
+            return Rets.success();
         }
         Cart cart = new Cart();
         cart.setIdGoods(idGoods);

@@ -1,20 +1,18 @@
 <template>
   <div class="cart">
-    <van-checkbox-group class="goods" v-model="checkedGoods">
+    <van-checkbox-group class="card-goods" :value="checkedGoods" @change="onChange">
       <div v-for="item in cartList"
-           :key="item.id" class="cart-item">
+           :key="item.id" class="card-goods__item">
         <van-checkbox
           :name="item.id"
-          @change="onChange"
         ></van-checkbox>
         <van-card
           :title="item.goods.name"
           :desc="item.goods.descript"
           :num="item.count"
-          :price="item.goods.price"
+          :price="item.goods.priceFormat"
           :thumb="item.thumb"
         >
-
           <div slot="footer">
             <van-stepper v-model="item.count" @change="stepperEvent(item,arguments)" disableInput/>
           </div>
@@ -28,67 +26,71 @@
       :button-text="submitBarText"
       @submit="submit"
     >
-      <van-checkbox v-model="checkedAll" @click="checkAll" style="padding: 0 10px;">全选</van-checkbox>
+      <van-checkbox :value="checkedAll" @click="checkAll" style="padding: 0 10px;">全选</van-checkbox>
     </van-submit-bar>
   </div>
 </template>
 
 <script>
   import store from '@/utils/store.js'
-  import cartData from './cart.json'
   import utils from '@/utils/index.js'
 
   export default {
     data() {
       return {
+        checkeAllCarts: [],
         checkedGoods: [],
-        cartList: [],
-        isGetDataIng: false
+        cartList: []
       }
     },
     computed: {
       submitBarText() {
         const count = this.checkedGoods.length
+        console.log('count', count)
         return '结算' + (count ? `(${count})` : '')
       },
       totalPrice() {
         return this.cartList.reduce((total, item) => total + (this.checkedGoods.indexOf(item.id) !== -1 ? (parseFloat(item.goods.price) * item.count) : 0), 0)
-      }
-    },
-    onLoad() {
-      const token = store.state.token
-      if (!token) {
-        const url = '../profile/loginOption/main'
-        wx.navigateTo({url})
-      } else {
-        this.isGetDataIng = true
-        this.getCartData()
+      },
+      checkedAll() {
+        return this.checkedGoods.length > 0
       }
     },
     onShow() {
-      const token = store.state.token
-      if (token) {
-        if (this.cartList.length === 0 && this.isGetDataIng === false) {
-          this.getCartData()
-        }
-      }
+      this.checkedGoods = []
+      this.cartList = []
+      this.checkeAllCarts = []
+      this.getCartData()
     },
     methods: {
       getCartData() {
-        const cartList = cartData.data
-        for (let index = 0; index < cartList.length; index++) {
-          cartList[index].goods.price = utils.formatPrice(cartList[index].goods.price)
-          cartList[index].thumb = utils.fileMgrUrl + cartList[index].goods.pic
-          this.checkedGoods.push(cartList[index].id + '')
-          this.isGetDataIng = false
-        }
-        this.cartList = cartList
+        this.$API.get('/user/cart/queryByUser').then(res => {
+          const cartList = res.data
+          for (let index = 0; index < cartList.length; index++) {
+            cartList[index].goods.priceFormat = utils.formatPrice(cartList[index].goods.price)
+            cartList[index].thumb = utils.fileMgrUrl + cartList[index].goods.pic
+            this.checkedGoods.push(cartList[index].id + '')
+          }
+          console.log('checked', this.checkedGoods)
+          this.cartList = cartList
+        })
       },
-      onChange(event) {
-        console.log("event",event)
+      onChange(e) {
+        console.log(e)
+        this.checkedGoods = e.mp.detail
+      },
+      checkAll() {
+        if (this.checkedGoods.length === this.cartList.length) {
+          this.checkeAllCarts = this.checkedGoods
+          this.checkedGoods = []
+        } else {
+          this.checkedGoods = this.checkeAllCarts
+        }
       },
       submit() {
         console.log('提交订单')
+        const url = '/pages/checkout/main'
+        wx.navigateTo({url})
       },
       decrement() {
         store.commit('decrement')
@@ -109,13 +111,17 @@
     bottom: 48px;
   }
 
-  .cart {
+  .card-goods {
     background-color: #fff;
   }
 
-  .cart > .goods > .cart-item {
+  .card-goods__item {
     position: relative;
     background-color: #fafafa;
+  }
+
+  .van-card {
+    margin-left: 20px;
   }
 
   .van-checkbox__label {
@@ -133,11 +139,8 @@
     margin-top: -10px;
   }
 
-  .van-card {
-    margin-left: 25px;
-  }
-
   .van-card__price {
     color: #f44;
   }
+
 </style>

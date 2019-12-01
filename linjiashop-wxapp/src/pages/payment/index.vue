@@ -36,6 +36,7 @@
 
 <script>
   import store from '@/utils/store'
+  import utils from '@/utils/index'
 
   export default {
     computed: {
@@ -51,7 +52,7 @@
     },
     onLoad(options) {
       let orderSn = options.orderSn
-      let totalPrice = options.totalPrice
+      let totalPrice = utils.formatPrice(options.totalPrice)
       this.order = {orderSn: orderSn, totalPrice: totalPrice}
     },
     methods: {

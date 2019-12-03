@@ -1,29 +1,29 @@
 <template>
   <div class="user">
     <navigator url="../loginOption/main">
-    <van-row class="user-poster">
-      <van-col span="6">
+      <van-row class="user-poster">
+        <van-col span="6">
 
-        <van-image
-          round
-          width="60"
-          height="60"
-          src="/static/img/logo.jpg"
-        />
-      </van-col>
-      <van-col span="15">
-        <div style="padding-top:25px;">
+          <van-image
+            round
+            width="60"
+            height="60"
+            src="/static/img/logo.jpg"
+          />
+        </van-col>
+        <van-col span="15">
+          <div style="padding-top:25px;">
 
-          {{user.nickName}}
+            {{user.nickName}}
 
-        </div>
-      </van-col>
-      <van-col span="3">
+          </div>
+        </van-col>
+        <van-col span="3">
 
-        <van-icon name="arrow" style="padding-top:25px;"/>
+          <van-icon name="arrow" style="padding-top:25px;"/>
 
-      </van-col>
-    </van-row>
+        </van-col>
+      </van-row>
     </navigator>
     <!--<img class="user-poster" src="/static/img/banner.jpg">-->
     <div class="user-links">
@@ -55,7 +55,7 @@
     </van-row>
 
     <van-cell-group>
-      <van-cell icon="location-o" title="收货地址" is-link to="address"/>
+      <van-cell icon="location-o" title="收货地址" is-link @click="toAddress()"/>
       <van-cell icon="points" title="我的积分" is-link/>
       <van-cell icon="gold-coin-o" title="我的优惠券" is-link/>
       <van-cell icon="gift-o" title="我收到的礼物" is-link/>
@@ -69,9 +69,7 @@
 
   export default {
     data() {
-      return {
-
-      }
+      return {}
     },
     computed: {
       user() {
@@ -82,6 +80,10 @@
       toOrder(status) {
         const url = '../../order/main?status=' + status
         wx.navigateTo({url})
+      },
+      toAddress() {
+        const url = '/pages/address/main'
+        wx.navigateTo({url})
       }
     }
   }
@@ -90,7 +92,7 @@
 
 <style>
   .user-poster > .van-row {
-    padding:8px;
+    padding: 8px;
     background-color: lightblue;
   }
 

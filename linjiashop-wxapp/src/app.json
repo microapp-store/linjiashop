@@ -38,7 +38,8 @@
     "pages/logs/main",
     "pages/counter/main",
     "pages/payment/main",
-    "pages/checkout/main"
+    "pages/checkout/main",
+    "pages/address/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

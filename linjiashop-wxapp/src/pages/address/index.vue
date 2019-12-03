@@ -50,6 +50,8 @@
       },
       edit(item) {
         console.log('edit', item)
+        const url = '/pages/address/edit/main?id=' + item.id
+        wx.navigateTo({url})
       }
     }
   }

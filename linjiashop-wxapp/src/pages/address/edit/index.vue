@@ -61,17 +61,29 @@
         addressName: '张三',
         areaList: areaData,
         placeholder: ['请选择', '请选择', '请选择'],
-        address: {},
+        address: {province: '', city: '', district: ''},
         id: '',
         showAreaPopup: false
       }
     },
     onShow() {
-      this.init()
+      console.log('onShow')
     },
-    computed: {},
+    computed: {
+      getAddress() {
+        if (this.address.province) {
+          return this.address.province + this.address.city + this.address.district
+        }
+        return ''
+      }
+    },
     onLoad(options) {
       this.id = options.id
+      if (this.id) {
+        this.init()
+      } else {
+        this.reset()
+      }
     },
     methods: {
       init() {
@@ -82,16 +94,15 @@
           })
         }
       },
+      reset() {
+        this.address = {province: '', city: '', district: ''}
+      },
       showPopup() {
         console.log('show')
         this.showAreaPopup = true
       },
       onClose(e) {
-        console.log(e)
         this.showAreaPopup = false
-      },
-      edit(item) {
-        console.log('edit', item)
       },
       onCancel() {
         this.showAreaPopup = false
@@ -110,27 +121,33 @@
         this.address.city = city
         this.address.district = district
         this.address.areaCode = areaCode
-        console.log('address', this.address)
-        console.log(this.addressName)
         this.showAreaPopup = false
       },
       changeName(e) {
-        console.log(1)
-        console.log(e)
+        this.address.name = e.mp.detail.value
       },
       changeTel(e) {
-        console.log(e)
+        this.address.tel = e.mp.detail.value
       },
       changeDetail(e) {
-        console.log(e)
+        this.address.addressDetail = e.mp.detail.value
       },
       save() {
         console.log('save', this.address)
         this.$API.post('/user/address/save', this.address).then(res => {
-          console.log('res', res)
+          wx.showToast({title: '提交成功', icon: 'success'})
+          wx.navigateBack({
+            delta: 1
+          })
         })
       },
       remove() {
+        this.$API.delete('/user/address/' + this.address.id).then(res => {
+          wx.showToast({title: '删除成功', icon: 'success'})
+          wx.navigateBack({
+            delta: 1
+          })
+        })
         console.log('remove')
       }
     }

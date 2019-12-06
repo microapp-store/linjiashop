@@ -1,7 +1,7 @@
 <template>
   <div class="checkout">
     <van-cell-group>
-      <van-cell :title="addrText" is-link to="address"/>
+      <van-cell :title="addrText" is-link @click="chooseAddress"/>
     </van-cell-group>
     <div v-for="item in cartList"
          :key="item.id" class="card-goods__item">
@@ -27,6 +27,7 @@
 
 <script>
   import utils from '@/utils/index.js'
+  import store from '@/utils/store.js'
 
   export default {
     data() {
@@ -45,6 +46,10 @@
     },
     computed: {
       addrText() {
+        const address = store.state.addr
+        if (address.name) {
+          this.addr = address
+        }
         if (this.addr) {
           return this.addr.name + '(' + this.addr.tel + ')'
         } else {
@@ -96,7 +101,8 @@
         }
       },
       chooseAddress() {
-
+        const url = '/pages/address/main?choose=true'
+        wx.navigateTo({url})
       }
     }
   }

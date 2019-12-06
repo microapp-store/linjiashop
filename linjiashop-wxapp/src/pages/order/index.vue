@@ -25,7 +25,7 @@
           </van-card>
         </navigator>
 
-        <div class="total">合计2: {{ item.totalPrice }}</div>
+        <div class="total">合计: {{ item.totalPrice }}</div>
         <view slot="footer" class="footer">
           <van-button size="small" @click="viewOrder(item)">查看详情</van-button>
           <van-button size="small" v-if="item.statusName === '待付款'" @click="cancelOrder(item)">取消订单</van-button>

@@ -9,7 +9,8 @@ const store = new Vuex.Store({
   state: {
     count: 0,
     token: undefined,
-    user: {nickName: '立即登录'}
+    user: {nickName: '立即登录'},
+    addr: {}
   },
   mutations: {
     increment: (state) => {
@@ -29,6 +30,10 @@ const store = new Vuex.Store({
       console.log('user', user)
       const obj = state
       obj.user = user
+    },
+    setAddr: (state, addr) => {
+      const obj = state
+      obj.addr = addr
     }
 
   }

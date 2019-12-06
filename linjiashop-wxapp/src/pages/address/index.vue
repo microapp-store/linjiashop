@@ -22,6 +22,7 @@
 </template>
 
 <script>
+  import store from '@/utils/store.js'
   export default {
     data() {
       return {
@@ -40,21 +41,26 @@
     methods: {
       init() {
         this.$API.get('/user/address/queryByUser').then(res => {
-          console.log('res', res)
           this.addressList = res.data
         })
       },
       onChange(e) {
-        console.log(e)
         this.radio = e.mp.detail
+        for (let i = 0; i < this.addressList.length; i++) {
+          if (this.addressList[i].id === this.radio) {
+            store.commit('setAddr', this.addressList[i])
+            wx.navigateBack({
+              delta: 1
+            })
+            break
+          }
+        }
       },
       edit(item) {
-        console.log('edit', item)
         const url = '/pages/address/edit/main?id=' + item.id
         wx.navigateTo({url})
       },
       add() {
-        console.log('add')
         const url = '/pages/address/edit/main'
         wx.navigateTo({url})
       }
@@ -63,9 +69,9 @@
 </script>
 
 <style>
-  .van-card {
-    margin-top: 10 rpx;
-    margin-left: 75 rpx;
+  .van-card__header {
+    margin-top: 5rpx;
+    margin-left: 75rpx;
   }
 
   .van-card__thumb {
@@ -76,7 +82,7 @@
     left: 10px;
     z-index: 1;
     position: absolute;
-    margin-top: 57px;
+    margin-top: 57rpx;
   }
 
   .van-card__footer {

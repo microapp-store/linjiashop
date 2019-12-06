@@ -23,7 +23,7 @@ export default {
         return request({
             url: '/user/address/save',
             method: 'post',
-            params
+            data:params
         })
     },
 

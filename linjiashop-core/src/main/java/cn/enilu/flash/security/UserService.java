@@ -59,11 +59,8 @@ public class UserService {
         AuthorizationUser userBean = tokenCache.getUser(token);
 
         if(userBean!=null){
-            logger.info("token:{},user Bean is null={}",token!=null?token.substring(0,10):"null",userBean==null);
             return userBean;
         }
-        logger.info("=====从数据库查询用户认证信息====");
-
         userBean = new AuthorizationUser();
         //构建后台用户认证信息
         if(userType == JwtUser.MANAGER) {

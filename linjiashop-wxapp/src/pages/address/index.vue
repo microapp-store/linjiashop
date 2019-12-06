@@ -16,7 +16,7 @@
       </div>
     </van-radio-group>
 
-
+    <van-button type="primary" size="large" @click="add">新增地址</van-button>
   </div>
 
 </template>
@@ -52,6 +52,11 @@
         console.log('edit', item)
         const url = '/pages/address/edit/main?id=' + item.id
         wx.navigateTo({url})
+      },
+      add() {
+        console.log('add')
+        const url = '/pages/address/edit/main'
+        wx.navigateTo({url})
       }
     }
   }
@@ -75,6 +80,6 @@
   }
 
   .van-card__footer {
-    margin-top: -24px;
+    margin-top: -100rpx;
   }
 </style>

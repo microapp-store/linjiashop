@@ -6,6 +6,7 @@ import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.AddressService;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.Lists;
+import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +34,7 @@ public class AddressController extends BaseController {
     public Object remove(@PathVariable("id") Long id){
         Long idUser = getIdUser();
         addressService.delete(idUser,id);
-        return Rets.success( );
-
+        return Rets.success();
     }
     @RequestMapping(value = "{id}/{isDefault}",method = RequestMethod.POST)
     public Object changeDefault(@PathVariable("id") Long id,@PathVariable("isDefault") Boolean isDefault){
@@ -72,7 +72,7 @@ public class AddressController extends BaseController {
         return Rets.success(list);
     }
     @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public Object save(@ModelAttribute @Valid Address addressInfo){
+    public Object save(@RequestBody  @Valid Address addressInfo){
         Long idUser = getIdUser();
         addressInfo.setIdUser(idUser);
         if(addressInfo.getId()!=null){

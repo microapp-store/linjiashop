@@ -41,6 +41,13 @@ module.exports = {
                 ]
             },
             {
+                title: '二次开发',
+                collapsable: false,
+                children: [
+                    '/develop/api'
+                ]
+            },
+            {
                 title: '其他',
                 collapsable: false,
                 children:[

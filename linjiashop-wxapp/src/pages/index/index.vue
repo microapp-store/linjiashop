@@ -93,4 +93,10 @@
 </script>
 
 <style scoped>
+  swiper{
+    height:220px;
+  }
+  swiper-item>navigator >image{
+    width:100%;
+  }
 </style>

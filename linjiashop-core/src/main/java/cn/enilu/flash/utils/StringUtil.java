@@ -18,6 +18,9 @@ public class StringUtil {
     public static final String EMPTY = "";
     private static final AtomicLong ORDER_SEQ = new AtomicLong(1);
     private static  final Pattern PATERN_IP = Pattern.compile("((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)");
+    public static  boolean isEmpty(Long num){
+        return num == null;
+    }
     /**
      * 是否为空字符
      */

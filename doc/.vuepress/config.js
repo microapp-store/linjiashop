@@ -44,7 +44,16 @@ module.exports = {
                 title: '二次开发',
                 collapsable: false,
                 children: [
-                    '/develop/api'
+                    '/develop/api',
+                    'develop/banner'
+                ]
+            },
+
+            {
+                title: '用户使用手册',
+                collapsable: false,
+                children: [
+                    '/useage/useage'
                 ]
             },
             {

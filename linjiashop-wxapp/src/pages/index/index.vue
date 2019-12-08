@@ -69,6 +69,27 @@
       },
       processBanners(banners) {
         for (let i = 0; i < banners.length; i++) {
+          let url = ''
+          let page = banners[i].page
+          let param = banners[i].param
+
+          if (!utils.startWith(page, 'http')) {
+            url = '../' + page + '/main'
+          }
+          if (param !== '') {
+            const paramJson = JSON.parse(param)
+            let i = 0
+            for (const key in paramJson) {
+              if (i === 0) {
+                url += '?' + key + '=' + paramJson[key]
+              } else {
+                url += '&' + key + '=' + paramJson[key]
+              }
+              i++
+            }
+          }
+          console.log('url', url)
+          banners[i].url = url
           banners[i].imgUrl = utils.fileMgrUrl + banners[i].idFile
         }
         return banners
@@ -93,10 +114,11 @@
 </script>
 
 <style scoped>
-  swiper{
-    height:220px;
+  swiper {
+    height: 220px;
   }
-  swiper-item>navigator >image{
-    width:100%;
+
+  swiper-item > navigator > image {
+    width: 100%;
   }
 </style>

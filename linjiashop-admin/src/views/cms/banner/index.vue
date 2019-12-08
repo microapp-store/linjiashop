@@ -42,9 +42,14 @@
           {{scope.row.type}}
         </template>
       </el-table-column>
-      <el-table-column label="url">
+      <el-table-column label="打开界面">
         <template slot-scope="scope">
-          {{scope.row.url}}
+          {{scope.row.page}}
+        </template>
+      </el-table-column>
+      <el-table-column label="参数">
+        <template slot-scope="scope">
+          {{scope.row.param}}
         </template>
       </el-table-column>
       <el-table-column label="图片">
@@ -66,8 +71,13 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="url" prop="url">
-              <el-input v-model="form.url"  minlength=1></el-input>
+            <el-form-item label="打开的界面">
+              <el-input v-model="form.page"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="参数" prop="param">
+              <el-input v-model="form.param"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">

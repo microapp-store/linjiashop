@@ -27,7 +27,8 @@ export default {
       form: {
         id: '',
         title: '',
-        url: '',
+        page: '',
+        param: '',
         img: '',
         idFile: '',
         type: 'index'
@@ -50,16 +51,12 @@ export default {
       return {
         title: [
           { required: true, message: '标题不能为空', trigger: 'blur' }
-        ],
-        url: [
-          { required: true, message: 'URL不能为空', trigger: 'blur' }
         ]
       }
     }
   },
   created() {
     this.shopCategory.id = this.$route.query.idCategory
-    console.log(this.shopCategory.id)
     this.init()
   },
   methods: {
@@ -100,7 +97,8 @@ export default {
       this.form = {
         id: '',
         title: '',
-        url: '',
+        page: '',
+        param: '',
         idFile: this.uploadFileId,
         type: ''
       }
@@ -117,7 +115,8 @@ export default {
           save({
             id: this.form.id,
             title: this.form.title,
-            url: this.form.url,
+            page: this.form.page,
+            param: this.form.param,
             idFile: this.uploadFileId,
             type: this.form.type
           }).then(response => {
@@ -159,7 +158,7 @@ export default {
       }else{
         this.$message({
           message: '请先选中要设置的banner',
-          type: 'warnging'
+          type: 'warning'
         })
       }
     },
@@ -200,7 +199,6 @@ export default {
     handleUploadSuccess(response, raw) {
       this.loadingInstance.close()
       if (response.code === 20000) {
-        console.log(response.data)
         this.uploadFileId = response.data.id
         this.form.fileName = response.data.originalFileName
       } else {

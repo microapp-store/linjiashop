@@ -41,23 +41,7 @@ export default {
     data() {
         return {
             navList: [],
-            banners: [
-            //     {
-            //     link: '/#/user', path:
-            //         './img/banner/banner_mobile1.jpg'
-            // }, {
-            //     link: 'http://www.baidu.com', path:
-            //         './img/banner/banner_mobile2.jpg'
-            // },
-            //     {
-            //         link: 'http://www.baidu.com', path:
-            //             './img/banner/banner_mobile3.jpg'
-            //     },
-            //     {
-            //         link: 'http://www.baidu.com', path:
-            //             './img/banner/banner_notebook1.jpg'
-            //     }
-            ],
+            banners: [],
             goodsList: [],
             activeFooter: 0,
             activeNav: 0,
@@ -98,8 +82,23 @@ export default {
             let bannerList = this.navList[categoryIndex].bannerList
             let imgList = new Array()
             for(let i=0;i<bannerList.length;i++){
+                let url = ''
+                let page = bannerList[i].page
+                if(page!=''){
+                    if(page.indexOf('http') === 0){
+                        url = page
+                    }else {
+                        url = '#/' + bannerList[i].page
+                    }
+                }
+                if(bannerList[i].param !=''){
+                    const param = JSON.parse(bannerList[i].param)
+                    for(const key in param){
+                        url +='/'+param[key]
+                    }
+                }
                 imgList.push({
-                    url:bannerList[i].url,
+                    url:url,
                     path:baseApi+'/file/getImgStream?idFile=' + bannerList[i].idFile
                 })
             }

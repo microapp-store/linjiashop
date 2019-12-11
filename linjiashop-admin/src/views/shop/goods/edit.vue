@@ -152,41 +152,62 @@
         </el-col>
       </el-row>
     </el-form>
-    <el-dialog title="添加规格" :visible.sync="specDialogFormVisible">
+    <el-dialog title="SKU配置" :visible.sync="specDialogFormVisible">
       <el-form :model="specsForm">
-        <el-form-item label="属性名" label-width="100px" prop="specs">
-          <el-select
-            v-model="attrKeySel"
-            filterable
-            allow-create
-            default-first-option
-            placeholder="属性值">
-            <el-option
-              v-for="item in attrKeyList"
-              :key="item.id"
-              :label="item.attrVal"
-              :value="item.id">
-            </el-option>
-          </el-select>
 
-        </el-form-item>
+            <el-form-item label="已选规格" label-width="100px" prop="specs">
+            <el-tag
+              v-for="tag in tags"
+              :key="tag.id"
+              closable
+              :type="tag.id">
+              {{tag.attrVal}}
+            </el-tag>
+            </el-form-item>
 
-        <el-form-item label="属性值" label-width="100px" prop="specs">
-          <el-select
-            v-model="attrValSel"
-            filterable
-            allow-create
-            default-first-option
-            placeholder="属性值">
-            <el-option
-              v-for="item in attrValListSel"
-              :key="item.id"
-              :label="item.attrVal"
-              :value="item.id">
-            </el-option>
-          </el-select>
+        <el-row>
+          <el-col span="8">
+            <el-form-item label="属性名" label-width="100px" prop="specs">
+              <el-select
+                v-model="attrKeySel"
+                filterable
+                allow-create
+                default-first-option
+                @change="changeAttrKey"
+                placeholder="属性名">
+                <el-option
+                  v-for="item in attrKeyList"
+                  :key="item.id"
+                  :label="item.attrName"
+                  :value="item.id">
+                </el-option>
+              </el-select>
 
-        </el-form-item>
+            </el-form-item>
+          </el-col>
+          <el-col span="8">
+            <el-form-item label="属性值" label-width="100px" prop="specs">
+              <el-select
+                v-model="attrValSel"
+                filterable
+                allow-create
+                default-first-option
+                placeholder="属性值">
+                <el-option
+                  v-for="item in attrValListSel"
+                  :key="item.id"
+                  :label="item.attrVal"
+                  :value="item.id">
+                </el-option>
+              </el-select>
+
+            </el-form-item>
+          </el-col>
+          <el-col offset="2" span="6">
+            <el-button type="success" @click="dialogFormVisible = false">添加规格</el-button>
+          </el-col>
+        </el-row>
+
         <el-form-item label="包装费" label-width="100px">
           <el-input-number v-model="specsForm.packing_fee" :min="0" :max="100"></el-input-number>
         </el-form-item>
@@ -195,7 +216,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="default" @click="dialogFormVisible = false">取 消</el-button>
         <el-button type="primary" @click="addSpec">确 定</el-button>
       </div>
     </el-dialog>

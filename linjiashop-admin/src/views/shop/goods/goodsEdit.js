@@ -2,6 +2,7 @@ import editorImage from '@/components/Tinymce'
 import plugins from '@/components/editContainer/plugins'
 import toolbar from '@/components/editContainer/toolbar'
 import {get, getList, save} from '@/api/shop/goods'
+import {getAttrBy} from '@/api/shop/attrVal'
 import {getCategories} from '@/api/shop/category'
 import {getApiUrl} from '@/utils/utils'
 import {getToken} from '@/utils/auth'
@@ -44,13 +45,15 @@ export default {
       specsForm:{},
       attrKeySel:'',
       attrKeyList:[],
+      attrValList:[],
       showAddAttrKey:false,
       attrKeyForm:{attrName:''},
       attrValForm:{attrVal:''},
       attrValSel:'',
-      attrValListSel:[
-        {id:1,attrVal:'白'},
-        {id:2,attrVal:'黑'}
+      attrValListSel:[],
+      tags:[
+        {attrVal:'3G+128G',id:1},
+        {attrVal:'哑光黑',id:2}
       ],
       form: {
         pic:'',
@@ -120,6 +123,7 @@ export default {
         get(this.idGoods).then(response => {
           this.form = response.data.goods
           this.skuList = response.data.skuList
+          this.spec = this.skuList.length>0?'more':'one'
           let galleryArr =this.form .gallery.split(',')
           for (let i = 0; i < galleryArr.length; i++) {
             if (galleryArr[i] != '') {
@@ -130,7 +134,12 @@ export default {
             }
           }
           this.setContent(this.form .detail)
+          getAttrBy(this.form.idCategory,this.idGoods).then(response2 => {
+              this.attrKeyList = response2.data.keyList
+              this.attrValList = response2.data.valList
+          })
         })
+
       }
       getCategories().then(response => {
         this.categories = response.data
@@ -192,7 +201,6 @@ export default {
 
     },
     handleUploadPicSuccess(response, raw) {
-      console.log('response',response)
       if (response.code === 20000) {
         this.form.pic = response.data.id
         console.log('form.pic',this.form.pic)
@@ -204,8 +212,6 @@ export default {
       }
     },
     handleUploadGallerySuccess(response, raw) {
-      console.log('response',response)
-      console.log('gallerylist',this.galleryList)
       if (response.code === 20000) {
         this.galleryList.push(
           {
@@ -293,6 +299,16 @@ export default {
     },
     handleDelete(index) {
       this.specs.splice(index, 1)
+    },
+    changeAttrKey(val){
+      console.log('val',val)
+      let attrValSel = []
+      for(let i=0;i<this.attrValList.length;i++){
+        if(this.attrValList[i].idAttrKey === val){
+          attrValSel.push(this.attrValList[i])
+        }
+      }
+      this.attrValListSel = attrValSel
     },
     addAttrKeyFun() {
       this.showAddAttrKey = !this.showAddAttrKey

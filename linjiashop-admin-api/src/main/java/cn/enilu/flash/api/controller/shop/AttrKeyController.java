@@ -21,24 +21,24 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/shop/goods/attr/key")
-public class GoodsAttrKeyController {
+public class AttrKeyController {
 	private  Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
-	private AttrKeyService goodsAttrKeyService;
+	private AttrKeyService attrKeyService;
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public Object list() {
 	Page<AttrKey> page = new PageFactory<AttrKey>().defaultPage();
-		page = goodsAttrKeyService.queryPage(page);
+		page = attrKeyService.queryPage(page);
 		return Rets.success(page);
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	@BussinessLog(value = "编辑商品属性名", key = "name",dict= CommonDict.class)
 	public Object save(@ModelAttribute AttrKey tShopGoodsAttrKey){
 		if(tShopGoodsAttrKey.getId()==null){
-			goodsAttrKeyService.insert(tShopGoodsAttrKey);
+			attrKeyService.insert(tShopGoodsAttrKey);
 		}else {
-			goodsAttrKeyService.update(tShopGoodsAttrKey);
+			attrKeyService.update(tShopGoodsAttrKey);
 		}
 		return Rets.success();
 	}
@@ -48,7 +48,7 @@ public class GoodsAttrKeyController {
 		if (StringUtil.isEmpty(id)) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
 		}
-		goodsAttrKeyService.deleteById(id);
+		attrKeyService.deleteById(id);
 		return Rets.success();
 	}
 }

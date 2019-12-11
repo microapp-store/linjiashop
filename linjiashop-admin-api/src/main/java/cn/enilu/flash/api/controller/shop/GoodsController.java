@@ -9,6 +9,8 @@ import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
+import cn.enilu.flash.service.shop.AttrKeyService;
+import cn.enilu.flash.service.shop.AttrValService;
 import cn.enilu.flash.service.shop.GoodsService;
 import cn.enilu.flash.utils.factory.Page;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -26,6 +28,10 @@ public class GoodsController {
 	private  Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private GoodsService goodsService;
+	@Autowired
+	private AttrKeyService attrKeyService;
+	@Autowired
+	private AttrValService attrValService;
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public Object list(@RequestParam(value = "name",required = false) String name) {
@@ -57,6 +63,7 @@ public class GoodsController {
 		goodsService.deleteById(id);
 		return Rets.success();
 	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public Object get(Long id){
 		if (id == null) {

@@ -1,5 +1,6 @@
 package cn.enilu.flash.api.controller.system;
 
+import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.entity.system.LoginLog;
@@ -37,8 +38,12 @@ public class LoginLogController extends BaseController {
                        @RequestParam(required = false) String endTime,
                        @RequestParam(required = false) String logName) {
         Page<LoginLog> page = new PageFactory<LoginLog>().defaultPage();
-        page.addFilter("createTime", SearchFilter.Operator.GTE, DateUtil.parseDate(beginTime));
-        page.addFilter("createTime", SearchFilter.Operator.LTE, DateUtil.parseDate(endTime));
+        if(StringUtil.isNotEmpty(beginTime)) {
+            page.addFilter("createTime", SearchFilter.Operator.GTE, DateUtil.parseDate(beginTime));
+        }
+        if(StringUtil.isNotEmpty(endTime)) {
+            page.addFilter("createTime", SearchFilter.Operator.LTE, DateUtil.parseDate(endTime));
+        }
         page.addFilter( "logname", SearchFilter.Operator.LIKE, logName);
         Page pageResult = loginlogService.queryPage(page);
         pageResult.setRecords((List<LoginLog>) new LogWarpper(BeanUtil.objectsToMaps(pageResult.getRecords())).warp());

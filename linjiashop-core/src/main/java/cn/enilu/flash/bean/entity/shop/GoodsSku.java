@@ -1,6 +1,6 @@
 package cn.enilu.flash.bean.entity.shop;
 
-import cn.enilu.flash.bean.entity.ShopBaseEntity;
+import cn.enilu.flash.bean.entity.BaseEntity;
 import lombok.Data;
 import org.hibernate.annotations.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import java.math.BigDecimal;
 
 /**
  * @author ：enilu
@@ -16,14 +17,19 @@ import javax.persistence.EntityListeners;
 
 @Data
 @Table(appliesTo = "t_shop_goods_sku",comment = "商品SKU")
-@Entity(name="t_shop_goods_attr_sku")
-public class GoodsSku extends ShopBaseEntity {
-    @Column(name="attr_symbol_path",columnDefinition = "BIGINT COMMENT '属性搭配方式'")
-    private Long idAttrKey;
+@Entity(name="t_shop_goods_sku")
+@EntityListeners(AuditingEntityListener.class)
+public class GoodsSku extends BaseEntity {
+    @Column(name="code",columnDefinition = "VARCHAR(32) COMMENT 'sku编码,格式:逗号分割的属性值id'",unique = true)
+    private String code;
+    @Column(name="code_name",columnDefinition = "VARCHAR(32) COMMENT 'sku名称,格式:逗号分割的属性值'",unique = true)
+    private String codeName;
     @Column(name="id_goods",columnDefinition = "BIGINT COMMENT '商品id'")
     private Long idGoods;
     @Column(name="price",columnDefinition = "VARCHAR(32) COMMENT '价格'")
-    private String price;
+    private BigDecimal price;
+    @Column(name="marketing_price",columnDefinition = "VARCHAR(32) COMMENT '市场价,原价'")
+    private BigDecimal marketingPrice;
     @Column(name="stock",columnDefinition = "INT COMMENT '库存'")
     private Integer stock;
 

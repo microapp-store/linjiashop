@@ -13,27 +13,37 @@ import java.util.Map;
  */
 public class SearchFilter {
     public enum Operator {
-        EQ, LIKE, GT, LT, GTE, LTE,IN,ISNULL,ISNOTNULL
+        EQ, NE, LIKE, LIKEL, LIKER, GT, LT, GTE, LTE, IN, NOTIN, ISNULL, ISNOTNULL, BETWEEN
     }
 
+    public enum Join {
+        and, or
+    }
+
+    public Join join;
     public String fieldName;
     public Object value;
     public Operator operator;
-    public  static SearchFilter build(String fieldName, Object value){
-        return  new SearchFilter(fieldName,Operator.EQ,value);
+
+    public static SearchFilter build(String fieldName, Object value) {
+        return new SearchFilter(fieldName, Operator.EQ, value);
     }
-    public  static SearchFilter build(String fieldName, Operator operator, Object value){
-        return  new SearchFilter(fieldName,operator,value);
+
+    public static SearchFilter build(String fieldName, Operator operator, Object value) {
+        return new SearchFilter(fieldName, operator, value);
     }
-    public  static SearchFilter build(String fieldName, Operator operator){
-        return  new SearchFilter(fieldName,operator);
+
+    public static SearchFilter build(String fieldName, Operator operator) {
+        return new SearchFilter(fieldName, operator);
     }
+
     public SearchFilter(String fieldName, Operator operator) {
         this.fieldName = fieldName;
         this.operator = operator;
     }
+
     public SearchFilter(String fieldName, Operator operator, Object value) {
-        if(!StringUtil.isNullOrEmpty(value)) {
+        if (!StringUtil.isNullOrEmpty(value)) {
             this.fieldName = fieldName;
             this.value = value;
             this.operator = operator;

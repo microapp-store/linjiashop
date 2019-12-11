@@ -38,8 +38,14 @@ public class Goods extends BaseEntity {
     private String detail;
     @Column(columnDefinition = "TEXT COMMENT '产品规格'")
     private String specifications;
+    /**
+     * 如果商品是多规格，则存所有库存之和
+     */
     @Column(columnDefinition = "INT COMMENT '库存数量'")
     private Integer num;
+    /**
+     * 如果商品是多规格，则存最低价
+     */
     @Column(columnDefinition = "VARCHAR(16) COMMENT '价格'")
     private BigDecimal price;
     @Column(columnDefinition = "tinyint COMMENT '是否删除'")

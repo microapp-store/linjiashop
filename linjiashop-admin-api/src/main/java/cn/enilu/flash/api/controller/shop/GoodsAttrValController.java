@@ -1,6 +1,6 @@
 package cn.enilu.flash.api.controller.shop;
 
-import cn.enilu.flash.bean.entity.shop.GoodsAttrVal;
+import cn.enilu.flash.bean.entity.shop.AttrVal;
 import cn.enilu.flash.service.shop.GoodsAttrValService;
 
 import cn.enilu.flash.bean.core.BussinessLog;
@@ -10,9 +10,7 @@ import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 
-import cn.enilu.flash.utils.Maps;
 import cn.enilu.flash.utils.StringUtil;
-import cn.enilu.flash.utils.ToolUtil;
 import cn.enilu.flash.utils.factory.Page;
 
 import org.slf4j.Logger;
@@ -30,13 +28,13 @@ public class GoodsAttrValController {
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public Object list() {
-	Page<GoodsAttrVal> page = new PageFactory<GoodsAttrVal>().defaultPage();
+	Page<AttrVal> page = new PageFactory<AttrVal>().defaultPage();
 		page = goodsAttrValService.queryPage(page);
 		return Rets.success(page);
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	@BussinessLog(value = "编辑商品属性值", key = "name",dict= CommonDict.class)
-	public Object save(@ModelAttribute GoodsAttrVal tShopGoodsAttrVal){
+	public Object save(@ModelAttribute AttrVal tShopGoodsAttrVal){
 		if(tShopGoodsAttrVal.getId()==null){
 			goodsAttrValService.insert(tShopGoodsAttrVal);
 		}else {

@@ -38,11 +38,26 @@ export default {
   },
   data() {
     return {
+      spec:'one',
+      specs:[],
+      specDialogFormVisible:false,
+      specsForm:{},
+      attrKeySel:'',
+      attrKeyList:[],
+      showAddAttrKey:false,
+      attrKeyForm:{attrName:''},
+      attrValForm:{attrVal:''},
+      attrValSel:'',
+      attrValListSel:[
+        {id:1,attrVal:'白'},
+        {id:2,attrVal:'黑'}
+      ],
       form: {
         pic:'',
         gallery:[],
         idCategory:''
       },
+      skuList:[],
       uploadUrl: '',
       uploadFileId: '',
       uploadHeaders: {
@@ -103,8 +118,9 @@ export default {
       this.listLoading = true
       if(this.idGoods) {
         get(this.idGoods).then(response => {
-          this.form = response.data
-          let galleryArr = response.data.gallery.split(',')
+          this.form = response.data.goods
+          this.skuList = response.data.skuList
+          let galleryArr =this.form .gallery.split(',')
           for (let i = 0; i < galleryArr.length; i++) {
             if (galleryArr[i] != '') {
               this.galleryList.push({
@@ -113,7 +129,7 @@ export default {
               })
             }
           }
-          this.setContent(response.data.detail)
+          this.setContent(this.form .detail)
         })
       }
       getCategories().then(response => {
@@ -267,6 +283,47 @@ export default {
         window.tinymce.get(_this.tinymceId).insertContent(`<img class="wscnph" src="${v.url}" >`)
       })
     },
+    tableRowClassName(row, index) {
+      if (index === 1) {
+        return 'info-row'
+      } else if (index === 3) {
+        return 'positive-row'
+      }
+      return ''
+    },
+    handleDelete(index) {
+      this.specs.splice(index, 1)
+    },
+    addAttrKeyFun() {
+      this.showAddAttrKey = !this.showAddAttrKey
+    },
+    submitAttrKeyForm() {
+      console.log('submitAttrKeyForm')
+      if( this.attrKeyForm.attrName != ''){
+        let duplicationKey = false;
+        for(let i=0;i<this.attrKeyList.length;i++){
+          if(this.attrKeyForm.attrName === this.attrKeyList[i].attrName){
+            duplicationKey = true;
+            break;
+          }
+        }
+        if(!duplicationKey){
+          const id = this.attrKeyList.length+1;
+          this.attrKeyList.push({
+            id:id,
+            attrName:this.attrKeyForm.attrName
+          })
+          this.attrKeySel = id;
+          this.addAttrKeyFun();
+        }
+      }
+      //提交属性名
+      //提交成功后，将属性名自动选择当前属性名
+      //提交成功后自动收起添加属性名表单，并且将并单清空重置
+    },
+    addSpec() {
+      console.log('addSpec')
+    }
 
   }
 }

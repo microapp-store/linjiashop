@@ -70,6 +70,8 @@ public class DynamicSpecifications {
 
                 return builder.conjunction();
             }
+
+
         };
     }
 }

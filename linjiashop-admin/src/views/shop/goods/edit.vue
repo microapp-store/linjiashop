@@ -13,7 +13,7 @@
       <el-steps :active="active" finish-status="success">
         <el-step title="基本信息"></el-step>
         <el-step title="商品相册"></el-step>
-        <el-step title="商品详情"></el-step>
+        <el-step title="商品规格"></el-step>
         <el-step title="上架信息"></el-step>
       </el-steps>
     </div>
@@ -97,20 +97,108 @@
     <el-form  label-width="150px" v-show="active==3">
       <el-row>
 
+
+
         <el-col :span="24">
+          <el-form-item label="商品规格">
+            <el-radio class="radio" v-model="spec" label="one">单规格</el-radio>
+            <el-radio class="radio" v-model="spec" label="more">多规格</el-radio>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24" v-if="spec == 'one'">
+          <el-form-item label="库存">
+            <el-input-number v-model="form.num" :min="0" :max="100000"></el-input-number>
+          </el-form-item>
           <el-form-item label="价格(分)">
-            <el-input v-model="form.price" minlength=1 type="number" placeholder="精确到分"></el-input>
+            <el-input-number v-model="form.price" :min="0" :max="1000000"></el-input-number>
           </el-form-item>
         </el-col>
-        <el-col :span="24">
-          <el-form-item label="数量">
-            <el-input v-model="form.num" minlength=1 type="number"></el-input>
-          </el-form-item>
+        <el-col  :offset="3" :span="18" v-else style="overflow: auto; text-align: center;">
+          <el-button type="primary" @click="specDialogFormVisible = true" style="margin-bottom: 10px;">添加规格</el-button>
+          <el-table
+            :data="skuList"
+            style="margin-bottom: 20px;"
+            :row-class-name="tableRowClassName">
+            <el-table-column
+              prop="codeName"
+              label="规格">
+            </el-table-column>
+            <el-table-column
+              prop="marketingPrice"
+              label="市场价">
+            </el-table-column>
+
+            <el-table-column
+              prop="price"
+              label="价格(分)">
+            </el-table-column>
+
+            <el-table-column
+              prop="stock"
+              label="库存">
+            </el-table-column>
+
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button
+                  size="small"
+                  type="danger"
+                  @click="handleDelete(scope.$index)">删除
+                </el-button>
+              </template>
+            </el-table-column>
+
+          </el-table>
         </el-col>
-
-
       </el-row>
     </el-form>
+    <el-dialog title="添加规格" :visible.sync="specDialogFormVisible">
+      <el-form :model="specsForm">
+        <el-form-item label="属性名" label-width="100px" prop="specs">
+          <el-select
+            v-model="attrKeySel"
+            filterable
+            allow-create
+            default-first-option
+            placeholder="属性值">
+            <el-option
+              v-for="item in attrKeyList"
+              :key="item.id"
+              :label="item.attrVal"
+              :value="item.id">
+            </el-option>
+          </el-select>
+
+        </el-form-item>
+
+        <el-form-item label="属性值" label-width="100px" prop="specs">
+          <el-select
+            v-model="attrValSel"
+            filterable
+            allow-create
+            default-first-option
+            placeholder="属性值">
+            <el-option
+              v-for="item in attrValListSel"
+              :key="item.id"
+              :label="item.attrVal"
+              :value="item.id">
+            </el-option>
+          </el-select>
+
+        </el-form-item>
+        <el-form-item label="包装费" label-width="100px">
+          <el-input-number v-model="specsForm.packing_fee" :min="0" :max="100"></el-input-number>
+        </el-form-item>
+        <el-form-item label="价格" label-width="100px">
+          <el-input-number v-model="specsForm.price" :min="0" :max="10000"></el-input-number>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addSpec">确 定</el-button>
+      </div>
+    </el-dialog>
     <br>
     <div class="block">
       <el-row>
@@ -180,6 +268,23 @@
     width: 145px;
     height: 145px;
     display: block;
+  }
+
+  .add_attr_key_row {
+    height: 0;
+    overflow: hidden;
+    transition: all 400ms;
+  }
+
+  .showEdit {
+    height: 185px;
+  }
+
+  .add_attr_key_button {
+    text-align: center;
+    line-height: 40px;
+    transition: all 400ms;
+
   }
 </style>
 

@@ -8,38 +8,38 @@ INSERT INTO `t_cms_article` (`id`, `create_by`, `create_time`, `modify_by`, `mod
 -- ----------------------------
 -- Records of t_cms_banner.sql
 -- ----------------------------
-INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (1, 1, '2019-3-9 16:29:03', NULL, NULL, 143, '红米Rote8,打开外部链接', 'index', '/#/goods/2', 'goods', '{\"id\":2}');
-INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (2, 1, '2019-3-9 16:29:03', NULL, NULL, 144, '红米8A', 'index', '/#/goods/1', 'goods', '{\"id\":1}');
-INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (3, 1, '2019-3-9 16:29:03', NULL, NULL, 145, '打开外部链接', 'index', 'https://m.mi.com/commodity/detail/10000180', NULL, NULL);
-INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (4, 1, '2019-3-9 16:29:03', NULL, NULL, 146, '不打开链接', 'product', '/#/goods/15', 'goods', '{\"id\":15}');
-INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (5, 1, '2019-3-9 16:29:03', NULL, NULL, 147, '打打开站内链接', 'product', '/#/goods/16', 'goods', '{\"id\":16}');
-INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (6, 1, '2019-3-9 16:29:03', NULL, NULL, 148, '打开外部链接', 'product', '/#/goods/11', 'goods', '{\"id\":11}');
-INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (7, 1, '2019-3-9 16:29:03', NULL, NULL, 149, '不打开链接', 'solution', 'https://s1.mi.com/m/app/hd/index.html?id=11868', NULL, NULL);
-INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (10, 1, '2019-3-9 16:29:03', NULL, NULL, 1, '不打开链接', 'case', 'javascript:', NULL, NULL);
+INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (1, 1, '2019-3-9 16:29:03', NULL, NULL, 143, '红米Rote8,打开外部链接', 'index', NULL, 'goods', '{\"id\":2}');
+INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (2, 1, '2019-3-9 16:29:03', NULL, NULL, 144, '红米8A', 'index', NULL, 'goods', '{\"id\":1}');
+INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (3, 1, '2019-3-9 16:29:03', NULL, NULL, 145, '打开外部链接', 'index', NULL,'https://microapp.gitee.io/linjiashop', NULL);
+INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (4, 1, '2019-3-9 16:29:03', NULL, NULL, 146, '不打开链接', 'product', NULL, 'goods', '{\"id\":15}');
+INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (5, 1, '2019-3-9 16:29:03', NULL, NULL, 147, '打打开站内链接', 'product', NULL, 'goods', '{\"id\":16}');
+INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (6, 1, '2019-3-9 16:29:03', NULL, NULL, 148, '打开外部链接', 'product', NULL, 'goods', '{\"id\":11}');
+INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (7, 1, '2019-3-9 16:29:03', NULL, NULL, 149, '不打开链接', 'solution', NULL, 'http://flash-mobile.enilu.cn/#/index', NULL);
+INSERT INTO `t_cms_banner` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_file`, `title`, `type`, `url`, `page`, `param`) VALUES (10, 1, '2019-3-9 16:29:03', NULL, NULL, 1, '不打开链接', 'case', null, NULL, NULL);
 
 -- ----------------------------
 -- Records of t_cms_channel.sql
 -- ----------------------------
-INSERT INTO `t_cms_channel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `name`) VALUES (1, NULL, NULL, 1, '2019-3-13 22:52:46', 'news', '动态资讯');
-INSERT INTO `t_cms_channel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `name`) VALUES (2, NULL, NULL, 1, '2019-3-13 22:53:11', 'product', '产品服务');
-INSERT INTO `t_cms_channel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `name`) VALUES (3, NULL, NULL, 1, '2019-3-13 22:53:37', 'solution', '解决方案');
-INSERT INTO `t_cms_channel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `name`) VALUES (4, NULL, NULL, 1, '2019-3-13 22:53:41', 'case', '精选案例');
+INSERT INTO `t_cms_channel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `name`) VALUES (1, 1, '2019-02-10 18:57:57', 1, '2019-3-13 22:52:46', 'news', '动态资讯');
+INSERT INTO `t_cms_channel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `name`) VALUES (2, 1, '2019-02-10 18:57:57', 1, '2019-3-13 22:53:11', 'product', '产品服务');
+INSERT INTO `t_cms_channel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `name`) VALUES (3, 1, '2019-02-10 18:57:57', 1, '2019-3-13 22:53:37', 'solution', '解决方案');
+INSERT INTO `t_cms_channel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `name`) VALUES (4, 1, '2019-02-10 18:57:57', 1, '2019-3-13 22:53:41', 'case', '精选案例');
 
 -- ----------------------------
 -- Records of t_cms_contacts.sql
 -- ----------------------------
-INSERT INTO `t_cms_contacts` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `email`, `mobile`, `remark`, `user_name`) VALUES (1, NULL, '2019-7-31 17:44:27', NULL, '2019-7-31 17:44:27', 'test@qq.com', '15011111111', '测试联系，哈哈哈', '张三');
+INSERT INTO `t_cms_contacts` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `email`, `mobile`, `remark`, `user_name`) VALUES (1, 1, '2019-7-31 17:44:27', NULL, '2019-7-31 17:44:27', 'test@qq.com', '15011111111', '测试联系，哈哈哈', '张三');
 
 -- ----------------------------
 -- Records of t_message.sql
 -- ----------------------------
-INSERT INTO `t_message` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `content`, `receiver`, `state`, `tpl_code`, `type`) VALUES (1, NULL, '2019-6-10 21:20:16', NULL, NULL, '【腾讯云】校验码1032，请于5分钟内完成验证，如非本人操作请忽略本短信。', '15021592814', '2', 'REGISTER_CODE', '0');
+INSERT INTO `t_message` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `content`, `receiver`, `state`, `tpl_code`, `type`) VALUES (1, 1, '2019-6-10 21:20:16', NULL, NULL, '【腾讯云】校验码1032，请于5分钟内完成验证，如非本人操作请忽略本短信。', '15021592814', '2', 'REGISTER_CODE', '0');
 
 -- ----------------------------
 -- Records of t_message_sender.sql
 -- ----------------------------
-INSERT INTO `t_message_sender` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `class_name`, `name`, `tpl_code`) VALUES (1, NULL, NULL, NULL, NULL, 'tencentSmsSender', ' 腾讯短信服务', NULL);
-INSERT INTO `t_message_sender` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `class_name`, `name`, `tpl_code`) VALUES (2, NULL, NULL, NULL, NULL, 'defaultEmailSender', '默认邮件发送器', NULL);
+INSERT INTO `t_message_sender` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `class_name`, `name`, `tpl_code`) VALUES (1, 1, '2019-12-10 18:57:57', NULL, NULL, 'tencentSmsSender', ' 腾讯短信服务', NULL);
+INSERT INTO `t_message_sender` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `class_name`, `name`, `tpl_code`) VALUES (2, 1, '2019-12-10 18:57:57', NULL, NULL, 'defaultEmailSender', '默认邮件发送器', NULL);
 
 -- ----------------------------
 -- Records of t_message_template.sql
@@ -52,7 +52,7 @@ INSERT INTO `t_message_template` (`id`, `create_by`, `create_time`, `modify_by`,
 -- Records of t_shop_address.sql
 -- ----------------------------
 INSERT INTO `t_shop_address` (`id`, `create_time`, `modify_time`, `address_detail`, `city`, `area_code`, `district`, `id_user`, `is_default`, `tel`, `post_code`, `province`, `name`, `is_delete`) VALUES (1, NULL, NULL, '人民路12号', '北京市', '110101', '东城区', 1, 1, '15011113333', NULL, '北京市', '路飞', 0);
-INSERT INTO `t_shop_address` (`id`, `create_time`, `modify_time`, `address_detail`, `city`, `area_code`, `district`, `id_user`, `is_default`, `tel`, `post_code`, `province`, `name`, `is_delete`) VALUES (2, NULL, NULL, '和平路32号', '深圳市', '440304', '福田区', 1, 0, '15111112222', NULL, '110000', '索隆', 0);
+INSERT INTO `t_shop_address` (`id`, `create_time`, `modify_time`, `address_detail`, `city`, `area_code`, `district`, `id_user`, `is_default`, `tel`, `post_code`, `province`, `name`, `is_delete`) VALUES (2, NULL, NULL, '和平路32号', '深圳市', '440304', '福田区', 1, 0, '15111112222', NULL, '广东省', '索隆', 0);
 
 -- ----------------------------
 -- Records of t_shop_cart.sql
@@ -63,21 +63,21 @@ INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `id_goods`, `id_u
 -- ----------------------------
 -- Records of t_shop_category.sql
 -- ----------------------------
-INSERT INTO `t_shop_category` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `icon`, `name`, `url`) VALUES (1, NULL, NULL, NULL, NULL, '', '手机', '');
-INSERT INTO `t_shop_category` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `icon`, `name`, `url`) VALUES (2, NULL, NULL, NULL, NULL, '', '电视', '');
-INSERT INTO `t_shop_category` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `icon`, `name`, `url`) VALUES (3, NULL, NULL, NULL, NULL, '', '笔记本', '');
-INSERT INTO `t_shop_category` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `icon`, `name`, `url`) VALUES (4, NULL, NULL, NULL, NULL, '', '家电', '');
+INSERT INTO `t_shop_category` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `icon`, `name`, `url`) VALUES (1, 1, '2019-12-10 18:57:57', NULL, NULL, '', '手机', '');
+INSERT INTO `t_shop_category` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `icon`, `name`, `url`) VALUES (2, 1, '2019-12-10 18:57:57', NULL, NULL, '', '电视', '');
+INSERT INTO `t_shop_category` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `icon`, `name`, `url`) VALUES (3, 1, '2019-12-10 18:57:57', NULL, NULL, '', '笔记本', '');
+INSERT INTO `t_shop_category` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `icon`, `name`, `url`) VALUES (4, 1, '2019-12-10 18:57:57', NULL, NULL, '', '家电', '');
 
 -- ----------------------------
 -- Records of t_shop_category_banner_rel.sql
 -- ----------------------------
-INSERT INTO `t_shop_category_banner_rel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_banner`, `id_category`) VALUES (1, NULL, NULL, NULL, NULL, 1, 1);
-INSERT INTO `t_shop_category_banner_rel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_banner`, `id_category`) VALUES (2, NULL, NULL, NULL, NULL, 2, 1);
-INSERT INTO `t_shop_category_banner_rel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_banner`, `id_category`) VALUES (3, NULL, NULL, NULL, NULL, 3, 1);
-INSERT INTO `t_shop_category_banner_rel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_banner`, `id_category`) VALUES (4, NULL, NULL, NULL, NULL, 6, 2);
-INSERT INTO `t_shop_category_banner_rel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_banner`, `id_category`) VALUES (5, NULL, NULL, NULL, NULL, 4, 3);
-INSERT INTO `t_shop_category_banner_rel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_banner`, `id_category`) VALUES (6, NULL, NULL, NULL, NULL, 5, 3);
-INSERT INTO `t_shop_category_banner_rel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_banner`, `id_category`) VALUES (7, NULL, NULL, NULL, NULL, 7, 4);
+INSERT INTO `t_shop_category_banner_rel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_banner`, `id_category`) VALUES (1, 1, '2019-12-10 18:57:57', NULL, NULL, 1, 1);
+INSERT INTO `t_shop_category_banner_rel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_banner`, `id_category`) VALUES (2, 1, '2019-12-10 18:57:57', NULL, NULL, 2, 1);
+INSERT INTO `t_shop_category_banner_rel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_banner`, `id_category`) VALUES (3, 1, '2019-12-10 18:57:57', NULL, NULL, 3, 1);
+INSERT INTO `t_shop_category_banner_rel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_banner`, `id_category`) VALUES (4, 1, '2019-12-10 18:57:57', NULL, NULL, 6, 2);
+INSERT INTO `t_shop_category_banner_rel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_banner`, `id_category`) VALUES (5, 1, '2019-12-10 18:57:57', NULL, NULL, 4, 3);
+INSERT INTO `t_shop_category_banner_rel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_banner`, `id_category`) VALUES (6, 1, '2019-12-10 18:57:57', NULL, NULL, 5, 3);
+INSERT INTO `t_shop_category_banner_rel` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `id_banner`, `id_category`) VALUES (7, 1, '2019-12-10 18:57:57', NULL, NULL, 7, 4);
 
 -- ----------------------------
 -- Records of t_shop_goods.sql
@@ -146,19 +146,19 @@ INSERT INTO `t_sys_dept` (`id`, `create_by`, `create_time`, `modify_by`, `modify
 -- ----------------------------
 -- Records of t_sys_dict.sql
 -- ----------------------------
-INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (16, NULL, NULL, NULL, NULL, '状态', '0', 0, NULL);
-INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (17, NULL, NULL, NULL, NULL, '启用', '1', 16, NULL);
-INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (18, NULL, NULL, NULL, NULL, '禁用', '2', 16, NULL);
-INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (29, NULL, NULL, NULL, NULL, '性别', '0', 0, NULL);
-INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (30, NULL, NULL, NULL, NULL, '男', '1', 29, NULL);
-INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (31, NULL, NULL, NULL, NULL, '女', '2', 29, NULL);
-INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (35, NULL, NULL, NULL, NULL, '账号状态', '0', 0, NULL);
-INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (36, NULL, NULL, NULL, NULL, '启用', '1', 35, NULL);
-INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (37, NULL, NULL, NULL, NULL, '冻结', '2', 35, NULL);
-INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (38, NULL, NULL, NULL, NULL, '已删除', '3', 35, NULL);
-INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (53, NULL, NULL, NULL, NULL, '证件类型', '0', 0, NULL);
-INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (54, NULL, NULL, NULL, NULL, '身份证', '1', 53, NULL);
-INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (55, NULL, NULL, NULL, NULL, '护照', '2', 53, NULL);
+INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (16, 1, '2019-1-13 14:18:21', NULL, NULL, '状态', '0', 0, NULL);
+INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (17, 1, '2019-1-13 14:18:21', NULL, NULL, '启用', '1', 16, NULL);
+INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (18, 1, '2019-1-13 14:18:21', NULL, NULL, '禁用', '2', 16, NULL);
+INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (29, 1, '2019-1-13 14:18:21', NULL, NULL, '性别', '0', 0, NULL);
+INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (30, 1, '2019-1-13 14:18:21', NULL, NULL, '男', '1', 29, NULL);
+INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (31, 1, '2019-1-13 14:18:21', NULL, NULL, '女', '2', 29, NULL);
+INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (35, 1, '2019-1-13 14:18:21', NULL, NULL, '账号状态', '0', 0, NULL);
+INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (36, 1, '2019-1-13 14:18:21', NULL, NULL, '启用', '1', 35, NULL);
+INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (37, 1, '2019-1-13 14:18:21', NULL, NULL, '冻结', '2', 35, NULL);
+INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (38, 1, '2019-1-13 14:18:21', NULL, NULL, '已删除', '3', 35, NULL);
+INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (53, 1, '2019-1-13 14:18:21', NULL, NULL, '证件类型', '0', 0, NULL);
+INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (54, 1, '2019-1-13 14:18:21', NULL, NULL, '身份证', '1', 53, NULL);
+INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (55, 1, '2019-1-13 14:18:21', NULL, NULL, '护照', '2', 53, NULL);
 INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (68, 1, '2019-1-13 14:18:21', 1, '2019-1-13 14:18:21', '是否', '0', 0, NULL);
 INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (69, 1, '2019-1-13 14:18:21', 1, '2019-1-13 14:18:21', '是', '1', 68, NULL);
 INSERT INTO `t_sys_dict` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `name`, `num`, `pid`, `tips`) VALUES (70, 1, '2019-1-13 14:18:21', 1, '2019-1-13 14:18:21', '否', '0', 68, NULL);
@@ -473,8 +473,8 @@ INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (80, 47, 1);
 -- ----------------------------
 -- Records of t_sys_role.sql
 -- ----------------------------
-INSERT INTO `t_sys_role` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `deptid`, `name`, `num`, `pid`, `tips`, `version`) VALUES (1, NULL, NULL, NULL, NULL, 24, '超级管理员', 1, 0, 'administrator', 1);
-INSERT INTO `t_sys_role` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `deptid`, `name`, `num`, `pid`, `tips`, `version`) VALUES (2, NULL, NULL, NULL, NULL, 25, '网站管理员', 1, 1, 'developer', NULL);
+INSERT INTO `t_sys_role` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `deptid`, `name`, `num`, `pid`, `tips`, `version`) VALUES (1, 1, '2019-1-13 14:18:21', NULL, NULL, 24, '超级管理员', 1, 0, 'administrator', 1);
+INSERT INTO `t_sys_role` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `deptid`, `name`, `num`, `pid`, `tips`, `version`) VALUES (2, 1, '2019-1-13 14:18:21', NULL, NULL, 25, '网站管理员', 1, 1, 'developer', NULL);
 
 -- ----------------------------
 -- Records of t_sys_task.sql
@@ -520,3 +520,29 @@ INSERT INTO `t_sys_task_log` (`id`, `exec_at`, `exec_success`, `id_task`, `job_e
 INSERT INTO `t_sys_user` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `account`, `avatar`, `birthday`, `deptid`, `email`, `name`, `password`, `phone`, `roleid`, `salt`, `sex`, `status`, `version`) VALUES (-1, NULL, NULL, NULL, NULL, 'system', NULL, NULL, NULL, NULL, '应用系统', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `t_sys_user` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `account`, `avatar`, `birthday`, `deptid`, `email`, `name`, `password`, `phone`, `roleid`, `salt`, `sex`, `status`, `version`) VALUES (1, NULL, '2016-1-29 08:49:53', 1, '2019-3-20 23:45:24', 'admin', NULL, '2017-5-5 00:00:00', 27, 'eniluzt@qq.com', '管理员', 'b5a51391f271f062867e5984e2fcffee', '15021222222', '1', '8pgby', 2, 1, 25);
 INSERT INTO `t_sys_user` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `account`, `avatar`, `birthday`, `deptid`, `email`, `name`, `password`, `phone`, `roleid`, `salt`, `sex`, `status`, `version`) VALUES (2, NULL, '2018-9-13 17:21:02', 1, '2019-1-9 23:05:51', 'developer', NULL, '2017-12-31 00:00:00', 25, 'eniluzt@qq.com', '网站管理员', 'fac36d5616fe9ebd460691264b28ee27', '15022222222', '2,', 'vscp9', 1, 1, NULL);
+
+
+-- ----------------------------
+-- Records of t_shop_attr_key.sql
+-- ----------------------------
+INSERT INTO `t_shop_attr_key` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `attr_name`, `id_category`, `id_goods`) VALUES (1, 1, '2019-12-10 18:57:57', NULL, NULL, '版本', 1, NULL);
+INSERT INTO `t_shop_attr_key` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `attr_name`, `id_category`, `id_goods`) VALUES (2, 1, '2019-12-10 18:57:57', NULL, NULL, '颜色', 1, NULL);
+INSERT INTO `t_shop_attr_key` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `attr_name`, `id_category`, `id_goods`) VALUES (3, 1, '2019-12-10 18:57:57', NULL, NULL, '颜色', 3, NULL);
+
+-- ----------------------------
+-- Records of t_shop_attr_val.sql
+-- ----------------------------
+INSERT INTO `t_shop_attr_val` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `attr_val`, `id_attr_key`, `id_category`, `id_goods`) VALUES (1, 1, '2019-12-10 18:57:57', NULL, NULL, '3GB+32GB', 1, 1, NULL);
+INSERT INTO `t_shop_attr_val` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `attr_val`, `id_attr_key`, `id_category`, `id_goods`) VALUES (2, 1, '2019-12-10 18:57:57', NULL, NULL, '4GB+64GB', 1, 1, NULL);
+INSERT INTO `t_shop_attr_val` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `attr_val`, `id_attr_key`, `id_category`, `id_goods`) VALUES (3, 1, '2019-12-10 18:57:57', NULL, NULL, '银', 3, 3, NULL);
+INSERT INTO `t_shop_attr_val` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `attr_val`, `id_attr_key`, `id_category`, `id_goods`) VALUES (4, 1, '2019-12-10 18:57:57', NULL, NULL, '黑', 3, 3, NULL);
+INSERT INTO `t_shop_attr_val` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `attr_val`, `id_attr_key`, `id_category`, `id_goods`) VALUES (5, 1, '2019-12-10 18:57:57', NULL, NULL, '珊瑚橙', 2, NULL, 1);
+INSERT INTO `t_shop_attr_val` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `attr_val`, `id_attr_key`, `id_category`, `id_goods`) VALUES (6, 1, '2019-12-10 18:57:57', NULL, NULL, '深海蓝', 2, NULL, 1);
+
+-- ----------------------------
+-- Records of t_shop_goods_sku.sql
+-- ----------------------------
+INSERT INTO `t_shop_goods_sku` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `code_name`, `id_goods`, `marketing_price`, `price`, `stock`) VALUES (1, NULL, '2019-12-10 18:57:57', NULL, NULL, '1,5', '3GB+32GB,珊瑚橙', 1, NULL, '69900', 100);
+INSERT INTO `t_shop_goods_sku` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `code_name`, `id_goods`, `marketing_price`, `price`, `stock`) VALUES (2, NULL, '2019-12-10 18:57:57', NULL, NULL, '1,6', '3GB+32GB,深海蓝', 1, NULL, '69900', 100);
+INSERT INTO `t_shop_goods_sku` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `code_name`, `id_goods`, `marketing_price`, `price`, `stock`) VALUES (3, NULL, '2019-12-10 18:57:57', NULL, NULL, '2,5', '4GB+64GB,珊瑚橙', 1, '79900', '74900', 100);
+INSERT INTO `t_shop_goods_sku` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `code_name`, `id_goods`, `marketing_price`, `price`, `stock`) VALUES (4, NULL, '2019-12-10 18:57:57', NULL, NULL, '2,6', '4GB+64GB,深海蓝', 1, '79900', '74900', 100);

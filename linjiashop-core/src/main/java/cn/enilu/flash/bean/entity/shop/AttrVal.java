@@ -15,20 +15,17 @@ import javax.persistence.EntityListeners;
  */
 
 @Data
-@Table(appliesTo = "t_shop_goods_attr_val",comment = "商品属性值")
-@Entity(name="t_shop_goods_attr_val")
+@Table(appliesTo = "t_shop_attr_val",comment = "商品属性值")
+@Entity(name="t_shop_attr_val")
 @EntityListeners(AuditingEntityListener.class)
-public class GoodsAttrVal extends BaseEntity {
+public class AttrVal extends BaseEntity {
     @Column(name="id_attr_key",columnDefinition = "BIGINT COMMENT '属性id'")
     private Long idAttrKey;
+    @Column(name="id_category",columnDefinition = "BIGINT COMMENT '商品类别id'")
+    private Long idCategory;
     @Column(name="id_goods",columnDefinition = "BIGINT COMMENT '商品id'")
     private Long idGoods;
     @Column(name="attr_val",columnDefinition = "VARCHAR(32) COMMENT '属性值'")
     private String attrVal;
-    /**
-     * 该字段是对指定商品下的的属性值的一个序号标记, 是为了提高检索效率。
-     */
-    @Column(name="symbol",columnDefinition = "INT COMMENT '属性编码'")
-    private Integer symbol;
 
 }

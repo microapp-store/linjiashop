@@ -62,7 +62,7 @@ public class GoodsController {
 		if (id == null) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
 		}
-		return Rets.success(goodsService.get(id));
+		return Rets.success(goodsService.getDetail(id));
 	}
 	@RequestMapping(value="/changeIsOnSale",method = RequestMethod.POST)
 	@RequiresPermissions(value = {Permission.GOODS_EDIT})

@@ -1,7 +1,7 @@
 package cn.enilu.flash.api.controller.shop;
 
-import cn.enilu.flash.bean.entity.shop.GoodsAttrKey;
-import cn.enilu.flash.service.shop.GoodsAttrKeyService;
+import cn.enilu.flash.bean.entity.shop.AttrKey;
+import cn.enilu.flash.service.shop.AttrKeyService;
 
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.constant.factory.PageFactory;
@@ -10,9 +10,7 @@ import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 
-import cn.enilu.flash.utils.Maps;
 import cn.enilu.flash.utils.StringUtil;
-import cn.enilu.flash.utils.ToolUtil;
 import cn.enilu.flash.utils.factory.Page;
 
 import org.slf4j.Logger;
@@ -26,17 +24,17 @@ import org.springframework.web.bind.annotation.*;
 public class GoodsAttrKeyController {
 	private  Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
-	private GoodsAttrKeyService goodsAttrKeyService;
+	private AttrKeyService goodsAttrKeyService;
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public Object list() {
-	Page<GoodsAttrKey> page = new PageFactory<GoodsAttrKey>().defaultPage();
+	Page<AttrKey> page = new PageFactory<AttrKey>().defaultPage();
 		page = goodsAttrKeyService.queryPage(page);
 		return Rets.success(page);
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	@BussinessLog(value = "编辑商品属性名", key = "name",dict= CommonDict.class)
-	public Object save(@ModelAttribute GoodsAttrKey tShopGoodsAttrKey){
+	public Object save(@ModelAttribute AttrKey tShopGoodsAttrKey){
 		if(tShopGoodsAttrKey.getId()==null){
 			goodsAttrKeyService.insert(tShopGoodsAttrKey);
 		}else {

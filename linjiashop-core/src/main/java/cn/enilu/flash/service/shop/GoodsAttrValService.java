@@ -1,7 +1,7 @@
 package cn.enilu.flash.service.shop;
 
 
-import cn.enilu.flash.bean.entity.shop.GoodsAttrVal;
+import cn.enilu.flash.bean.entity.shop.AttrVal;
 import cn.enilu.flash.dao.shop.GoodsAttrValRepository;
 
 import cn.enilu.flash.service.BaseService;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GoodsAttrValService extends BaseService<GoodsAttrVal,Long,GoodsAttrValRepository>  {
+public class GoodsAttrValService extends BaseService<AttrVal,Long,GoodsAttrValRepository>  {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private GoodsAttrValRepository goodsAttrValRepository;

@@ -15,12 +15,11 @@ public class SearchFilter {
     public enum Operator {
         EQ, NE, LIKE, LIKEL, LIKER, GT, LT, GTE, LTE, IN, NOTIN, ISNULL, ISNOTNULL, BETWEEN
     }
-
     public enum Join {
         and, or
     }
 
-    public Join join;
+    public Join join = Join.and;
     public String fieldName;
     public Object value;
     public Operator operator;
@@ -33,20 +32,24 @@ public class SearchFilter {
         return new SearchFilter(fieldName, operator, value);
     }
 
-    public static SearchFilter build(String fieldName, Operator operator) {
-        return new SearchFilter(fieldName, operator);
-    }
 
-    public SearchFilter(String fieldName, Operator operator) {
-        this.fieldName = fieldName;
-        this.operator = operator;
-    }
+    public static  SearchFilter build (String fieldName, Object value,Join join) {
+        return new SearchFilter(fieldName,Operator.EQ,value,join);
 
+    }
     public SearchFilter(String fieldName, Operator operator, Object value) {
         if (!StringUtil.isNullOrEmpty(value)) {
             this.fieldName = fieldName;
             this.value = value;
             this.operator = operator;
+        }
+    }
+    public SearchFilter(String fieldName, Operator operator, Object value,Join join) {
+        if (!StringUtil.isNullOrEmpty(value)) {
+            this.fieldName = fieldName;
+            this.value = value;
+            this.operator = operator;
+            this.join = join;
         }
     }
 

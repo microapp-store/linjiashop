@@ -8,7 +8,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author ：enilu
@@ -19,38 +18,41 @@ public class SimpleSpecification <T> implements Specification<T> {
     /**
      * 查询的条件列表，是一组列表
      */
-    private List<SearchFilter> operators;
+    private Collection<SearchFilter> filters;
 
-    public SimpleSpecification(List<SearchFilter> operators) {
-        this.operators = operators;
+    public SimpleSpecification(Collection<SearchFilter> operators) {
+        this.filters = operators;
     }
 
     @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-        int index = 0;
-        //通过resultPre来组合多个条件
-        Predicate resultPre = null;
-        for (SearchFilter op : operators) {
-            if (index++ == 0) {
-                resultPre = generatePredicate(root, cb, op);
-                continue;
+        if (filters !=null && !filters.isEmpty()) {
+            int index = 0;
+            //通过resultPre来组合多个条件
+            Predicate resultPre = null;
+            for (SearchFilter op : filters) {
+                if (index++ == 0) {
+                    resultPre = generatePredicate(root, cb, op);
+                    continue;
+                }
+                Predicate pre = generatePredicate(root, cb, op);
+                if (pre == null) {
+                    continue;
+                }
+                switch (op.join) {
+                    case and:
+                        resultPre = cb.and(resultPre, pre);
+                        break;
+                    case or:
+                        resultPre = cb.or(resultPre, pre);
+                        break;
+                    default:
+                        break;
+                }
             }
-            Predicate pre = generatePredicate(root, cb, op);
-            if (pre == null) {
-                continue;
-            }
-            switch (op.join) {
-                case and :
-                    resultPre = cb.and(resultPre, pre);
-                    break;
-                case or :
-                    resultPre = cb.or(resultPre, pre);
-                    break;
-                default:
-                    break;
-            }
+            return resultPre;
         }
-        return resultPre;
+       return  cb.conjunction();
     }
 
     /**
@@ -63,7 +65,6 @@ public class SimpleSpecification <T> implements Specification<T> {
      */
     private Predicate generatePredicate(Root<T> root, CriteriaBuilder cb, SearchFilter op) {
         Object value = op.value;
-        op.operator =  SearchFilter.Operator.EQ  ;
         switch (op.operator) {
             case EQ:
                 return cb.equal(root.get(op.fieldName), value);

@@ -14,7 +14,6 @@ import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.MD5;
 import cn.enilu.flash.utils.Maps;
 import cn.enilu.flash.utils.StringUtil;
-import cn.enilu.flash.web.ApiConstants;
 import cn.enilu.flash.web.controller.BaseController;
 import org.nutz.mapl.Mapl;
 import org.slf4j.Logger;

@@ -58,7 +58,7 @@ public class JwtUtil {
         try {
             DecodedJWT jwt = JWT.decode(token);
             return jwt.getClaim("userId").asLong();
-        } catch (JWTDecodeException e) {
+        } catch (Exception e) {
             return null;
         }
     }

@@ -9,6 +9,13 @@ export function getList(params) {
 }
 
 
+export function saveBaseInfo(params) {
+  return request({
+    url: '/shop/goods/saveBaseInfo',
+    method: 'post',
+    data : params
+  })
+}
 export function save(params) {
     return request({
         url: '/shop/goods',

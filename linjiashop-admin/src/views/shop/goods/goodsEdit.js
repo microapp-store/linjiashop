@@ -1,11 +1,13 @@
 import editorImage from '@/components/Tinymce'
 import plugins from '@/components/editContainer/plugins'
 import toolbar from '@/components/editContainer/toolbar'
-import {get, getList, save} from '@/api/shop/goods'
+import {get, getList, save,saveBaseInfo} from '@/api/shop/goods'
+import skuRequest from '@/api/shop/goodsSku'
 import {getAttrBy} from '@/api/shop/attrVal'
 import {getCategories} from '@/api/shop/category'
 import {getApiUrl} from '@/utils/utils'
 import {getToken} from '@/utils/auth'
+import goodsSku from "../../../api/shop/goodsSku";
 
 export default {
   components: {editorImage},
@@ -42,7 +44,7 @@ export default {
       spec:'one',
       specs:[],
       specDialogFormVisible:false,
-      specsForm:{},
+      skuForm:{},
       attrKeySel:'',
       attrKeyList:[],
       attrValList:[],
@@ -52,8 +54,8 @@ export default {
       attrValSel:'',
       attrValListSel:[],
       tags:[
-        {attrVal:'3G+128G',id:1},
-        {attrVal:'哑光黑',id:2}
+        // {attrVal:'3G+128G',id:1},
+        // {attrVal:'哑光黑',id:2}
       ],
       form: {
         pic:'',
@@ -133,8 +135,8 @@ export default {
               })
             }
           }
-          this.setContent(this.form .detail)
-          getAttrBy(this.form.idCategory,this.idGoods).then(response2 => {
+          this.setContent(this.form.detail)
+          getAttrBy(this.form.idCategory).then(response2 => {
               this.attrKeyList = response2.data.keyList
               this.attrValList = response2.data.valList
           })
@@ -151,13 +153,42 @@ export default {
       }
     },
     save() {
+
+      if(!this.idGoods && this.active == 0 ){
+        //第一步提交的时候先保存下商品以便获取商品id
+        if(this.form.name === '' ||
+        this.form.idCategory === '' ||
+        this.form.descript === ''){
+          this.$message({
+            message: '请输入必要的商品项目',
+            type: 'error'
+          })
+          return
+        }
+        saveBaseInfo({
+          name: this.form.name,
+          idCategory: this.form.idCategory,
+          descript: this.form.descript
+        }).then( response => {
+          this.idGoods = response.data
+        })
+        getAttrBy(this.form.idCategory).then(response2 => {
+          this.attrKeyList = response2.data.keyList
+          this.attrValList = response2.data.valList
+        })
+      }
       if (this.active < 3) {
         this.active++
         return
       }
       const content = this.getContent()
       const gallery = this.getGallery()
-
+      if(this.spec === 'more'){
+        //如果商品配置多规格，则删除单规格配置
+        this.form.price =''
+        this.form.marketingPrice =''
+        this.form.stock = ''
+      }
       save({
         name: this.form.name,
         pic: this.form.pic,
@@ -165,8 +196,7 @@ export default {
         idCategory: this.form.idCategory,
         descript: this.form.descript,
         detail: content,
-        specifications: this.form.specifications,
-        num: this.form.num,
+        stock: this.form.stock,
         price: this.form.price,
         isDelete: this.form.isDelete,
         isOnSale: this.form.isOnSale,
@@ -178,8 +208,8 @@ export default {
         })
         this.$router.push('/goods')
       })
-
     },
+
     getGallery() {
       let gallery = ''
       for (let i = 0; i < this.galleryList.length; i++) {
@@ -297,21 +327,30 @@ export default {
       }
       return ''
     },
-    handleDelete(index) {
-      this.specs.splice(index, 1)
-    },
     changeAttrKey(val){
       console.log('val',val)
+      console.log('this.attrValList',this.attrValList)
       let attrValSel = []
       for(let i=0;i<this.attrValList.length;i++){
         if(this.attrValList[i].idAttrKey === val){
           attrValSel.push(this.attrValList[i])
         }
       }
+
       this.attrValListSel = attrValSel
+      this.attrValSel = attrValSel[0].id
     },
     addAttrKeyFun() {
       this.showAddAttrKey = !this.showAddAttrKey
+    },
+    addToTag(){
+      for(let i=0;i<this.attrValList.length;i++){
+        if(this.attrValList[i].id === this.attrValSel){
+          this.tags.push(this.attrValList[i])
+          break
+        }
+      }
+
     },
     submitAttrKeyForm() {
       console.log('submitAttrKeyForm')
@@ -337,8 +376,66 @@ export default {
       //提交成功后，将属性名自动选择当前属性名
       //提交成功后自动收起添加属性名表单，并且将并单清空重置
     },
-    addSpec() {
-      console.log('addSpec')
+    openAddSkuForm() {
+      this.tags = []
+      this.specDialogFormVisible = true
+    },
+    closeAddSkuForm() {
+      this.specDialogFormVisible = false
+    },
+    getSkuCode(){
+      let code = ''
+      let codeName = ''
+      for(let i =0; i<this.tags.length;i++){
+        if(i===0){
+          code = this.tags[i].id
+          codeName = this.tags[i].attrVal
+        }else{
+          code += ',' + this.tags[i].id
+          codeName += ',' + this.tags[i].attrVal
+        }
+      }
+      return {code:code,codeName:codeName}
+    },
+    addSku() {
+      console.log('addSku')
+      if(this.tags.length==0){
+        this.$message({
+          message: '请选择商品规格',
+          type: 'error'
+        })
+        return
+      }
+      const skuCodeAndName = this.getSkuCode()
+      goodsSku.save({
+        idGoods:this.idGoods,
+        marketingPrice:this.skuForm.marketingPrice,
+        code:skuCodeAndName.code,
+        codeName:skuCodeAndName.codeName,
+        price:this.skuForm.price,
+        stock:this.skuForm.stock
+      }).then( response => {
+
+        let sku = response.data
+        let updateOldSku = false
+        for(let i=0;i<this.skuList.length;i++){
+          if(this.skuList[i].id === sku.id){
+            this.skuList.splice(i,1,sku)
+            updateOldSku = true
+            break;
+          }
+        }
+        if(!updateOldSku){
+          this.skuList.push(sku)
+        }
+        this.specDialogFormVisible = false
+      })
+    },
+    removeSku(index) {
+      console.log(index)
+      let records = this.skuList.splice(index, 1)
+      const record = records[0]
+      goodsSku.remove(record.id)
     }
 
   }

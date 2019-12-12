@@ -21,7 +21,6 @@ public class Goods extends BaseEntity {
     @NotBlank(message = "商品名称不能为空")
     @Column(columnDefinition = "VARCHAR(32) COMMENT '名称'")
     private String name;
-    @NotBlank(message = "商品小图不能为空")
     @Column(columnDefinition = "VARCHAR(16) COMMENT '小图'")
     private String pic;
     @Column(columnDefinition = "VARCHAR(32) COMMENT '大图相册列表,以逗号分隔'")
@@ -42,7 +41,7 @@ public class Goods extends BaseEntity {
      * 如果商品是多规格，则存所有库存之和
      */
     @Column(columnDefinition = "INT COMMENT '库存数量'")
-    private Integer num;
+    private Integer stock;
     /**
      * 如果商品是多规格，则存最低价
      */

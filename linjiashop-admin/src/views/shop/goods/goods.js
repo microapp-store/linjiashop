@@ -87,17 +87,16 @@ export default {
     add() {
       this.$router.push('goodsEdit')
     },
-    edit() {
-      if (this.checkSel()) {
-        this.$router.push({path:'goodsEdit',query:{id:this.selRow.id}})
-      }
+    edit(id) {
+        this.$router.push({path:'goodsEdit',query:{id:id}})
+
     },
     changeIsOnSale(sel){
       console.log('id',sel.id)
       console.log('isOnSale',sel.isOnSale)
       changeIsOnSale(sel.id,sel.isOnSale).then( response =>{
         this.$message({
-          message: this.$t('common.optionSuccess'),
+          message: sel.isOnSale?'上架成功':'下架成功',
           type: 'success'
         })
       })

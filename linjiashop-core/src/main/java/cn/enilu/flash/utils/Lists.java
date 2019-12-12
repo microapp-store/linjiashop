@@ -267,6 +267,20 @@ public final class Lists {
         return list;
     }
 
+    /**
+     * 使用指定拼接符将集合拼接为字符串
+     * @param list
+     * @param str
+     * @return
+     */
+    public static  String concat(List list,String str){
+        StringBuilder builder = new StringBuilder();
+        for(Object obj:list){
+            builder.append(obj.toString()).append(str);
+        }
+        return builder.toString().substring(0,builder.toString().length()-1);
+    }
+
     private static Object getProperty(Object bean,String name){
         return BeanUtils.getBeanProperty(bean,name);
     }

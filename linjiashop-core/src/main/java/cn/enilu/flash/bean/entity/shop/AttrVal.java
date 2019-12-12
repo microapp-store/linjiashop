@@ -5,9 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
+import javax.persistence.*;
 
 /**
  * @author ：enilu
@@ -21,10 +19,9 @@ import javax.persistence.EntityListeners;
 public class AttrVal extends BaseEntity {
     @Column(name="id_attr_key",columnDefinition = "BIGINT COMMENT '属性id'")
     private Long idAttrKey;
-    @Column(name="id_category",columnDefinition = "BIGINT COMMENT '商品类别id'")
-    private Long idCategory;
-    @Column(name="id_goods",columnDefinition = "BIGINT COMMENT '商品id'")
-    private Long idGoods;
+    @JoinColumn(name="id_attr_key", insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
+    @ManyToOne(fetch = FetchType.LAZY)
+    private AttrKey attrKey;
     @Column(name="attr_val",columnDefinition = "VARCHAR(32) COMMENT '属性值'")
     private String attrVal;
 

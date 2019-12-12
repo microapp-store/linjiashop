@@ -20,9 +20,9 @@ import java.math.BigDecimal;
 @Entity(name="t_shop_goods_sku")
 @EntityListeners(AuditingEntityListener.class)
 public class GoodsSku extends BaseEntity {
-    @Column(name="code",columnDefinition = "VARCHAR(32) COMMENT 'sku编码,格式:逗号分割的属性值id'",unique = true)
+    @Column(name="code",columnDefinition = "VARCHAR(32) COMMENT 'sku编码,格式:逗号分割的属性值id'")
     private String code;
-    @Column(name="code_name",columnDefinition = "VARCHAR(32) COMMENT 'sku名称,格式:逗号分割的属性值'",unique = true)
+    @Column(name="code_name",columnDefinition = "VARCHAR(32) COMMENT 'sku名称,格式:逗号分割的属性值'")
     private String codeName;
     @Column(name="id_goods",columnDefinition = "BIGINT COMMENT '商品id'")
     private Long idGoods;

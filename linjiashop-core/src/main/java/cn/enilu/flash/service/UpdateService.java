@@ -13,4 +13,10 @@ public interface UpdateService <T, ID> {
      * @return 返回修改的记录
      */
     T update(T record);
+
+    /**
+     * 批量更新
+     * @param list
+     */
+    void update(Iterable<T> list);
 }

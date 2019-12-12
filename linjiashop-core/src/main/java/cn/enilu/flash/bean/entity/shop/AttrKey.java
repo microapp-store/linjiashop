@@ -23,7 +23,5 @@ public class AttrKey extends BaseEntity {
     private String attrName;
     @Column(name="id_category",columnDefinition = "BIGINT COMMENT '商品类别id'")
     private Long idCategory;
-    @Column(name="id_goods",columnDefinition = "BIGINT COMMENT '商品id'")
-    private Long idGoods;
 
 }

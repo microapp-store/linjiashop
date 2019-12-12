@@ -8,8 +8,10 @@ import cn.enilu.flash.bean.entity.shop.AttrVal;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
+import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.AttrKeyService;
 import cn.enilu.flash.service.shop.AttrValService;
+import cn.enilu.flash.utils.Lists;
 import cn.enilu.flash.utils.Maps;
 import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.utils.factory.Page;
@@ -29,11 +31,17 @@ public class AttrValController {
     @Autowired
     private AttrKeyService attrKeyService;
 
-    @RequestMapping("/getAttrByCategoryAndGoods/{idCategory}/{idGoods}")
-    public Object getAttrByCategoryAndGoods(@PathVariable("idCategory") Long idCategory,
-                                            @PathVariable("idGoods") Long idGoods) {
-        List<AttrKey> keyList = attrKeyService.queryBy(idCategory, idGoods);
-        List<AttrVal> valList = attrValService.queryBy(idCategory, idGoods);
+    @RequestMapping("/getAttrByCategoryAndGoods/{idCategory}")
+    public Object getAttrByCategoryAndGoods(@PathVariable("idCategory") Long idCategory) {
+        List<AttrKey> keyList = attrKeyService.queryBy(idCategory);
+        List<Long> idAttrKeyList = Lists.newArrayList();
+        for(AttrKey attrKey:keyList){
+            idAttrKeyList.add(attrKey.getId());
+        }
+        List<AttrVal> valList = Lists.newArrayList();
+        if(!idAttrKeyList.isEmpty()) {
+            valList = attrValService.queryAll(SearchFilter.build("idAttrKey", SearchFilter.Operator.IN, idAttrKeyList));
+        }
         return Rets.success(Maps.newHashMap(
                 "keyList", keyList,
                 "valList", valList

@@ -102,19 +102,22 @@
         <el-col :span="24">
           <el-form-item label="商品规格">
             <el-radio class="radio" v-model="spec" label="one">单规格</el-radio>
-            <el-radio class="radio" v-model="spec" label="more">多规格</el-radio>
+            <el-radio class="radio" v-model="spec" label="more" v-show="attrKeyList.length>0">多规格</el-radio>
           </el-form-item>
         </el-col>
         <el-col :span="24" v-if="spec == 'one'">
           <el-form-item label="库存">
-            <el-input-number v-model="form.num" :min="0" :max="100000"></el-input-number>
+            <el-input-number v-model="form.stock" :min="0" :max="100000"></el-input-number>
+          </el-form-item>
+          <el-form-item label="市场价(分)">
+            <el-input-number v-model="form.marketingPrice" :min="0" :max="10000000"></el-input-number>
           </el-form-item>
           <el-form-item label="价格(分)">
-            <el-input-number v-model="form.price" :min="0" :max="1000000"></el-input-number>
+            <el-input-number v-model="form.price" :min="0" :max="10000000"></el-input-number>
           </el-form-item>
         </el-col>
         <el-col  :offset="3" :span="18" v-else style="overflow: auto; text-align: center;">
-          <el-button type="primary" @click="specDialogFormVisible = true" style="margin-bottom: 10px;">添加规格</el-button>
+          <el-button type="primary" @click="openAddSkuForm" style="margin-bottom: 10px;">添加规格</el-button>
           <el-table
             :data="skuList"
             style="margin-bottom: 20px;"
@@ -143,7 +146,7 @@
                 <el-button
                   size="small"
                   type="danger"
-                  @click="handleDelete(scope.$index)">删除
+                  @click="removeSku(scope.$index)">删除
                 </el-button>
               </template>
             </el-table-column>
@@ -153,7 +156,7 @@
       </el-row>
     </el-form>
     <el-dialog title="SKU配置" :visible.sync="specDialogFormVisible">
-      <el-form :model="specsForm">
+      <el-form :model="skuForm">
 
             <el-form-item label="已选规格" label-width="100px" prop="specs">
             <el-tag
@@ -166,8 +169,8 @@
             </el-form-item>
 
         <el-row>
-          <el-col span="8">
-            <el-form-item label="属性名" label-width="100px" prop="specs">
+          <el-col :span="8">
+            <el-form-item label="属性名" label-width="100px"  >
               <el-select
                 v-model="attrKeySel"
                 filterable
@@ -185,8 +188,8 @@
 
             </el-form-item>
           </el-col>
-          <el-col span="8">
-            <el-form-item label="属性值" label-width="100px" prop="specs">
+          <el-col :span="8">
+            <el-form-item label="属性值" label-width="100px"  >
               <el-select
                 v-model="attrValSel"
                 filterable
@@ -203,21 +206,24 @@
 
             </el-form-item>
           </el-col>
-          <el-col offset="2" span="6">
-            <el-button type="success" @click="dialogFormVisible = false">添加规格</el-button>
+          <el-col :offset="2" :span="6">
+            <el-button type="success" @click="addToTag">添加规格</el-button>
           </el-col>
         </el-row>
 
-        <el-form-item label="包装费" label-width="100px">
-          <el-input-number v-model="specsForm.packing_fee" :min="0" :max="100"></el-input-number>
+        <el-form-item label="市场价(分)" label-width="100px">
+          <el-input-number v-model="skuForm.marketingPrice" :min="0" :max="100000"></el-input-number>
         </el-form-item>
-        <el-form-item label="价格" label-width="100px">
-          <el-input-number v-model="specsForm.price" :min="0" :max="10000"></el-input-number>
+        <el-form-item label="价格(分)" label-width="100px">
+          <el-input-number v-model="skuForm.price" :min="0" :max="1000000"></el-input-number>
+        </el-form-item>
+        <el-form-item label="库存" label-width="100px">
+          <el-input-number v-model="skuForm.stock" :min="0" :max="100000"></el-input-number>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="default" @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addSpec">确 定</el-button>
+        <el-button type="default" @click="closeAddSkuForm">取 消</el-button>
+        <el-button type="primary" @click="addSku">确 定</el-button>
       </div>
     </el-dialog>
     <br>

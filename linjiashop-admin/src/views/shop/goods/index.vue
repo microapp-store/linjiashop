@@ -15,8 +15,6 @@
         <el-col :span="24">
           <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}
           </el-button>
-          <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}
-          </el-button>
         </el-col>
       </el-row>
     </div>
@@ -53,6 +51,12 @@
             @change="changeIsOnSale(scope.row)"
           >
           </el-switch>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit(scope.row.id)" circle>
+          </el-button>
         </template>
       </el-table-column>
 

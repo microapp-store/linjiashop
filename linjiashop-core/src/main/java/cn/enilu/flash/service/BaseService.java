@@ -146,6 +146,11 @@ public abstract class BaseService<T, ID extends Serializable, R extends BaseRepo
     }
 
     @Override
+    public void update(Iterable<T> list) {
+        dao.saveAll(list);
+    }
+
+    @Override
     public void clear() {
         dao.deleteAllInBatch();
     }

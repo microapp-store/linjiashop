@@ -60,6 +60,10 @@ public class GoodsController {
 					sku.setStock(0);
 				}
 				goodsSkuService.update(skuList);
+			}else{
+				for(GoodsSku sku:skuList){
+					goods.setStock(goods.getStock()+sku.getStock());
+				}
 			}
 		}
 		if(goods.getId()==null){

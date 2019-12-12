@@ -41,7 +41,7 @@ public class Goods extends BaseEntity {
      * 如果商品是多规格，则存所有库存之和
      */
     @Column(columnDefinition = "INT COMMENT '库存数量'")
-    private Integer stock;
+    private Integer stock=0;
     /**
      * 如果商品是多规格，则存最低价
      */

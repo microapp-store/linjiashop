@@ -12,6 +12,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (getToken()) {
+      console.log('token',getToken())
       // 让每个请求携带自定义token 请根据实际情况自行修改
       config.headers['Authorization'] = getToken()
     }
@@ -36,6 +37,7 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
+    console.log('response',response)
     const res = response.data
     // console.log('response',response)
     // if the custom code is not 20000, it is judged as an error.
@@ -55,7 +57,7 @@ service.interceptors.response.use(
         case 401:
           console.log(401)
           router.replace({
-            path: 'login',
+            path: '/login',
             query:{redirect:router.currentRoute.path}
           })
           return
@@ -63,16 +65,19 @@ service.interceptors.response.use(
         case 500:
           console.log(500)
           if(error.response.data.message && error.response.data.message.indexOf('relogin')>-1){
+            console.log('relogin')
             router.replace({
-              path: 'login',
+              path: '/login',
               query:{redirect:router.currentRoute.path}
             })
+            return Promise.reject(error.response.data.message)
           }else{
             return Promise.reject(error.response.data.message)
           }
           break;
+        default:
+          return Promise.reject(error.response.data.message)
       }
-      return Promise.reject(error.response.data.message)
     }
   }
 )

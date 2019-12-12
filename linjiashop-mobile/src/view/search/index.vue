@@ -8,7 +8,7 @@
                   >
 
         <van-card v-for="(goods,index) in goodsList" :key="index"
-                  :num="goods.num"
+                  :num="goods.stock"
                   :price="formatPrice(goods.price)"
                   :desc="goods.descript"
                   :title="goods.name"

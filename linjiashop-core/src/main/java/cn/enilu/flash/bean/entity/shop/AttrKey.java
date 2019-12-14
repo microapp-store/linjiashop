@@ -5,9 +5,8 @@ import lombok.Data;
 import org.hibernate.annotations.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author ：enilu
@@ -23,5 +22,8 @@ public class AttrKey extends BaseEntity {
     private String attrName;
     @Column(name="id_category",columnDefinition = "BIGINT COMMENT '商品类别id'")
     private Long idCategory;
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name="id_attr_key")
+    private List<AttrVal> attrVals;
 
 }

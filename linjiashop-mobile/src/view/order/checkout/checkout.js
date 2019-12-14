@@ -49,11 +49,10 @@ export default {
     methods: {
         init() {
             const chosenAddressId = getCookie('chosenAddressId')
-            console.log('chosenAddressId',chosenAddressId)
             order.prepareCheckout({chosenAddressId:chosenAddressId}).then(response => {
                 let cartList = response.data.list
                 this.addr = response.data.addr
-                for (var index in cartList) {
+                for (let index in cartList) {
                     cartList[index].thumb = baseApi+ '/file/getImgStream?idFile=' + cartList[index].goods.pic
                     this.checkedGoods.push(cartList[index].id + '')
                 }

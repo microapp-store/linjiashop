@@ -59,6 +59,7 @@ public class ShiroConfig {
 
         Map<String, String> filterRuleMap =  new LinkedHashMap<String,String>();
         filterRuleMap.put("/account/**","anon");
+        filterRuleMap.put("/file/getImgStream","anon");
         filterRuleMap.put("/account/logout", "logout");
         // 访问401和404页面不通过我们的Filter
         filterRuleMap.put("/401", "anon");

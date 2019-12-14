@@ -3,16 +3,14 @@ package cn.enilu.flash.mobile.controller;
 import cn.enilu.flash.bean.entity.shop.Cart;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
+import cn.enilu.flash.bean.vo.shop.CartVo;
 import cn.enilu.flash.service.shop.CartService;
+import cn.enilu.flash.service.shop.GoodsService;
+import cn.enilu.flash.service.shop.GoodsSkuService;
 import cn.enilu.flash.utils.HttpUtil;
-import cn.enilu.flash.utils.Lists;
-import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,6 +24,10 @@ import java.util.List;
 public class CartController extends BaseController {
     @Autowired
     private CartService cartService;
+    @Autowired
+    private GoodsSkuService goodsSkuService;
+    @Autowired
+    private GoodsService goodsService;
     @RequestMapping(value = "/queryByUser",method = RequestMethod.GET)
     public Object getByUser(){
         Long idUser = getIdUser(HttpUtil.getRequest());
@@ -33,28 +35,10 @@ public class CartController extends BaseController {
         return Rets.success(list);
     }
     @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public Object add(@RequestParam("idGoods") Long idGoods,
-                          @RequestParam(value = "count",required = false) String count){
-
-        if(StringUtil.isEmpty(count)){
-            count = "1";
-        }
+    public Object add(@RequestBody CartVo cartVo){
         Long idUser = getIdUser();
-        List<SearchFilter> searchFilters = Lists.newArrayList(
-                SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser),
-                SearchFilter.build("idGoods", SearchFilter.Operator.EQ,idGoods)
-        );
-        Cart old  = cartService.get(searchFilters);
-        if(old!=null){
-            old.setCount(old.getCount().add(new BigDecimal(count)));
-            cartService.update(old);
-            return Rets.success();
-        }
-        Cart cart = new Cart();
-        cart.setIdGoods(idGoods);
-        cart.setCount(new BigDecimal(count));
-        cart.setIdUser(idUser);
-        cartService.insert(cart);
+        cartVo.setIdUser(idUser);
+       cartService.add(cartVo);
         return Rets.success();
     }
 

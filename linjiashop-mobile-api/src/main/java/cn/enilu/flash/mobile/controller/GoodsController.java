@@ -90,31 +90,61 @@ public class GoodsController extends BaseController {
         List<GoodsSku> skuList = goodsSkuService.queryAll(Lists.newArrayList(
                 SearchFilter.build("idGoods", id)
         ));
-        List<AttrVal> attrValList = attrValService.queryBy(goods.getIdCategory());
-        List<AttrKey> attrKeyList = attrKeyService.queryBy(goods.getIdCategory());
 
-        Map<Long, List<AttrVal>> group = Lists.group(attrValList, "idAttrKey");
 
-        Map skuVo = Maps.newHashMap();
+        Map skuMap = Maps.newHashMap();
+
         List<Map> tree = Lists.newArrayList();
-        for (AttrKey attrKey : attrKeyList) {
-            Map treeNode = Maps.newHashMap();
-            treeNode.put("k", attrKey.getAttrName());
-            List<Map> v = Lists.newArrayList();
-            List<AttrVal> attrValListChildren = group.get(attrKey.getId());
-            for (AttrVal attrVal : attrValListChildren) {
-                v.add(Maps.newHashMap(
-                        "id", attrVal.getId(),
-                        "name", attrVal.getAttrVal()
-                ));
+
+        if (!skuList.isEmpty()) {
+            List<AttrVal> attrValList = Lists.newArrayList();
+            List<AttrKey> attrKeyList = attrKeyService.queryBy(goods.getIdCategory());
+            for (AttrKey attrKey : attrKeyList) {
+                Map treeNode = Maps.newHashMap();
+                treeNode.put("k", attrKey.getAttrName());
+                List<Map> v = Lists.newArrayList();
+                List<AttrVal> attrValListChildren = attrKey.getAttrVals();
+                attrValList.addAll(attrValListChildren);
+                for (AttrVal attrVal : attrValListChildren) {
+                    v.add(Maps.newHashMap(
+                            "id", attrVal.getId(),
+                            "name", attrVal.getAttrVal()
+                    ));
+                }
+                treeNode.put("v", v);
+                treeNode.put("k_s", "s" + attrKey.getId());
+                tree.add(treeNode);
             }
-            treeNode.put("v", v);
-            tree.add(treeNode);
+            Map<Long, AttrVal> attrValMap = Lists.toMap(attrValList, "id");
+            List<Map> skuList2 = Lists.newArrayList();
+
+            for (GoodsSku sku : skuList) {
+                Map oneSkuMap = Maps.newHashMap();
+                oneSkuMap.put("id", sku.getId());
+                oneSkuMap.put("price", sku.getPrice());
+                String[] attrValIdArr = sku.getCode().split(",");
+                for (String attrValId : attrValIdArr) {
+                    AttrVal attrVal = attrValMap.get(Long.valueOf(attrValId));
+                    oneSkuMap.put("s" + attrVal.getIdAttrKey(), attrVal.getId());
+                }
+                oneSkuMap.put("stock_num", sku.getStock());
+                skuList2.add(oneSkuMap);
+            }
+            skuMap.put("list", skuList2);
+            skuMap.put("price", skuList.get(0).getPrice());
+            skuMap.put("collection_id", skuList.get(0).getId());
+            skuMap.put("none_sku", false);
+        } else {
+            skuMap.put("price", goods.getPrice());
+            skuMap.put("collection_id", goods.getId());
+            skuMap.put("none_sku", true);
         }
-        skuVo.put("tree", tree);
+        skuMap.put("tree", tree);
+        skuMap.put("stock_num", goods.getStock());
+        skuMap.put("hide_stock", false);
         return Rets.success(Maps.newHashMap(
                 "goods", goods,
-                "skuList", skuList
+                "sku", skuMap
         ));
     }
 }

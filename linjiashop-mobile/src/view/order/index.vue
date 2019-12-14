@@ -23,7 +23,7 @@
       >
         <van-card v-for="(orderItem, index2) in item.items"
                   :key="index2"
-                  :title="orderItem.goods.name"
+                  :title="orderItem.title"
                   :desc="orderItem.goods.descript"
                   :price="formatPrice(orderItem.price)"
                   :num="orderItem.count"

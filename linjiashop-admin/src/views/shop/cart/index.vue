@@ -11,12 +11,12 @@
             </el-table-column>
             <el-table-column label="商品">
                 <template slot-scope="scope">
-                    {{scope.row.goods.name}}
+                    {{scope.row.title}}
                 </template>
             </el-table-column>
           <el-table-column label="商品价格">
             <template slot-scope="scope">
-              {{formatPrice(scope.row.goods.price)}}
+              {{formatPrice(scope.row.price)}}
             </template>
           </el-table-column>
             <el-table-column label="产品规格">

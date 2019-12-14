@@ -25,6 +25,7 @@ module.exports = {
                 title: '准备',
                 collapsable: false,
                 children: [
+                    '/base/preface',
                     '/base/jdkAndMaven',
                     '/base/modules'
                 ]

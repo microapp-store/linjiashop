@@ -38,13 +38,13 @@
             <van-goods-action-icon icon="home-o" @click="toHome">
                 主页
             </van-goods-action-icon>
+            <van-goods-action-icon icon="like-o" @click="sorry">
+                喜欢
+            </van-goods-action-icon>
             <van-goods-action-icon icon="cart-o" @click="goToCart">
                 购物车
             </van-goods-action-icon>
-            <van-goods-action-button type="warning" @click="addCart">
-                加入购物车
-            </van-goods-action-button>
-            <van-goods-action-button type="danger" @click="buy">
+            <van-goods-action-button type="danger" @click="addCart">
                 立即购买
             </van-goods-action-button>
         </van-goods-action>

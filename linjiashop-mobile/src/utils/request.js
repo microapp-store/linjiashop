@@ -12,7 +12,6 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (getToken()) {
-      console.log('token',getToken())
       // 让每个请求携带自定义token 请根据实际情况自行修改
       config.headers['Authorization'] = getToken()
     }
@@ -39,23 +38,19 @@ service.interceptors.response.use(
   response => {
     console.log('response',response)
     const res = response.data
-    // console.log('response',response)
-    // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000) {
       console.log('error',res)
       return Promise.reject(res.msg || 'error')
     } else {
+      console.log('res',res)
       return res
     }
   },
   error => {
 
-    console.log('1error',error.response.data.message)
-    //todo 未完成
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          console.log(401)
           router.replace({
             path: '/login',
             query:{redirect:router.currentRoute.path}
@@ -63,9 +58,7 @@ service.interceptors.response.use(
           return
           break;
         case 500:
-          console.log(500)
           if(error.response.data.message && error.response.data.message.indexOf('relogin')>-1){
-            console.log('relogin')
             router.replace({
               path: '/login',
               query:{redirect:router.currentRoute.path}
@@ -76,6 +69,7 @@ service.interceptors.response.use(
           }
           break;
         default:
+          console.log('aaaaaaaaa')
           return Promise.reject(error.response.data.message)
       }
     }

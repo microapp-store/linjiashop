@@ -7,14 +7,11 @@ export default {
             method: 'get'
         })
     },
-    add: function (idGoods, count) {
+    add: function (params) {
         return request({
             url: '/user/cart/add',
             method: 'POST',
-            params: {
-                "idGoods": idGoods,
-                "count": count
-            }
+            data:params
         })
     },
     update:function(params){

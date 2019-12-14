@@ -88,7 +88,8 @@ public class OrderController extends BaseController {
         for(Cart cart:cartList){
             OrderItem orderItem = new OrderItem();
             orderItem.setIdGoods(cart.getIdGoods());
-            orderItem.setPrice(cart.getGoods().getPrice());
+            orderItem.setIdSku(cart.getIdSku());
+            orderItem.setPrice(cart.getPrice());
             orderItem.setCount(cart.getCount());
             orderItem.setTotalPrice(orderItem.getPrice().multiply(orderItem.getCount()));
             totalPrice = totalPrice.add(orderItem.getTotalPrice());

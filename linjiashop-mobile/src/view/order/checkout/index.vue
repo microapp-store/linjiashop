@@ -7,10 +7,10 @@
                    :key="item.id"    class="card-goods__item">
                 <van-card
                         style="margin-left:15px;"
-                        :title="item.goods.name"
+                        :title="item.title"
                         :desc="item.goods.descript"
                         :num="item.count"
-                        :price="formatPrice(item.goods.price)"
+                        :price="formatPrice(item.price)"
                         :thumb="item.thumb"
                 >
                 </van-card>

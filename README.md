@@ -50,10 +50,11 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 - linjiashop-admin PC端后台管理的前端网页
 - linjiashop-admin-api PC端后台管理的api服务
 - linjiashop-mobile 手机商城的前端网页
-- linjiashop-mobile-api 手机端商城的api服务
-- linjiashop-wxapp 商城小程序版，小程序版和手机版公用一个api服务(linjiashop-mobile-api)
+- linjiashop-mobile-api 移动端商城的api服务（h5,小程序，app都用改api服务作为后台接口）
+- linjiasho-wxapp 微信小程序商城
 - linjiashop-core 基础模块，包括工具类，dao，service，bean等内容
-- linjiashop-generator 代码生成模块,主要生成后台管理的前后端代码,配合IDEA 代码生成插件[webflash-generator](https://plugins.jetbrains.com/plugin/12648-webflash-generator)使用效果更好
+- linjiashop-generator 代码生成模块,根据实体生成dao,service,后台管理的controller和页面,配合IDEA 代码生成插件[webflash-generator](https://plugins.jetbrains.com/plugin/12648-webflash-generator)使用效果更好
+
 ## 运行效果图
 - 手机端：
 ![手机端](doc/img/mobile.gif)
@@ -96,13 +97,19 @@ linjiashop包含了后台管理功能和手机端商城业务功能
         - 运行 npm install --registry=https://registry.npm.taobao.org
         - 运行npm run dev
         - 启动成功后访问 http://localhost:8080/#/index
- 
+- 微信小程序开发
+    - 首先启动后台api服务，和h5公用一个后台服务，即：linjiashop-mobile-api
+    - 进入linjiashop-wxapp目录
+        - 运行  npm install --registry=https://registry.npm.taobao.org
+        - 运行npm run dev
+        - 启动微信开发工具打开linjiashop-wxapp/dist/wx 目录即可预览小程序
  
 ## 技术交流
 - QQ群：254059156
 - 微信：myenilu,添加请备注：邻家小铺
 ## 在线文档
 - 该项目克隆并扩展自[web-flash](https://github.com/enilu/web-flash),所以开发的时候多看看web-flash的[在线文档](http://enilu.gitee.io/web-flash)
-- 该项目手机端linjiashop-mobile使用有赞Vant组件库，开发过程可以参考Vant的[在线文档](https://youzan.github.io/vant/#/zh-CN/intro) 
+- 该项目手机端linjiashop-mobile使用有赞Vant组件库，开发过程可以参考Vant的[在线文档](https://youzan.github.io/vant/#/zh-CN/intro)
+- 该项目微信小程序使用mpvue+vant-weapp，开发过程请参考相关文档：[mpvue文档](http://mpvue.com/),[vant-weapp文档](https://youzan.github.io/vant-weapp/#/intro)
 - 该项目的业务功能参考[litemall](https://github.com/linlinjava/litemall)，感谢[linlinjava](https://github.com/linlinjava)
  

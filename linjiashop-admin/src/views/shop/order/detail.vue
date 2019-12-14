@@ -59,7 +59,7 @@
           <el-table-column label="商品">
             <template slot-scope="scope">
               <router-link :to="{path:'goodsEdit?id='+scope.row.goods.id}">
-                {{scope.row.goods.name}}
+                {{scope.row.title}}
               </router-link>
             </template>
           </el-table-column>

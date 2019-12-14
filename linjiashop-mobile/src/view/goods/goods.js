@@ -96,15 +96,19 @@ export default {
         init() {
             let id = this.$route.params.id
             goods.getGoods(id).then(response => {
-                let goods = response.data
+                let goods = response.data.goods
+                let sku = response.data.sku
+                sku.price = (sku.price / 100).toFixed(2)
+                this.sku = sku
                 goods.thumb = new Array()
                 goods.picture = baseApi + '/file/getImgStream?idFile=' +goods.pic
-                const gallery = response.data.gallery.split(',')
+                const gallery = goods.gallery.split(',')
                 for (var index in gallery) {
                     goods.thumb.push(baseApi + '/file/getImgStream?idFile=' + gallery[index])
                 }
                 this.goods = goods
             }).catch((err) => {
+                console.log('err',err)
                 Toast(err)
             })
         },
@@ -127,10 +131,24 @@ export default {
         sorry() {
             Toast('敬请期待...')
         },
-        onBuyClicked() {
-
+        onBuyClicked(skuData) {
+            let cartData = {idGoods:skuData.goodsId,idSku:this.sku.none_sku?'':skuData.selectedSkuComb.id,count:skuData.selectedNum}
+            cart.add(cartData).then( response => {
+                this.$router.push('/cart');
+                this.showSku = false
+            }).catch( (err) => {
+                Toast.fail(err)
+            })
         },
-        onAddCartClicked() {
+        onAddCartClicked(skuData) {
+            let cartData = {idGoods:skuData.goodsId,idSku:this.sku.none_sku?'':skuData.selectedSkuComb.id,count:skuData.selectedNum}
+            cart.add(cartData).then( response => {
+                Toast.success('已加入到购物车')
+                this.showSku = false
+                // this.$router.push('/cart');
+            }).catch( (err) => {
+                Toast.fail(err)
+            })
 
         }
     }

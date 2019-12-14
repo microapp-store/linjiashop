@@ -22,10 +22,19 @@ public class OrderItem extends ShopBaseEntity {
     @JoinColumn(name="id_goods", insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
     private Goods goods;
+    @Column(name="id_sku",columnDefinition = "BIGINT COMMENT 'skuId'")
+    private Long idSku;
+    @JoinColumn(name="id_sku", insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
+    @ManyToOne(fetch = FetchType.LAZY)
+    private GoodsSku sku;
     @Column(columnDefinition = "VARCHAR(16) COMMENT '单价'")
     private BigDecimal price;
     @Column(columnDefinition = "VARCHAR(16) COMMENT '数量'")
     private BigDecimal count;
     @Column(columnDefinition = "VARCHAR(16) COMMENT '合计'")
     private BigDecimal totalPrice;
+
+    public String getTitle(){
+        return idSku!=null?getGoods().getName()+" "+getSku().getCodeName():getGoods().getName();
+    }
 }

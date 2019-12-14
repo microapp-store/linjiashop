@@ -57,8 +57,9 @@ INSERT INTO `t_shop_address` (`id`, `create_time`, `modify_time`, `address_detai
 -- ----------------------------
 -- Records of t_shop_cart.sql
 -- ----------------------------
-INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`, `specifications`, `count`) VALUES (12, '2019-11-12 17:27:44', NULL, 2, 1, NULL, '1');
-INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`, `specifications`, `count`) VALUES (13, '2019-11-18 18:01:00', NULL, 6, 1, NULL, '1');
+INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_user`, `id_sku`) VALUES (9, '2019-12-14 23:18:02', NULL, '1', 1, 1, 3);
+INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_user`, `id_sku`) VALUES (10, '2019-12-14 23:18:21', NULL, '1', 20, 1, NULL);
+INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_user`, `id_sku`) VALUES (11, '2019-12-14 23:18:30', NULL, '1', 6, 1, NULL);
 
 -- ----------------------------
 -- Records of t_shop_category.sql
@@ -109,17 +110,22 @@ INSERT INTO `t_shop_goods` (`id`, `create_by`, `create_time`, `modify_by`, `modi
 -- ----------------------------
 -- Records of t_shop_order.sql
 -- ----------------------------
-INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `real_price`, `status`, `total_price`) VALUES (2, '2019-11-6 17:58:40', '2019-11-6 17:58:50', NULL, 2, 1, NULL, 'OSN2019110605371202', '8800', 3, '8800');
-INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `real_price`, `status`, `total_price`) VALUES (6, '2019-11-9 21:11:03', NULL, NULL, 2, 1, '', '20191109211103528351', '1000', 1, '1000');
-INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `real_price`, `status`, `total_price`) VALUES (7, '2019-11-12 16:06:04', NULL, NULL, 1, 1, '', '20191112160603383875', '3200', 1, '3200');
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `real_price`, `status`, `total_price`) VALUES (1, '2019-12-14 23:09:57', NULL, NULL, 1, 1, '', '20191214230956111128', '409700', 1, '409700');
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `real_price`, `status`, `total_price`) VALUES (2, '2019-12-14 23:12:49', NULL, NULL, 2, 1, '', '20191214231249046951', '849700', 2, '849700');
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `real_price`, `status`, `total_price`) VALUES (3, '2019-12-14 23:16:57', NULL, NULL, 2, 1, '', '20191214231656504561', '189800', 3, '189800');
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `real_price`, `status`, `total_price`) VALUES (4, '2019-12-14 23:17:24', NULL, NULL, 2, 1, '', '20191214231724727283', '299900', 4, '299900');
 
 -- ----------------------------
 -- Records of t_shop_order_item.sql
 -- ----------------------------
-INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (3, '2019-11-6 17:58:56', '2019-11-6 17:59:01', '1', 3, 2, '3200', '3200');
-INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (4, '2019-11-6 17:58:56', '2019-11-6 17:59:01', '2', 4, 2, '2800', '5600');
-INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (15, '2019-11-9 21:11:03', NULL, '1', 1, 6, '1000', '1000');
-INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (16, '2019-11-12 16:06:04', NULL, '1', 3, 7, '3200', '3200');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (1, '2019-12-14 23:09:57', NULL, '2', 4, 1, 1, '74900', '149800');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (2, '2019-12-14 23:09:57', NULL, '1', NULL, 11, 1, '259900', '259900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (3, '2019-12-14 23:12:49', NULL, '1', NULL, 6, 2, '219900', '219900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (4, '2019-12-14 23:12:49', NULL, '1', NULL, 14, 2, '429900', '429900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (5, '2019-12-14 23:12:49', NULL, '1', NULL, 22, 2, '199900', '199900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (6, '2019-12-14 23:16:57', NULL, '1', 1, 1, 3, '69900', '69900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (7, '2019-12-14 23:16:57', NULL, '1', NULL, 7, 3, '119900', '119900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (8, '2019-12-14 23:17:24', NULL, '1', NULL, 5, 4, '299900', '299900');
 
 -- ----------------------------
 -- Records of t_shop_user.sql

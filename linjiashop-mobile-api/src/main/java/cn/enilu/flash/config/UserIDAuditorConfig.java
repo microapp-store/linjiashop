@@ -4,7 +4,6 @@ import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.utils.Constants;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.StringUtil;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 
 import java.util.Optional;
@@ -15,7 +14,7 @@ import java.util.Optional;
  * @author enilu
  * @version 2019/1/8 0008
  */
-@Configuration
+
 public class UserIDAuditorConfig implements AuditorAware<Long> {
     @Override
     public Optional<Long> getCurrentAuditor() {

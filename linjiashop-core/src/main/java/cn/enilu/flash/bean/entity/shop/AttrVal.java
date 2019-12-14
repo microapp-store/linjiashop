@@ -19,9 +19,9 @@ import javax.persistence.*;
 public class AttrVal extends BaseEntity {
     @Column(name="id_attr_key",columnDefinition = "BIGINT COMMENT '属性id'")
     private Long idAttrKey;
-    @JoinColumn(name="id_attr_key", insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
-    @ManyToOne(fetch = FetchType.LAZY)
-    private AttrKey attrKey;
+//    @JoinColumn(name="id_attr_key", insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private AttrKey attrKey;
     @Column(name="attr_val",columnDefinition = "VARCHAR(32) COMMENT '属性值'")
     private String attrVal;
 

@@ -46,7 +46,8 @@ module.exports = {
                 collapsable: false,
                 children: [
                     '/develop/api',
-                    'develop/banner'
+                    'develop/banner',
+                    '/develop/attribute'
                 ]
             },
 

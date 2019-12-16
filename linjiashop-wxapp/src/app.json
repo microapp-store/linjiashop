@@ -8,6 +8,7 @@
     "van-checkbox-group": "/static/vant/checkbox-group/index",
     "van-checkbox": "/static/vant/checkbox/index",
     "van-divider": "/static/vant/divider/index",
+    "van-dialog": "/static/vant/dialog/index",
     "van-row": "/static/vant/row/index",
     "van-col": "/static/vant/col/index",
     "van-field": "/static/vant/field/index",
@@ -22,6 +23,7 @@
     "van-toast": "/static/vant/toast/index",
     "van-tab": "/static/vant/tab/index",
     "van-tabs": "/static/vant/tabs/index",
+    "van-tag": "/static/vant/tag/index",
     "van-submit-bar": "/static/vant/submit-bar/index",
     "van-radio-group": "/static/vant/radio-group/index",
     "van-radio": "/static/vant/radio/index"

@@ -49,6 +49,25 @@
         @click="buy"
       />
     </van-goods-action>
+    <van-popup
+      :show="showDialog"
+      position="bottom"
+      custom-style="height: 60%;"
+      bind:close="closeDialog"
+    >
+      <van-card
+        :num="goods.stock"
+        tag="标签"
+        :price="goods.price"
+        :desc="goods.descript"
+        :title="goods.name"
+        :thumb="imgUrl"
+      >
+      </van-card>
+      <van-tag plain>标签</van-tag>
+      <van-tag color="#f2826a">标签</van-tag>
+      <van-tag color="#f2826a" plain>标签</van-tag>
+    </van-popup>
   </div>
 </template>
 
@@ -62,7 +81,8 @@
     data() {
       return {
         goods: {thumb: []},
-        imgheights: []
+        imgheights: [],
+        showDialog: false
       }
     },
     methods: {
@@ -71,12 +91,13 @@
       },
       getGoods(id) {
         this.$API.get('/goods/' + id).then(res => {
-          let goods = res.data
+          let goods = res.data.goods
           goods.thumb = []
-          const gallery = res.data.gallery.split(',')
+          const gallery = goods.gallery.split(',')
           for (var index in gallery) {
             goods.thumb.push({imgUrl: utils.fileMgrUrl + gallery[index]})
           }
+          goods.imgUrl = utils.fileMgrUrl + goods.pic
           this.goods = goods
         })
       },
@@ -92,12 +113,23 @@
         wx.switchTab({url: '/pages/cart/main'})
       },
       addCart() {
+        console.log(this.showDialog)
+        this.showDialog = true
+        console.log(this.showDialog)
+      },
+      closeDialog() {
+        console.log('closeDialog')
+        this.showDialog = false
+      },
+      getUserInfo() {
+        console.log('getUserInfo')
+        this.showDialog = false
+      },
+      buy() {
         console.log('addCart', this.goods.id)
         this.$API.post('user/cart/add?idGoods=' + this.goods.id + '&count=1').then(res => {
           wx.showToast({title: '已经加入到购物车', icon: 'success'})
         })
-      },
-      buy() {
         this.$API.post('user/cart/add?idGoods=' + this.goods.id + '&count=1').then(res => {
           wx.switchTab({url: '/pages/cart/main'})
         })
@@ -155,6 +187,9 @@
 
   .goods-cell-group {
     margin: 15px 0;
+  }
+  .cart-dialog{
+    bottom:0px;
   }
 </style>
 

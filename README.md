@@ -108,6 +108,7 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 - QQ群：254059156
 - 微信：myenilu,添加请备注：邻家小铺
 ## 在线文档
+- 项目文档：[http://microapp.gitee.io/linjiashop](http://microapp.gitee.io/linjiashop/)
 - 该项目克隆并扩展自[web-flash](https://github.com/enilu/web-flash),所以开发的时候多看看web-flash的[在线文档](http://enilu.gitee.io/web-flash)
 - 该项目手机端linjiashop-mobile使用有赞Vant组件库，开发过程可以参考Vant的[在线文档](https://youzan.github.io/vant/#/zh-CN/intro)
 - 该项目微信小程序使用mpvue+vant-weapp，开发过程请参考相关文档：[mpvue文档](http://mpvue.com/),[vant-weapp文档](https://youzan.github.io/vant-weapp/#/intro)

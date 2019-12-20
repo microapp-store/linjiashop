@@ -46,7 +46,6 @@ public class CartService extends BaseService<Cart,Long,CartRepository>  {
         if(old!=null){
             old.setCount(old.getCount().add(new BigDecimal(count)));
             update(old);
-
         }else {
             Cart cart = new Cart();
             cart.setIdGoods(cartVo.getIdGoods());

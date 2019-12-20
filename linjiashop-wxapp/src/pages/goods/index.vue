@@ -69,7 +69,7 @@
           <van-col :span="16">
             <div>{{skuData.price}}</div>
             <div>剩余：{{goods.stock}}</div>
-            <div>选择 版本;颜色</div>
+            <div>选择 {{attrText}}</div>
           </van-col>
         </van-row>
         <block v-for="(treeNode, index) in sku.tree" :index="index" :key="key">
@@ -119,11 +119,13 @@
     data() {
       return {
         temp: 1,
+        skuSel: {},
         goods: {thumb: []},
         sku: [],
         selSku: {},
         imgheights: [],
         showDialog: false,
+        chooseAttrText: {},
         plainTest: false,
         skuData: {
           idGoods: '',
@@ -138,17 +140,28 @@
         }
       }
     },
+    computed: {
+      attrText() {
+        let ret = ''
+        for (let key in this.chooseAttrText) {
+          ret += this.chooseAttrText[key] + ';'
+        }
+        return ret
+      }
+    },
     methods: {
-      clickNav() {
-
-      },
       getGoods(id) {
         this.$API.get('/goods/' + id).then(res => {
           let goods = res.data.goods
           this.sku = res.data.sku
+          let chooseAttrText = {}
+          for (let i = 0; i < this.sku.tree.length; i++) {
+            chooseAttrText[this.sku.tree[i]['k_s']] = this.sku.tree[i].k
+          }
+          this.chooseAttrText = chooseAttrText
           goods.thumb = []
           const gallery = goods.gallery.split(',')
-          for (var index in gallery) {
+          for (const index in gallery) {
             goods.thumb.push({imgUrl: utils.fileMgrUrl + gallery[index]})
           }
           goods.imgUrl = utils.fileMgrUrl + goods.pic
@@ -166,20 +179,16 @@
         wx.showToast({title: '敬请期待...', icon: 'info'})
       },
       goToCart() {
-        console.log('gotocart')
         wx.switchTab({url: '/pages/cart/main'})
       },
       openAddDialog() {
         this.showDialog = true
       },
       prepareSkuData() {
-        console.log(this.skuData.selAttrKey)
         let selAttrKeyLen = 0
         for (let key in this.skuData.selAttrKey) {
-          console.log(key)
           selAttrKeyLen++
         }
-        console.log(selAttrKeyLen)
         if (selAttrKeyLen !== this.sku.tree.length && !this.sku.none_sku) {
           wx.showToast({title: '请先选择商品规格', icon: 'none'})
           return
@@ -198,7 +207,6 @@
               this.skuData.idGoods = this.goods.id
               this.skuData.idSku = this.sku.list[i]['id']
               this.skuData.price = this.sku.list[i]['price']
-              console.log('用户选中的sku：', this.skuData)
               break
             }
           }
@@ -213,6 +221,7 @@
           count: skuData.selectedNum
         }).then(res => {
           wx.showToast({title: '已经加入到购物车', icon: 'success'})
+          this.showDialog = false
         })
       },
       closeDialog(e) {
@@ -231,27 +240,49 @@
       },
 
       chooseAttr(treeV, treeNode) {
-        console.log('a', treeV)
         this.plainTest = !this.plainTest
         let sku = this.sku
         this.skuData.selAttrKey[treeNode.k_s] = treeV.id
         for (let i = 0; i < sku.tree.length; i++) {
           if (sku.tree[i]['k_s'] === treeNode['k_s']) {
+            let skuSel = this.skuSel[treeNode['k_s']]
+            if (!skuSel) {
+              this.skuSel[treeNode['k_s']] = {}
+            }
+            // 第一个for循环将之前选中的取消掉
+            for (let j = 0; j < sku.tree[i].v.length; j++) {
+              if (skuSel) {
+                let skuSelIdKeyIndex = skuSel['idKeyIndex']
+                let skuSelIdValIndex = skuSel['idValIndex']
+                if (skuSelIdKeyIndex > -1 && skuSelIdValIndex > -1) {
+                  if (skuSelIdKeyIndex === i && skuSelIdValIndex === j) {
+                    sku.tree[skuSelIdKeyIndex].v[skuSelIdValIndex].plain = !sku.tree[skuSelIdKeyIndex].v[skuSelIdValIndex].plain
+                  }
+                }
+              }
+            }
+            // 第二个循环获取当前选中的标签标记选中
             for (let j = 0; j < sku.tree[i].v.length; j++) {
               if (sku.tree[i].v[j].id === treeV.id) {
-                this.sku.tree[i].v[j].plain = !sku.tree[i].v[j].plain
-                this.sku.tree = [...sku.tree]
-                break
+                this.chooseAttrText[sku.tree[i]['k_s']] = sku.tree[i].v[j].name
+                sku.tree[i].v[j].plain = !sku.tree[i].v[j].plain
+                this.skuSel[treeNode['k_s']]['idKeyIndex'] = i
+                this.skuSel[treeNode['k_s']]['idValIndex'] = j
               }
             }
           }
         }
+        // 必须使用以下方式更新数组，使用数组的方法或者=赋值不会触发视图更新
+        this.sku.tree = [...sku.tree]
       }
     },
     onLoad(options) {
       let id = options.id
-      this.getGoods(id)
+      this.skuSel = {}
+      this.sku = {}
+      this.showDialog = false
       this.skuData.selAttrKey = []
+      this.getGoods(id)
     }
   }
 </script>

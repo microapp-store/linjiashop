@@ -88,7 +88,6 @@
               i++
             }
           }
-          console.log('url', url)
           banners[i].url = url
           banners[i].imgUrl = utils.fileMgrUrl + banners[i].idFile
         }

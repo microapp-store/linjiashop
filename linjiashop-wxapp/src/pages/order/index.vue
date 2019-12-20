@@ -17,7 +17,7 @@
           :key="index2"
           :url="'/pages/goods/main?id='+orderItem.goods.id">
           <van-card
-            :title="orderItem.goods.name"
+            :title="orderItem.title"
             :desc="orderItem.goods.descript"
             :price="orderItem.price"
             :num="orderItem.count"

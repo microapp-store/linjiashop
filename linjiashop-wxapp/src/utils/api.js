@@ -16,7 +16,6 @@ export default ($wx) => {
       target[property] = (url, params = {}) => {
         return new Promise((resolve, reject) => {
           if (!token) {
-            console.log(url)
             if (utils.startWith(url, '/user') || utils.startWith(url, 'user')) {
               const url = '../profile/loginOption/main'
               $wx.navigateTo({url})

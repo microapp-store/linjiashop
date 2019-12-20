@@ -13,7 +13,7 @@
       <el-steps :active="active" finish-status="success">
         <el-step title="基本信息"></el-step>
         <el-step title="商品相册"></el-step>
-        <el-step title="商品规格"></el-step>
+        <el-step title="商品详情"></el-step>
         <el-step title="上架信息"></el-step>
       </el-steps>
     </div>

@@ -14,11 +14,10 @@ export default {
             data:params
         })
     },
-    update:function(params){
+    update:function(id,count){
         return request({
-            url: '/user/cart/update',
+            url: '/user/cart/update'+id+'/'+count,
             method: 'POST',
-            params
         })
     }
 }

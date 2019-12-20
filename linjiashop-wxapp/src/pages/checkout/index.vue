@@ -6,7 +6,7 @@
     <div v-for="item in cartList"
          :key="item.id" class="card-goods__item">
       <van-card
-        :title="item.goods.name"
+        :title="item.title"
         :desc="item.goods.descript"
         :num="item.count"
         :price="item.price"
@@ -68,11 +68,10 @@
     methods: {
       init() {
         this.$API.get('/user/order/prepareCheckout').then(res => {
-          console.log('res', res)
           let cartList = res.data.list
           this.addr = res.data.addr
           for (const index in cartList) {
-            cartList[index].price = utils.formatPrice(cartList[index].count * cartList[index].goods.price)
+            cartList[index].price = utils.formatPrice(cartList[index].count * cartList[index].price)
             cartList[index].thumb = utils.fileMgrUrl + cartList[index].goods.pic
             this.checkedGoods.push(cartList[index].id + '')
           }
@@ -87,10 +86,6 @@
       },
       formatPrice(price) {
         return (price / 100).toFixed(2)
-      },
-      stepperEvent(item, arg) {
-        // let count = arg[0];
-        // cart.update({id: item.id, count: count})
       },
       checkAll() {
         if (this.checkedGoods.length === this.cartList.length) {

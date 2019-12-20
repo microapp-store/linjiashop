@@ -34,6 +34,7 @@
     "pages/index/main",
     "pages/search/main",
     "pages/profile/index/main",
+    "pages/profile/about/main",
     "pages/profile/loginOption/main",
     "pages/profile/loginAccount/main",
     "pages/cart/main",

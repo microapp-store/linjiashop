@@ -59,6 +59,7 @@
       <van-cell icon="points" title="我的积分" is-link/>
       <van-cell icon="gold-coin-o" title="我的优惠券" is-link/>
       <van-cell icon="gift-o" title="我收到的礼物" is-link/>
+      <van-cell icon="warning-o" title="关于本项目" is-link @click="toAbout()"/>
     </van-cell-group>
   </div>
 </template>
@@ -84,7 +85,12 @@
       toAddress() {
         const url = '/pages/address/main'
         wx.navigateTo({url})
+      },
+      toAbout() {
+        const url = '/pages/profile/about/main'
+        wx.navigateTo({url})
       }
+
     }
   }
 </script>

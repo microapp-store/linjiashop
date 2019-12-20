@@ -129,7 +129,7 @@
         plainTest: false,
         skuData: {
           idGoods: '',
-          stockNum:'',
+          stockNum: '',
           selectedNum: 1,
           price: '',
           idSku: '',

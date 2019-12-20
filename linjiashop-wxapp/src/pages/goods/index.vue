@@ -67,9 +67,9 @@
             />
           </van-col>
           <van-col :span="16">
-            <div>{{skuData.price}}</div>
-            <div>剩余：{{goods.stock}}</div>
-            <div>选择 {{attrText}}</div>
+            <div>价格：{{skuData.price}}</div>
+            <div>剩余：{{skuData.stockNum}}</div>
+            <div> {{attrText}}</div>
           </van-col>
         </van-row>
         <block v-for="(treeNode, index) in sku.tree" :index="index" :key="key">
@@ -129,6 +129,7 @@
         plainTest: false,
         skuData: {
           idGoods: '',
+          stockNum:'',
           selectedNum: 1,
           price: '',
           idSku: '',
@@ -142,11 +143,14 @@
     },
     computed: {
       attrText() {
-        let ret = ''
-        for (let key in this.chooseAttrText) {
-          ret += this.chooseAttrText[key] + ';'
+        if (!this.sku.none_sku) {
+          let ret = '选择：'
+          for (let key in this.chooseAttrText) {
+            ret += this.chooseAttrText[key] + ';'
+          }
+          return ret
         }
-        return ret
+        return ''
       }
     },
     methods: {
@@ -187,6 +191,7 @@
       prepareSkuData() {
         let selAttrKeyLen = 0
         for (let key in this.skuData.selAttrKey) {
+          console.log(key)
           selAttrKeyLen++
         }
         if (selAttrKeyLen !== this.sku.tree.length && !this.sku.none_sku) {

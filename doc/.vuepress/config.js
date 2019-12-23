@@ -45,6 +45,7 @@ module.exports = {
                 title: '二次开发',
                 collapsable: false,
                 children: [
+                    '/develop/develop',
                     '/develop/api',
                     'develop/banner',
                     '/develop/attribute'

@@ -11,3 +11,4 @@
 - linjiasho-wxapp 微信小程序商城
 - linjiashop-core 基础模块，包括工具类，dao，service，bean等内容
 - linjiashop-generator 代码生成模块,根据实体生成dao,service,后台管理的controller和页面,配合IDEA 代码生成插件[webflash-generator](https://plugins.jetbrains.com/plugin/12648-webflash-generator)使用效果更好
+- linjiashop-flutter 商城app版本；项目地址：(https://gitee.com/microapp/linjiashop-flutter)[https://gitee.com/microapp/linjiashop-flutter]

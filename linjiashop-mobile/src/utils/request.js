@@ -51,6 +51,7 @@ service.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
+          console.log(401)
           router.replace({
             path: '/login',
             query:{redirect:router.currentRoute.path}
@@ -69,7 +70,6 @@ service.interceptors.response.use(
           }
           break;
         default:
-          console.log('aaaaaaaaa')
           return Promise.reject(error.response.data.message)
       }
     }

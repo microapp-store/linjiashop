@@ -40,6 +40,41 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 - 手机端
     -完整的商城购物功能        
 
+## 运行效果图
+### 手机端H5
+![手机端](doc/img/mobile.gif)
+
+### IOS
+<table>
+<tr>
+<td>
+<img src="doc/img/app/home.png" width="300"/></td>
+<td>
+<img src="doc/img/app/find.png" width="300"/></td>
+</tr>
+<tr>
+<td>
+<img src="doc/img/app/guige.jpg" width="300"/></td>
+<td>
+<img src="doc/img/app/login.png" width="300"/></td>
+</tr>
+<tr>
+<td>
+<img src="doc/img/app/mine.png" width="300"/></td>
+<td>
+<img src="doc/img/app/cart.png" width="300"/></td>
+</tr>
+</table>
+
+### Android
+![效果](doc/img/app/mobile.gif)
+
+### 后台管理
+![后台管理](doc/img/admin.gif)
+## 演示
+- 手机版本：[http://linjiashop.microapp.store](http://linjiashop.microapp.store)
+- 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 请不要随意删除测试数据，谢谢
+
 ## 技术选型
 - 核心框架：Spring Boot
 - 数据库层：Spring data jpa
@@ -57,14 +92,6 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 - linjiashop-core 基础模块，包括工具类，dao，service，bean等内容
 - linjiashop-generator 代码生成模块,根据实体生成dao,service,后台管理的controller和页面,配合IDEA 代码生成插件[webflash-generator](https://plugins.jetbrains.com/plugin/12648-webflash-generator)使用效果更好
 
-## 运行效果图
-- 手机端：
-![手机端](doc/img/mobile.gif)
-- 后台管理：
-![后台管理](doc/img/admin.gif)
-## 演示
-- 手机版本：[http://linjiashop.microapp.store](http://linjiashop.microapp.store)
-- 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 请不要随意删除测试数据，谢谢
 
 ## 快速开始
 - 克隆本项目

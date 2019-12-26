@@ -58,8 +58,6 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
             }
         }
         response401(request, response);
-        HttpServletResponse resp = (HttpServletResponse) response;
-        resp.setHeader("www-authenticate","");
         return false;
     }
 
@@ -82,7 +80,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     }
 
     /**
-     * 将非法请求跳转到 /401
+     * 将非法请求返回httpcode:401
      */
     private void response401(ServletRequest req, ServletResponse resp) {
         try {
@@ -91,5 +89,19 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
         } catch (Exception e) {
             logger.error(e.getMessage(),e);
         }
+    }
+
+    /**
+     * 重新该方法直接返回false，因为走到这个方法的请求都是因为401过来的，所以直接返回false
+     * 如果不重写该方法，父类的方法回返回WWW-Authenticate 头信息导致浏览器自身弹出验证框，影响用户使用体验。本项目的业务要求前端自行判断401的话往登录页面跳转，不需要浏览器自己弹框。
+     * @param request
+     * @param response
+     * @param mappedValue
+     * @return
+     * @throws Exception
+     */
+    @Override
+    protected boolean onAccessDenied(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+        return false;
     }
 }

@@ -56,7 +56,7 @@ service.interceptors.response.use(
             path: '/login',
             query:{redirect:router.currentRoute.path}
           })
-          return
+          return Promise.reject(error.response.data.message)
           break;
         case 500:
           if(error.response.data.message && error.response.data.message.indexOf('relogin')>-1){

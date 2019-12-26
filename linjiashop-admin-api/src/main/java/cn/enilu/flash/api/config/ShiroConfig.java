@@ -66,6 +66,10 @@ public class ShiroConfig {
         filterRuleMap.put("/webjars/**", "anon");
         filterRuleMap.put("/swagger-resources","anon");
         filterRuleMap.put("/images/**","anon");
+        filterRuleMap.put("/configuration/security","anon");
+        filterRuleMap.put("/configuration/ui","anon");
+        //druid监控地址不拦截
+        filterRuleMap.put("/druid/**","anon");
 
         //系统图片资源不拦截
         filterRuleMap.put("/file/getImgStream","anon");

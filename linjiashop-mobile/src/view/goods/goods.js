@@ -113,18 +113,14 @@ export default {
             cart.add(cartData).then( response => {
                 this.$router.push('/cart');
                 this.showSku = false
-            }).catch( (err) => {
-                Toast.fail(err)
             })
         },
         onAddCartClicked(skuData) {
             let cartData = {idGoods:skuData.goodsId,idSku:this.sku.none_sku?'':skuData.selectedSkuComb.id,count:skuData.selectedNum}
             cart.add(cartData).then( response => {
+                console.log(response)
                 Toast.success('已加入到购物车')
                 this.showSku = false
-                // this.$router.push('/cart');
-            }).catch( (err) => {
-                Toast.fail(err)
             })
 
         }

@@ -429,7 +429,7 @@ INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (31, 46, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (32, 45, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (33, 65, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (34, 73, 1);
--- INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (35, 77, 1);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (35, 77, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (36, 48, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (37, 50, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (38, 51, 1);

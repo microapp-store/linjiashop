@@ -7,7 +7,7 @@ module.exports = {
     ],
     evergreen: true,
     editLinkText:'在 GitHub 上编辑此页',
-    port: 8081,
+    port: 8090,
     ga: 'UA-71886989-13',
     themeConfig: {
         repo: 'microapp-store/linjiashop',
@@ -51,19 +51,12 @@ module.exports = {
                     '/develop/attribute'
                 ]
             },
-
-            {
-                title: '用户使用手册',
-                collapsable: false,
-                children: [
-                    '/useage/useage'
-                ]
-            },
             {
                 title: '其他',
                 collapsable: false,
                 children:[
-                    '/other/faq'
+                    '/other/faq',
+                    '/other/changelog'
                 ]
             }
         ]

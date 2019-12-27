@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-    <navigator url="../loginOption/main">
+    <navigator url="../loginOption/index">
       <van-row class="user-poster">
         <van-col span="6">
 
@@ -59,6 +59,7 @@
       <van-cell icon="points" title="我的积分" is-link/>
       <van-cell icon="gold-coin-o" title="我的优惠券" is-link/>
       <van-cell icon="gift-o" title="我收到的礼物" is-link/>
+      <van-cell icon="warning-o" title="关于本项目" is-link @click="toAbout()"/>
     </van-cell-group>
   </div>
 </template>
@@ -68,6 +69,9 @@
   import store from '@/utils/store.js'
 
   export default {
+    config:{
+      navigationBarTitleText: '个人中心'
+    },
     data() {
       return {}
     },
@@ -78,13 +82,18 @@
     },
     methods: {
       toOrder(status) {
-        const url = '../../order/main?status=' + status
+        const url = '../../order/index?status=' + status
         wx.navigateTo({url})
       },
       toAddress() {
-        const url = '/pages/address/main'
+        const url = '/pages/address/index'
+        wx.navigateTo({url})
+      },
+      toAbout() {
+        const url = '/pages/profile/about/index'
         wx.navigateTo({url})
       }
+
     }
   }
 </script>

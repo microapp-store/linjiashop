@@ -57,7 +57,7 @@ export default {
         },
         stepperEvent(item, arg) {
             let count = arg[0];
-            cart.update({id:item.id,count:count})
+            cart.update(item.id,count)
         },
         checkAll( ) {
             if (this.checkedGoods.length === this.cartList.length) {

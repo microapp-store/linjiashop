@@ -59,9 +59,19 @@ public class ShiroConfig {
 
         Map<String, String> filterRuleMap =  new LinkedHashMap<String,String>();
         filterRuleMap.put("/account/**","anon");
+
+        //swagger资源不拦截
+        filterRuleMap.put("/swagger-ui.html","anon");
+        filterRuleMap.put("/v2/api-docs/**", "anon");
+        filterRuleMap.put("/webjars/**", "anon");
+        filterRuleMap.put("/swagger-resources","anon");
+        filterRuleMap.put("/images/**","anon");
+
+        //系统图片资源不拦截
         filterRuleMap.put("/file/getImgStream","anon");
+
         filterRuleMap.put("/account/logout", "logout");
-        // 访问401和404页面不通过我们的Filter
+
         filterRuleMap.put("/401", "anon");
         filterRuleMap.put("/**", "jwt");
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);

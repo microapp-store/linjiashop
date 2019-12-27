@@ -2,7 +2,7 @@ import store from './store'
 import utils from '@/utils/index.js'
 
 // const host = 'http://linjiashop-mobile-api.microapp.store/'
-const host = 'http://localhost:8081/'
+const host = 'http://localhost:8081'
 export default ($wx) => {
   let reqHeader = {
     'content-type': 'application/json'
@@ -16,9 +16,8 @@ export default ($wx) => {
       target[property] = (url, params = {}) => {
         return new Promise((resolve, reject) => {
           if (!token) {
-            console.log(url)
             if (utils.startWith(url, '/user') || utils.startWith(url, 'user')) {
-              const url = '../profile/loginOption/main'
+              const url = '../profile/loginOption/index'
               $wx.navigateTo({url})
               return
             }

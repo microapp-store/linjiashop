@@ -33,7 +33,7 @@ public class Cart extends ShopBaseEntity {
     @Column(columnDefinition = "varchar(16) COMMENT '数量'")
     private BigDecimal count;
     @Transient
-    private String price;
+    private BigDecimal price;
     public BigDecimal getPrice(){
         if(idSku!=null){
             return sku.getPrice();

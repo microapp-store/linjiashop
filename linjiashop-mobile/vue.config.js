@@ -5,7 +5,7 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 const port = 8080 // dev port
-const name = 'lite-shop'
+const name = 'linjiashop'
 module.exports = {
   outputDir: 'dist',
   publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',

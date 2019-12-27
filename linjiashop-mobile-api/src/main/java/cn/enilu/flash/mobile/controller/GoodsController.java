@@ -108,7 +108,8 @@ public class GoodsController extends BaseController {
                 for (AttrVal attrVal : attrValListChildren) {
                     v.add(Maps.newHashMap(
                             "id", attrVal.getId(),
-                            "name", attrVal.getAttrVal()
+                            "name", attrVal.getAttrVal(),
+                            "plain",true
                     ));
                 }
                 treeNode.put("v", v);
@@ -128,6 +129,7 @@ public class GoodsController extends BaseController {
                     oneSkuMap.put("s" + attrVal.getIdAttrKey(), attrVal.getId());
                 }
                 oneSkuMap.put("stock_num", sku.getStock());
+                oneSkuMap.put("code",sku.getCode());
                 skuList2.add(oneSkuMap);
             }
             skuMap.put("list", skuList2);

@@ -3,8 +3,10 @@
 [![vue](https://img.shields.io/badge/vue-2.6.10-brightgreen.svg)](https://github.com/vuejs/vue)
 [![element-ui](https://img.shields.io/badge/element--ui-2.11.0-brightgreen.svg)](https://github.com/ElemeFE/element)
 [![Vant](https://img.shields.io/badge/vant-2.2.0-brightgreen.svg)](https://youzan.github.io/vant/#/zh-CN/intro)
+[![Vant-weapp](https://img.shields.io/badge/vant--weapp-1.0.1-brightgreen)](https://youzan.github.io/vant-weapp/#/intro)
 [![Flutter](https://img.shields.io/badge/Flutter-1.9.6-brightgreen)](https://flutter.dev/)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/enilu/linjiashop/blob/master/LICENSE)
+[![Gitee stars](https://gitee.com/microapp/linjiashop/badge/star.svg?theme=social)](https://gitee.com/microapp/linjiashop)
  
 
 
@@ -38,6 +40,41 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 - 手机端
     -完整的商城购物功能        
 
+## 运行效果图
+### 手机端H5
+![手机端](doc/img/mobile.gif)
+
+### IOS
+<table>
+<tr>
+<td>
+<img src="doc/img/app/home.png" width="300"/></td>
+<td>
+<img src="doc/img/app/find.png" width="300"/></td>
+</tr>
+<tr>
+<td>
+<img src="doc/img/app/guige.jpg" width="300"/></td>
+<td>
+<img src="doc/img/app/login.png" width="300"/></td>
+</tr>
+<tr>
+<td>
+<img src="doc/img/app/mine.png" width="300"/></td>
+<td>
+<img src="doc/img/app/cart.png" width="300"/></td>
+</tr>
+</table>
+
+### Android
+![效果](doc/img/app/mobile.gif)
+
+### 后台管理
+![后台管理](doc/img/admin.gif)
+## 演示
+- 手机版本：[http://linjiashop.microapp.store](http://linjiashop.microapp.store)
+- 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 请不要随意删除测试数据，谢谢
+
 ## 技术选型
 - 核心框架：Spring Boot
 - 数据库层：Spring data jpa
@@ -55,14 +92,6 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 - linjiashop-core 基础模块，包括工具类，dao，service，bean等内容
 - linjiashop-generator 代码生成模块,根据实体生成dao,service,后台管理的controller和页面,配合IDEA 代码生成插件[webflash-generator](https://plugins.jetbrains.com/plugin/12648-webflash-generator)使用效果更好
 
-## 运行效果图
-- 手机端：
-![手机端](doc/img/mobile.gif)
-- 后台管理：
-![后台管理](doc/img/admin.gif)
-## 演示
-- 手机版本：[http://linjiashop.microapp.store](http://linjiashop.microapp.store)
-- 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 请不要随意删除测试数据，谢谢
 
 ## 快速开始
 - 克隆本项目
@@ -75,7 +104,7 @@ linjiashop包含了后台管理功能和手机端商城业务功能
     GRANT ALL privileges ON linjiashop.* TO 'linjiashop'@'%';
     flush privileges;
     ```     
-
+- 下载项目测试数据的图片：链接：链接：[https://pan.baidu.com/s/1Ppfgy2wR1nW0l-QMYHFGKw](https://pan.baidu.com/s/1Ppfgy2wR1nW0l-QMYHFGKw) 提取码：wo8q ，将图片存放到t_sys_cfg表中system.file.upload.path配置的目录下
 - 启动后台管理
     - 启动后台管理api服务:linjiashop-admin-api
         - 修改linjiashop-admin-api中数据库连接配置

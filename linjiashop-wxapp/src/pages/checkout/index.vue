@@ -6,7 +6,7 @@
     <div v-for="item in cartList"
          :key="item.id" class="card-goods__item">
       <van-card
-        :title="item.goods.name"
+        :title="item.title"
         :desc="item.goods.descript"
         :num="item.count"
         :price="item.price"
@@ -30,6 +30,9 @@
   import store from '@/utils/store.js'
 
   export default {
+    config: {
+      navigationBarTitleText: '提交订单'
+    },
     data() {
       return {
         activeFooter: 2,
@@ -68,11 +71,10 @@
     methods: {
       init() {
         this.$API.get('/user/order/prepareCheckout').then(res => {
-          console.log('res', res)
           let cartList = res.data.list
           this.addr = res.data.addr
           for (const index in cartList) {
-            cartList[index].price = utils.formatPrice(cartList[index].count * cartList[index].goods.price)
+            cartList[index].price = utils.formatPrice(cartList[index].count * cartList[index].price)
             cartList[index].thumb = utils.fileMgrUrl + cartList[index].goods.pic
             this.checkedGoods.push(cartList[index].id + '')
           }
@@ -81,16 +83,12 @@
       },
       submit() {
         this.$API.post('user/order/save?idAddress=' + this.addr.id + '&message=' + this.message).then(res => {
-          const url = '/pages/payment/main?orderSn=' + res.data.orderSn + '&totalPrice=' + res.data.totalPrice
+          const url = '/pages/payment/index?orderSn=' + res.data.orderSn + '&totalPrice=' + res.data.totalPrice
           wx.navigateTo({url})
         })
       },
       formatPrice(price) {
         return (price / 100).toFixed(2)
-      },
-      stepperEvent(item, arg) {
-        // let count = arg[0];
-        // cart.update({id: item.id, count: count})
       },
       checkAll() {
         if (this.checkedGoods.length === this.cartList.length) {
@@ -101,7 +99,7 @@
         }
       },
       chooseAddress() {
-        const url = '/pages/address/main?choose=true'
+        const url = '/pages/address/index?choose=true'
         wx.navigateTo({url})
       }
     }

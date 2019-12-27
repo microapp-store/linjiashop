@@ -42,9 +42,9 @@ public class CartController extends BaseController {
         return Rets.success();
     }
 
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public Object update(@RequestParam("id") Long id,
-                          @RequestParam("count") String count){
+    @RequestMapping(value = "/update/{id}/{count}",method = RequestMethod.POST)
+    public Object update(@PathVariable("id") Long id,
+                          @PathVariable("count") String count){
         Cart cart = cartService.get(id);
         cart.setCount(new BigDecimal(count));
         cartService.update(cart);

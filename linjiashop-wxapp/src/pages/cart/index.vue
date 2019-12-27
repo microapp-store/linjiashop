@@ -7,10 +7,10 @@
           :name="item.id"
         ></van-checkbox>
         <van-card
-          :title="item.goods.name"
+          :title="item.title"
           :desc="item.goods.descript"
           :num="item.count"
-          :price="item.goods.priceFormat"
+          :price="item.priceFormat"
           :thumb="item.thumb"
         >
           <div slot="footer">
@@ -67,7 +67,7 @@
         this.$API.get('/user/cart/queryByUser').then(res => {
           const cartList = res.data
           for (let index = 0; index < cartList.length; index++) {
-            cartList[index].goods.priceFormat = utils.formatPrice(cartList[index].goods.price)
+            cartList[index].priceFormat = utils.formatPrice(cartList[index].price)
             cartList[index].thumb = utils.fileMgrUrl + cartList[index].goods.pic
             this.checkedGoods.push(cartList[index].id + '')
           }
@@ -89,8 +89,12 @@
       },
       submit() {
         console.log('提交订单')
-        const url = '/pages/checkout/main'
+        const url = '/pages/checkout/index'
         wx.navigateTo({url})
+      },
+      stepperEvent(item, arg) {
+        this.$API.post('user/cart/update/' + item.id + '/' + arg[0].mp.detail).then(res => {
+        })
       },
       decrement() {
         store.commit('decrement')

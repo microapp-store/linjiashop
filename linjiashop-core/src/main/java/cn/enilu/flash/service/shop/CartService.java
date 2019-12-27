@@ -23,12 +23,6 @@ import java.util.List;
 public class CartService extends BaseService<Cart,Long,CartRepository>  {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
-    private CartRepository cartRepository;
-    @Autowired
-    private GoodsSkuService goodsSkuService;
-    @Autowired
-    private GoodsService goodsService;
-    @Autowired
     private GoodsSkuRepository goodsSkuRepository;
     @Autowired
     private GoodsRepository goodsRepository;
@@ -52,7 +46,6 @@ public class CartService extends BaseService<Cart,Long,CartRepository>  {
         if(old!=null){
             old.setCount(old.getCount().add(new BigDecimal(count)));
             update(old);
-
         }else {
             Cart cart = new Cart();
             cart.setIdGoods(cartVo.getIdGoods());

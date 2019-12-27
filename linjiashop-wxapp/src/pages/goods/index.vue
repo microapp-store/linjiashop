@@ -196,7 +196,7 @@
         }
         if (selAttrKeyLen !== this.sku.tree.length && !this.sku.none_sku) {
           wx.showToast({title: '请先选择商品规格', icon: 'none'})
-          return
+          return false
         }
         if (!this.sku.none_sku) {
           // 根据规格类别id和规格值id获取sku id
@@ -216,9 +216,13 @@
             }
           }
         }
+        return true;
+
       },
       addCart() {
-        this.prepareSkuData()
+        if(!this.prepareSkuData()) {
+          return
+        }
         let skuData = this.skuData
         console.log('skuData', this.skuData)
         this.$API.post('user/cart/add', {

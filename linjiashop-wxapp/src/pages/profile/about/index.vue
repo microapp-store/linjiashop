@@ -25,6 +25,11 @@
 </template>
 
 <script>
+  export default {
+    config:{
+      navigationBarTitleText: '关于本项目'
+    }
+  }
 </script>
 
 

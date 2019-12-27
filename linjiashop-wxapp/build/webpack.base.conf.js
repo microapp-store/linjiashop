@@ -6,6 +6,7 @@ var webpack = require('webpack')
 var merge = require('webpack-merge')
 var vueLoaderConfig = require('./vue-loader.conf')
 var MpvuePlugin = require('webpack-mpvue-asset-plugin')
+var MpvueEntry = require('mpvue-entry')
 var glob = require('glob')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var relative = require('relative')
@@ -14,19 +15,21 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-function getEntry (rootSrc) {
-  var map = {};
-  glob.sync(rootSrc + '/pages/**/main.js')
-  .forEach(file => {
-    var key = relative(rootSrc, file).replace('.js', '');
-    map[key] = file;
-  })
-   return map;
-}
+// function getEntry (rootSrc) {
+//   var map = {};
+//   glob.sync(rootSrc + '/pages/**/main.js')
+//   .forEach(file => {
+//     var key = relative(rootSrc, file).replace('.js', '');
+//     map[key] = file;
+//   })
+//    return map;
+// }
+//
+// const appEntry = { app: resolve('./src/main.js') }
+// const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
+// const entry = Object.assign({}, appEntry, pagesEntry)
 
-const appEntry = { app: resolve('./src/main.js') }
-const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
-const entry = Object.assign({}, appEntry, pagesEntry)
+const entry = MpvueEntry.getEntry('src/app.json')
 
 let baseWebpackConfig = {
   // 如果要自定义生成的 dist 目录里面的文件路径，
@@ -54,15 +57,15 @@ let baseWebpackConfig = {
   },
   module: {
     rules: [
-      {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [resolve('src'), resolve('test')],
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
-      },
+      // {
+      //   test: /\.(js|vue)$/,
+      //   loader: 'eslint-loader',
+      //   enforce: 'pre',
+      //   include: [resolve('src'), resolve('test')],
+      //   options: {
+      //     formatter: require('eslint-friendly-formatter')
+      //   }
+      // },
       {
         test: /\.vue$/,
         loader: 'mpvue-loader',
@@ -112,12 +115,13 @@ let baseWebpackConfig = {
       'mpvuePlatform': 'global.mpvuePlatform'
     }),
     new MpvuePlugin(),
-    new CopyWebpackPlugin([{
-      from: '**/*.json',
-      to: ''
-    }], {
-      context: 'src/'
-    }),
+    new MpvueEntry(),
+    // new CopyWebpackPlugin([{
+    //   from: '**/*.json',
+    //   to: ''
+    // }], {
+    //   context: 'src/'
+    // }),
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),

@@ -89,7 +89,7 @@
       },
       submit() {
         console.log('提交订单')
-        const url = '/pages/checkout/main'
+        const url = '/pages/checkout/index'
         wx.navigateTo({url})
       },
       stepperEvent(item, arg) {

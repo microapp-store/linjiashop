@@ -30,6 +30,9 @@
   import store from '@/utils/store.js'
 
   export default {
+    config: {
+      navigationBarTitleText: '提交订单'
+    },
     data() {
       return {
         activeFooter: 2,
@@ -80,7 +83,7 @@
       },
       submit() {
         this.$API.post('user/order/save?idAddress=' + this.addr.id + '&message=' + this.message).then(res => {
-          const url = '/pages/payment/main?orderSn=' + res.data.orderSn + '&totalPrice=' + res.data.totalPrice
+          const url = '/pages/payment/index?orderSn=' + res.data.orderSn + '&totalPrice=' + res.data.totalPrice
           wx.navigateTo({url})
         })
       },
@@ -96,7 +99,7 @@
         }
       },
       chooseAddress() {
-        const url = '/pages/address/main?choose=true'
+        const url = '/pages/address/index?choose=true'
         wx.navigateTo({url})
       }
     }

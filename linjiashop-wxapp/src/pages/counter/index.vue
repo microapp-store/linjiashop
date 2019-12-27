@@ -10,7 +10,7 @@
 
 <script>
 // Use Vuex
-import store from './store'
+import store from '@/utils/store.js'
 
 export default {
   computed: {

@@ -26,6 +26,9 @@
   import utils from '@/utils/index.js'
 
   export default {
+    config: {
+      navigationBarTitleText: '发现'
+    },
     data() {
       return {
         value: '',
@@ -84,7 +87,7 @@
         })
       },
       viewGoodsDetail(id) {
-        const url = '../goods/main?id=' + id
+        const url = '../goods/index?id=' + id
         wx.navigateTo({url})
       }
     }

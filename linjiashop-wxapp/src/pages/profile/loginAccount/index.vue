@@ -48,6 +48,9 @@
   import store from '@/utils/store.js'
 
   export default {
+    config:{
+      navigationBarTitleText: '登录'
+    },
     data() {
       return {
         mobile: '15011112222',

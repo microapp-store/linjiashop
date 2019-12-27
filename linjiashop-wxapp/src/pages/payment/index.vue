@@ -44,6 +44,9 @@
         return store.state.count
       }
     },
+    config:{
+      navigationBarTitleText: '收银台'
+    },
     data() {
       return {
         order: {},

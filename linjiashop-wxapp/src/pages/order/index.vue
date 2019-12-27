@@ -15,7 +15,7 @@
         <navigator
           v-for="(orderItem, index2) in item.items"
           :key="index2"
-          :url="'/pages/goods/main?id='+orderItem.goods.id">
+          :url="'/pages/goods/index?id='+orderItem.goods.id">
           <van-card
             :title="orderItem.title"
             :desc="orderItem.goods.descript"
@@ -52,6 +52,9 @@
         return store.state.count
       }
     },
+    config:{
+      navigationBarTitleText: '订单'
+    },
     data() {
       return {
         navList: [
@@ -76,7 +79,7 @@
     onLoad(options) {
       const token = store.state.token
       if (!token) {
-        const url = '../profile/loginOption/main'
+        const url = '../profile/loginOption/index'
         wx.navigateTo({url})
       } else {
         const status = options.status
@@ -131,7 +134,7 @@
       handleOrder(order) {
         if (order.statusName === '待付款') {
           console.log('立即付款')
-          const url = '../payment/main?orderSn=' + order.orderSn + ' &totalPrice=' + order.totalPrice
+          const url = '../payment/index?orderSn=' + order.orderSn + ' &totalPrice=' + order.totalPrice
           wx.navigateTo({url})
         }
         if (order.statusName === '已发货') {

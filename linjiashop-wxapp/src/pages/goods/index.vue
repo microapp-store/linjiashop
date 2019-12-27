@@ -220,6 +220,7 @@
       addCart() {
         this.prepareSkuData()
         let skuData = this.skuData
+        console.log('skuData', this.skuData)
         this.$API.post('user/cart/add', {
           idGoods: this.goods.id,
           idSku: this.sku.none_sku ? '' : skuData.idSku,
@@ -235,7 +236,7 @@
       buy() {
         this.prepareSkuData()
         let skuData = this.skuData
-        this.$API.post('user/cart/add', {
+        this.$API.post('/user/cart/add', {
           idGoods: this.goods.id,
           idSku: this.sku.none_sku ? '' : skuData.idSku,
           count: skuData.selectedNum
@@ -283,6 +284,7 @@
     },
     onLoad(options) {
       let id = options.id
+      console.log('id:', id)
       this.skuSel = {}
       this.sku = {}
       this.showDialog = false

@@ -16,7 +16,7 @@ module.exports = {
         editLinkText: '编辑此页面！',
         nav: [
             {text: '文档', link: '/'},
-            {text: '更新日志',link:'/base/changelog'},
+            {text: '更新日志',link:'/other/changelog'},
             {text: '资源',link:'/base/resource'},
             {text: 'Gitee', link: 'https://gitee.com/microapp/linjiashop'}
         ],

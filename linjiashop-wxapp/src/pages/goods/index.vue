@@ -176,14 +176,14 @@
         return utils.formatPrice(price)
       },
       toHome() {
-        const url = '/pages/index/main'
+        const url = '/pages/index/index'
         wx.switchTab({url})
       },
       sorry() {
         wx.showToast({title: '敬请期待...', icon: 'info'})
       },
       goToCart() {
-        wx.switchTab({url: '/pages/cart/main'})
+        wx.switchTab({url: '/pages/cart/index'})
       },
       openAddDialog() {
         this.showDialog = true
@@ -240,7 +240,7 @@
           idSku: this.sku.none_sku ? '' : skuData.idSku,
           count: skuData.selectedNum
         }).then(res => {
-          wx.switchTab({url: '/pages/cart/main'})
+          wx.switchTab({url: '/pages/cart/index'})
         })
       },
 

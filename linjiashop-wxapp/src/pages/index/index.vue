@@ -29,6 +29,9 @@
   import utils from '@/utils/index.js'
 
   export default {
+    config: {
+      navigationBarTitleText: '邻家小铺'
+    },
     data() {
       return {
         banners: [],
@@ -64,7 +67,7 @@
         })
       },
       viewGoodsDetail(id) {
-        const url = '../goods/main?id=' + id
+        const url = '../goods/index?id=' + id
         wx.navigateTo({url})
       },
       processBanners(banners) {
@@ -74,7 +77,7 @@
           let param = banners[i].param
 
           if (!utils.startWith(page, 'http')) {
-            url = '../' + page + '/main'
+            url = '../' + page + '/index'
           }
           if (param !== '') {
             const paramJson = JSON.parse(param)
@@ -112,7 +115,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   swiper {
     height: 220px;
   }

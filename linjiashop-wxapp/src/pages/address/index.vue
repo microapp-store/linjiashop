@@ -24,6 +24,9 @@
 <script>
   import store from '@/utils/store.js'
   export default {
+    config:{
+      navigationBarTitleText: '地址管理'
+    },
     data() {
       return {
         radio: '1',
@@ -57,11 +60,11 @@
         }
       },
       edit(item) {
-        const url = '/pages/address/edit/main?id=' + item.id
+        const url = '/pages/address/edit/index?id=' + item.id
         wx.navigateTo({url})
       },
       add() {
-        const url = '/pages/address/edit/main'
+        const url = '/pages/address/edit/index'
         wx.navigateTo({url})
       }
     }

@@ -24,7 +24,9 @@ export default {
   components: {
     card
   },
-
+  config:{
+    navigationBarTitleText: '查看启动日志'
+  },
   data () {
     return {
       logs: [],

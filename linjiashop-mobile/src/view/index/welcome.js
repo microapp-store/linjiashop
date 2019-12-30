@@ -16,7 +16,9 @@ import {
     Tabbar,
     TabbarItem,
     Tabs,
-    Toast
+    Toast,
+    Divider,
+    List
 } from 'vant';
 
 export default {
@@ -34,22 +36,29 @@ export default {
         [Tabs.name]: Tabs,
         [Card.name]: Card,
         [Toast.name]: Toast,
+        [Divider.name]: Divider,
+        [List.name]: List,
         Lazyload
 
 
     },
     data() {
         return {
+            loading: false,
+            finished: false,
             navList: [],
             banners: [],
             goodsList: [],
             activeFooter: 0,
             activeNav: 0,
+            total:0,
             listQuery: {
                 page: 1,
-                limit: 20,
+                limit: 2,
                 idCategory: undefined
-            }
+            },
+            count: 0,
+            isLoading: false
         }
     },
     mounted() {
@@ -108,6 +117,7 @@ export default {
             this.listQuery['idCategory'] = idCategory
             goods.queryGoods(this.listQuery).then(response => {
                 let list = response.data.records
+                this.total = response.data.total
                 for (var index in  list) {
                     const item = list[index]
                     item.img = baseApi+'/file/getImgStream?idFile=' + item.pic
@@ -117,6 +127,11 @@ export default {
             }).catch((err) => {
                 Toast(err)
             })
+        },
+        loadMore(){
+            console.log('loadMore')
+            this.loading = false
+            this.finished = true
         },
         clickNav(index, title) {
             this.activeNav = index;
@@ -136,6 +151,13 @@ export default {
         formatPrice(price) {
             return (price / 100).toFixed(2)
         },
+        onRefresh() {
+            alert('refresh')
+            setTimeout(() => {
+                this.$toast('刷新成功');
+                this.isLoading = false;
+            }, 500);
+        }
 
     }
 };

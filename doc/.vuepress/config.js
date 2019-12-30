@@ -15,9 +15,29 @@ module.exports = {
         editLinks: true,
         editLinkText: '编辑此页面！',
         nav: [
-            {text: '文档', link: '/'},
-            {text: '更新日志',link:'/other/changelog'},
-            {text: '资源',link:'/base/resource'},
+            {text: '指南', link: '/base/preface'},
+            {text: '生态系统',
+                items:[
+                    {text:"项目",items:[
+                            {text:'linjiashop-flutter(app)',link:'/ecosystem/app'},
+                            {text:'code-generator',link:'http://enilu.gitee.io/web-flash/ecosystem/code-generator.html'},
+                            {text:'database-doc-generator',link:'http://enilu.gitee.io/web-flash/ecosystem/database-doc-generator.html'},
+                            {text:'web-flash',link:'http://enilu.gitee.io/web-flash'},
+                            {text:'material-admin',link:'https://enilu.gitee.io/material-admin'}
+                        ]
+                    },
+                    {text:'帮助',items:[
+                            {text: '在线资源',link:'/base/resource'},
+                            {text:'QQ群(254059156)',link:'https://jq.qq.com/?_wv=1027&k=5rEmcb6'},
+                            {text:'作者blog',link:'http://blog.enilu.cn'},
+                            {text:'商业支持',link:'https://www.microapp.store'},
+                            {text:'FAQ',link:'/other/faq'},
+                            {text:'Change Log',link:'/other/changelog'}
+                    ]},
+
+                ]
+            },
+            {text: '捐赠',link:'/other/donate'},
             {text: 'Gitee', link: 'https://gitee.com/microapp/linjiashop'}
         ],
         sidebar: [

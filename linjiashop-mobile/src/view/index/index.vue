@@ -9,6 +9,13 @@
                 <a :href="image.url"><img v-lazy="image.path" style="width:100%;"/></a>
             </van-swipe-item>
         </van-swipe>
+        <van-list
+                v-model="loading"
+                :finished="finished"
+                finished-text="更多好物，敬请期待"
+                @load="loadMore"
+        >
+        </van-list>
         <van-card v-for="(goods,index) in goodsList" :key="index"
                   :num="goods.stock"
                   :price="formatPrice(goods.price)"
@@ -18,7 +25,7 @@
                   :thumb-link="goods.link"
                   @click="viewGoodsDetail(goods.id)"
         />
-<br><br>
+        <br><br><br><br>
 
         <van-tabbar v-model="activeFooter">
             <van-tabbar-item icon="home-o"  replace to="/index">首页</van-tabbar-item>

@@ -6,8 +6,8 @@ import cn.enilu.flash.bean.vo.UserInfo;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.service.shop.ShopUserService;
-import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.MD5;
+import cn.enilu.flash.utils.RandomUtil;
 import cn.enilu.flash.web.controller.BaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,13 +50,17 @@ public class LoginController extends BaseController {
             logger.info("用户登录:" + mobile + ",短信验证码:" + smsCode);
             //1,
             ShopUser user = shopUserService.findByMobile(mobile);
-            if (user == null) {
-                return Rets.failure("该用户不存在");
-            }
             Boolean validateRet = shopUserService.validateSmsCode(mobile,smsCode);
+
+            Map<String, String> result = new HashMap<>(6);
             if(validateRet) {
+                if(user==null){
+                    //初始化6位密码
+                    String initPassword = RandomUtil.getRandomString(6);
+                    user = shopUserService.register(mobile,initPassword);
+                    result.put("initPassword",initPassword);
+                }
                 String token = JwtUtil.sign(new JwtUser(user));
-                Map<String, String> result = new HashMap<>(1);
                 logger.info("token:{}",token);
                 result.put("token", token);
                 return Rets.success(result);

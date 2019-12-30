@@ -20,7 +20,8 @@
                         label="短信验证码"
                         placeholder="请输入短信验证码"
                 >
-                    <van-button slot="button" size="small" type="primary" @click="sendSms">发送验证码</van-button>
+                    <van-button slot="button" size="small" type="primary" @click="sendSms" v-show="!hasSendSms">发送验证码</van-button>
+                    <van-button slot="button" size="small" disabled type="primary" v-show="hasSendSms">{{second}}秒后重新获取</van-button>
                 </van-field>
             </van-cell-group>
             <van-cell-group  v-show="show2">

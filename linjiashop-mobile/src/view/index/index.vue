@@ -12,7 +12,6 @@
         <van-list
                 v-model="loading"
                 :finished="finished"
-                finished-text="更多好物，敬请期待"
                 @load="loadMore"
         >
         </van-list>

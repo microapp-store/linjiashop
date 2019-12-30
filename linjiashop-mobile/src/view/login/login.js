@@ -2,7 +2,7 @@ import loginApi from '@/api/login'
 import store from '@/store'
 import { Row, Col, Icon, Cell, CellGroup,Field,Button,Toast,
     Tabbar,
-    TabbarItem} from 'vant';
+    TabbarItem,Dialog} from 'vant';
 
 export default {
     components: {
@@ -15,7 +15,8 @@ export default {
         [TabbarItem.name]: TabbarItem,
         [Field.name]: Field,
         [Button.name]: Button,
-        [Toast.name]: Toast
+        [Toast.name]: Toast,
+        [Dialog.name]: Dialog
     },
     data() {
         return {
@@ -25,7 +26,9 @@ export default {
             activeFooter:3,
             show1:false,
             show2:true,
-            redirect:''
+            redirect:'',
+            hasSendSms: false,
+            second: 60
         }
     },
     mounted(){
@@ -50,6 +53,9 @@ export default {
             loginApi.loginOrReg(this.mobile,this.smsCode).then( response=> {
                 store.dispatch('app/toggleToken',response.data.token)
                 store.dispatch('app/toggleUser',response.data.user)
+                if(response.data.initPassword){
+                    Toast({duration:8000,message:'欢迎新用户，请谨慎保管您的初始密码：'+response.data.initPassword})
+                }
                 if(this.redirect){
                     this.$router.push({path: this.redirect})
                 }else {
@@ -64,19 +70,34 @@ export default {
                 store.dispatch('app/toggleToken',response.data.token)
                 store.dispatch('app/toggleUser',response.data.user)
                 if(this.redirect){
-                    this.$router.push({path: this.redirect})
+                   this.$router.push({path: this.redirect})
                 }else {
-                    this.$router.push({path: '/index'})
+                   this.$router.push({path: '/index'})
                 }
             }).then( (err) => {
                 // Toast.fail(err)
             })
         },
         sendSms(){
+            this.hasSendSms = true
             loginApi.sendSmsCode(this.mobile).then( response => {
+                this.setTimeOut()
                 const smsCode = response.data
-                Toast('提示：测试阶段不是加发送短信验证码：'+smsCode)
+                Toast('提示：测试阶段不发送短信验证码：'+smsCode)
             })
-        }
+        },
+        setTimeOut () {
+            let timer = setTimeout(() => {
+                this.setTimeOut()
+                if(this.second > 0) {
+                    this.second--
+                }
+            }, 1000)
+            if(this.second <= 0) {
+                this.hasSendSms = false
+                this.second = 60
+                clearTimeout(timer)
+            }
+        },
     }
 };

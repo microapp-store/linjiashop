@@ -54,7 +54,7 @@ export default {
             total:0,
             listQuery: {
                 page: 1,
-                limit: 2,
+                limit: 50,
                 idCategory: undefined
             },
             count: 0,

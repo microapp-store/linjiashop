@@ -12,10 +12,7 @@ import cn.enilu.flash.utils.factory.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/shop/address")
@@ -25,8 +22,9 @@ public class AddressController {
 	private AddressService addressService;
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
-	public Object list() {
-	Page<Address> page = new PageFactory<Address>().defaultPage();
+	public Object list(@RequestParam(required = false)Long idUser) {
+		Page<Address> page = new PageFactory<Address>().defaultPage();
+		page.addFilter("idUser",idUser);
 		page = addressService.queryPage(page);
 		return Rets.success(page);
 	}

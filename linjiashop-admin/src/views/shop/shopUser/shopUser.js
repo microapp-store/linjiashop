@@ -1,5 +1,6 @@
 import {getList, remove, save} from '@/api/shop/shopUser'
 
+import { getApiUrl } from '@/utils/utils'
 export default {
   data() {
     return {
@@ -14,11 +15,17 @@ export default {
         avatar: '',
         id: ''
       },
+      regDate: undefined,
+      lastLoginTime:undefined,
       listQuery: {
         page: 1,
         limit: 20,
         mobile: undefined,
-        nickName:undefined
+        nickName: undefined,
+        startRegDate:undefined,
+        endRegDate:undefined,
+        startLastLoginTime:undefined,
+        endLastLoginTime:undefined
       },
       total: 0,
       list: null,
@@ -45,8 +52,21 @@ export default {
     },
     fetchData() {
       this.listLoading = true
+      if(this.regDate){
+        this.listQuery['startRegDate'] = this.regDate[0]
+        this.listQuery['endRegDate'] = this.regDate[1]
+      }
+      if(this.lastLoginTime){
+
+        this.listQuery['startLastLoginTime'] = this.lastLoginTime[0]
+        this.listQuery['endLastLoginTime'] = this.lastLoginTime[1]
+      }
       getList(this.listQuery).then(response => {
         this.list = response.data.records
+        for (var index in this.list) {
+          let item = this.list[index]
+          item.img = getApiUrl() + '/file/getImgStream?idFile=' + item.avatar
+        }
         this.listLoading = false
         this.total = response.data.total
       })
@@ -57,6 +77,12 @@ export default {
     reset() {
       this.listQuery.mobile = ''
       this.listQuery.nickName = ''
+      this.listQuery.startRegDate = ''
+      this.listQuery.endRegDate = ''
+      this.listQuery.startLastLoginTime = ''
+      this.listQuery.endLastLoginTime = ''
+      this.lastLoginTime = ''
+      this.regDate = ''
       this.fetchData()
     },
     handleFilter() {

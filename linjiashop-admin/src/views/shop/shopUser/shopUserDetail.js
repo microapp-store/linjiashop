@@ -1,15 +1,18 @@
 import {getUserInfo, save} from '@/api/shop/shopUser'
+import {getList} from '@/api/shop/address'
 import {getApiUrl} from '@/utils/utils'
+
 export default {
   data() {
     return {
-     userInfo:{},
-      idUser:'',
-      apiUrl:getApiUrl()
+      userInfo: {},
+      idUser: '',
+      apiUrl: getApiUrl(),
+      addressList:[]
     }
   },
   created() {
-    this.idUser  = this.$route.query.id
+    this.idUser = this.$route.query.id
     this.init()
   },
   methods: {
@@ -18,9 +21,15 @@ export default {
     },
     fetchData() {
 
-      if (this.idUser ) {
+      if (this.idUser) {
         getUserInfo(this.idUser).then(response => {
           this.userInfo = response.data
+        })
+        getList({
+          page: 1,
+          limit: 20, idUser: this.idUser
+        }).then(response => {
+          this.addressList = response.data.records
         })
       }
     }

@@ -11,7 +11,9 @@ import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.CartService;
 import cn.enilu.flash.service.shop.OrderService;
 import cn.enilu.flash.service.shop.ShopUserService;
+import cn.enilu.flash.utils.DateUtil;
 import cn.enilu.flash.utils.Maps;
+import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.utils.factory.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,10 +34,26 @@ public class ShopUserController {
 	private OrderService orderService;
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
-	public Object list(@RequestParam(required = false) String mobile, @RequestParam(required = false) String nickName) {
+	public Object list(@RequestParam(required = false) String mobile, @RequestParam(required = false) String nickName,
+					   @RequestParam(required = false) String startRegDate,
+					   @RequestParam(required = false) String endRegDate,
+					   @RequestParam(required = false) String startLastLoginTime,
+					   @RequestParam(required = false) String endLastLoginTime) {
 		Page<ShopUser> page = new PageFactory<ShopUser>().defaultPage();
 		page.addFilter("mobile",mobile);
 		page.addFilter("nickName",nickName);
+		if(StringUtil.isNotEmpty(startRegDate)) {
+			page.addFilter("createTime", SearchFilter.Operator.GTE, DateUtil.parseTime(startRegDate+" 00:00:00"));
+		}
+		if(StringUtil.isNotEmpty(endRegDate)) {
+			page.addFilter("createTime", SearchFilter.Operator.LTE, DateUtil.parseTime(endRegDate+" 23:59:59"));
+		}
+		if(StringUtil.isNotEmpty(startLastLoginTime)) {
+			page.addFilter("lastLoginTime", SearchFilter.Operator.GTE, DateUtil.parseTime(startLastLoginTime+" 00:00:00"));
+		}
+		if(StringUtil.isNotEmpty(endLastLoginTime)) {
+			page.addFilter("lastLoginTime", SearchFilter.Operator.LTE, DateUtil.parseTime(endLastLoginTime+" 23:59:59"));
+		}
 		page = shopUserService.queryPage(page);
 		return Rets.success(page);
 	}

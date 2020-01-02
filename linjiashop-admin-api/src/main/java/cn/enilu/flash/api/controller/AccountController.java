@@ -6,7 +6,6 @@ import cn.enilu.flash.bean.vo.JwtUser;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.core.log.LogManager;
 import cn.enilu.flash.core.log.LogTaskFactory;
-import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.security.UserService;
 import cn.enilu.flash.service.system.AccountService;
 import cn.enilu.flash.service.system.ManagerService;
@@ -19,6 +18,7 @@ import org.nutz.mapl.Mapl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,10 +39,14 @@ import java.util.Map;
 public class AccountController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(AccountController.class);
 
+    @Value("${jwt.token.expire.time}")
+    private Long tokenExpireTime ;
     @Autowired
     private ManagerService managerService;
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private UserService userService;
     /**
      * 用户登录<br>
      * 1，验证没有注册<br>
@@ -68,7 +72,8 @@ public class AccountController extends BaseController {
                 return Rets.failure("输入的密码错误");
             }
 
-            String token = JwtUtil.sign(new JwtUser(user));
+//            String token = JwtUtil.sign(new JwtUser(user),tokenExpireTime);
+            String token = userService.loginForToken(new JwtUser(user));
             Map<String, String> result = new HashMap<>(1);
             logger.info("token:{}",token);
             result.put("token", token);

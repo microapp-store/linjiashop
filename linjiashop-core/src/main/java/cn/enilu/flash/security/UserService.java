@@ -7,6 +7,7 @@ import cn.enilu.flash.bean.entity.system.User;
 import cn.enilu.flash.bean.vo.JwtUser;
 import cn.enilu.flash.bean.vo.SpringContextHolder;
 import cn.enilu.flash.cache.TokenCache;
+import cn.enilu.flash.cache.impl.EhcacheDao;
 import cn.enilu.flash.dao.shop.ShopUserRepository;
 import cn.enilu.flash.dao.system.MenuRepository;
 import cn.enilu.flash.dao.system.RoleRepository;
@@ -20,23 +21,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
- * 用户认证服务类
+ * 用户认证服务类,后台管理系统和前端用户系统都用该服务类做登录验证相关逻辑
  */
 @Service
 @DependsOn("springContextHolder")
-@Transactional(readOnly = true)
 public class UserService {
     private Logger logger = LoggerFactory.getLogger(UserService.class);
      @Value("${jwt.user.type}")
      private Integer userType;
+    @Value("${jwt.token.expire.time}")
+    private Long tokenExpireTime ;
     @Autowired
     private UserRepository userRepository;
 
@@ -46,6 +44,8 @@ public class UserService {
     private RoleRepository roleRepository;
     @Autowired
     private TokenCache tokenCache;
+    @Autowired
+    private EhcacheDao ehcacheDao;
     @Autowired
     private ShopUserRepository shopUserRepository;
 
@@ -101,6 +101,44 @@ public class UserService {
         }
         tokenCache.setUser(token,userBean);
         return userBean;
+    }
+
+    /**
+     * 获取新的token
+     * @return
+     */
+    public String  refreshToken(){
+        //获取用户信息
+        String oldToken = HttpUtil.getToken();
+        AuthorizationUser userBean = tokenCache.getUser(oldToken);
+
+        //验证refreshToken是否有效
+        if(refreshTokenIsValid(oldToken)) {
+            //生成新token 返回界面
+            JwtUser jwtUser = new JwtUser(userBean);
+            String newToken = loginForToken(jwtUser);
+            return newToken;
+        }
+        return null;
+    }
+
+    public boolean refreshTokenIsValid(String token){
+        String  refreshTokenTime = (String) ehcacheDao.hget(EhcacheDao.SESSION,token);
+        if(refreshTokenTime == null){
+            return false;
+        }
+        return System.currentTimeMillis()<=Long.valueOf(refreshTokenTime);
+
+    }
+
+    public String loginForToken(JwtUser user){
+        //获取用户token值
+        String token = JwtUtil.sign(user,tokenExpireTime*60000);
+        //将token作为RefreshToken Key 存到缓存中，缓存时间为token有效期的两倍
+        String   refreshTokenCacheKey = token;
+        Date expireDate = new Date(System.currentTimeMillis()+tokenExpireTime*120000);
+        ehcacheDao.hset(EhcacheDao.SESSION,refreshTokenCacheKey,String.valueOf(expireDate.getTime()));
+        return token;
     }
 
 

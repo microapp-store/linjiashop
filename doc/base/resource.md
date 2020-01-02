@@ -10,7 +10,7 @@
 
 ### vue-element-admin
 - [https://panjiachen.gitee.io/vue-element-admin-site/zh/](https://panjiachen.gitee.io/vue-element-admin-site/zh/)
-- flash-vue-admin使用了vue-element-admin作为基础框架，基于flash-vue-admin开发之前强烈建议先看下vue-element-admin的官方文档
+- linjiashop-admin使用了vue-element-admin作为基础框架，基于linjiashop-admin开发之前强烈建议先看下vue-element-admin的官方文档
 
 
 ## Vue.js
@@ -19,12 +19,15 @@
 
 ## Vant
 - [https://youzan.github.io/vant/#/zh-CN/intro](https://youzan.github.io/vant/#/zh-CN/intro)
-- Vant H5组件官方文档
+- linjiashop-mobile项目使用了Vant组件，上面是其官方文档
 
 ## Vant-weapp
 - [https://youzan.github.io/vant-weapp/#/intro](https://youzan.github.io/vant-weapp/#/intro)
-- Vant小程序组件官方文档
+- linjiashop-wxapp使用了Vant-weapp作为基础的ui组件，上面是其官方文档
 
+## mpvue
+- [http://mpvue.com/](http://mpvue.com/)
+- linjiashop-wxapp使用了mpvue作为基础框架，上面为其官方文档
 
 ## 后端
 ## Spring Boot
@@ -34,4 +37,4 @@
 
 ## web-flash
 - [http://enilu.github.io/web-flash](http://enilu.github.io/web-flash)
-- 后台管理和接口基于web-flash改造，可以参考该项目官方文档
+- 后台管理和接口基于web-flash改造，可以参考该项目[官方文档](http://enilu.gitee.io/web-flash)

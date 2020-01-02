@@ -1,5 +1,8 @@
 package cn.enilu.flash.security;
 
+import cn.enilu.flash.bean.vo.SpringContextHolder;
+import cn.enilu.flash.utils.HttpUtil;
+import cn.enilu.flash.utils.StringUtil;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +55,19 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
             try {
                 return executeLogin(request, response);
             } catch (Exception e) {
-                e.printStackTrace();
+                //判断如果抛出token失效，则执行刷新token逻辑
+                if(e.getMessage().contains("expired")){
+
+                    UserService userService = SpringContextHolder.getBean(UserService.class);
+                    String newToken =userService.refreshToken();
+                    if(StringUtil.isNotEmpty(newToken)){
+                        JwtToken jwtToken = new JwtToken(newToken);
+                        getSubject(request, response).login(jwtToken);
+                        HttpUtil.getResponse().setHeader("token", newToken);
+                        return true;
+                    }
+
+                }
                 response401(request, response);
                 return false;
             }

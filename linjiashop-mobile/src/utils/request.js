@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { router } from '@/router';
+import { router } from '@/router'
+import store from '@/store'
 import { getToken } from '@/utils/auth'
 // create an axios instance
 const service = axios.create({
@@ -37,6 +38,10 @@ service.interceptors.response.use(
    */
   response => {
     console.log('response',response)
+    if(response.headers.token){
+      //如果后台通过header返回token，说明token已经更新，则更新客户端本地token
+      store.dispatch('app/toggleToken',response.headers.token)
+    }
     const res = response.data
     if (res.code !== 20000) {
       console.log('error',res)
@@ -47,7 +52,6 @@ service.interceptors.response.use(
     }
   },
   error => {
-
     if (error.response) {
       switch (error.response.status) {
         case 401:

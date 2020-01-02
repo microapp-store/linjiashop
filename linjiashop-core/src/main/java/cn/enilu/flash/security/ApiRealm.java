@@ -21,7 +21,7 @@ import java.util.Set;
 @Service
 public class ApiRealm extends AuthorizingRealm {
     @Autowired
-    private UserService shiroFactroy;
+    private UserService userService;
 
 
     /**
@@ -39,7 +39,7 @@ public class ApiRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String username = JwtUtil.getUsername(principals.toString());
 
-        AuthorizationUser user = shiroFactroy.getAuthorizationInfo(username);
+        AuthorizationUser user = userService.getAuthorizationInfo(username);
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         simpleAuthorizationInfo.addRoles(user.getRoleCodes());
         Set<String> permission = user.getPermissions();
@@ -64,8 +64,12 @@ public class ApiRealm extends AuthorizingRealm {
             throw new AuthenticationException("User didn't existed!please relogin");
         }
 
-        if (! JwtUtil.verify(token, username, userBean.getPassword())) {
-            throw new AuthenticationException("Username or password error,please relogin");
+        try {
+            if (!JwtUtil.verify(token,  userBean.getPassword())) {
+                throw new AuthenticationException("Username or password error");
+            }
+        }catch (Exception e){
+            throw  new AuthenticationException(e.getMessage());
         }
 
         return new SimpleAuthenticationInfo(token, token, "my_realm");

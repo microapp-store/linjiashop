@@ -10,6 +10,7 @@ import cn.enilu.flash.utils.MD5;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,9 @@ import java.util.Map;
 
 @RestController("/shop")
 public class LoginController extends BaseController {
+
+    @Value("${jwt.token.expire.time}")
+    private Long tokenExpireTime ;
     @Autowired
     private ShopUserService shopUserService;
     private Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -45,7 +49,7 @@ public class LoginController extends BaseController {
                 return Rets.failure("输入的密码错误");
             }
 
-            String token = JwtUtil.sign(new JwtUser(user));
+            String token = JwtUtil.sign(new JwtUser(user),tokenExpireTime);
             Map<String, String> result = new HashMap<>(1);
             logger.info("token:{}",token);
             result.put("token", token);

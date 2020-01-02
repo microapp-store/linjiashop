@@ -4,7 +4,7 @@ import cn.enilu.flash.bean.entity.shop.ShopUser;
 import cn.enilu.flash.bean.vo.JwtUser;
 import cn.enilu.flash.bean.vo.UserInfo;
 import cn.enilu.flash.bean.vo.front.Rets;
-import cn.enilu.flash.security.JwtUtil;
+import cn.enilu.flash.security.UserService;
 import cn.enilu.flash.service.shop.ShopUserService;
 import cn.enilu.flash.utils.MD5;
 import cn.enilu.flash.utils.RandomUtil;
@@ -31,6 +31,8 @@ import java.util.Map;
 public class LoginController extends BaseController {
     @Autowired
     private ShopUserService shopUserService;
+    @Autowired
+    private UserService userService;
     private Logger logger = LoggerFactory.getLogger(LoginController.class);
     @RequestMapping(value = "sendSmsCode",method = RequestMethod.POST)
     public Object sendSmsCode(@RequestParam String mobile){
@@ -60,7 +62,8 @@ public class LoginController extends BaseController {
                     user = shopUserService.register(mobile,initPassword);
                     result.put("initPassword",initPassword);
                 }
-                String token = JwtUtil.sign(new JwtUser(user));
+
+                String token = userService.loginForToken(new JwtUser(user));
                 logger.info("token:{}",token);
                 result.put("token", token);
                 return Rets.success(result);
@@ -96,7 +99,7 @@ public class LoginController extends BaseController {
             if (!user.getPassword().equals(passwdMd5)) {
                 return Rets.failure("输入的密码错误");
             }
-            String token = JwtUtil.sign(new JwtUser(user));
+            String token = userService.loginForToken(new JwtUser(user));
             Map<String, Object> result = new HashMap<>(1);
             user.setLastLoginTime(new Date());
             shopUserService.update(user);

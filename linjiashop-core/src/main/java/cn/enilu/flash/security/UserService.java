@@ -6,8 +6,8 @@ import cn.enilu.flash.bean.entity.system.Role;
 import cn.enilu.flash.bean.entity.system.User;
 import cn.enilu.flash.bean.vo.JwtUser;
 import cn.enilu.flash.bean.vo.SpringContextHolder;
+import cn.enilu.flash.cache.CacheDao;
 import cn.enilu.flash.cache.TokenCache;
-import cn.enilu.flash.cache.impl.EhcacheDao;
 import cn.enilu.flash.dao.shop.ShopUserRepository;
 import cn.enilu.flash.dao.system.MenuRepository;
 import cn.enilu.flash.dao.system.RoleRepository;
@@ -45,7 +45,7 @@ public class UserService {
     @Autowired
     private TokenCache tokenCache;
     @Autowired
-    private EhcacheDao ehcacheDao;
+    private CacheDao cacheDao;
     @Autowired
     private ShopUserRepository shopUserRepository;
 
@@ -123,7 +123,7 @@ public class UserService {
     }
 
     public boolean refreshTokenIsValid(String token){
-        String  refreshTokenTime = (String) ehcacheDao.hget(EhcacheDao.SESSION,token);
+        String  refreshTokenTime = (String) cacheDao.hget(CacheDao.SESSION,token);
         if(refreshTokenTime == null){
             return false;
         }
@@ -137,7 +137,7 @@ public class UserService {
         //将token作为RefreshToken Key 存到缓存中，缓存时间为token有效期的两倍
         String   refreshTokenCacheKey = token;
         Date expireDate = new Date(System.currentTimeMillis()+tokenExpireTime*120000);
-        ehcacheDao.hset(EhcacheDao.SESSION,refreshTokenCacheKey,String.valueOf(expireDate.getTime()));
+        cacheDao.hset(CacheDao.SESSION,refreshTokenCacheKey,String.valueOf(expireDate.getTime()));
         return token;
     }
 

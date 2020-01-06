@@ -1,4 +1,4 @@
-import {getUserInfo} from '@/api/user'
+import userApi from '@/api/user'
 import {Cell, CellGroup, Col, Icon, Row, Tabbar, TabbarItem, Toast} from 'vant';
 
 export default {
@@ -22,12 +22,15 @@ export default {
     },
     methods: {
         init() {
-            getUserInfo().then(response => {
+            userApi.getUserInfo().then(response => {
 
             }).catch((err) => {
                 console.log('err',err.response)
                 this.$router.replace({path:'login',query:{redirect:'user'}})
             })
+        },
+        sorry(){
+          Toast('敬请期待')
         },
         toOrder(status){
             this.$router.push({path:'order',query:{status:status}})

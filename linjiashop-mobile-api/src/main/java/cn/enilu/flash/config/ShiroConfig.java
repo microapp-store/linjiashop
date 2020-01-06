@@ -2,6 +2,7 @@ package cn.enilu.flash.config;
 
 import cn.enilu.flash.security.ApiRealm;
 import cn.enilu.flash.security.JwtFilter;
+import cn.enilu.flash.security.SystemLogoutFilter;
 import cn.enilu.flash.utils.Maps;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
@@ -27,13 +28,7 @@ public class ShiroConfig {
     @Bean("securityManager")
     public DefaultWebSecurityManager getManager(ApiRealm realm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
-        // 使用自己的realm
         manager.setRealm(realm);
-
-        /*
-         * 关闭shiro自带的session，详情见文档
-         * http://shiro.apache.org/session-management.html#SessionManagement-StatelessApplications%28Sessionless%29
-         */
         DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
         DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
         defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
@@ -52,6 +47,7 @@ public class ShiroConfig {
         filterMap.put("jwt", new JwtFilter());
         factoryBean.setFilters(filterMap);
 
+        filterMap.put("logout", new SystemLogoutFilter());
         factoryBean.setSecurityManager(securityManager);
         factoryBean.setUnauthorizedUrl("/401");
 
@@ -62,8 +58,11 @@ public class ShiroConfig {
         Map<String, String> filterRuleMap = new LinkedHashMap<String,String>();
         // /user开头的请求需要拦截通过我们自己的JWT Filter
         filterRuleMap.put("/user/**", "jwt");
+        filterRuleMap.put("/file/upload/**","jwt");
         // 访问401和404页面不通过我们的Filter
         filterRuleMap.put("/401", "anon");
+
+        filterRuleMap.put("/logout", "logout");
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return factoryBean;
     }

@@ -4,6 +4,7 @@ import cn.enilu.flash.bean.constant.cache.Cache;
 import cn.enilu.flash.bean.constant.cache.CacheKey;
 import cn.enilu.flash.bean.entity.system.FileInfo;
 import cn.enilu.flash.bean.enumeration.ConfigKeyEnum;
+import cn.enilu.flash.bean.vo.shop.Base64File;
 import cn.enilu.flash.cache.ConfigCache;
 import cn.enilu.flash.cache.TokenCache;
 import cn.enilu.flash.dao.system.FileInfoRepository;
@@ -14,6 +15,7 @@ import org.jxls.common.Context;
 import org.jxls.expression.JexlExpressionEvaluator;
 import org.jxls.transform.Transformer;
 import org.jxls.util.JxlsHelper;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,7 @@ import java.util.UUID;
 
 @Service
 public class FileService extends BaseService<FileInfo,Long,FileInfoRepository> {
+    private Logger logger;
     @Autowired
     private ConfigCache configCache;
     @Autowired
@@ -52,11 +55,66 @@ public class FileService extends BaseService<FileInfo,Long,FileInfoRepository> {
             multipartFile.transferTo(file);
             return save(multipartFile.getOriginalFilename(),file);
         } catch (Exception e) {
-            e.printStackTrace();
-             return null;
+
+            logger.error("保存文件异常",e);
+
         }
+        return null;
+    }
+    /**
+     * 文件上传
+     * @param base64File
+     * @return
+     */
+    public FileInfo upload(Base64File base64File){
+        String uuid = UUID.randomUUID().toString();
+        String originalFileName = base64File.getName();
+        String realFileName =   uuid +"."+ originalFileName.split("\\.")[originalFileName.split("\\.").length-1];
+        try {
+            File file = new File(configCache.get(ConfigKeyEnum.SYSTEM_FILE_UPLOAD_PATH.getValue()) + File.separator+realFileName);
+            if(base64ToFile(base64File.getBase64(),file)){
+                return save(originalFileName,file);
+            }
+
+        } catch (Exception e) {
+            logger.error("保存文件异常",e);
+        }
+        return null;
     }
 
+    private boolean base64ToFile(String base64, File file) {
+        base64 = base64.substring(base64.indexOf(",")+1);
+        BufferedOutputStream bos = null;
+        java.io.FileOutputStream fos = null;
+        try {
+
+            byte[] bytes = org.apache.commons.codec.binary.Base64.decodeBase64(base64);
+            fos = new java.io.FileOutputStream(file);
+            bos = new BufferedOutputStream(fos);
+            bos.write(bytes);
+            return true;
+        } catch (Exception e) {
+            logger.error("base64转视频文件失败", e);
+            return false;
+        } finally {
+            if (bos != null) {
+                try {
+                    bos.close();
+                } catch (IOException e) {
+                    logger.error("关闭文件流bos失败", e);
+                    return false;
+                }
+            }
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    logger.error("关闭文件流fos失败", e);
+                    return false;
+                }
+            }
+        }
+    }
     /**
      * 根据模板创建excel文件
      * @param template excel模板

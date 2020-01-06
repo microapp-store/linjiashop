@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { router } from '@/router'
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import storage  from '@/utils/storage'
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
@@ -12,9 +12,9 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   config => {
-    if (getToken()) {
+    if (storage.getToken()) {
       // 让每个请求携带自定义token 请根据实际情况自行修改
-      config.headers['Authorization'] = getToken()
+      config.headers['Authorization'] = storage.getToken()
     }
     return config
   },

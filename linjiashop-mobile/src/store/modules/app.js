@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-import { setToken } from '@/utils/auth'
+import storage from '@/utils/storage'
 
 const state = {
     device: 'desktop',
@@ -20,10 +20,11 @@ const mutations = {
     },
     TOGGLE_USER: (state, user) => {
         state.user = user
+
     },
     TOGGLE_TOKEN: (state, token) => {
         state.token = token
-        setToken(token)
+        storage.setToken(token)
 
     }
 }
@@ -37,6 +38,7 @@ const actions = {
         commit('TOGGLE_CATEGORY', category)
     },
     toggleUser({ commit }, user) {
+        user.genderStr = user.gender?('male' === user.gender?'男':'女'):'请选择'
         commit('TOGGLE_USER', user)
     },
     toggleToken({ commit }, token) {

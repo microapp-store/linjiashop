@@ -26,10 +26,10 @@
 
     <van-cell-group>
       <van-cell icon="location-o" title="收货地址" is-link to="address"/>
-      <van-cell icon="points" title="我的积分" is-link />
-      <van-cell icon="gold-coin-o" title="我的优惠券" is-link />
-      <van-cell icon="gift-o" title="我收到的礼物" is-link />
-      <van-cell icon="warning-o" title="关于本项目" is-link url="http://microapp.gitee.io/linjiashop/"/>
+      <van-cell icon="points" title="我的积分" is-link @click="sorry"/>
+      <van-cell icon="gold-coin-o" title="我的优惠券" is-link @click="sorry" />
+      <van-cell icon="gift-o" title="我收到的礼物" is-link  @click="sorry"/>
+      <van-cell icon="setting-o" title="设置" is-link to="setting"/>
     </van-cell-group>
     <van-tabbar v-model="activeFooter">
       <van-tabbar-item icon="home-o"  replace to="/index">首页</van-tabbar-item>

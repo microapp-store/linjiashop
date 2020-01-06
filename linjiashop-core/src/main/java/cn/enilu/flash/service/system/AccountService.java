@@ -14,9 +14,6 @@ import org.springframework.stereotype.Service;
 public class AccountService {
     @Autowired
     private TokenCache tokenCache;
-
-
-
     public void logout(String token) {
         tokenCache.remove(token);
     }

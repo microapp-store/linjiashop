@@ -129,7 +129,6 @@ export default {
             })
         },
         loadMore(){
-            console.log('loadMore')
             this.loading = false
             this.finished = true
         },
@@ -150,13 +149,6 @@ export default {
         },
         formatPrice(price) {
             return (price / 100).toFixed(2)
-        },
-        onRefresh() {
-            alert('refresh')
-            setTimeout(() => {
-                this.$toast('刷新成功');
-                this.isLoading = false;
-            }, 500);
         }
 
     }

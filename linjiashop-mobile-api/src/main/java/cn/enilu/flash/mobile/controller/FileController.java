@@ -1,15 +1,16 @@
 package cn.enilu.flash.mobile.controller;
 
+import cn.enilu.flash.bean.entity.shop.ShopUser;
 import cn.enilu.flash.bean.entity.system.FileInfo;
-import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.vo.front.Rets;
+import cn.enilu.flash.bean.vo.shop.Base64File;
+import cn.enilu.flash.service.shop.ShopUserService;
 import cn.enilu.flash.service.system.FileService;
 import cn.enilu.flash.utils.CryptUtil;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.Maps;
 import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.web.controller.BaseController;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +27,16 @@ public class FileController extends BaseController {
     private static  final Logger logger = LoggerFactory.getLogger(FileController.class);
     @Autowired
     private FileService fileService;
+    @Autowired
+    private ShopUserService shopUserService;
 
     /**
      * 上传文件
      * @param multipartFile
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST)
-    @RequiresPermissions(value = {Permission.FILE_UPLOAD})
+    @RequestMapping(value="upload",method = RequestMethod.POST)
     public Object upload(@RequestPart("file") MultipartFile multipartFile) {
-        Long idUse = getIdUser();
 
         try {
             FileInfo fileInfo = fileService.upload(multipartFile);
@@ -45,7 +46,20 @@ public class FileController extends BaseController {
             return Rets.failure("上传文件失败");
         }
     }
+    @RequestMapping(value = "upload/base64",method = RequestMethod.POST)
+    public Object uploadUploadFileBase64(@RequestBody Base64File base64File) {
 
+        try {
+            FileInfo fileInfo = fileService.upload(base64File);
+            ShopUser user = shopUserService.getCurrentUser();
+            user.setAvatar(String.valueOf(fileInfo.getId()));
+            shopUserService.update(user);
+            return Rets.success(user);
+        } catch (Exception e) {
+            logger.error("上传文件异常",e);
+            return Rets.failure("上传文件失败");
+        }
+    }
     /**
      * 下载文件
      * @param idFile

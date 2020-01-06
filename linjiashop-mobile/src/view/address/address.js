@@ -1,6 +1,6 @@
 import address from '@/api/address'
 import {AddressList, Col, Icon, NavBar, Row, Toast} from 'vant'
-import {setCookie } from '@/utils/auth'
+import storage  from '@/utils/storage'
 export default {
     components: {
         [AddressList.name]: AddressList,
@@ -8,7 +8,6 @@ export default {
         [Row.name]: Row,
         [Col.name]: Col,
         [Icon.name]: Icon,
-
         [NavBar.name]: NavBar
     },
     data() {
@@ -44,7 +43,7 @@ export default {
             this.$router.push({path:'address/edit',query:{id:item.id}})
         },
         onClickLeft() {
-            setCookie('chosenAddressId',this.chosenAddressId)
+            storage.set('chosenAddressId',this.chosenAddressId)
             this.$router.go(-1)
         }
     }

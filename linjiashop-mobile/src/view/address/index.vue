@@ -2,7 +2,6 @@
     <div>
         <van-nav-bar
                 title="收货地址"
-                left-text="返回"
                 left-arrow
                 @click-left="onClickLeft"
         />
@@ -13,7 +12,6 @@
                 @add="onAdd"
                 @edit="onEdit"
         />
-
     </div>
 </template>
 

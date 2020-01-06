@@ -1,6 +1,6 @@
 import order  from '@/api/orders'
 import {Card, Cell, CellGroup, Checkbox, CheckboxGroup, NavBar, SubmitBar, Tabbar, TabbarItem, Toast} from 'vant';
-import {getCookie } from '@/utils/auth'
+import storage from '@/utils/storage'
 const baseApi = process.env.VUE_APP_BASE_API
 export default {
     components: {
@@ -48,7 +48,7 @@ export default {
 
     methods: {
         init() {
-            const chosenAddressId = getCookie('chosenAddressId')
+            const chosenAddressId = storage.get('chosenAddressId')
             order.prepareCheckout({chosenAddressId:chosenAddressId}).then(response => {
                 let cartList = response.data.list
                 this.addr = response.data.addr

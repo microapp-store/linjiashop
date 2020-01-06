@@ -114,4 +114,14 @@ public class LoginController extends BaseController {
         }
         return Rets.failure("登录时失败");
     }
+
+    /**
+     * 退出登录
+     * @return
+     */
+    @RequestMapping(value = "/logout",method = RequestMethod.POST)
+    public Object logout(){
+        logger.info("处理额外的退出登录逻辑");
+        return Rets.success();
+    }
 }

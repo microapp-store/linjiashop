@@ -130,7 +130,7 @@ INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `i
 -- ----------------------------
 -- Records of t_shop_user.sql
 -- ----------------------------
-INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`,`last_login_time`, `mobile`, `nick_name`, `password`, `salt`) VALUES (1, NULL, '2019-11-01 12:00:00','2019-11-03 13:00:15','15011112222', 'enilu', 'b5a51391f271f062867e5984e2fcffee', '8pgby');
+INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `last_login_time`, `mobile`, `nick_name`, `password`, `salt`, `gender`) VALUES (1, null, '2019-11-1 12:00:00', '2020-1-5 11:53:55', '15011112222', 'eniluzt', 'b5a51391f271f062867e5984e2fcffee', '8pgby', NULL);
 
 -- ----------------------------
 -- Records of t_sys_cfg.sql

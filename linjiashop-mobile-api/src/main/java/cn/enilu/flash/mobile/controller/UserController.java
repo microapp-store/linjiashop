@@ -5,9 +5,12 @@ import cn.enilu.flash.bean.vo.UserInfo;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.service.shop.ShopUserService;
+import cn.enilu.flash.utils.MD5;
+import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.web.controller.BaseController;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +32,40 @@ public class UserController extends BaseController {
         UserInfo userInfo = new UserInfo();
         BeanUtils.copyProperties(shopUser,userInfo);
         return Rets.success(shopUser);
+    }
+    @RequestMapping(value = "/updateUserName/{userName}",method = RequestMethod.POST)
+    public Object updateUserName(@PathVariable("userName") String userName){
+        ShopUser user = shopUserService.getCurrentUser();
+        user.setNickName(userName);
+        shopUserService.update(user);
+        return Rets.success();
+    }
+
+    @RequestMapping(value = "/updateGender/{gender}",method = RequestMethod.POST)
+    public Object updateGender(@PathVariable("gender") String gender){
+        ShopUser user = shopUserService.getCurrentUser();
+        user.setGender(gender);
+        shopUserService.update(user);
+        return Rets.success();
+    }
+
+    @RequestMapping(value = "/updatePassword/{oldPwd}/{password}/{rePassword}",method = RequestMethod.POST)
+    public Object updatePassword(@PathVariable("oldPwd") String oldPwd,
+                                 @PathVariable("password") String password,
+                                 @PathVariable("rePassword") String rePassword){
+        if(StringUtil.isEmpty(oldPwd) || StringUtil.isEmpty(password) || StringUtil.isEmpty(rePassword)){
+            return  Rets.failure("项目并能为空");
+        }
+        if(!StringUtil.equals(password,rePassword)){
+            return Rets.failure("密码前后不一致");
+        }
+        ShopUser user = shopUserService.getCurrentUser();
+        String oldPasswdMd5 = MD5.md5(oldPwd, user.getSalt());
+        if(!StringUtil.equals(oldPasswdMd5,user.getPassword())){
+            return Rets.failure("旧密码不正确");
+        }
+        user.setPassword(MD5.md5(password,user.getSalt()));
+        shopUserService.update(user);
+        return Rets.success();
     }
 }

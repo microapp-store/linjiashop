@@ -35,6 +35,8 @@ public class ShopUser  implements Serializable {
     private String nickName;
     @Column(columnDefinition = "VARCHAR(16) COMMENT '头像'")
     private String avatar;
+    @Column(columnDefinition = "VARCHAR(18) COMMENT '性别:male;female'")
+    private String gender;
     @Column(columnDefinition = "DATETIME COMMENT '最后登陆时间'")
     private Date lastLoginTime;
 

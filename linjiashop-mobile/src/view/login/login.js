@@ -36,6 +36,10 @@ export default {
     },
     methods:{
         init(){
+            if(store.state.app.user.nickName){
+                this.$router.push({path: '/index'})
+                return
+            }
             if(this.$route.query.redirect){
                 this.redirect = this.$route.query.redirect
                 console.log('redirect',this.redirect)
@@ -74,8 +78,8 @@ export default {
                 }else {
                    this.$router.push({path: '/index'})
                 }
-            }).then( (err) => {
-                // Toast.fail(err)
+            }).catch( err=>{
+                Toast(err)
             })
         },
         sendSms(){

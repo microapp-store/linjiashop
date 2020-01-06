@@ -4,6 +4,7 @@ package cn.enilu.flash.service.shop;
 import cn.enilu.flash.bean.entity.shop.ShopUser;
 import cn.enilu.flash.cache.CacheDao;
 import cn.enilu.flash.dao.shop.ShopUserRepository;
+import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.service.BaseService;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.MD5;
@@ -53,6 +54,10 @@ public class ShopUserService extends BaseService<ShopUser,Long,ShopUserRepositor
 
         insert(user);
         return user;
+    }
+
+    public ShopUser getCurrentUser() {
+        return get(JwtUtil.getUserId());
     }
 }
 

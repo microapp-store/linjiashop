@@ -14,5 +14,6 @@ public class UserInfo {
     private String avatar;
     private String nickName;
     private Date lastLoginTime;
+    private String gender;
 
 }

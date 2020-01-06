@@ -30,5 +30,11 @@ export default {
       }
     })
   },
+  logout:function(){
+    return request({
+      url: '/logout',
+      method: 'post'
+    })
+  }
 
 }

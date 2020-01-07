@@ -1,4 +1,5 @@
 import { getList } from '@/api/system/notice'
+import dashboardApi from '@/api/dashboard'
 import { mapGetters } from 'vuex'
 import ECharts from 'vue-echarts/components/ECharts'
 import 'echarts/lib/chart/bar'
@@ -32,6 +33,11 @@ export default {
       data.push([r, i])
     }
     return {
+      dashboard:{
+        orderCount:0,
+        userCount:0,
+      },
+
       notice: [],
       lineData: {
         title: {
@@ -178,6 +184,9 @@ export default {
     fetchData() {
       this.listLoading = true
       const self = this
+      dashboardApi.get().then(response => {
+        this.dashboard = response.data
+      })
       getList(self.listQuery).then(response => {
         for (var i = 0; i < response.data.length; i++) {
           var notice = response.data[i]

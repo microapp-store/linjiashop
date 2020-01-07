@@ -86,7 +86,9 @@ export default {
   },
 
   dashboard: {
-    newUser: 'New Users',
+    orderCount:'Orders',
+    userCount: 'Users',
+    userLike:'Carts',
     message: 'Message',
     income: 'Income',
     onlineUser: 'Online User',

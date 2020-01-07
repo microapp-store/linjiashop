@@ -6,12 +6,12 @@
       <el-col :span="6">
         <el-card class="box-card">
           <el-col :span="12">
-            <svg-icon  icon-class="documentation" ></svg-icon>
+            <svg-icon  icon-class="form" ></svg-icon>
           </el-col>
           <el-col :span="12" >
-            <div class="card-panel-text">订单数</div>
+            <div class="card-panel-text">{{ $t('dashboard.orderCount') }}</div>
             <div class="card-panel-num">
-               110
+               {{dashboard.orderCount}}
             </div>
           </el-col>
         </el-card>
@@ -19,22 +19,22 @@
       <el-col :span="6">
         <el-card class="box-card">
           <el-col :span="12">
-            <svg-icon  icon-class="user" ></svg-icon>
+            <svg-icon  icon-class="peoples" ></svg-icon>
           </el-col>
           <el-col :span="12" >
-            <div class="card-panel-text">{{ $t('dashboard.newUser') }}</div>
-            <div class="card-panel-num">102,400</div>
+            <div class="card-panel-text">{{ $t('dashboard.userCount') }}</div>
+            <div class="card-panel-num">{{dashboard.userCount}}</div>
           </el-col>
         </el-card>
       </el-col>
       <el-col :span="6">
         <el-card class="box-card">
           <el-col :span="12">
-            <svg-icon  icon-class="message" ></svg-icon>
+            <svg-icon  icon-class="shoppingCard" ></svg-icon>
           </el-col>
           <el-col :span="12" >
-            <div class="card-panel-text">{{ $t('dashboard.message') }}</div>
-            <div class="card-panel-num">5</div>
+            <div class="card-panel-text">{{ $t('dashboard.userLike') }}</div>
+            <div class="card-panel-num">{{dashboard.cartCount}}</div>
           </el-col>
         </el-card>
       </el-col>
@@ -45,7 +45,7 @@
           </el-col>
           <el-col :span="12" >
             <div class="card-panel-text">{{ $t('dashboard.income') }}</div>
-            <div class="card-panel-num">10000</div>
+            <div class="card-panel-num">{{dashboard.orderSumPrice}}</div>
           </el-col>
         </el-card>
       </el-col>

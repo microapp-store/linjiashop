@@ -75,6 +75,11 @@ public abstract class BaseService<T, ID extends Serializable, R extends BaseRepo
     }
 
     @Override
+    public Object get(String sql) {
+        return dao.getBySql(sql);
+    }
+
+    @Override
     public List<T> query(Iterable<ID> ids) {
         return dao.findAllById(ids);
     }
@@ -82,6 +87,11 @@ public abstract class BaseService<T, ID extends Serializable, R extends BaseRepo
     @Override
     public List<T> queryAll() {
         return dao.findAll();
+    }
+
+    @Override
+    public List queryBySql(String sql) {
+        return dao.queryBySql(sql);
     }
 
     @Override
@@ -131,6 +141,12 @@ public abstract class BaseService<T, ID extends Serializable, R extends BaseRepo
     @Override
     public long count(SearchFilter filter) {
         return count(Lists.newArrayList(filter));
+    }
+
+    @Override
+    public long count() {
+
+        return dao.count();
     }
 
     @Override

@@ -86,9 +86,11 @@ export default {
     }
   },
   dashboard: {
-    newUser: '新增用户',
+    orderCount:'累计订单',
+    userCount: '累计用户',
+    userLike:'购物车',
     message: '未处理消息',
-    income: '收入',
+    income: '累计收入',
     onlineUser: '在线用户',
     document:'在线文档',
     date: '日期',

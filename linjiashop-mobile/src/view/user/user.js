@@ -25,7 +25,6 @@ export default {
             userApi.getUserInfo().then(response => {
 
             }).catch((err) => {
-                console.log('err',err.response)
                 this.$router.replace({path:'login',query:{redirect:'user'}})
             })
         },

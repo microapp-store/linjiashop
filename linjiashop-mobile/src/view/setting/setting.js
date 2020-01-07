@@ -44,7 +44,7 @@ export default {
             this.user.gender = name
             this.user.genderStr = (name === 'male' ? '男' : '女')
             userApi.updateGender(name).then(response => {
-                store.dispatch('app/toggleUser', response.data)
+                store.dispatch('app/toggleUser', this.user)
                 this.showGender = false
             })
         },

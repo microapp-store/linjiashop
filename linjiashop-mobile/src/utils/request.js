@@ -44,10 +44,8 @@ service.interceptors.response.use(
     }
     const res = response.data
     if (res.code !== 20000) {
-      console.log('error',res)
       return Promise.reject(res.msg || 'error')
     } else {
-      console.log('res',res)
       return res
     }
   },
@@ -55,7 +53,9 @@ service.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          console.log(401)
+          //如果后台返回401，则清空本地用户信息信息并跳转至登录页
+          store.dispatch('app/toggleUser', {})
+          store.dispatch('app/toggleToken', '')
           router.replace({
             path: '/login',
             query:{redirect:router.currentRoute.path}
@@ -64,6 +64,9 @@ service.interceptors.response.use(
           break;
         case 500:
           if(error.response.data.message && error.response.data.message.indexOf('relogin')>-1){
+            console.log('need relogin')
+            store.dispatch('app/toggleUser', {})
+            store.dispatch('app/toggleToken', '')
             router.replace({
               path: '/login',
               query:{redirect:router.currentRoute.path}

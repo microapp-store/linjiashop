@@ -39,6 +39,15 @@ export default {
             method: 'post',
             data:file
         })
-    }
+    },
+    sendSmsCode:function(mobile) {
+        return request({
+            url: '/user/sendSmsCode',
+            method: 'post',
+            params: {
+                "mobile": mobile
+            }
+        })
+    },
 }
 

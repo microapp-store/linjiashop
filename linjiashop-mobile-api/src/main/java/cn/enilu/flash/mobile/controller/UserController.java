@@ -10,10 +10,7 @@ import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.web.controller.BaseController;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author ：enilu
@@ -67,5 +64,11 @@ public class UserController extends BaseController {
         user.setPassword(MD5.md5(password,user.getSalt()));
         shopUserService.update(user);
         return Rets.success();
+    }
+    @RequestMapping(value = "sendSmsCode",method = RequestMethod.POST)
+    public Object sendSmsCode(@RequestParam String mobile){
+        String smsCode = shopUserService.sendSmsCodeForOldMobile(mobile);
+        //todo 测试环境直接返回验证码，生成环境切忌返回该验证码
+        return Rets.success(smsCode);
     }
 }

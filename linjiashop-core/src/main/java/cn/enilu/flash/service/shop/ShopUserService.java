@@ -43,6 +43,15 @@ public class ShopUserService extends BaseService<ShopUser,Long,ShopUserRepositor
         return smsCode;
     }
 
+    public String sendSmsCodeForOldMobile(String mobile) {
+        //todo 发送短信验证码逻辑，暂不实现
+        String smsCode = RandomUtil.getRandomNumber(4);
+        cacheDao.hset(CacheDao.SESSION,mobile+"_smsCode",smsCode);
+        HttpUtil.getRequest().getSession().setAttribute(mobile+"_smsCode",smsCode);
+        return smsCode;
+    }
+
+
     public ShopUser register(String mobile,String initPwd) {
         ShopUser user = new ShopUser();
         user.setMobile(mobile);

@@ -46,6 +46,22 @@
 
           </el-form-item>
         </el-col>
+        <el-col :span="24">
+          <el-form-item label="是否新品">
+            <el-radio-group v-model="form.isNew">
+              <el-radio :label="true">是</el-radio>
+              <el-radio :label="false">否</el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="是否热卖">
+            <el-radio-group v-model="form.isHot">
+              <el-radio :label="true">是</el-radio>
+              <el-radio :label="false">否</el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </el-col>
 
 
       </el-row>

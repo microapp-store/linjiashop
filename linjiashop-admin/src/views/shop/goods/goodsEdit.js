@@ -2,7 +2,6 @@ import editorImage from '@/components/Tinymce'
 import plugins from '@/components/editContainer/plugins'
 import toolbar from '@/components/editContainer/toolbar'
 import {get, getList, save,saveBaseInfo} from '@/api/shop/goods'
-import skuRequest from '@/api/shop/goodsSku'
 import {getAttrBy} from '@/api/shop/attrVal'
 import {getCategories} from '@/api/shop/category'
 import {getApiUrl} from '@/utils/utils'
@@ -54,13 +53,13 @@ export default {
       attrValSel:'',
       attrValListSel:[],
       tags:[
-        // {attrVal:'3G+128G',id:1},
-        // {attrVal:'哑光黑',id:2}
       ],
       form: {
         pic:'',
         gallery:[],
-        idCategory:''
+        idCategory:'',
+        isHot:false,
+        isNew:false
       },
       skuList:[],
       uploadUrl: '',
@@ -168,7 +167,9 @@ export default {
         saveBaseInfo({
           name: this.form.name,
           idCategory: this.form.idCategory,
-          descript: this.form.descript
+          descript: this.form.descript,
+          isNew: this.form.isNew,
+          isHot:this.form.isHot
         }).then( response => {
           this.idGoods = response.data
         })
@@ -200,7 +201,9 @@ export default {
         price: this.form.price,
         isDelete: this.form.isDelete,
         isOnSale: this.form.isOnSale,
-        id: this.form.id
+        id: this.form.id,
+        isNew: this.form.isNew,
+        isHot:this.form.isHot
       }).then(response => {
         this.$message({
           message: this.$t('common.optionSuccess'),

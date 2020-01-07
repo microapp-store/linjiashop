@@ -42,7 +42,6 @@ public class GoodsController {
 	@BussinessLog(value = "保存商品基本信息", key = "name",dict= CommonDict.class)
 	@RequiresPermissions(value = {Permission.GOODS_EDIT})
 	public Object saveBaseInfo(@RequestBody Goods goods){
-
 		if(goods.getId()==null){
 			goodsService.insert(goods);
 		}

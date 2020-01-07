@@ -1,6 +1,8 @@
 <template>
     <div>
         <van-tabs v-model="activeNav" @click="clickNav">
+            <van-tab title="推荐" v-bind:key="-1">
+            </van-tab>
             <van-tab v-for="nav in navList" :title="nav.name" v-bind:key="nav.id">
             </van-tab>
         </van-tabs>

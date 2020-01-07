@@ -35,8 +35,6 @@ public class Goods extends BaseEntity {
     private String descript;
     @Column(columnDefinition = "TEXT COMMENT '产品详情'")
     private String detail;
-    @Column(columnDefinition = "TEXT COMMENT '产品规格'")
-    private String specifications;
     /**
      * 如果商品是多规格，则存所有库存之和
      */
@@ -50,6 +48,10 @@ public class Goods extends BaseEntity {
     @Column(columnDefinition = "tinyint COMMENT '是否删除'")
     private Boolean isDelete= false;
     @Column(columnDefinition = "tinyint COMMENT '是否上架'")
-    private Boolean isOnSale = true;
+    private Boolean isOnSale = false;
+    @Column(columnDefinition = "tinyint COMMENT '是否新品推荐'")
+    private Boolean isNew = false;
+    @Column(columnDefinition = "tinyint COMMENT '是否人气商品'")
+    private Boolean isHot = false;
 
 }

@@ -24,14 +24,22 @@ import request from '@/utils/request'
    },
 
    /**
-    * 获取热门商品
+    * 获取热门推荐
     * @param params
     */
-   searchHot:function(params) {
+   searchHot:function() {
      return request({
        url: '/goods/searchHot',
-       method: 'get',
-       params
+       method: 'get'
+     })
+   },
+   /**
+    * 获取新品推荐
+    */
+   searchNew:function() {
+     return request({
+       url: '/goods/searchNew',
+       method: 'get'
      })
    },
    getGoods:function(id) {

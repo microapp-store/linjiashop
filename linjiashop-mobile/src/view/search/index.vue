@@ -105,7 +105,7 @@
             },
             searchHot(){
                 goods.searchHot().then( response =>{
-                    let list = response.data.records
+                    let list = response.data
                     for(var index in  list){
                         const item = list[index]
                         item.img = baseApi+'/file/getImgStream?idFile=' + item.pic

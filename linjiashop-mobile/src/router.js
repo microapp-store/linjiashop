@@ -31,6 +31,21 @@ const routes = [
         }
     },
     {
+        name: 'list',
+        component: () => import('./view/goods/list'),
+        meta: {
+            title: '邻家小铺'
+        }
+    },
+    {
+        path: '/goods/:id',
+        name: 'goods',
+        component: () => import('./view/goods'),
+        meta: {
+            title: '商品详情'
+        }
+    },
+    {
         name: 'search',
         component: () => import('./view/search'),
         meta: {
@@ -137,14 +152,6 @@ const routes = [
         meta: {
             requireAuth: true,
             title: '购物车'
-        }
-    },
-    {
-        path: '/goods/:id',
-        name: 'goods',
-        component: () => import('./view/goods'),
-        meta: {
-            title: '商品详情'
         }
     }
 ]

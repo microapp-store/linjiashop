@@ -70,18 +70,25 @@ public class GoodsController extends BaseController {
         return Rets.success(page);
     }
 
+    @RequestMapping(value = "/searchNew", method = RequestMethod.GET)
+    public Object searchNew() {
+        List<Goods> list = goodsService.queryAll(Lists.newArrayList(
+                SearchFilter.build("isNew", true)
+        ));
+        return Rets.success(list);
+    }
+
     /**
      * 查询热门商品
-     * todo 暂无实现具体逻辑
      *
      * @return
      */
     @RequestMapping(value = "/searchHot", method = RequestMethod.GET)
     public Object searchHot() {
-        Page<Goods> page = new PageFactory<Goods>().defaultPage();
-        page.addFilter(SearchFilter.build("isOnSale", true));
-        page = goodsService.queryPage(page);
-        return Rets.success(page);
+        List<Goods> list = goodsService.queryAll(Lists.newArrayList(
+                SearchFilter.build("isHot", true)
+        ));
+        return Rets.success(list);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -109,7 +116,7 @@ public class GoodsController extends BaseController {
                     v.add(Maps.newHashMap(
                             "id", attrVal.getId(),
                             "name", attrVal.getAttrVal(),
-                            "plain",true
+                            "plain", true
                     ));
                 }
                 treeNode.put("v", v);
@@ -129,7 +136,7 @@ public class GoodsController extends BaseController {
                     oneSkuMap.put("s" + attrVal.getIdAttrKey(), attrVal.getId());
                 }
                 oneSkuMap.put("stock_num", sku.getStock());
-                oneSkuMap.put("code",sku.getCode());
+                oneSkuMap.put("code", sku.getCode());
                 skuList2.add(oneSkuMap);
             }
             skuMap.put("list", skuList2);

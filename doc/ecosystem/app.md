@@ -1,7 +1,7 @@
 # linjiasho-flutter
  
-- 基于fluetter开发的linjiashop app版本，使用flutter 1.9.6 版本构建
-- linjiashop 包含了h5,小程序，web（基于SpringBoot，Vue.js) 仓库地址[gitee](https://gitee.com/microapp/linjiashop),[github](https://github.com/microapp-store/linjiashop)
+- 基于fluetter开发的linjiashop app版本，使用flutter 1.12.13(后续会更新，以项目readme为准) 版本构建
+- 仓库地址[gitee](https://gitee.com/microapp/linjiashop-flutter),[github](https://github.com/microapp-store/linjiashop-flutter)
  
 
 ## 技术选型

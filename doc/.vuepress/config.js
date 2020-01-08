@@ -20,9 +20,9 @@ module.exports = {
                 items:[
                     {text:"项目",items:[
                             {text:'linjiashop-flutter(app)',link:'/ecosystem/app'},
+                            {text:'web-flash',link:'http://enilu.gitee.io/web-flash'},
                             {text:'code-generator',link:'http://enilu.gitee.io/web-flash/ecosystem/code-generator.html'},
                             {text:'database-doc-generator',link:'http://enilu.gitee.io/web-flash/ecosystem/database-doc-generator.html'},
-                            {text:'web-flash',link:'http://enilu.gitee.io/web-flash'},
                             {text:'material-admin',link:'https://enilu.gitee.io/material-admin'}
                         ]
                     },

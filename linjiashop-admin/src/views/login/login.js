@@ -39,7 +39,6 @@ export default {
   methods: {
     init(){
       let redirect = this.$route.query.redirect
-      console.log('redirect',redirect)
       if(redirect){
         this.redirect = redirect
       }

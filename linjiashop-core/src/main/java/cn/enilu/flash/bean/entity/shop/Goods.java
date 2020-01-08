@@ -30,7 +30,7 @@ public class Goods extends BaseEntity {
     @JoinColumn(name="id_category", insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
-    @Column(columnDefinition = "VARCHAR(64) COMMENT '产品简介'")
+    @Column(columnDefinition = "VARCHAR(255) COMMENT '产品简介'")
     @NotBlank(message = "商品简介不能为空")
     private String descript;
     @Column(columnDefinition = "TEXT COMMENT '产品详情'")

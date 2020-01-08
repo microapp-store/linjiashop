@@ -42,6 +42,7 @@ linjiashop包含了后台管理功能和手机端商城业务功能
     -完整的商城购物功能        
 
 ## 运行效果图
+_商品素材取自小米商城_
 ### 手机端H5
 ![手机端](doc/img/mobile.gif)
 
@@ -97,7 +98,7 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 ## 快速开始
 - 克隆本项目
 - 导入idea或者eclipse
-- 确保开发工具下载并安装了lombok插件
+- 确保开发工具下载并安装了lombok插件，另外由于lombok有版本差异，如果出现问题，可以更新maven以来中lombok的版本来解决
 - 创建数据库：linjiashop
      ```sql
     CREATE DATABASE IF NOT EXISTS linjiashop DEFAULT CHARSET utf8 COLLATE utf8_general_ci; 

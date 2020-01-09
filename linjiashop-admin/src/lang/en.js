@@ -34,7 +34,9 @@ export default {
     goodsEdit:'Edit Goods',
     order:'Orders',
     orderDetail:'Order Detail',
-    cart:'Carts'
+    cart:'Carts',
+    promotion:'Promotion',
+    topic:'Topics'
   },
   navbar: {
     logOut: 'Log Out',

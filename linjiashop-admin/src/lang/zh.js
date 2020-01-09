@@ -34,7 +34,9 @@ export default {
     goodsEdit:'商品编辑',
     order:'订单管理',
     orderDetail:'订单详情',
-    cart:'购物车'
+    cart:'购物车',
+    promotion:'推广管理',
+    topic:'专题管理'
   },
   navbar: {
     logOut: '退出登录',

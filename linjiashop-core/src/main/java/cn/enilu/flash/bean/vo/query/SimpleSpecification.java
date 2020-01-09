@@ -79,10 +79,11 @@ public class SimpleSpecification <T> implements Specification<T> {
             case LT:
                 return cb.lessThan(root.get(op.fieldName), (Comparable) value);
             case IN:
-                if (value instanceof Collection) {
+                if(value.getClass().isArray()){
+                    return root.get(op.fieldName).in((Object[]) value);
+                } else{
                     return root.get(op.fieldName).in((Collection) value);
                 }
-                return root.get(op.fieldName).in(value);
             case NOTIN:
                 if (value instanceof Collection) {
                     return cb.not(root.get(op.fieldName).in((Collection) value));

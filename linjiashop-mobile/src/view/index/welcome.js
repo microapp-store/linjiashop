@@ -1,5 +1,6 @@
-import category from '@/api/category'
-import goods from '@/api/goods'
+import categoryApi from '@/api/category'
+import goodsApi from '@/api/goods'
+import topicApi from '@/api/topic'
 import store from '@/store'
 const baseApi = process.env.VUE_APP_BASE_API
 import {
@@ -59,7 +60,8 @@ export default {
                 idCategory: undefined
             },
             count: 0,
-            isLoading: false
+            isLoading: false,
+            topicList: []
         }
     },
     mounted() {
@@ -71,7 +73,7 @@ export default {
             if (!categoryData || categoryData.length == 0) {
                 let platform = navigator.platform
                 store.dispatch('app/toggleDevice', platform)
-                category.getAllCategories().then(response => {
+                categoryApi.getAllCategories().then(response => {
                     let navList = response.data
                     navList.splice(0,0,{name:'推荐',id:'0'})
                     this.navList = navList
@@ -83,13 +85,14 @@ export default {
             } else {
                 this.navList = categoryData
             }
-            this.getGoods()
+            this.queryGoods()
+            this.queryTopic()
 
         },
-        getGoods() {
-            goods.searchHot().then(response => {
+        queryGoods() {
+            goodsApi.searchHot().then(response => {
                 let list = response.data
-                for (var index in  list) {
+                for (const index in  list) {
                     const item = list[index]
                     item.img = baseApi+'/file/getImgStream?idFile=' + item.pic
                 }
@@ -98,9 +101,9 @@ export default {
             }).catch((err) => {
                 Toast(err)
             })
-            goods.searchNew().then(response => {
+            goodsApi.searchNew().then(response => {
                 let list = response.data
-                for (var index in  list) {
+                for (const index in  list) {
                     const item = list[index]
                     item.img = baseApi+'/file/getImgStream?idFile=' + item.pic
                 }
@@ -108,6 +111,17 @@ export default {
 
             }).catch((err) => {
                 Toast(err)
+            })
+        },
+        queryTopic(){
+            topicApi.queryAll().then(response => {
+                let list = response.data
+                for (const index in  list) {
+                    const item = list[index]
+                    item.img = baseApi+'/file/getImgStream?idFile=' + item.article.img
+                }
+                this.topicList = list
+                console.log('topicList',this.topicList)
             })
         },
         clickNav(index, title) {
@@ -125,8 +139,9 @@ export default {
         formatPrice(price) {
             return (price / 100).toFixed(2)
         },
-        toTopic() {
-          Toast('敬请期待')
+        toTopic(id) {
+            this.$router.push({path: '/topic/'+id})
+          // Toast('敬请期待')
         }
 
     }

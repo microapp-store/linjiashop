@@ -6,50 +6,15 @@
         </van-tabs>
         <div class="subject">
             <van-row>
-                <van-col span="12">
-                    <van-image height="100"
-                               @click="toTopic"
-                               src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a56394373382e7d98a395b25c709cfcb.jpg?thumb=1&w=360&h=140"></van-image>
-                    <div class="text"> 智能新品好物</div>
-                </van-col>
-                <van-col span="6">
-                    <van-image height="100"
-                               @click="toTopic"
-                               src="https://i8.mifile.cn/v1/a1/b79cb907-3ae4-2a35-6756-b243b386a95a.webp"></van-image>
+                    <van-col  v-for="(topic,index) in topicList" :key="index" :span="(index+3)%3===0?12:6"  >
+                        <van-image height="100"
+                                   @click="toTopic(topic.id)"
+                                   :src="topic.img"></van-image>
+                        <div class="text"> {{topic.title}}</div>
+                    </van-col>
 
-                    <div class="text"> 爱生活,爱自己</div>
-                </van-col>
-                <van-col span="6">
-                    <van-image height="100"
-                               @click="toTopic"
-                               src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/efae8106bc194e6a730294c9ee531caf.jpg?thumb=1&w=360&h=360"></van-image>
-
-                    <div class="text"> 给你一个安全的家</div>
-                </van-col>
             </van-row>
-            <van-row>
 
-                <van-col span="12">
-                    <van-image height="100"
-                               @click="toTopic"
-                               src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/f4c4a11536a720ee0f1b516e53e4d868.jpg?thumb=1&w=360&h=140"></van-image>
-                    <div class="text"> 新年换新家</div>
-                </van-col>
-                <van-col span="6">
-                    <van-image height="100"
-                               @click="toTopic"
-                               src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/739c1321d2a05d48c0b8b86cd459c4d4.jpg?thumb=1&w=360&h=360"></van-image>
-
-                    <div class="text"> 记录美好时刻</div>
-                </van-col>
-                <van-col span="6">
-                    <van-image height="100"
-                               @click="toTopic"
-                               src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/c33f008a86c151a1500d44d599351256.jpg?thumb=1&w=360&h=360"></van-image>
-
-                    <div class="text"> “小爱同学”</div>
-                </van-col>
-            </van-row>
         </div>
         <van-panel title="热门推荐">
             <van-card v-for="(goods,index) in hotList" :key="index"
@@ -91,6 +56,7 @@
             padding: 0px 0px 5px 0px;
             .text {
                 display: none;
+                width:100%;
                 padding: 5px;
                 position: absolute;
                 z-index: 10;

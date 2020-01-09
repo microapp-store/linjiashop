@@ -31,6 +31,14 @@ const routes = [
         }
     },
     {
+        path: '/topic/:id',
+        name: 'topic',
+        component: () => import('./view/topic'),
+        meta: {
+            title: '专题推荐'
+        }
+    },
+    {
         name: 'list',
         component: () => import('./view/goods/list'),
         meta: {

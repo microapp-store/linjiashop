@@ -1,6 +1,6 @@
 # Change log
 
-## 未发布
+
 ## v0.2 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.2)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.2)
 ### Issue
 - 【API】 Token过期自动刷新
@@ -16,7 +16,6 @@
 - 【H5，后台管理】用户户没有权限操作的时候浏览器自动弹出验证框的问题
 
 
-## 已发布
 ## v0.1[gitee](https://gitee.com/microapp/linjiashop/releases/v0.1)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.1)
 ### Issue
 - 【后台管理】  基础的管理功能：用户，权限，菜单，角色，定时任务，消息发送，日志，监控

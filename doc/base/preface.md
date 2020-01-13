@@ -97,7 +97,7 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 ## 快速开始
 - 克隆本项目
 - 导入idea或者eclipse
-- 确保开发工具下载并安装了lombok插件
+- 确保开发工具下载并安装了lombok插件，另外由于lombok有版本差异，如果出现问题，可以更新maven以来中lombok的版本来解决
 - 创建数据库：linjiashop
      ```sql
     CREATE DATABASE IF NOT EXISTS linjiashop DEFAULT CHARSET utf8 COLLATE utf8_general_ci; 
@@ -105,12 +105,12 @@ linjiashop包含了后台管理功能和手机端商城业务功能
     GRANT ALL privileges ON linjiashop.* TO 'linjiashop'@'%';
     flush privileges;
     ```     
-
+- 下载项目测试数据的图片：链接：[https://pan.baidu.com/s/1V1QTSLspuDRuwI7H9TjcOA](https://pan.baidu.com/s/1V1QTSLspuDRuwI7H9TjcOA) 提取码：dyj6 ，将图片存放到t_sys_cfg表中system.file.upload.path配置的目录下
 - 启动后台管理
     - 启动后台管理api服务:linjiashop-admin-api
         - 修改linjiashop-admin-api中数据库连接配置
             ```properties
-            ## 首次启动需要设置下列配置项设置为create，以便系统可以自动创建表并导入./import.sql测试数据文件
+            ## 首次启动需要设置下列配置项设置为create，以便系统可以自动创建表并导入./import.sql测试数据文件，
             ## 如果下面配置无法自动建表并导入测试数据文件；则可以手动初始化数据库，手动使用的初始化文件文件位于：doc/database.sql
             spring.jpa.hibernate.ddl-auto=create
             ```                    
@@ -127,6 +127,12 @@ linjiashop包含了后台管理功能和手机端商城业务功能
         - 运行 npm install --registry=https://registry.npm.taobao.org
         - 运行npm run dev
         - 启动成功后访问 http://localhost:8080/#/index
+- 微信小程序开发
+    - 首先启动后台api服务，和h5公用一个后台服务，即：linjiashop-mobile-api
+    - 进入linjiashop-wxapp目录
+        - 运行  npm install --registry=https://registry.npm.taobao.org
+        - 运行npm run dev
+        - 启动微信开发工具打开linjiashop-wxapp/dist/wx 目录即可预览小程序
  
  
 ## 技术交流

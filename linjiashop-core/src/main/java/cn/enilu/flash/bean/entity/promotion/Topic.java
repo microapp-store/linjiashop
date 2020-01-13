@@ -29,6 +29,8 @@ public class Topic  extends BaseEntity {
     private String idGoodsList;
     @Column(columnDefinition = "BIGINT COMMENT '阅读量'")
     private Long pv=0L;
+    @Column(columnDefinition = "TINYINT COMMENT '是否禁用'")
+    private boolean disabled=false;
     @Transient
     private List<Goods> goodsList = Lists.newArrayList();
 

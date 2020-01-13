@@ -1,6 +1,8 @@
 import { remove, getList, save } from '@/api/promotion/topic'
 import {getApiUrl} from '@/utils/utils'
+import permission from '@/directive/permission/index.js'
 export default {
+  directives: { permission },
   data() {
     return {
       formVisible: false,
@@ -16,8 +18,14 @@ export default {
       listQuery: {
         page: 1,
         limit: 20,
-        id: undefined
+        id: undefined,
+        disabled:''
       },
+      options:[
+        {label:'是',value:1},
+        {label:'否',value:0}
+      ],
+      rangeDate:'',
       total: 0,
       list: null,
       listLoading: true,
@@ -58,6 +66,12 @@ export default {
     },
     fetchData() {
       this.listLoading = true
+      let queryData = this.listQuery
+      if(this.rangeDate){
+        queryData['startDate'] = this.rangeDate[0]
+        queryData['endDate'] = this.rangeDate[1]
+
+      }
       getList(this.listQuery).then(response => {
         this.list = response.data.records
         this.listLoading = false
@@ -69,6 +83,8 @@ export default {
     },
     reset() {
       this.listQuery.id = ''
+      this.listQuery.disabled=''
+      this.rangeDate = ''
       this.fetchData()
     },
     handleFilter() {

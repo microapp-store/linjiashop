@@ -1,6 +1,8 @@
 import {getList, remove, save, getBanners,removeBanner} from '@/api/shop/category'
 import {getApiUrl} from '@/utils/utils'
+import permission from '@/directive/permission/index.js'
 export default {
+  directives: { permission },
   data() {
     return {
       formVisible: false,

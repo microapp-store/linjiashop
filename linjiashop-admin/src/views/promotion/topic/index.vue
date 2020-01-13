@@ -1,13 +1,43 @@
 <template>
   <div class="app-container">
     <div class="block">
+      <el-row  :gutter="20">
+        <el-col :span="6">
+            <el-select    size="mini" v-model="listQuery.disabled" filterable placeholder="请选择是否禁用">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+
+        </el-col>
+        <el-col :span="10">
+          <el-date-picker
+            v-model="rangeDate"
+            size="mini"
+            type="datetimerange"
+            range-separator="至"
+            start-placeholder="发送起始日期"
+            end-placeholder="发送截至日期"
+            value-format="yyyyMMddHHmmss"
+            align="right">
+          </el-date-picker>
+        </el-col>
+        <el-col :span="6">
+          <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
+        </el-col>
+      </el-row>
+      <br>
       <el-row>
         <el-col :span="24">
-          <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}
+          <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add" v-permission="['/topic/edit']">{{ $t('button.add') }}
           </el-button>
-          <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}
+          <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit" v-permission="['/topic/edit']">{{ $t('button.edit') }}
           </el-button>
-          <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}
+          <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove" v-permission="['/topic/delete']">{{ $t('button.delete') }}
           </el-button>
         </el-col>
       </el-row>
@@ -30,6 +60,11 @@
       <el-table-column label="阅读量">
         <template slot-scope="scope">
           {{scope.row.pv}}
+        </template>
+      </el-table-column>
+      <el-table-column label="是否禁用">
+        <template slot-scope="scope">
+          {{scope.row.disabled}}
         </template>
       </el-table-column>
       <el-table-column label="创建日期">

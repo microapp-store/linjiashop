@@ -106,7 +106,7 @@ _商品素材取自小米商城_
     GRANT ALL privileges ON linjiashop.* TO 'linjiashop'@'%';
     flush privileges;
     ```     
-- 下载项目测试数据的图片：链接：链接：[https://pan.baidu.com/s/1Ppfgy2wR1nW0l-QMYHFGKw](https://pan.baidu.com/s/1Ppfgy2wR1nW0l-QMYHFGKw) 提取码：wo8q ，将图片存放到t_sys_cfg表中system.file.upload.path配置的目录下
+- 下载项目测试数据的图片：链接：[https://pan.baidu.com/s/1V1QTSLspuDRuwI7H9TjcOA](https://pan.baidu.com/s/1V1QTSLspuDRuwI7H9TjcOA) 提取码：dyj6 ，将图片存放到t_sys_cfg表中system.file.upload.path配置的目录下
 - 启动后台管理
     - 启动后台管理api服务:linjiashop-admin-api
         - 修改linjiashop-admin-api中数据库连接配置

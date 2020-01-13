@@ -1,7 +1,9 @@
 import {getList, remove, save,changeIsOnSale} from '@/api/shop/goods'
 import {getApiUrl} from '@/utils/utils'
+import permission from '@/directive/permission/index.js'
 
 export default {
+  directives: { permission },
   data() {
     return {
       listQuery: {

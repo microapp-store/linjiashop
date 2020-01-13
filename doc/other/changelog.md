@@ -1,6 +1,7 @@
 # Change log
 
 ## 未发布
+## v0.2 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.2)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.2)
 ### Issue
 - 【API】 Token过期自动刷新
 - 【后台管理】 用户列表增加用户头像，注册时间列，添加过滤功能，增加用户详情页内容

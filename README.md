@@ -75,7 +75,7 @@ _商品素材取自小米商城_
 ![后台管理](doc/img/admin.gif)
 ## 演示
 - 手机版本：[http://linjiashop.microapp.store](http://linjiashop.microapp.store)
-- 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 请不要随意删除测试数据，谢谢
+- 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 请不要随意删除测试数据，谢谢（演示环境为避免误删数据，没有开放全部权限）
 
 ## 技术选型
 - 核心框架：Spring Boot

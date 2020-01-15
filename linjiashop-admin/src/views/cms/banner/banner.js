@@ -3,8 +3,9 @@ import {setCategoryBanner} from '@/api/shop/category'
 import { getToken } from '@/utils/auth'
 import { Loading } from 'element-ui'
 import { getApiUrl } from '@/utils/utils'
-
+import permission from '@/directive/permission/index.js'
 export default {
+  directives: { permission },
   data() {
     return {
       uploadUrl: '',

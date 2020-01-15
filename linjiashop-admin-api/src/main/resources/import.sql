@@ -393,7 +393,7 @@ INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify
 INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (74, 1, '2019-11-4 19:07:13', 1, '2019-11-4 19:07:13', 'order', 'views/shop/order/index', 0, 'order', 1, NULL, 2, '订单管理', 4, 'shopMgr', '[0],[shopMgr],', 1, NULL, '/order');
 INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (75, 1, '2019-7-31 22:04:30', 1, '2019-7-31 22:04:30', 'category', 'views/shop/category/index', 0, 'category', 1, NULL, 2, '商品类别', 2, 'shopMgr', '[0],[shopMgr],', 1, NULL, '/category');
 INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (76, 1, '2019-11-4 19:08:51', 1, '2019-11-4 19:08:51', 'cart', 'views/shop/cart/index', 0, 'cart', 1, NULL, 2, '购物车', 5, 'shopMgr', '[0],[shopMgr],', 1, NULL, '/cart');
-INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (77, 1, '2019-7-31 22:04:30', 1, '2019-7-31 22:04:30', 'goodsEdit', 'views/shop/goods/edit', 1, 'goods', 1, NULL, 2, '商品编辑', 2, 'shopMgr', '[0],[shopMgr],', 1, NULL, '/goods/edit');
+INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (77, 1, '2019-7-31 22:04:30', 1, '2019-7-31 22:04:30', 'goodsEdit', 'views/shop/goods/edit', 1, 'goods', 1, NULL, 2, '商品编辑', 2, 'shopMgr', '[0],[shopMgr],', 1, NULL, '/goodsEdit');
 INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (78, 1, '2019-7-31 22:04:30', 1, '2019-7-31 22:04:30', 'shopUserDetail', 'views/shop/shopUser/detail', 1, 'user', 1, NULL, 2, '用户详情', 2, 'shopMgr', '[0],[shopMgr],', 1, NULL, '/shopUserDetail');
 INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (79, 1, '2019-7-31 22:04:30', 1, '2019-7-31 22:04:30', 'orderDetail', 'views/shop/order/detail', 1, 'order', 1, NULL, 2, '订单详情', 2, 'shopMgr', '[0],[shopMgr],', 1, NULL, '/orderDetail');
 INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (80, 1, '2019-7-31 22:04:30', 1, '2019-7-31 22:04:30', 'categoryEdit', NULL, 0, NULL, 0, NULL, 3, '编辑类别', 1, 'category', '[0],[shopMgr],[category],', 1, NULL, '/category/edit');
@@ -419,7 +419,7 @@ INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (3, 67, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (4, 66, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (5, 76, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (6, 75, 1);
--- INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (7, 80, 1);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (7, 80, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (8, 33, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (9, 34, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (10, 36, 1);
@@ -429,7 +429,7 @@ INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (13, 69, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (14, 68, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (15, 2, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (16, 44, 1);
--- INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (17, 70, 1);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (17, 70, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (18, 21, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (19, 32, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (20, 24, 1);
@@ -447,7 +447,7 @@ INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (31, 46, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (32, 45, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (33, 65, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (34, 73, 1);
--- INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (35, 77, 1);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (35, 77, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (36, 48, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (37, 50, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (38, 51, 1);
@@ -495,9 +495,8 @@ INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (79, 39, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (80, 47, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (81, 82, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (82, 83, 1);
--- 专题维护功能未开发完毕，暂不开放该权限
--- INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (83, 84, 1);
--- INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (84, 85, 1);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (83, 84, 1);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (84, 85, 1);
 
 -- ----------------------------
 -- Records of t_sys_role.sql

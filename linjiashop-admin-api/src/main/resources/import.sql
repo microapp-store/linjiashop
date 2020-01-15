@@ -497,6 +497,20 @@ INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (81, 82, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (82, 83, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (83, 84, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (84, 85, 1);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (85, 41, 2);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (86, 42, 2);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (87, 43, 2);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (88, 44, 2);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (89, 45, 2);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (90, 46, 2);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (91, 65, 2);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (92, 66, 2);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (93, 67, 2);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (94, 68, 2);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (95, 69, 2);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (96, 70, 2);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (97, 2, 2);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (98, 17, 2);
 
 -- ----------------------------
 -- Records of t_sys_role.sql

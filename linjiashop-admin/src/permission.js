@@ -18,25 +18,23 @@ router.beforeEach(async(to, from, next) => {
 
   // determine whether the user has logged in
   const hasToken = getToken()
-  console.log('hasToken',hasToken)
   if (hasToken) {
     if (to.path === '/login') {
-      console.log('login')
       next({ path: '/' })
       NProgress.done()
     } else {
-      const hasGetUserInfo = store.getters.name
-      console.log('hasGetUserInfo',hasGetUserInfo)
-      if (hasGetUserInfo) {
+      const hasRoles = store.getters.roles && store.getters.roles.length > 0
+      if (hasRoles) {
         next()
       } else {
         try {
           // get user info
-          await store.dispatch('user/getInfo')
+          store.dispatch('user/getInfo')
           const accessRoutes  = await store.dispatch('menu/getSideMenus');
           router.addRoutes(accessRoutes)
           next({ ...to, replace: true })
         } catch (error) {
+          console.log('error',error)
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')
           Message.error(error || 'Has Error')
@@ -47,7 +45,6 @@ router.beforeEach(async(to, from, next) => {
     }
   } else {
     /* has no token*/
-    console.log("no token")
     if (whiteList.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly
       next()

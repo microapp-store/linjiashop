@@ -158,7 +158,7 @@ const routes = [
         name: 'cart',
         component: () => import('./view/cart'),
         meta: {
-            requireAuth: true,
+            // requireAuth: true,
             title: '购物车'
         }
     }

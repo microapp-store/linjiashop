@@ -1,6 +1,7 @@
 import cart from '@/api/cart'
-import { Checkbox, CheckboxGroup, Card, SubmitBar, Toast, NavBar, Tabbar, TabbarItem,Stepper } from 'vant';
+import { Checkbox, CheckboxGroup, Card, SubmitBar, Toast, NavBar, Tabbar, TabbarItem,Stepper, Button, Icon  } from 'vant';
 const baseApi = process.env.VUE_APP_BASE_API
+import store from '@/store'
 export default {
     components: {
         [Card.name]: Card,
@@ -10,11 +11,14 @@ export default {
         [NavBar.name]: NavBar,
         [Tabbar.name]: Tabbar,
         [TabbarItem.name]: TabbarItem,
-        [Stepper.name]: Stepper
+        [Stepper.name]: Stepper,
+        [Button.name]: Button,
+        [Icon.name]: Icon
     },
 
     data() {
         return {
+            isLogin:false,
             activeFooter: 2,
             checkedGoods: [],
             checkeAllCarts:[],
@@ -37,17 +41,21 @@ export default {
 
     methods: {
         init(){
-            cart.queryByUser().then( response => {
-              let cartList = response.data
-              for(var index in cartList){
-                  let cart = cartList[index]
-                  cart.thumb = baseApi+ '/file/getImgStream?idFile=' + cart.goods.pic
-                  this.checkedGoods.push(cartList[index].id+'')
-              }
-              this.cartList = cartList
-          }).catch((err) => {
+            const user = store.state.app.user
+            this.isLogin = user.nickName
+            if(user.avatar) {
+                cart.queryByUser().then(response => {
+                    let cartList = response.data
+                    for (var index in cartList) {
+                        let cart = cartList[index]
+                        cart.thumb = baseApi + '/file/getImgStream?idFile=' + cart.goods.pic
+                        this.checkedGoods.push(cartList[index].id + '')
+                    }
+                    this.cartList = cartList
+                }).catch((err) => {
 
-          })
+                })
+            }
         },
         submit() {
             this.$router.push('checkout')
@@ -58,6 +66,12 @@ export default {
         stepperEvent(item, arg) {
             let count = arg[0];
             cart.update(item.id,count)
+        },
+        toIndex() {
+            this.$router.push('/')
+        },
+        toLogin() {
+            this.$router.push({path:'login', query: {redirect:'cart'}})
         },
         checkAll( ) {
             if (this.checkedGoods.length === this.cartList.length) {

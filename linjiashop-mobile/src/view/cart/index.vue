@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <van-checkbox-group class="card-goods" v-model="checkedGoods">
+  <div class="cart">
+    <van-checkbox-group class="card-goods" v-model="checkedGoods" v-if="isLogin && cartList.length>0">
       <div   v-for="item in cartList"
              :key="item.id"    class="card-goods__item">
       <van-checkbox
@@ -27,9 +27,22 @@
       :disabled="!checkedGoods.length"
       :button-text="submitBarText"
       @submit="submit"
+      v-if="isLogin && cartList.length>0"
     >
       <van-checkbox v-model="checkedAll" @click="checkAll" style="padding: 0 10px;">全选</van-checkbox>
     </van-submit-bar>
+    <div class="no-data" v-if="isLogin && cartList.length ===0 ">
+      <p style="text-align: center;color:lightgray">
+        <van-icon name="cart-o" style="text-align: center" size="3rem"/><br>
+        购物车还是空的</p>
+      <van-button type="default" block round @click="toIndex">去逛逛</van-button>
+    </div>
+    <div class="no-data" v-if="!isLogin" >
+      <p style="text-align: center;color:lightgray">
+        <van-icon name="cart-o" style="text-align: center" size="3rem"/><br>
+        还没有登录</p>
+      <van-button type="primary" block round @click="toLogin">立即登录</van-button>
+    </div>
 
     <van-tabbar v-model="activeFooter">
       <van-tabbar-item icon="home-o"  replace to="/index">首页</van-tabbar-item>
@@ -43,6 +56,11 @@
 <script src="./cart.js"></script>
 
 <style lang="less">
+  .cart{
+    .no-data{
+      margin-top:60%;
+    }
+  }
   .van-submit-bar{
    bottom:48px;
   }

@@ -1,5 +1,11 @@
 # Change log
-
+## Latest
+### Issue 
+- 【后台管理】压缩svg图标
+- 【H5】新增未登录状态和购物车为空状态下的购物车界面
+### Fix
+- 修复并完善权限配置功能
+- 商品编辑菜单数据初始化错误
 
 ## v0.2 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.2)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.2)
 ### Issue

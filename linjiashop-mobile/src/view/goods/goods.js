@@ -14,7 +14,8 @@ import {
     Tabbar,
     TabbarItem,
     Tag,
-    Toast
+    Toast,
+    Button
 } from 'vant';
 
 const baseApi = process.env.VUE_APP_BASE_API
@@ -33,7 +34,8 @@ export default {
         [GoodsActionButton.name]: GoodsActionButton,
         [Tabbar.name]: Tabbar,
         [TabbarItem.name]: TabbarItem,
-        [Sku.name]: Sku
+        [Sku.name]: Sku,
+        [Button.name]:Button
     },
 
     data() {
@@ -51,6 +53,7 @@ export default {
                 none_sku: false, // 是否无规格商品
                 hide_stock: false // 是否隐藏剩余库存
             },
+            offline:false,
             goods: {
                 name: '',
                 price: 0,
@@ -74,6 +77,7 @@ export default {
             let id = this.$route.params.id
             goods.getGoods(id).then(response => {
                 let goods = response.data.goods
+                this.offline = !goods.isOnSale
                 let sku = response.data.sku
                 sku.price = (sku.price / 100).toFixed(2)
                 this.sku = sku

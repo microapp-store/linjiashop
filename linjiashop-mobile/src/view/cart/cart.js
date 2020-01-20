@@ -67,7 +67,7 @@ export default {
             let count = arg[0];
             cart.update(item.id,count)
         },
-        toIndex() {
+        toHome() {
             this.$router.push('/')
         },
         toLogin() {

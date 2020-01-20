@@ -35,7 +35,7 @@
       <p style="text-align: center;color:lightgray">
         <van-icon name="cart-o" style="text-align: center" size="3rem"/><br>
         购物车还是空的</p>
-      <van-button type="default" block round @click="toIndex">去逛逛</van-button>
+      <van-button type="default" block round @click="toHome">去逛逛</van-button>
     </div>
     <div class="no-data" v-if="!isLogin" >
       <p style="text-align: center;color:lightgray">

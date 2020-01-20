@@ -1,5 +1,5 @@
 <template>
-    <div class="goods">
+    <div class="goods" v-if="!offline">
         <van-swipe class="goods-swipe" :autoplay="3000">
             <van-swipe-item v-for="thumb in goods.thumb" :key="thumb">
                 <img :src="thumb">
@@ -59,6 +59,12 @@
         />
     </div>
 
+    <div class="offline" v-else>
+        <p style="text-align: center;color:lightgray">
+            <van-icon name="warning-o" style="text-align: center" size="3rem"/><br>
+            改商品已下架</p>
+        <van-button type="primary" block round @click="toHome">去看看其他商品</van-button>
+    </div>
 </template>
 
 <script src="./goods.js"></script>
@@ -121,5 +127,8 @@
         &-tag {
             margin-left: 5px;
         }
+    }
+    .offline{
+        margin-top:60%;
     }
 </style>

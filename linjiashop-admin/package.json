@@ -29,7 +29,6 @@
     "webpack-dev-server": "3.3.1"
   },
   "devDependencies": {
-    "autoprefixer": "8.5.0",
     "@babel/core": "7.0.0",
     "@babel/register": "7.0.0",
     "@vue/cli-plugin-babel": "3.6.0",
@@ -37,6 +36,7 @@
     "@vue/cli-plugin-unit-jest": "3.6.3",
     "@vue/cli-service": "3.6.0",
     "@vue/test-utils": "1.0.0-beta.29",
+    "autoprefixer": "8.5.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",
     "babel-jest": "23.6.0",
@@ -46,7 +46,7 @@
     "eslint-plugin-vue": "5.2.2",
     "html-webpack-plugin": "3.2.0",
     "mockjs": "1.0.1-beta3",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.13.1",
     "runjs": "^4.3.2",
     "sass-loader": "^7.1.0",
     "script-ext-html-webpack-plugin": "2.1.3",

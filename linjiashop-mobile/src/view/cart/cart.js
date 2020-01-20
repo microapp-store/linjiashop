@@ -43,7 +43,7 @@ export default {
         init(){
             const user = store.state.app.user
             this.isLogin = user.nickName
-            if(user.avatar) {
+            if(this.isLogin) {
                 cart.queryByUser().then(response => {
                     let cartList = response.data
                     for (var index in cartList) {

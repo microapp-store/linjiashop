@@ -42,7 +42,7 @@ public class TaskService extends BaseService<Task,Long,TaskRepository> {
 
 	@Override
 	public Task update(Task record) {
-		logger.info("更新定时任务{}", record.getName());
+		logger.info("更新定时任务:{}", record.getName());
 		taskRepository.save(record);
 		try {
 			QuartzJob job = jobService.getJob(record.getId().toString(), record.getJobGroup());
@@ -61,7 +61,7 @@ public class TaskService extends BaseService<Task,Long,TaskRepository> {
 		Task task = get(id);
 		task.setDisabled(true);
 		taskRepository.save(task);
-		logger.info("禁用定时任务{}", id.toString());
+		logger.info("禁用定时任务:{}", id.toString());
 		try {
 			QuartzJob job = jobService.getJob(task.getId().toString(), task.getJobGroup());
 			if (job != null) {

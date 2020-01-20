@@ -36,6 +36,6 @@ public class TaskLog{
     @Column(columnDefinition = "INTEGER COMMENT '执行结果（成功:1、失败:0)'")
     private int execSuccess;
 
-    @Column(columnDefinition = "VARCHAR(500) COMMENT '抛出异常'")
+    @Column(columnDefinition = "TEXT COMMENT '抛出异常'")
     private String jobException;
 }

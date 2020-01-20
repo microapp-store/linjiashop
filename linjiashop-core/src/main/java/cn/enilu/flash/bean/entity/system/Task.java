@@ -45,7 +45,7 @@ public class Task extends BaseEntity {
     @Column(name="exec_at", columnDefinition = "DateTime COMMENT '执行时间'")
     private Date execAt;
 
-    @Column(name="exec_result", columnDefinition = "text COMMENT '执行结果'")
+    @Column(name="exec_result", columnDefinition = "VARCHAR(64) COMMENT '执行结果'")
     private String execResult;
 
     @Column(name="disabled", columnDefinition = "TINYINT COMMENT '是否禁用'")

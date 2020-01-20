@@ -55,9 +55,12 @@ public class GoodsController {
 			//如果配置了price，说明是单规格商品，则将之前配置的sku库存皆设置为0
 			List<GoodsSku> skuList = goodsSkuService.queryAll(SearchFilter.build("idGoods",goods.getId()));
 			if(!skuList.isEmpty()){
+				int stock = 0;
 				for(GoodsSku sku:skuList){
-					sku.setStock(0);
+					stock+=sku.getStock();
 				}
+				goods.setStock(stock);
+				goods.setPrice(skuList.get(0).getPrice());
 				goodsSkuService.update(skuList);
 			}else{
 				for(GoodsSku sku:skuList){
@@ -68,6 +71,9 @@ public class GoodsController {
 		if(goods.getId()==null){
 			goodsService.insert(goods);
 		}else {
+			Goods old = goodsService.get(goods.getId());
+			goods.setCreateBy(old.getCreateBy());
+			goods.setCreateTime(old.getCreateTime());
 			goodsService.update(goods);
 		}
 		return Rets.success();

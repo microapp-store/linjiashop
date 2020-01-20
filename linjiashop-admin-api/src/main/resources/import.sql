@@ -142,11 +142,17 @@ INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `last_login_time`, `mo
 -- ----------------------------
 -- Records of t_sys_cfg.sql
 -- ----------------------------
-INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (1, NULL, NULL, -1, '2019-11-20 11:00:00', 'update by 2019-11-20 11:00:00', 'system.app.name', 'linjiashop');
-INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (2, NULL, NULL, 1, '2019-11-13 16:05:21', '系统默认上传文件路径', 'system.file.upload.path', '/data/linjiashop/runtime/upload');
-INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (3, NULL, NULL, 1, '2019-4-15 21:36:17', '腾讯sms接口appid', 'api.tencent.sms.appid', '1400219425');
-INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (4, NULL, NULL, 1, '2019-4-15 21:36:17', '腾讯sms接口appkey', 'api.tencent.sms.appkey', '5f71ed5325f3b292946530a1773e997a');
-INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (5, NULL, NULL, 1, '2019-4-15 21:36:17', '腾讯sms接口签名参数', 'api.tencent.sms.sign', '需要去申请咯');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (1, 1, '2020-1-1 17:06:43', 1, '2020-1-19 18:36:04', '应用名称', 'system.app.name', 'linjiashop');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (2, 1, '2020-1-1 17:06:43', 1, '2019-11-13 16:05:21', '系统默认上传文件路径', 'system.file.upload.path', '/data/linjiashop/runtime/upload');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (3, 1, '2020-1-1 17:06:43', 1, '2019-4-15 21:36:17', '腾讯sms接口appid', 'api.tencent.sms.appid', '需要去申请咯');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (4, 1, '2020-1-1 17:06:43', 1, '2019-4-15 21:36:17', '腾讯sms接口appkey', 'api.tencent.sms.appkey', '需要去申请咯');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (5, 1, '2020-1-1 17:06:43', 1, '2019-4-15 21:36:17', '腾讯sms接口签名参数', 'api.tencent.sms.sign', '需要去申请咯');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (6, 1, '2020-1-19 17:06:54', 1, '2020-1-19 18:44:10', '微信商户id', 'weixin.app.id', '需要去申请咯');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (7, 1, '2020-1-19 17:06:54', 1, '2020-1-19 18:45:04', '微信密钥', 'weixin.app.secret', '需要去申请咯');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (8, 1, '2020-1-19 17:06:54', 1, '2020-1-19 18:45:04', '微信token', 'weixin.access.token', '需要去申请咯');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (9, 1, '2020-1-19 17:06:54', 1, '2020-1-19 18:45:04', '微信ticket', 'weixin.js.api.ticket', '需要去申请咯');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (10, 1, '2020-1-19 17:06:54', 1, '2020-1-19 18:45:04', '微信获取token的地址', 'weixin.access.token.url', 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (11, 1, '2020-1-19 17:06:54', 1, '2020-1-19 18:45:04', '微信获取ticket的地址', 'weixin.js.api.ticket.url', 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi');
 
 -- ----------------------------
 -- Records of t_sys_dept.sql
@@ -522,7 +528,8 @@ INSERT INTO `t_sys_role` (`id`, `create_by`, `create_time`, `modify_by`, `modify
 -- ----------------------------
 -- Records of t_sys_task.sql
 -- ----------------------------
-INSERT INTO `t_sys_task` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `concurrent`, `cron`, `data`, `disabled`, `exec_at`, `exec_result`, `job_class`, `job_group`, `name`, `note`) VALUES (1, 1, '2018-12-28 09:54:00', -1, '2019-11-20 11:00:00', 0, '0 0/30 * * * ?', '{\n\"appname\": \"web-flash\",\n\"version\":1\n}\n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            \n            ', 0, '2019-11-20 11:00:00', '执行成功', 'cn.enilu.flash.service.task.job.HelloJob', 'default', '测试任务', '测试任务,每30分钟执行一次');
+INSERT INTO `t_sys_task` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `concurrent`, `cron`, `data`, `disabled`, `exec_at`, `exec_result`, `job_class`, `job_group`, `name`, `note`) VALUES (1, 1, '2018-12-28 09:54:00', -1, '2020-1-20 10:04:57', 0, '0 0/30 * * * ?', '{\n\"appname\": \"web-flash\",\n\"version\":1}', 0, '2020-1-20 10:04:57', '执行成功', 'cn.enilu.flash.service.task.job.HelloJob', 'default', '测试任务', '测试任务,每30分钟执行一次');
+INSERT INTO `t_sys_task` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `concurrent`, `cron`, `data`, `disabled`, `exec_at`, `exec_result`, `job_class`, `job_group`, `name`, `note`) VALUES (2, 1, '2020-1-19 17:40:02', -1, '2020-1-20 10:04:57', 0, '0 0 0/1 * * ?', '', 0, '2020-1-19 19:25:00', '执行失败', 'cn.enilu.flash.service.task.job.UpdateWeixinTokenJob', NULL, '更新微信token', '获取微信token，每小时获取一次');
 
 -- ----------------------------
 -- Records of t_sys_task_log.sql

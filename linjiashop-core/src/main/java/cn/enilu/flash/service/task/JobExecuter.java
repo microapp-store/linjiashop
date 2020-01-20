@@ -51,14 +51,16 @@ public abstract class JobExecuter {
         taskLog.setExecSuccess(TaskLog.EXE_SUCCESS_RESULT);
         try {
             execute(dataMap);
+            task.setExecResult(exeResult);
         } catch (Exception e) {
+            task.setExecResult("执行失败");
             log.error("exeucte " + getClass().getName() + " error : ", e);
             exeResult = "执行失败\n";
             exeResult += ExceptionUtils.getStackTrace(e);
             taskLog.setExecSuccess(TaskLog.EXE_FAILURE_RESULT);
-            taskLog.setJobException(e.getClass().getName());
+            taskLog.setJobException(exeResult);
         }
-        task.setExecResult(exeResult);
+
         task.setExecAt(exeAt);
         taskLogRepository.save(taskLog);
         taskRepository.save(task);

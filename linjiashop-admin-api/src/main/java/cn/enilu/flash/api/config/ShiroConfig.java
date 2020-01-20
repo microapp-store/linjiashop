@@ -73,6 +73,7 @@ public class ShiroConfig {
 
         //系统图片资源不拦截
         filterRuleMap.put("/file/getImgStream","anon");
+        filterRuleMap.put("/file/download","anon");
 
         filterRuleMap.put("/account/logout", "logout");
 

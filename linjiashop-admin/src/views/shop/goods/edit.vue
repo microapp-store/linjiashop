@@ -71,7 +71,7 @@
       <el-row>
 
         <el-col :span="24">
-          <el-form-item label="商品相册">
+          <el-form-item label="商品缩略图">
             <el-upload
               :headers="uploadHeaders"
               :action="uploadUrl"

@@ -40,6 +40,7 @@ export default {
 
     data() {
         return {
+            cartCount:'',
             showSku:false,
             sku: {
                 tree: [
@@ -92,6 +93,9 @@ export default {
                 console.log('err',err)
                 Toast(err)
             })
+            cart.count().then(response => {
+                this.cartCount = response.data ===0?'':response.data
+            })
         },
         toHome() {
             this.$router.push('/index')
@@ -125,6 +129,7 @@ export default {
                 console.log(response)
                 Toast.success('已加入到购物车')
                 this.showSku = false
+                this.cartCount += 1
             })
 
         }

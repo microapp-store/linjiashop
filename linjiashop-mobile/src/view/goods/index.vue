@@ -41,7 +41,7 @@
             <van-goods-action-icon icon="like-o" @click="sorry">
                 喜欢
             </van-goods-action-icon>
-            <van-goods-action-icon icon="cart-o" @click="goToCart">
+            <van-goods-action-icon icon="cart-o" @click="goToCart" :info="cartCount">
                 购物车
             </van-goods-action-icon>
             <van-goods-action-button type="danger" @click="addCart">

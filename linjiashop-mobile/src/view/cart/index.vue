@@ -20,6 +20,7 @@
           </div>
         </van-card>
       </div>
+      <br><br><br><br><br>
 
     </van-checkbox-group>
     <van-submit-bar

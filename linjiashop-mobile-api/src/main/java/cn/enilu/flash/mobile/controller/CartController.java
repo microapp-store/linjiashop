@@ -41,6 +41,12 @@ public class CartController extends BaseController {
        cartService.add(cartVo);
         return Rets.success();
     }
+    @RequestMapping(value="/count",method = RequestMethod.GET)
+    public Object count(){
+        Long idUser = getIdUser(HttpUtil.getRequest());
+        List<Cart> list = cartService.queryAll(SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser));
+        return Rets.success(list.size());
+    }
 
     @RequestMapping(value = "/update/{id}/{count}",method = RequestMethod.POST)
     public Object update(@PathVariable("id") Long id,

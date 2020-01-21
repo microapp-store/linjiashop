@@ -46,7 +46,7 @@ export default {
             if(this.isLogin) {
                 cart.queryByUser().then(response => {
                     let cartList = response.data
-                    for (var index in cartList) {
+                    for (const index in cartList) {
                         let cart = cartList[index]
                         cart.thumb = baseApi + '/file/getImgStream?idFile=' + cart.goods.pic
                         this.checkedGoods.push(cartList[index].id + '')
@@ -64,7 +64,7 @@ export default {
             return (price / 100).toFixed(2);
         },
         stepperEvent(item, arg) {
-            let count = arg[0];
+            const count = arg[0];
             cart.update(item.id,count)
         },
         toHome() {

@@ -38,8 +38,8 @@ public class CartController extends BaseController {
     public Object add(@RequestBody CartVo cartVo){
         Long idUser = getIdUser();
         cartVo.setIdUser(idUser);
-       cartService.add(cartVo);
-        return Rets.success();
+       Integer result = cartService.add(cartVo);
+        return Rets.success(result);
     }
     @RequestMapping(value="/count",method = RequestMethod.GET)
     public Object count(){

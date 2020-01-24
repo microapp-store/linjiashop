@@ -27,7 +27,12 @@ public class CartService extends BaseService<Cart,Long,CartRepository>  {
     @Autowired
     private GoodsRepository goodsRepository;
 
-    public void add(CartVo cartVo) {
+    /**
+     * 添加到购物车
+     * @param cartVo
+     * @return，添加新商品，返回1，添加购物车已经存在的商品，返回0
+     */
+    public Integer add(CartVo cartVo) {
         Integer count = cartVo.getCount();
 
         Long idSku = cartVo.getIdSku();
@@ -43,9 +48,11 @@ public class CartService extends BaseService<Cart,Long,CartRepository>  {
         }
 
         Cart old  = get(searchFilters);
+        Integer result = 0;
         if(old!=null){
             old.setCount(old.getCount().add(new BigDecimal(count)));
             update(old);
+
         }else {
             Cart cart = new Cart();
             cart.setIdGoods(cartVo.getIdGoods());
@@ -53,6 +60,7 @@ public class CartService extends BaseService<Cart,Long,CartRepository>  {
             cart.setIdUser(cartVo.getIdUser());
             cart.setIdSku(idSku);
             insert(cart);
+            result = 1;
         }
 
         //减库存
@@ -63,6 +71,7 @@ public class CartService extends BaseService<Cart,Long,CartRepository>  {
         Goods goods = goodsRepository.getOne(cartVo.getIdGoods());
         goods.setStock(goods.getStock()-count);
         goodsRepository.save(goods);
+        return result;
     }
 }
 

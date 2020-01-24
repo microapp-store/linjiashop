@@ -69,9 +69,7 @@ export default {
         this.init()
     },
     computed: {
-        cartCount() {
-            return 2
-        }
+
     },
     methods: {
         init() {
@@ -114,6 +112,9 @@ export default {
             this.showSku = true
         },
         sorry() {
+            Toast('敬请期待')
+        },
+        like() {
             Toast('敬请期待...')
         },
         onBuyClicked(skuData) {
@@ -129,7 +130,7 @@ export default {
                 console.log(response)
                 Toast.success('已加入到购物车')
                 this.showSku = false
-                this.cartCount += 1
+                this.cartCount += response.data
             })
 
         }

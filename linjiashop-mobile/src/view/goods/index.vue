@@ -25,7 +25,7 @@
         <!--<van-tag class="goods-tag" type="danger">官方</van-tag>-->
         <!--</template>-->
         <!--</van-cell>-->
-        <!--<van-cell title="线下门店" icon="location-o" is-link @click="sorry" />-->
+        <!--s-->
         <!--</van-cell-group>-->
 
         <van-cell-group class="goods-cell-group">
@@ -38,7 +38,7 @@
             <van-goods-action-icon icon="home-o" @click="toHome">
                 主页
             </van-goods-action-icon>
-            <van-goods-action-icon icon="like-o" @click="sorry">
+            <van-goods-action-icon icon="like-o" @click="like">
                 喜欢
             </van-goods-action-icon>
             <van-goods-action-icon icon="cart-o" @click="goToCart" :info="cartCount">

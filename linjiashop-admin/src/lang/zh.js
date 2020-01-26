@@ -36,7 +36,8 @@ export default {
     orderDetail:'订单详情',
     cart:'购物车',
     promotion:'推广管理',
-    topic:'专题管理'
+    topic:'专题管理',
+    favorite:'收藏列表'
   },
   navbar: {
     logOut: '退出登录',

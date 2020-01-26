@@ -407,7 +407,7 @@ INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify
 INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (83, 1, '2019-7-31 22:04:30', 1, '2019-7-31 22:04:30', 'topic', 'views/promotion/topic/index', 0, 'topic', 1, NULL, 2, '专题管理', 1, 'promotion', '[0],[promotion],', 1, NULL, '/topic');
 INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (84, 1, '2019-7-31 22:04:30', 1, '2019-7-31 22:04:30', 'topicEdit', NULL, 0, NULL, 0, NULL, 3, '编辑专题', 1, 'topic', '[0],[promotion],[topic],', 1, NULL, '/topic/edit');
 INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (85, 1, '2019-7-31 22:04:30', 1, '2019-7-31 22:04:30', 'topicDelete', NULL, 0, NULL, 0, NULL, 3, '删除专题', 2, 'topic', '[0],[promotion],[topic],', 1, NULL, '/topic/delete');
-
+INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (86, 1, '2020-1-24 22:21:40', 1, '2020-1-24 22:21:40', 'favorite', 'views/shop/favorite/index', 0, 'favorite', 1, NULL, 2, '收藏列表', 6, 'shopMgr', '[0],[shopMgr],', 1, NULL, '/favorite');
 -- ----------------------------
 -- Records of t_sys_notice.sql
 -- ----------------------------
@@ -518,6 +518,7 @@ INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (95, 69, 2);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (96, 70, 2);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (97, 2, 2);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (98, 17, 2);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (99, 86, 1);
 
 -- ----------------------------
 -- Records of t_sys_role.sql
@@ -602,3 +603,10 @@ INSERT INTO `t_promotion_topic` (`id`, `create_by`, `create_time`, `modify_by`, 
 INSERT INTO `t_promotion_topic` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `disabled`, `id_article`, `id_goods_list`, `pv`, `title`) VALUES (4, 1, '2020-1-8 21:25:53', 1, '2020-1-8 21:25:53', 0, 2, '3,6,9,13', 3500, '以旧换新');
 INSERT INTO `t_promotion_topic` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `disabled`, `id_article`, `id_goods_list`, `pv`, `title`) VALUES (5, 1, '2020-1-8 21:25:53', 1, '2020-1-8 21:25:53', 0, 5, '15', 4222, '从核芯到视野');
 INSERT INTO `t_promotion_topic` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `disabled`, `id_article`, `id_goods_list`, `pv`, `title`) VALUES (6, 1, '2020-1-8 21:25:53', 1, '2020-1-8 21:25:53', 0, 6, '11', 50000, '智能电视');
+
+
+-- ----------------------------
+-- Records of t_shop_favorite
+-- ----------------------------
+INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (1, '2020-1-24 22:34:19', NULL, 1, 1);
+INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (2, '2020-1-24 22:34:19', NULL, 2, 1);

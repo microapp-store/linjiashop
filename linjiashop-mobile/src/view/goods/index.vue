@@ -35,18 +35,10 @@
             <p class="goods-detail" v-html="goods.detail"></p>
         </van-cell-group>
         <van-goods-action>
-            <van-goods-action-icon icon="home-o" @click="toHome">
-                主页
-            </van-goods-action-icon>
-            <van-goods-action-icon icon="like-o" @click="like">
-                喜欢
-            </van-goods-action-icon>
-            <van-goods-action-icon icon="cart-o" @click="goToCart" :info="cartCount">
-                购物车
-            </van-goods-action-icon>
-            <van-goods-action-button type="danger" @click="addCart">
-                立即购买
-            </van-goods-action-button>
+            <van-goods-action-icon icon="home-o" @click="toHome" text="主页"/>
+            <van-goods-action-icon icon="like-o"  @click="like" :color="likeColor" text="喜欢"/>
+            <van-goods-action-icon icon="cart-o" @click="goToCart" :info="cartCount" text="购物车"/>
+            <van-goods-action-button type="danger" @click="addCart" text="立即购买"/>
         </van-goods-action>
         <van-sku
                 v-model="showSku"
@@ -77,7 +69,12 @@
     .section-detail {
         margin-top: -4px;
     }
-
+    .like-info {
+       color:black;
+    }
+    .like-red {
+        color:red !important;
+    }
     .goods {
         padding-bottom: 50px;
 

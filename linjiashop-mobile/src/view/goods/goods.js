@@ -1,5 +1,7 @@
 import goods from '@/api/goods'
 import cart from '@/api/cart'
+import favorite from '@/api/favorite'
+
 import {
     Cell,
     CellGroup,
@@ -40,6 +42,8 @@ export default {
 
     data() {
         return {
+            ifLike:false,
+            likeColor:'black',
             cartCount:'',
             showSku:false,
             sku: {
@@ -87,13 +91,22 @@ export default {
                     goods.thumb.push(baseApi + '/file/getImgStream?idFile=' + gallery[index])
                 }
                 this.goods = goods
+                //判断当前用户是否收藏该产品
+                favorite.ifLike(this.goods.id).then(response =>{
+                    if(response.data === true){
+                        this.likeColor = 'red'
+                        this.ifLike = true
+                    }
+                })
             }).catch((err) => {
                 console.log('err',err)
                 Toast(err)
             })
+            //获取当前用户购物车商品数量
             cart.count().then(response => {
                 this.cartCount = response.data ===0?'':response.data
             })
+
         },
         toHome() {
             this.$router.push('/index')
@@ -115,7 +128,13 @@ export default {
             Toast('敬请期待')
         },
         like() {
-            Toast('敬请期待...')
+            if(this.ifLike === false) {
+                favorite.add(this.goods.id).then(response => {
+                    Toast('收藏成功')
+                    this.ifLike = true
+                    this.likeColor = 'red'
+                })
+            }
         },
         onBuyClicked(skuData) {
             let cartData = {idGoods:skuData.goodsId,idSku:this.sku.none_sku?'':skuData.selectedSkuComb.id,count:skuData.selectedNum}

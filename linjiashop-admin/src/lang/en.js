@@ -36,7 +36,8 @@ export default {
     orderDetail:'Order Detail',
     cart:'Carts',
     promotion:'Promotion',
-    topic:'Topics'
+    topic:'Topics',
+    favorite:'Favorite'
   },
   navbar: {
     logOut: 'Log Out',

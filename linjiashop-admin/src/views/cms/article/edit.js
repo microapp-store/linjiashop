@@ -117,7 +117,7 @@ export default {
     initTinymce() {
       const _this = this
       window.tinymce.init({
-        value: 'aaaaaa',
+        value: '',
         language: this.language,
         selector: `#${this.tinymceId}`,
         height: this.height,
@@ -221,7 +221,7 @@ export default {
     handleUploadSuccess(response, raw) {
       this.loadingInstance.close()
       if (response.code === 20000) {
-        this.form.img = response.data.id
+        this.form.img = response.data.realFileName
       } else {
         this.$message({
           message: this.$t('common.uploadError'),

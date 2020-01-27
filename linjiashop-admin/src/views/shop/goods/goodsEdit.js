@@ -123,6 +123,7 @@ export default {
       if(this.idGoods) {
         get(this.idGoods).then(response => {
           this.form = response.data.goods
+          this.idGoods = this.form.id
           this.skuList = response.data.skuList
           this.spec = this.skuList.length>0?'more':'one'
           let galleryArr =this.form .gallery.split(',')
@@ -201,7 +202,7 @@ export default {
         price: this.form.price,
         isDelete: this.form.isDelete,
         isOnSale: this.form.isOnSale,
-        id: this.form.id,
+        id: this.idGoods,
         isNew: this.form.isNew,
         isHot:this.form.isHot
       }).then(response => {
@@ -235,7 +236,7 @@ export default {
     },
     handleUploadPicSuccess(response, raw) {
       if (response.code === 20000) {
-        this.form.pic = response.data.id
+        this.form.pic = response.data.realFileName
         console.log('form.pic',this.form.pic)
       } else {
         this.$message({
@@ -248,8 +249,8 @@ export default {
       if (response.code === 20000) {
         this.galleryList.push(
           {
-            id: response.data.id,
-            url: this.apiUrl + '/file/getImgStream?idFile=' + response.data.id
+            id: response.data.realFileName,
+            url: this.apiUrl + '/file/getImgStream?idFile=' + response.data.realFileName
           }
         )
       } else {

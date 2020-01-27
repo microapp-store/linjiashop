@@ -6,6 +6,7 @@ import cn.enilu.flash.bean.entity.shop.GoodsSku;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.bean.vo.shop.GoodsVo;
 import cn.enilu.flash.dao.shop.GoodsRepository;
+import cn.enilu.flash.dao.system.FileInfoRepository;
 import cn.enilu.flash.service.BaseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,8 @@ public class GoodsService extends BaseService<Goods,Long,GoodsRepository>  {
     private GoodsRepository goodsRepository;
     @Autowired
     private GoodsSkuService goodsSkuService;
+    @Autowired
+    private FileInfoRepository fileInfoRepository;
 
     @Override
     public void deleteById(Long id) {

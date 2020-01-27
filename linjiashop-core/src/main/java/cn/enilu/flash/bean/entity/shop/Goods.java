@@ -21,9 +21,9 @@ public class Goods extends BaseEntity {
     @NotBlank(message = "商品名称不能为空")
     @Column(columnDefinition = "VARCHAR(32) COMMENT '名称'")
     private String name;
-    @Column(columnDefinition = "VARCHAR(16) COMMENT '小图'")
+    @Column(columnDefinition = "VARCHAR(64) COMMENT '小图'")
     private String pic;
-    @Column(columnDefinition = "VARCHAR(32) COMMENT '大图相册列表,以逗号分隔'")
+    @Column(columnDefinition = "VARCHAR(512) COMMENT '大图相册列表,以逗号分隔'")
     private String  gallery;
     @Column(name="id_category",columnDefinition = "BIGINT COMMENT '类别id'")
     private Long idCategory;

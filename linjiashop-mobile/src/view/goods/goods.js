@@ -1,6 +1,7 @@
 import goods from '@/api/goods'
 import cart from '@/api/cart'
 import favorite from '@/api/favorite'
+import store from '@/store'
 
 import {
     Cell,
@@ -91,20 +92,25 @@ export default {
                     goods.thumb.push(baseApi + '/file/getImgStream?idFile=' + gallery[index])
                 }
                 this.goods = goods
-                //判断当前用户是否收藏该产品
-                favorite.ifLike(this.goods.id).then(response =>{
-                    if(response.data === true){
-                        this.likeColor = 'red'
-                        this.ifLike = true
-                    }
-                })
+
+                const user = store.state.app.user
+                console.log('user',user)
+                if(user.nickName) {
+                    //获取当前用户购物车商品数量
+                    cart.count().then(response => {
+                        this.cartCount = response.data ===0?'':response.data
+                    })
+                    //判断当前用户是否收藏该产品
+                    favorite.ifLike(this.goods.id).then(response => {
+                        if (response.data === true) {
+                            this.likeColor = 'red'
+                            this.ifLike = true
+                        }
+                    })
+                }
             }).catch((err) => {
                 console.log('err',err)
                 Toast(err)
-            })
-            //获取当前用户购物车商品数量
-            cart.count().then(response => {
-                this.cartCount = response.data ===0?'':response.data
             })
 
         },

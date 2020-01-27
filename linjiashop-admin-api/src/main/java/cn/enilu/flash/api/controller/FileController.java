@@ -94,13 +94,13 @@ public class FileController extends BaseController {
 
     /**
      * 获取base64图片数据
-     * @param idFile
+     * @param fileName
      * @return
      */
     @RequestMapping(value="getImgBase64",method = RequestMethod.GET)
-    public Object getImgBase64(@RequestParam("idFile")Long idFile){
-
-        FileInfo fileInfo = fileService.get(idFile);
+    public Object getImgBase64(@RequestParam("idFile")String fileName ){
+        FileInfo fileInfo = fileService.getByName(fileName);
+//        FileInfo fileInfo = fileService.get(idFile);
         FileInputStream fis = null;
         try {
             File file = new File(fileInfo.getAblatePath());
@@ -126,12 +126,12 @@ public class FileController extends BaseController {
     /**
      * 获取图片流
      * @param response
-     * @param idFile
+     * @param fileName
      */
     @RequestMapping(value="getImgStream",method = RequestMethod.GET)
     public void getImgStream(HttpServletResponse response,
-                             @RequestParam("idFile")Long idFile){
-        FileInfo fileInfo = fileService.get(idFile);
+                             @RequestParam("idFile")String  fileName){
+        FileInfo fileInfo = fileService.getByName(fileName);
         FileInputStream fis = null;
         response.setContentType("image/"+fileInfo.getRealFileName().split("\\.")[1]);
         try {

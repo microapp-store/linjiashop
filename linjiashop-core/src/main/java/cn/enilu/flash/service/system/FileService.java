@@ -4,6 +4,7 @@ import cn.enilu.flash.bean.constant.cache.Cache;
 import cn.enilu.flash.bean.constant.cache.CacheKey;
 import cn.enilu.flash.bean.entity.system.FileInfo;
 import cn.enilu.flash.bean.enumeration.ConfigKeyEnum;
+import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.bean.vo.shop.Base64File;
 import cn.enilu.flash.cache.ConfigCache;
 import cn.enilu.flash.cache.TokenCache;
@@ -183,6 +184,12 @@ public class FileService extends BaseService<FileInfo,Long,FileInfoRepository> {
     @Cacheable(value = Cache.APPLICATION, key = "'" + CacheKey.FILE_INFO + "'+#id")
     public FileInfo get(Long id){
         FileInfo fileInfo = fileInfoRepository.getOne(id);
+        fileInfo.setAblatePath(configCache.get(ConfigKeyEnum.SYSTEM_FILE_UPLOAD_PATH.getValue()) + File.separator+fileInfo.getRealFileName());
+        return fileInfo;
+    }
+
+    public FileInfo getByName(String fileName) {
+        FileInfo fileInfo =  get(SearchFilter.build("realFileName",fileName));
         fileInfo.setAblatePath(configCache.get(ConfigKeyEnum.SYSTEM_FILE_UPLOAD_PATH.getValue()) + File.separator+fileInfo.getRealFileName());
         return fileInfo;
     }

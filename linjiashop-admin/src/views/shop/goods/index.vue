@@ -13,7 +13,7 @@
         </el-row> <br>
       <el-row>
         <el-col :span="24">
-          <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add" v-permission="['/goods/edit']">{{ $t('button.add') }}
+          <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add" v-permission="['/goodsEdit']">{{ $t('button.add') }}
           </el-button>
         </el-col>
       </el-row>

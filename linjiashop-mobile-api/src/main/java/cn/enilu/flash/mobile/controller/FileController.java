@@ -52,7 +52,7 @@ public class FileController extends BaseController {
         try {
             FileInfo fileInfo = fileService.upload(base64File);
             ShopUser user = shopUserService.getCurrentUser();
-            user.setAvatar(String.valueOf(fileInfo.getId()));
+            user.setAvatar(String.valueOf(fileInfo.getRealFileName()));
             shopUserService.update(user);
             return Rets.success(user);
         } catch (Exception e) {
@@ -62,13 +62,11 @@ public class FileController extends BaseController {
     }
     /**
      * 下载文件
-     * @param idFile
      * @param fileName
      */
     @RequestMapping(value="download",method = RequestMethod.GET)
-    public void download(@RequestParam("idFile") Long idFile,
-                           @RequestParam(value = "fileName",required = false) String fileName){
-        FileInfo fileInfo = fileService.get(idFile);
+    public void download(@RequestParam("idFile") String fileName){
+        FileInfo fileInfo = fileService.getByName(fileName);
         fileName = StringUtil.isEmpty(fileName)? fileInfo.getOriginalFileName():fileName;
         HttpServletResponse response = HttpUtil.getResponse();
         response.setContentType("application/x-download");
@@ -109,13 +107,13 @@ public class FileController extends BaseController {
 
     /**
      * 获取base64图片数据
-     * @param idFile
+     * @param fileName
      * @return
      */
     @RequestMapping(value="getImgBase64",method = RequestMethod.GET)
-    public Object getImgBase64(@RequestParam("idFile")Long idFile){
+    public Object getImgBase64(@RequestParam("idFile")String fileName){
 
-        FileInfo fileInfo = fileService.get(idFile);
+        FileInfo fileInfo = fileService.getByName(fileName);
         FileInputStream fis = null;
         try {
             File file = new File(fileInfo.getAblatePath());
@@ -141,12 +139,12 @@ public class FileController extends BaseController {
     /**
      * 获取图片流
      * @param response
-     * @param idFile
+     * @param fileName
      */
     @RequestMapping(value="getImgStream",method = RequestMethod.GET)
     public void getImgStream(HttpServletResponse response,
-                             @RequestParam("idFile")Long idFile){
-        FileInfo fileInfo = fileService.get(idFile);
+                             @RequestParam("idFile")String fileName){
+        FileInfo fileInfo = fileService.getByName(fileName);
         FileInputStream fis = null;
         response.setContentType("image/"+fileInfo.getRealFileName().split("\\.")[1]);
         try {

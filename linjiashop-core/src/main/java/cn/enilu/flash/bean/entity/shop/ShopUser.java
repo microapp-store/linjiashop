@@ -33,7 +33,7 @@ public class ShopUser  implements Serializable {
     private String password;
     @Column(columnDefinition = "VARCHAR(32) COMMENT '昵称'")
     private String nickName;
-    @Column(columnDefinition = "VARCHAR(16) COMMENT '头像'")
+    @Column(columnDefinition = "VARCHAR(64) COMMENT '头像'")
     private String avatar;
     @Column(columnDefinition = "VARCHAR(18) COMMENT '性别:male;female'")
     private String gender;

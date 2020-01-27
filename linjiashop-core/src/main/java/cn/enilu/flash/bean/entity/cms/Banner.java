@@ -23,8 +23,8 @@ public class Banner extends BaseEntity {
     @Column(columnDefinition = "VARCHAR(32) COMMENT '类型'")
     @NotBlank(message = "类型不能为空")
     private String type;
-    @Column(columnDefinition = "BIGINT COMMENT 'banner图id'")
-    private Long idFile;
+    @Column(columnDefinition = "VARCHAR(64) COMMENT 'banner图id'")
+    private String idFile;
     @Column(columnDefinition = "VARCHAR(64) COMMENT '界面'")
     private String page;
     @Column(columnDefinition = "VARCHAR(128) COMMENT '参数'")

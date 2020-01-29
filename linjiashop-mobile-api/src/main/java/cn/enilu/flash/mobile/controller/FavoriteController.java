@@ -8,6 +8,7 @@ import cn.enilu.flash.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class FavoriteController extends BaseController {
     @Autowired
     private FavoriteService favoriteService;
-    @RequestMapping("/add/{idGoods}")
+    @RequestMapping(value = "/add/{idGoods}",method = RequestMethod.POST)
     public Object add(@PathVariable("idGoods") Long idGoods){
         Long idUser = JwtUtil.getUserId();
         Favorite old = favoriteService.get(idUser,idGoods);
@@ -32,7 +33,7 @@ public class FavoriteController extends BaseController {
         favoriteService.insert(favorite);
         return Rets.success();
     }
-    @RequestMapping("/ifLike/{idGoods}")
+    @RequestMapping(value = "/ifLike/{idGoods}",method = RequestMethod.GET)
     public Object ifLike(@PathVariable("idGoods") Long idGoods){
         Long idUser = JwtUtil.getUserId();
         Favorite favorite = favoriteService.get(idUser,idGoods);

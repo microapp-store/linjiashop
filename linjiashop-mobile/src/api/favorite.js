@@ -4,7 +4,7 @@ export default {
     add: function (idGoods) {
         return request({
             url: '/user/favorite/add/' + idGoods,
-            method: 'get'
+            method: 'POST'
         })
     },
     ifLike: function (idGoods) {

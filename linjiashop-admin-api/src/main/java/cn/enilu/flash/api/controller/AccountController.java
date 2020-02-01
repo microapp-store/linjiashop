@@ -4,6 +4,7 @@ import cn.enilu.flash.bean.core.AuthorizationUser;
 import cn.enilu.flash.bean.entity.system.User;
 import cn.enilu.flash.bean.vo.JwtUser;
 import cn.enilu.flash.bean.vo.front.Rets;
+import cn.enilu.flash.cache.CacheDao;
 import cn.enilu.flash.core.log.LogManager;
 import cn.enilu.flash.core.log.LogTaskFactory;
 import cn.enilu.flash.security.UserService;
@@ -47,6 +48,8 @@ public class AccountController extends BaseController {
     private AccountService accountService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CacheDao cacheDao;
     /**
      * 用户登录<br>
      * 1，验证没有注册<br>
@@ -139,6 +142,8 @@ public class AccountController extends BaseController {
             }
             user.setPassword(MD5.md5(password, user.getSalt()));
             managerService.update(user);
+            //清空缓存
+            cacheDao.hset(CacheDao.SESSION,user.getAccount(),null);
             return Rets.success();
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

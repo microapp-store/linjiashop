@@ -5,7 +5,7 @@ import {getApiUrl} from '@/utils/utils'
 export default {
   data() {
     return {
-      userInfo: {},
+      userInfo: {info:{}},
       idUser: '',
       apiUrl: getApiUrl(),
       addressList:[]

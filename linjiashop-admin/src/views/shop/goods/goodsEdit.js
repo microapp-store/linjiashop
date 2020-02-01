@@ -1,7 +1,7 @@
 import editorImage from '@/components/Tinymce'
 import plugins from '@/components/editContainer/plugins'
 import toolbar from '@/components/editContainer/toolbar'
-import {get, getList, save,saveBaseInfo} from '@/api/shop/goods'
+import goodsApi from '@/api/shop/goods'
 import {getAttrBy} from '@/api/shop/attrVal'
 import {getCategories} from '@/api/shop/category'
 import {getApiUrl} from '@/utils/utils'
@@ -121,7 +121,7 @@ export default {
     fetchData() {
       this.listLoading = true
       if(this.idGoods) {
-        get(this.idGoods).then(response => {
+        goodsApi.get(this.idGoods).then(response => {
           this.form = response.data.goods
           this.idGoods = this.form.id
           this.skuList = response.data.skuList
@@ -165,7 +165,7 @@ export default {
           })
           return
         }
-        saveBaseInfo({
+        goodsApi.saveBaseInfo({
           name: this.form.name,
           idCategory: this.form.idCategory,
           descript: this.form.descript,
@@ -191,7 +191,7 @@ export default {
         this.form.marketingPrice =''
         this.form.stock = ''
       }
-      save({
+      goodsApi.save({
         name: this.form.name,
         pic: this.form.pic,
         gallery: gallery,
@@ -237,7 +237,6 @@ export default {
     handleUploadPicSuccess(response, raw) {
       if (response.code === 20000) {
         this.form.pic = response.data.realFileName
-        console.log('form.pic',this.form.pic)
       } else {
         this.$message({
           message: this.$t('common.uploadError'),
@@ -332,8 +331,6 @@ export default {
       return ''
     },
     changeAttrKey(val){
-      console.log('val',val)
-      console.log('this.attrValList',this.attrValList)
       let attrValSel = []
       for(let i=0;i<this.attrValList.length;i++){
         if(this.attrValList[i].idAttrKey === val){
@@ -357,7 +354,6 @@ export default {
 
     },
     submitAttrKeyForm() {
-      console.log('submitAttrKeyForm')
       if( this.attrKeyForm.attrName != ''){
         let duplicationKey = false;
         for(let i=0;i<this.attrKeyList.length;i++){
@@ -402,7 +398,7 @@ export default {
       return {code:code,codeName:codeName}
     },
     addSku() {
-      console.log('addSku')
+
       if(this.tags.length==0){
         this.$message({
           message: '请选择商品规格',

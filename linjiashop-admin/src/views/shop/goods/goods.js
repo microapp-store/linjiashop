@@ -1,4 +1,4 @@
-import {getList, remove, save,changeIsOnSale} from '@/api/shop/goods'
+import goodsApi from '@/api/shop/goods'
 import {getApiUrl} from '@/utils/utils'
 import permission from '@/directive/permission/index.js'
 
@@ -37,7 +37,7 @@ export default {
     },
     fetchData() {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
+      goodsApi.getList(this.listQuery).then(response => {
         this.list = response.data.records
         this.listLoading = false
         this.total = response.data.total
@@ -93,12 +93,10 @@ export default {
         this.$router.push({path:'goodsEdit',query:{id:id}})
 
     },
-    changeIsOnSale(sel){
-      console.log('id',sel.id)
-      console.log('isOnSale',sel.isOnSale)
-      changeIsOnSale(sel.id,sel.isOnSale).then( response =>{
+    changeIsOnSale(data){
+      goodsApi.changeIsOnSale(data.id,data.isOnSale).then( response =>{
         this.$message({
-          message: sel.isOnSale?'上架成功':'下架成功',
+          message: data.isOnSale?'上架成功':'下架成功',
           type: 'success'
         })
       })

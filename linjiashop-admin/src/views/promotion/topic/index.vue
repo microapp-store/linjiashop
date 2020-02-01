@@ -35,8 +35,6 @@
         <el-col :span="24">
           <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add" v-permission="['/topic/edit']">{{ $t('button.add') }}
           </el-button>
-          <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit" v-permission="['/topic/edit']">{{ $t('button.edit') }}
-          </el-button>
           <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove" v-permission="['/topic/delete']">{{ $t('button.delete') }}
           </el-button>
         </el-col>
@@ -64,7 +62,11 @@
       </el-table-column>
       <el-table-column label="是否禁用">
         <template slot-scope="scope">
-          {{scope.row.disabled}}
+          <el-switch
+            v-model="scope.row.disabled"
+            @change="changeDisabled(scope.row)"
+          >
+          </el-switch>
         </template>
       </el-table-column>
       <el-table-column label="创建日期">
@@ -75,6 +77,11 @@
       <el-table-column label="最近维护日期">
         <template slot-scope="scope">
           {{scope.row.modifyTime}}
+        </template>
+      </el-table-column>
+      <el-table-column>
+        <template slot-scope="scope">
+          <el-button type="primary" size="mini" icon="el-icon-view" @click.native="view(scope.row.id)" circle></el-button>
         </template>
       </el-table-column>
 
@@ -105,22 +112,45 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="标题">
-              <el-input v-model="form.title" minlength=1></el-input>
+              <el-input v-model="form.title" minlength=4 placeholder="请输入标题"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="专题文章">
-              <el-input v-model="form.idArticle" minlength=1></el-input>
+              <el-select
+                v-model="form.idArticle"
+                filterable
+                remote
+                placeholder="请输入文章关键字搜索"
+                :remote-method="searchArticle"
+                :loading="searchLoading">
+                <el-option
+                  v-for="item in articleList"
+                  :key="item.id"
+                  :label="item.title"
+                  :value="item.id">
+                </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="商品id列表">
-              <el-input v-model="form.idGoodsList" minlength=1></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="阅读量">
-              <el-input v-model="form.pv" minlength=1></el-input>
+            <el-form-item label="商品列表">
+              <el-select
+                v-model="form.idGoodsList"
+                multiple
+                filterable
+                remote
+                placeholder="请输入商品关键字搜索"
+                :remote-method="searchGoods"
+                :loading="searchLoading"
+                @change="changeGoods">
+                <el-option
+                  v-for="item in goodsList"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id">
+                </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
         </el-row>
@@ -131,6 +161,14 @@
 
       </el-form>
     </el-dialog>
+    <el-dialog
+      title="专题预览"
+      :visible.sync="showTopic"
+      width="450px">
+      <p v-html="topicDetail"></p>
+
+
+    </el-dialog>
   </div>
 </template>
 
@@ -140,8 +178,5 @@
 <style rel="stylesheet/scss" lang="scss" scoped>
   @import "src/styles/common.scss";
 
-  img {
-    width: 100% !important;
-  }
 </style>
 

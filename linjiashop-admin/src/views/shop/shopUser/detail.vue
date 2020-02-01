@@ -2,7 +2,7 @@
   <div class="app-container">
 
 
-    <el-form ref="form" :model="form" :rules="rules" label-width="120px" label-position="left">
+    <el-form ref="form"   label-width="120px" label-position="left">
       <el-row>
         <h3>基本信息</h3>
         <el-col :span="12">

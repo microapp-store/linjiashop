@@ -35,6 +35,7 @@ public class TopicController extends BaseController {
         Page<Topic> page = new Page<Topic>();
         page.setSize(6);
         page.setSort(Sort.by(Sort.Direction.ASC,"id"));
+        page.addFilter(SearchFilter.build("disabled",false));
         page = topicService.queryPage(page);
 
         return Rets.success(page.getRecords());
@@ -42,6 +43,8 @@ public class TopicController extends BaseController {
     @RequestMapping(value="/{id}",method = RequestMethod.GET)
     public Object get(@PathVariable("id") Long id){
         Topic topic = topicService.get(id);
+        topic.setPv(topic.getPv()+1);
+        topicService.update(topic);
         String idGoodsList = topic.getIdGoodsList();
         if(StringUtil.isNotEmpty(idGoodsList)){
             Long[] idGoodsArr = Convert.toLongArray(",",idGoodsList);

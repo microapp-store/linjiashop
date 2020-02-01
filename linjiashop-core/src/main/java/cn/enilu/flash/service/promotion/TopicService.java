@@ -16,5 +16,11 @@ public class TopicService extends BaseService<Topic,Long,TopicRepository>  {
     @Autowired
     private TopicRepository topicRepository;
 
+    public Topic changeDisabled(Long id, Boolean disabled) {
+        Topic topic = get(id);
+        topic.setDisabled(disabled);
+        update(topic);
+        return topic;
+    }
 }
 

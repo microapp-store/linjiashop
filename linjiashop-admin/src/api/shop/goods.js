@@ -1,55 +1,55 @@
 import request from '@/utils/request'
 
-export function getList(params) {
+export default {
+  getList: function (params) {
     return request({
-        url: '/shop/goods/list',
-        method: 'get',
-        params
+      url: '/shop/goods/list',
+      method: 'get',
+      params
     })
-}
+  },
 
 
-export function saveBaseInfo(params) {
-  return request({
-    url: '/shop/goods/saveBaseInfo',
-    method: 'post',
-    data : params
-  })
-}
-export function save(params) {
+  saveBaseInfo: function (params) {
     return request({
-        url: '/shop/goods',
-        method: 'post',
-        data : params
+      url: '/shop/goods/saveBaseInfo',
+      method: 'post',
+      data: params
     })
-}
-
-export function remove(id) {
+  },
+  save: function (params) {
     return request({
-        url: '/shop/goods',
-        method: 'delete',
-        params: {
-            id: id
-        }
+      url: '/shop/goods',
+      method: 'post',
+      data: params
     })
+  },
+  remove: function (id) {
+    return request({
+      url: '/shop/goods',
+      method: 'delete',
+      params: {
+        id: id
+      }
+    })
+  },
+  get: function (id) {
+    return request({
+      url: '/shop/goods',
+      method: 'get',
+      params: {
+        id: id
+      }
+    })
+  },
+  changeIsOnSale: function (id, isOnSale) {
+    return request({
+      url: '/shop/goods/changeIsOnSale',
+      method: 'post',
+      params: {
+        id: id,
+        isOnSale: isOnSale
+      }
+    })
+  }
 }
-export function get(id) {
-  return request({
-    url: '/shop/goods',
-    method: 'get',
-    params: {
-      id: id
-    }
-  })
-}
-export function changeIsOnSale(id,isOnSale){
-  return request({
-    url:'/shop/goods/changeIsOnSale',
-    method:'post',
-    params:{
-      id:id,
-      isOnSale:isOnSale
-    }
-  })
-}
-

@@ -1,9 +1,10 @@
 import {getOrder, sendOut} from '@/api/shop/order'
 import {getApiUrl} from '@/utils/utils'
+
 export default {
   data() {
     return {
-      form: {},
+      form: {user: {id: '', name: ''}, address: {name: '', tel: '', addressDetail: ''}},
       apiUrl: getApiUrl()
     }
   },
@@ -25,8 +26,8 @@ export default {
     },
     sendOut() {
       sendOut(this.form.id).then(response => {
-        this.fetchData()
-        this.$message({
+          this.fetchData()
+          this.$message({
             message: '发货成功,只是将订单状态更改为已发货',
             type: 'info'
           })
@@ -35,7 +36,7 @@ export default {
     },
     formatPrice(price) {
       if (price) {
-        return  '￥'+ (price / 100).toFixed(2)
+        return '￥' + (price / 100).toFixed(2)
       }
       return ''
     },

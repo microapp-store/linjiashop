@@ -2,7 +2,7 @@ import editorImage from '@/components/Tinymce'
 import { Loading } from 'element-ui'
 import plugins from '@/components/editContainer/plugins'
 import toolbar from '@/components/editContainer/toolbar'
-import { save, get } from '@/api/cms/article'
+import articelApi from '@/api/cms/article'
 import { getList } from '@/api/cms/channel'
 import { getApiUrl } from '@/utils/utils'
 import { getToken } from '@/utils/auth'
@@ -103,7 +103,7 @@ export default {
       this.uploadHeaders['Authorization'] = getToken()
       const id = this.$route.query.id
       if (id) {
-        get(id).then(response => {
+        articelApi.get(id).then(response => {
           this.form = response.data
           this.setContent(response.data.content)
           this.articleImg = this.uploadUrl + '/getImgStream?idFile=' + response.data.img
@@ -180,7 +180,7 @@ export default {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           const content = this.form.content.split('%').join('%25')
-          save({
+          articelApi.save({
             id: this.form.id,
             title: this.form.title,
             author: this.form.author,

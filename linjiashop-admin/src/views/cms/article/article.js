@@ -1,4 +1,4 @@
-import { remove, getList, save } from '@/api/cms/article'
+import articleApi from '@/api/cms/article'
 
 import { getApiUrl } from '@/utils/utils'
 
@@ -87,7 +87,7 @@ export default {
         queryData['endDate'] = this.rangeDate[1]
 
       }
-      getList(queryData).then(response => {
+      articleApi.getList(queryData).then(response => {
         this.list = response.data.records
         for (var index in this.list) {
           const item = this.list[index]
@@ -161,7 +161,7 @@ export default {
           cancelButtonText: this.$t('button.cancel'),
           type: 'warning'
         }).then(() => {
-          remove(id).then(response => {
+          articleApi.remove(id).then(response => {
             this.$message({
               message: this.$t('common.optionSuccess'),
               type: 'success'

@@ -5,6 +5,7 @@ import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.dictmap.CommonDict;
 import cn.enilu.flash.bean.entity.promotion.Topic;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
+import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
@@ -12,6 +13,7 @@ import cn.enilu.flash.service.promotion.TopicService;
 import cn.enilu.flash.utils.DateUtil;
 import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.utils.factory.Page;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,21 +40,34 @@ public class TopicController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	@BussinessLog(value = "编辑专题", key = "name",dict= CommonDict.class)
-	public Object save(@ModelAttribute Topic tPromotionTopic){
-		if(tPromotionTopic.getId()==null){
-			topicService.insert(tPromotionTopic);
+	@RequiresPermissions(value = {Permission.TOPIC_EDIT})
+	public Object save(@ModelAttribute Topic topic){
+		if(topic.getId()==null){
+			topic.setPv(0L);
+			topicService.insert(topic);
 		}else {
-			topicService.update(tPromotionTopic);
+			topicService.update(topic);
 		}
 		return Rets.success();
 	}
 	@RequestMapping(method = RequestMethod.DELETE)
 	@BussinessLog(value = "删除专题", key = "id",dict= CommonDict.class)
+	@RequiresPermissions(value = {Permission.TOPIC_DEL})
 	public Object remove(Long id){
 		if (StringUtil.isEmpty(id)) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
 		}
 		topicService.deleteById(id);
+		return Rets.success();
+	}
+
+	@RequestMapping(value="/changeDisabled",method = RequestMethod.POST)
+	@RequiresPermissions(value = {Permission.TOPIC_EDIT})
+	public Object changeIsOnSale(@RequestParam("id")  Long id,@RequestParam("disabled") Boolean disabled){
+		if (id == null) {
+			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+		}
+		topicService.changeDisabled(id,disabled);
 		return Rets.success();
 	}
 }

@@ -33,7 +33,7 @@ export default {
     handleClick(tab, event) {
       this.$router.push({path: '/account/' + tab.name})
     },
-    async updatePwd() {
+    updatePwd() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           updatePwd({

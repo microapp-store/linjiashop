@@ -57,10 +57,12 @@ export default {
 
         onChangeDetail(val) {
             if (val) {
-                this.searchResult = [{
-                    name: '黄龙万科中心',
-                    address: '杭州市西湖区'
-                }];
+                //todo 这里可以根据gps定位和关键字模糊搜索详细地址列表
+                this.searchResult = []
+                // this.searchResult = [{
+                //     name: '黄龙万科中心',
+                //     address: '杭州市西湖区'
+                // }];
             } else {
                 this.searchResult = []
             }

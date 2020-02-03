@@ -1,17 +1,20 @@
 # Change log
-## Latest
+## v0.3 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.3)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.3)
 ### Issue 
 - 【后台管理】压缩svg图标
 - 【H5】新增未登录状态和购物车为空状态下的购物车界面
-- 商品下架后商品详情页显示该商品已下架
-- 新增未登录状态和购物车为空状态下的购物车界面
-- 后台新增定时任务定时更新微信token
-- 在商品详情页商品添加到购物车后购物车图标显示商品数量
-- 新增商品收藏功能
+- 【H5】商品下架后商品详情页显示该商品已下架
+- 【H5】新增未登录状态和购物车为空状态下的购物车界面
+- 【后台管理】后台新增定时任务定时更新微信token
+- 【H5】在商品详情页商品添加到购物车后购物车图标显示商品数量
+- 【H5】新增商品收藏功能
 - 优化图片资源请求地址：图片资源标识使用uuid代替自增的id
+- 完善后台管理的专题管理功能
+
 ### Fix
-- 修复并完善权限配置功能
-- 商品编辑菜单数据初始化错误
+- 【后台管理】修复并完善权限配置功能
+- 【后台管理】商品编辑菜单数据初始化错误
+- 【后台管理】修改管理员密码后缓存处理错误导致重新登录失败
 
 ## v0.2 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.2)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.2)
 ### Issue

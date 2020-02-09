@@ -1,5 +1,6 @@
 import orderApi from '@/api/shop/order'
 import expressApi from '@/api/system/express'
+import { getApiUrl } from '@/utils/utils'
 export default {
   data() {
     return {
@@ -116,7 +117,6 @@ export default {
         cancelButtonText: this.$t('button.cancel'),
         type: 'warning'
       }).then(() => {
-        this.fetchData()
         orderApi.sendOut(this.shipping.id,this.shipping.idExpress,this.shipping.shippingSn).then(response => {
           this.fetchData()
           this.shipping.show = false
@@ -146,10 +146,10 @@ export default {
       })
     },
     exportXls() {
-      this.$message({
-        message: '开发中',
-        type: 'success'
+      orderApi.exportXls(this.listQuery).then(response => {
+        window.location.href= getApiUrl() + '/file/download?idFile='+response.data.id
       })
+
     }
   }
 }

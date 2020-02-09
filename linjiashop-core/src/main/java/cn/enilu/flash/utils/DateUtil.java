@@ -29,6 +29,8 @@ import java.util.Map;
 
 public class DateUtil {
 
+	public static  final String DATE_TIME_FMT = "yyyy-MM-dd HH:mm:ss";
+	public static  final String DATE_FMT = "yyyy-MM-dd";
 
 	private static final Object LOCK = new Object();
 
@@ -57,7 +59,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getDay() {
-		return formatDate(new Date(), "yyyy-MM-dd");
+		return formatDate(new Date(), DATE_FMT);
 	}
 
 	/**
@@ -66,7 +68,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getDay(Date date) {
-		return formatDate(date, "yyyy-MM-dd");
+		return formatDate(date, DATE_FMT);
 	}
 
 	/**
@@ -93,7 +95,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getTime() {
-		return formatDate(new Date(), "yyyy-MM-dd HH:mm:ss");
+		return formatDate(new Date(), DATE_TIME_FMT);
 	}
 
 	/**
@@ -128,7 +130,7 @@ public class DateUtil {
 		if (StringUtil.isNotEmpty(pattern)) {
 			formatDate = DateFormatUtils.format(date, pattern);
 		} else {
-			formatDate = DateFormatUtils.format(date, "yyyy-MM-dd");
+			formatDate = DateFormatUtils.format(date, DATE_FMT);
 		}
 		return formatDate;
 	}
@@ -155,7 +157,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static Date parseDate(String date) {
-		return parse(date,"yyyy-MM-dd");
+		return parse(date,DATE_FMT);
 	}
 
 	/**
@@ -244,7 +246,7 @@ public class DateUtil {
 	}
 
 	public static int getDiffYear(String startTime, String endTime) {
-		DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat fmt = new SimpleDateFormat(DATE_FMT);
 		try {
 			int years = (int) (((fmt.parse(endTime).getTime() - fmt.parse(
 					startTime).getTime()) / (1000 * 60 * 60 * 24)) / 365);

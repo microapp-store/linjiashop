@@ -3,7 +3,7 @@
     <div class="block">
       <el-row>
         <el-col :span="24">
-          <el-button type="success" size="mini" icon="el-icon-edit" @click.native="sendOut"
+          <el-button type="success" size="mini" icon="el-icon-edit" @click.native="openSendOutForm"
                      v-show="form.statusName =='待发货'">发货
           </el-button>
           <el-button type="default" size="mini" @click="printOrder">打 印</el-button>
@@ -106,6 +106,37 @@
       </el-row>
 
     </el-form>
+    <el-dialog
+      title="发货"
+      :visible.sync="shipping.show"
+      width="40%">
+      <el-form ref="form" :model="shipping"  label-width="200px">
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="快递公司"  >
+              <el-select v-model="shipping.idExpress" placeholder="请选择">
+                <el-option
+                  v-for="item in expressList"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="快递单号"  >
+              <el-input v-model="shipping.shippingSn" minlength=1></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item>
+          <el-button type="primary" @click="sendOut">{{ $t('button.submit') }}</el-button>
+          <el-button @click.native="shipping.show = false">{{ $t('button.cancel') }}</el-button>
+        </el-form-item>
+
+      </el-form>
+    </el-dialog>
 
   </div>
 </template>

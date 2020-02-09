@@ -174,7 +174,6 @@ export default {
       exportXls(this.listQuery).then(response => {
         window.location.href= getApiUrl() + '/file/download?idFile='+response.data.id
       })
-
     }
 
   }

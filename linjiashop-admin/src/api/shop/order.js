@@ -9,6 +9,14 @@ export  default {
     })
   },
 
+  exportXls: function (params) {
+    return request({
+      url: '/shop/order/export',
+      method: 'get',
+      params
+    })
+  },
+
 
   sendOut: function (id,idExpress,shippingSn) {
     return request({

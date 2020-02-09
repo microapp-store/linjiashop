@@ -1,11 +1,19 @@
 import orderApi from '@/api/shop/order'
+import expressApi from '@/api/system/express'
 import {getApiUrl} from '@/utils/utils'
 
 export default {
   data() {
     return {
       form: {user: {id: '', name: ''}, address: {name: '', tel: '', addressDetail: ''}},
-      apiUrl: getApiUrl()
+      apiUrl: getApiUrl(),
+      expressList:[],
+      shipping:{
+        show:false,
+        id:'',
+        idExpress:'',
+        shippingSn:''
+      }
     }
   },
   created() {
@@ -24,16 +32,23 @@ export default {
         )
       }
     },
+    openSendOutForm(){
+      if(this.expressList.length==0){
+        expressApi.queryAll().then( response=> {
+          this.expressList = response.data
+        })
+      }
+      this.shipping.show = true
+    },
     sendOut() {
-      //todo 发货只是更改订单状态为已发货，正常发货需要填写物流信息
-      //this.$t('common.optionConfirm')
-      this.$confirm('发货只是更改订单状态为已发货，正常发货需要填写物流信息,功能完善中，确认发货?', this.$t('common.tooltip'), {
+      this.$confirm(this.$t('common.optionConfirm'), this.$t('common.tooltip'), {
         confirmButtonText: this.$t('button.submit'),
         cancelButtonText: this.$t('button.cancel'),
         type: 'warning'
       }).then(() => {
-        this.fetchData()
-        orderApi.sendOut(id).then(response => {
+        orderApi.sendOut(this.form.id,this.shipping.idExpress,this.shipping.shippingSn).then(response => {
+          this.fetchData()
+          this.shipping.show = false
           this.$message({
             message: '发货成功',
             type: 'success'

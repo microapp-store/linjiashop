@@ -1,4 +1,4 @@
-import { remove, getList, save } from '@/api/shop/order'
+import orderApi from '@/api/shop/order'
 
 export default {
   data() {
@@ -6,12 +6,15 @@ export default {
       listQuery: {
         page: 1,
         limit: 20,
-        id: undefined
+        mobile: undefined,
+        orderSn: undefined
       },
       total: 0,
       list: null,
       listLoading: true,
-      selRow: {}
+      selRow: {},
+      logVisible: false,
+      logs:[]
     }
   },
   filters: {
@@ -33,7 +36,7 @@ export default {
     },
     fetchData() {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
+      orderApi.getList(this.listQuery).then(response => {
         this.list = response.data.records
         this.listLoading = false
         this.total = response.data.total
@@ -84,6 +87,40 @@ export default {
     },
     formatPrice(price) {
       return (price / 100).toFixed(2);
+    },
+    sendOut(id) {
+      //todo 发货只是更改订单状态为已发货，正常发货需要填写物流信息
+      this.$confirm(this.$t('common.optionConfirm'), this.$t('common.tooltip'), {
+        confirmButtonText: this.$t('button.submit'),
+        cancelButtonText: this.$t('button.cancel'),
+        type: 'warning'
+      }).then(() => {
+        this.fetchData()
+        orderApi.sendOut(id).then(response => {
+          this.$message({
+            message: '发货成功',
+            type: 'success'
+          })
+        })
+      }).catch(() => {
+      })
+    },
+    viewLog(id) {
+      this.logs = []
+      this.logVisible = true
+      orderApi.getLogs(id).then( response=>{
+        this.logs = response.data
+      })
+    },
+    addComment(id){
+      console.log('idOrder', id)
+      this.$prompt('请输入备注信息', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      }).then(({ value }) => {
+        orderApi.addComment(id,value)
+      }).catch(() => {
+      })
     }
   }
 }

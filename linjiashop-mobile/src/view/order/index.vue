@@ -45,6 +45,7 @@
         <div slot="footer"
              class="footer_btn">
           <van-button size="small" @click.stop="cancelOrder(item)"  v-show="item.statusName === '待付款'" type="default">取消订单</van-button>
+          <!--<van-button size="small" @click.stop="cancelOrder(item)"  v-show="item.statusName === '已发货' || item.statusName === '待发货'||item.statusName === '已完成'" type="warning">申请退款</van-button>-->
           <van-button size="small" @click.stop="handleOrder(item)"  type="danger">
             {{getHandlerText(item.statusName)}}
           </van-button>

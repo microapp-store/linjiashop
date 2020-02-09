@@ -7,6 +7,7 @@ import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,16 +20,19 @@ import java.util.List;
 public class Order extends ShopBaseEntity {
     @Column(name="id_user",columnDefinition = "BIGINT COMMENT '用户id'")
     private Long idUser;
-    @JoinColumn(name="id_user", insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name="id_user", referencedColumnName="id",insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
     private ShopUser user;
     @Column(columnDefinition = "VARCHAR(32) COMMENT '订单号'")
     private String orderSn;
+    /**
+     * @see OrderEnum.OrderStatusEnum
+     */
     @Column(columnDefinition = "INT COMMENT '状态'")
     private Integer status;
     @Column(name="id_address",columnDefinition = "BIGINT COMMENT '收货信息'")
     private Long idAddress;
-    @JoinColumn(name="id_address",  insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name="id_address",  referencedColumnName="id",insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
     private Address address;
     @OneToMany(cascade = {CascadeType.ALL})
@@ -36,16 +40,44 @@ public class Order extends ShopBaseEntity {
     private List<OrderItem> items;
     @Column(columnDefinition = "VARCHAR(64) COMMENT '订单备注'")
     private String message;
+    @Column(columnDefinition = "VARCHAR(256) COMMENT '管理员备注'")
+    private String adminMessage;
+    @Column(columnDefinition = "VARCHAR(32) COMMENT '配送费用'")
+    private BigDecimal shippingAmount;
+    @Column(columnDefinition = "VARCHAR(32) COMMENT '交易金额'")
+    private BigDecimal tradeAmount;
     @Column(columnDefinition = "VARCHAR(32) COMMENT '总金额'")
     private BigDecimal totalPrice;
     @Column(columnDefinition = "VARCHAR(32) COMMENT '优惠券抵扣金额'")
     private BigDecimal couponPrice;
     @Column(columnDefinition = "VARCHAR(32) COMMENT '实付金额'")
     private BigDecimal realPrice;
+    @Column(columnDefinition = "DATETIME COMMENT '出库时间'")
+    private Date shippingTime;
+    @Column(columnDefinition = "DATETIME COMMENT '确认收货时间'")
+    private Date confirmReceivingTime;
+    @Column(columnDefinition = "VARCHAR(16) COMMENT '实付类型:alipay,wechat'")
+    private String payType;
+    @Column(columnDefinition = "INT COMMENT '支付状态1:未付款;2:已付款'")
+    private Integer payStatus;
 
 
     public String getStatusName(){
-        return OrderEnum.get(status).getValue();
+        if(status!=null) {
+            return OrderEnum.get(status).getValue();
+        }
+        return null;
     }
-
+    public String getPayStatusName(){
+        if(payStatus!=null) {
+            return OrderEnum.getPayStatus(payStatus).getValue();
+        }
+        return null;
+    }
+    public String getPayTypeName(){
+        if(payType!=null) {
+            return OrderEnum.get(payType).getValue();
+        }
+        return null;
+    }
 }

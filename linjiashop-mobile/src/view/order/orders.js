@@ -113,11 +113,11 @@ export default {
             }
             return statusName
         },
-        handleOrder(order){
-            if(order.statusName==='待付款'){
-                this.$router.push({path:'payment',query:{orderSn:order.orderSn,totalPrice:order.totalPrice}})
+        handleOrder(orderInfo){
+            if(orderInfo.statusName==='待付款'){
+                this.$router.push({path:'payment',query:{orderSn:orderInfo.orderSn,totalPrice:orderInfo.totalPrice}})
             }
-            if(order.statusName==='已发货'){
+            if(orderInfo.statusName==='已发货'){
                 order.confirm(orderInfo.orderSn).then( response => {
                     Toast('成功收货')
                     this.getData()

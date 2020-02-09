@@ -10,7 +10,10 @@ public class OrderEnum {
         UN_PAY(1, "待付款"),
         UN_SEND(2, "待发货"),
         SENDED(3, "已发货"),
-        FINISHED(4, "已完成");
+        FINISHED(4, "已完成"),
+        CANCEL(5,"已取消"),
+        REFUND_ING(6,"退款中"),
+        REFUND(7,"已退款");
 
 
         private String value;
@@ -38,4 +41,69 @@ public class OrderEnum {
         }
         return null;
     }
+
+    public enum  PayTypeEnum {
+        UN_PAY("alipay", "支付宝"),
+        UN_SEND("wechat", "微信支付");
+
+
+        private String value;
+        private String key;
+
+        PayTypeEnum(String key, String value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public String getKey() {
+            return key;
+        }
+    }
+
+    public static PayTypeEnum get(String key){
+        for(PayTypeEnum payTypeEnum : PayTypeEnum.values()){
+            if(payTypeEnum.getKey().equals(key)){
+                return payTypeEnum;
+            }
+        }
+        return null;
+    }
+
+
+    public enum  PayStatusEnum {
+        UN_PAY(1, "未付款"),
+        UN_SEND(2, "已付款");
+
+
+        private String value;
+        private Integer status;
+
+        PayStatusEnum(Integer status, String value) {
+            this.status = status;
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public Integer getId() {
+            return status;
+        }
+    }
+
+    public static PayStatusEnum getPayStatus(Integer status){
+        for(PayStatusEnum se : PayStatusEnum.values()){
+            if(se.getId().intValue() == status.intValue()){
+                return se;
+            }
+        }
+        return null;
+    }
+
+
 }

@@ -31,7 +31,7 @@ public class AttrValController {
     @Autowired
     private AttrKeyService attrKeyService;
 
-    @RequestMapping("/getAttrByCategoryAndGoods/{idCategory}")
+    @RequestMapping(value = "/getAttrByCategoryAndGoods/{idCategory}",method = RequestMethod.GET)
     public Object getAttrByCategoryAndGoods(@PathVariable("idCategory") Long idCategory) {
         List<AttrKey> keyList = attrKeyService.queryBy(idCategory);
         List<Long> idAttrKeyList = Lists.newArrayList();

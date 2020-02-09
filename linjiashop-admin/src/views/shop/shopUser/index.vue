@@ -30,12 +30,14 @@
             end-placeholder="最近登录截至日期">
           </el-date-picker>
         </el-col>
-
+      </el-row>
+      <el-row  :gutter="20">
         <el-col :span="6">
           <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
           <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
         </el-col>
       </el-row>
+
     </div>
     <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
               @current-change="handleCurrentChange">

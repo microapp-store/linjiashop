@@ -99,6 +99,7 @@ public class OrderController extends BaseController {
         order.setTotalPrice(totalPrice);
         order.setRealPrice(totalPrice);
         order.setStatus(OrderEnum.OrderStatusEnum.UN_PAY.getId());
+        order.setPayStatus(OrderEnum.PayStatusEnum.UN_PAY.getId());
         orderService.save(order,itemList);
         cartService.deleteAll(cartList);
         return Rets.success(order);

@@ -49,6 +49,9 @@ public class JwtUtil {
             return null;
         }
     }
+    public static String getUsername() {
+        return getUsername(HttpUtil.getToken());
+    }
 
     public static Long getUserId() {
        return getUserId(HttpUtil.getToken());

@@ -70,8 +70,8 @@
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item v-if="scope.row.statusName === '待付款'">修改订单</el-dropdown-item>
               <el-dropdown-item @click.native="addComment(scope.row.id)">订单备注</el-dropdown-item>
-              <el-dropdown-item v-if="scope.row.statusName==='已发货'">物流信息</el-dropdown-item>
-              <el-dropdown-item v-if="scope.row.statusName === '待发货'" @click.native="sendOut(scope.row.id)">立即发货</el-dropdown-item>
+              <el-dropdown-item v-if="scope.row.statusName==='已发货'" @click.native="viewShippingInfo(scope.row)">物流信息</el-dropdown-item>
+              <el-dropdown-item v-if="scope.row.statusName === '待发货'" @click.native="openSendOutForm(scope.row.id)">立即发货</el-dropdown-item>
               <el-dropdown-item v-if="scope.row.payStatusName === '已付款' && scope.row.statusName !== '已退款'&& scope.row.statusName !== '退款中'">立即退款</el-dropdown-item>
               <el-dropdown-item @click.native="viewLog(scope.row.id)">操作日志</el-dropdown-item>
             </el-dropdown-menu>
@@ -109,6 +109,37 @@
           label="操作时间">
         </el-table-column>
       </el-table>
+    </el-dialog>
+    <el-dialog
+      title="发货"
+      :visible.sync="shipping.show"
+      width="40%">
+      <el-form ref="form" :model="shipping"  label-width="200px">
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="快递公司"  >
+              <el-select v-model="shipping.idExpress" placeholder="请选择">
+                <el-option
+                  v-for="item in expressList"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="快递单号"  >
+              <el-input v-model="shipping.shippingSn" minlength=1></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item>
+          <el-button type="primary" @click="sendOut">{{ $t('button.submit') }}</el-button>
+          <el-button @click.native="shipping.show = false">{{ $t('button.cancel') }}</el-button>
+        </el-form-item>
+
+      </el-form>
     </el-dialog>
 
   </div>

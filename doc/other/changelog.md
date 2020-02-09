@@ -1,4 +1,11 @@
 # Change log
+## Latest
+### Issue
+- 【后台管理】管理员给订单添加备注信息
+- 【后台管理】维护物流公司
+- 针对订单全流程生命周期添加操作日志
+- 基础程序封装支持关联查询
+
 ## v0.3 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.3)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.3)
 ### Issue 
 - 【后台管理】压缩svg图标

@@ -1,6 +1,7 @@
 package cn.enilu.flash.bean.entity.shop;
 
 import cn.enilu.flash.bean.entity.ShopBaseEntity;
+import cn.enilu.flash.bean.entity.system.Express;
 import cn.enilu.flash.bean.enumeration.shop.OrderEnum;
 import lombok.Data;
 import org.hibernate.annotations.Table;
@@ -54,6 +55,13 @@ public class Order extends ShopBaseEntity {
     private BigDecimal realPrice;
     @Column(columnDefinition = "DATETIME COMMENT '出库时间'")
     private Date shippingTime;
+    @Column(name="id_express",columnDefinition = "BIGINT COMMENT '快递公司'")
+    private Long idExpress;
+    @JoinColumn(name="id_express",  referencedColumnName="id",insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Express express;
+    @Column(columnDefinition = "VARCHAR(32) COMMENT '快递单号'")
+    private String shippingSn;
     @Column(columnDefinition = "DATETIME COMMENT '确认收货时间'")
     private Date confirmReceivingTime;
     @Column(columnDefinition = "VARCHAR(16) COMMENT '实付类型:alipay,wechat'")

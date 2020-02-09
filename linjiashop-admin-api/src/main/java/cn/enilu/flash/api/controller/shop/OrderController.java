@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("/shop/order")
 public class OrderController {
@@ -34,8 +36,14 @@ public class OrderController {
 
     @RequestMapping(value = "/sendOut/{id}", method = RequestMethod.POST)
     @BussinessLog(value = "发货", key = "id", dict = CommonDict.class)
-    public Object sendOut(@PathVariable("id") Long id) {
+    public Object sendOut(@PathVariable("id") Long id,
+                          @RequestParam("idExpress") Long idExpress,
+                          @RequestParam("shippingSn") String shippingSn,
+                          @RequestParam(value = "shippingAmount",defaultValue = "0",required = false) String shippingAmount) {
         Order order = orderService.get(id);
+        order.setIdExpress(idExpress);
+        order.setShippingSn(shippingSn);
+        order.setShippingAmount(new BigDecimal(shippingAmount));
         order.setStatus(OrderEnum.OrderStatusEnum.SENDED.getId());
         orderService.updateOrder(order);
         return Rets.success();

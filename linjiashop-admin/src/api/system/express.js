@@ -8,7 +8,12 @@ export default {
       params
     })
   },
-
+  queryAll: function () {
+    return request({
+      url: '/sys/express/queryAll',
+      method: 'get'
+    })
+  },
 
   save: function (params) {
     return request({

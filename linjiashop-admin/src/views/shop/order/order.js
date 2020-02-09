@@ -1,5 +1,5 @@
 import orderApi from '@/api/shop/order'
-
+import expressApi from '@/api/system/express'
 export default {
   data() {
     return {
@@ -14,7 +14,14 @@ export default {
       listLoading: true,
       selRow: {},
       logVisible: false,
-      logs: []
+      logs: [],
+      expressList:[],
+      shipping:{
+        show:false,
+        id:'',
+        idExpress:'',
+        shippingSn:''
+      }
     }
   },
   filters: {
@@ -89,16 +96,30 @@ export default {
     formatPrice(price) {
       return (price / 100).toFixed(2);
     },
-    sendOut(id) {
-      //todo 发货只是更改订单状态为已发货，正常发货需要填写物流信息
-      //this.$t('common.optionConfirm')
-      this.$confirm('发货只是更改订单状态为已发货，正常发货需要填写物流信息,功能完善中，确认发货?', this.$t('common.tooltip'), {
+    viewShippingInfo(data){
+      this.shipping.idExpress = data.idExpress
+      this.shipping.shippingSn = data.shippingSn
+      this.openSendOutForm(data.id)
+    },
+    openSendOutForm(id){
+      if(this.expressList.length==0){
+        expressApi.queryAll().then( response=> {
+          this.expressList = response.data
+        })
+      }
+      this.shipping.id = id
+      this.shipping.show = true
+    },
+    sendOut() {
+      this.$confirm(this.$t('common.optionConfirm'), this.$t('common.tooltip'), {
         confirmButtonText: this.$t('button.submit'),
         cancelButtonText: this.$t('button.cancel'),
         type: 'warning'
       }).then(() => {
         this.fetchData()
-        orderApi.sendOut(id).then(response => {
+        orderApi.sendOut(this.shipping.id,this.shipping.idExpress,this.shipping.shippingSn).then(response => {
+          this.fetchData()
+          this.shipping.show = false
           this.$message({
             message: '发货成功',
             type: 'success'

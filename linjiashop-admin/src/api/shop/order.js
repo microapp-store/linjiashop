@@ -10,10 +10,14 @@ export  default {
   },
 
 
-  sendOut: function (id) {
+  sendOut: function (id,idExpress,shippingSn) {
     return request({
       url: '/shop/order/sendOut/' + id,
-      method: 'post'
+      method: 'post',
+      params:{
+        idExpress:idExpress,
+        shippingSn:shippingSn
+      }
     })
   },
 

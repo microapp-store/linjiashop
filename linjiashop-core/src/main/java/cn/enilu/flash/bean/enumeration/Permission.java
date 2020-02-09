@@ -34,6 +34,8 @@ public interface Permission {
     String DEPT = "dept";
     String DEPT_EDIT = "deptEdit";
     String DEPT_DEL = "deptDelete";
+    String EXPRESS = "express";
+    String EXPRESS_EDIT = "expressEdit";
 
     //消息管理
     String MSG = "msg";

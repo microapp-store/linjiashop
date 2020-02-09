@@ -37,7 +37,8 @@ export default {
     cart:'购物车',
     promotion:'推广管理',
     topic:'专题管理',
-    favorite:'收藏列表'
+    favorite:'收藏列表',
+    express:'物流公司'
   },
   navbar: {
     logOut: '退出登录',
@@ -68,11 +69,13 @@ export default {
     cancel: '取消',
     clear: '清除',
     back: '返回',
-    export: '导出'
+    export: '导出',
+    refresh:'刷新'
   },
   common: {
     mustSelectOne: '请选中操作项!',
     deleteConfirm: '你确认删除该记录？',
+    optionConfirm:'确认该操作？',
     tooltip: '提示',
     warning: '警告',
     optionSuccess: '操作成功',

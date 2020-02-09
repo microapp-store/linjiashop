@@ -116,22 +116,49 @@ INSERT INTO `t_shop_goods` (`id`, `create_by`, `create_time`, `modify_by`, `modi
 -- ----------------------------
 -- Records of t_shop_order.sql
 -- ----------------------------
-INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `real_price`, `status`, `total_price`) VALUES (1, '2019-12-14 23:09:57', NULL, NULL, 1, 1, '', '20191214230956111128', '409700', 1, '409700');
-INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `real_price`, `status`, `total_price`) VALUES (2, '2019-12-14 23:12:49', NULL, NULL, 2, 1, '', '20191214231249046951', '849700', 2, '849700');
-INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `real_price`, `status`, `total_price`) VALUES (3, '2019-12-14 23:16:57', NULL, NULL, 2, 1, '', '20191214231656504561', '189800', 3, '189800');
-INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `real_price`, `status`, `total_price`) VALUES (4, '2019-12-14 23:17:24', NULL, NULL, 2, 1, '', '20191214231724727283', '299900', 4, '299900');
+INSERT INTO `t_shop_order` (`id`, `order_sn`, `create_time`, `modify_time`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_user`, `message`, `admin_message`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (1, '20191214230956111128', '2019-12-14 23:09:57', NULL, NULL, NULL, 1, 1, '', NULL, 1, NULL, '409700', NULL, NULL, 1, '409700', NULL);
+INSERT INTO `t_shop_order` (`id`, `order_sn`, `create_time`, `modify_time`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_user`, `message`, `admin_message`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (2, '20191214231249046951', '2019-12-14 23:12:49', NULL, NULL, NULL, 2, 1, '', NULL, 2, 'alipay', '849700', NULL, NULL, 2, '849700', NULL);
+INSERT INTO `t_shop_order` (`id`, `order_sn`, `create_time`, `modify_time`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_user`, `message`, `admin_message`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (3, '20191214231656504561', '2019-12-14 23:16:57', NULL, NULL, NULL, 2, 1, '', NULL, 2, 'wechat', '189800', NULL, NULL, 3, '189800', NULL);
+INSERT INTO `t_shop_order` (`id`, `order_sn`, `create_time`, `modify_time`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_user`, `message`, `admin_message`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (4, '20191214231724727283', '2019-12-14 23:17:24', NULL, NULL, NULL, 2, 1, '', NULL, 2, 'wechat', '299900', NULL, NULL, 4, '299900', NULL);
+INSERT INTO `t_shop_order` (`id`, `order_sn`, `create_time`, `modify_time`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_user`, `message`, `admin_message`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (5, '20191215231724727284', '2019-12-15 23:17:24', NULL, NULL, NULL, 1, 1, NULL, NULL, 2, 'alipay', '749900', NULL, NULL, 6, '749900', NULL);
+INSERT INTO `t_shop_order` (`id`, `order_sn`, `create_time`, `modify_time`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_user`, `message`, `admin_message`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (6, '20191216231724727285', '2019-12-16 23:17:24', NULL, NULL, NULL, 1, 1, NULL, NULL, 2, 'alipay', '749900', NULL, NULL, 7, '749900', NULL);
+
+-- ----------------------------
+-- Records of t_shop_order_log.sql
+-- ----------------------------
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (1, '2019-12-14 23:09:57', NULL, '生成订单', 1);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (2, '2019-12-14 23:12:49', NULL, '生成订单', 2);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (3, '2019-12-14 23:16:57', NULL, '生成订单', 3);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (4, '2019-12-14 23:17:24', NULL, '生成订单', 4);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (5, '2019-12-15 23:17:24', NULL, '生成订单', 5);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (6, '2019-12-16 23:17:24', NULL, '生成订单', 6);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (7, '2019-12-14 23:13:49', NULL, '用户成功付款', 2);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (8, '2019-12-14 23:17:57', NULL, '用户成功付款', 3);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (9, '2019-12-14 23:17:25', NULL, '用户成功付款', 4);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (10, '2019-12-15 23:17:27', NULL, '用户成功付款', 5);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (11, '2019-12-16 23:17:29', NULL, '用户成功付款', 6);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (12, '2019-12-14 23:19:57', NULL, '管理员已发货', 3);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (13, '2019-12-14 23:19:24', NULL, '管理员已发货', 4);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (14, '2019-12-14 23:19:44', NULL, '用户确认收货', 4);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (15, '2019-12-15 23:20:24', NULL, '用户申请退款', 5);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (16, '2019-12-16 13:20:24', NULL, '管理员处理退款申请', 5);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (17, '2019-12-17 23:17:29', NULL, '用户申请退款', 6);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (18, '2019-12-18 10:17:29', NULL, '管理员处理退款申请', 6);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (19, '2019-12-18 18:17:29', NULL, '用户确认退款成功', 6);
 
 -- ----------------------------
 -- Records of t_shop_order_item.sql
 -- ----------------------------
-INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (1, '2019-12-14 23:09:57', NULL, '2', 4, 1, 1, '74900', '149800');
-INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (2, '2019-12-14 23:09:57', NULL, '1', NULL, 11, 1, '259900', '259900');
-INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (3, '2019-12-14 23:12:49', NULL, '1', NULL, 6, 2, '219900', '219900');
-INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (4, '2019-12-14 23:12:49', NULL, '1', NULL, 14, 2, '429900', '429900');
-INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (5, '2019-12-14 23:12:49', NULL, '1', NULL, 22, 2, '199900', '199900');
-INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (6, '2019-12-14 23:16:57', NULL, '1', 1, 1, 3, '69900', '69900');
-INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (7, '2019-12-14 23:16:57', NULL, '1', NULL, 7, 3, '119900', '119900');
-INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_sku`, `id_goods`, `id_order`, `price`, `total_price`) VALUES (8, '2019-12-14 23:17:24', NULL, '1', NULL, 5, 4, '299900', '299900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (1, '2019-12-14 23:09:57', NULL, '2', 1, 1, 4, '74900', '149800');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (2, '2019-12-14 23:09:57', NULL, '1', 11, 1, NULL, '259900', '259900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (3, '2019-12-14 23:12:49', NULL, '1', 6, 2, NULL, '219900', '219900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (4, '2019-12-14 23:12:49', NULL, '1', 14, 2, NULL, '429900', '429900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (5, '2019-12-14 23:12:49', NULL, '1', 22, 2, NULL, '199900', '199900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (6, '2019-12-14 23:16:57', NULL, '1', 1, 3, 1, '69900', '69900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (7, '2019-12-14 23:16:57', NULL, '1', 7, 3, NULL, '119900', '119900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (8, '2019-12-14 23:17:24', NULL, '1', 5, 4, NULL, '299900', '299900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (9, '2019-12-15 23:17:24', NULL, '1', 16, 5, NULL, '749900', '749900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (10, '2019-12-16 23:17:24', NULL, '1', 16, 6, NULL, '749900', '749900');
 
 -- ----------------------------
 -- Records of t_shop_user.sql
@@ -407,6 +434,9 @@ INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify
 INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (84, 1, '2019-7-31 22:04:30', 1, '2019-7-31 22:04:30', 'topicEdit', NULL, 0, NULL, 0, NULL, 3, '编辑专题', 1, 'topic', '[0],[promotion],[topic],', 1, NULL, '/topic/edit');
 INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (85, 1, '2019-7-31 22:04:30', 1, '2019-7-31 22:04:30', 'topicDelete', NULL, 0, NULL, 0, NULL, 3, '删除专题', 2, 'topic', '[0],[promotion],[topic],', 1, NULL, '/topic/delete');
 INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (86, 1, '2020-1-24 22:21:40', 1, '2020-1-24 22:21:40', 'favorite', 'views/shop/favorite/index', 0, 'favorite', 1, NULL, 2, '收藏列表', 6, 'shopMgr', '[0],[shopMgr],', 1, NULL, '/favorite');
+INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (87, 1, '2020-2-9 10:18:33', 1, '2020-2-9 10:18:53', 'express', 'views/system/express/index', 0, 'express', 1, NULL, 2, '物流公司', 7, 'system', '[0],[system]', 1, NULL, '/express');
+INSERT INTO `t_sys_menu` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `component`, `hidden`, `icon`, `ismenu`, `isopen`, `levels`, `name`, `num`, `pcode`, `pcodes`, `status`, `tips`, `url`) VALUES (88, 1, '2020-2-9 10:18:33', 1, '2020-2-9 10:18:53', 'expressEdit', NULL, NULL, NULL, 0, NULL, 3, '编辑物流公司', 1, 'express', '[0],[system],[express]', 1, NULL, '/express/edit');
+
 
 
 -- ----------------------------
@@ -521,6 +551,9 @@ INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (97, 2, 2);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (98, 17, 2);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (99, 86, 1);
 INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (100, 77, 1);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (101, 87, 1);
+INSERT INTO `t_sys_relation` (`id`, `menuid`, `roleid`) VALUES (102, 88, 1);
+
 
 -- ----------------------------
 -- Records of t_sys_role.sql
@@ -612,3 +645,13 @@ INSERT INTO `t_promotion_topic` (`id`, `create_by`, `create_time`, `modify_by`, 
 -- ----------------------------
 INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (1, '2020-1-24 22:34:19', NULL, 1, 1);
 INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (2, '2020-1-24 22:34:19', NULL, 2, 1);
+
+-- ----------------------------
+-- Records of t_sys_express
+-- ----------------------------
+INSERT INTO `t_sys_express` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `disabled`, `name`, `sort`) VALUES (1, NULL, NULL, NULL, NULL, 'SF', 0, '顺丰快递', 1);
+INSERT INTO `t_sys_express` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `disabled`, `name`, `sort`) VALUES (2, NULL, NULL, NULL, NULL, 'STO', 0, '申通快递', 2);
+INSERT INTO `t_sys_express` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `disabled`, `name`, `sort`) VALUES (3, NULL, NULL, NULL, NULL, 'yto', 0, '圆通快递', 3);
+INSERT INTO `t_sys_express` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `disabled`, `name`, `sort`) VALUES (4, NULL, NULL, NULL, NULL, 'ZTO', 0, '中通快递', 4);
+INSERT INTO `t_sys_express` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `disabled`, `name`, `sort`) VALUES (5, NULL, NULL, NULL, NULL, 'YUNDA', 0, '韵达快递', 5);
+INSERT INTO `t_sys_express` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `disabled`, `name`, `sort`) VALUES (6, NULL, NULL, NULL, NULL, 'RUFENG', 1, '如风达快递', 6);

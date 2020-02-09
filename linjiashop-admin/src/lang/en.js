@@ -37,7 +37,8 @@ export default {
     cart:'Carts',
     promotion:'Promotion',
     topic:'Topics',
-    favorite:'Favorite'
+    favorite:'Favorite',
+    express:'Express'
   },
   navbar: {
     logOut: 'Log Out',
@@ -67,11 +68,13 @@ export default {
     cancel: 'Cancel',
     clear: 'Clear',
     back: 'Back',
-    export: 'Export'
+    export: 'Export',
+    refresh:'Refresh'
   },
   common: {
     mustSelectOne: 'Please select the record to operate!',
     deleteConfirm: 'Are you sure delete the record?',
+    optionConfirm:'Are you sure?',
     tooltip: 'Tooltip',
     warning: 'Warning',
     optionSuccess: 'success',

@@ -1,11 +1,9 @@
 package cn.enilu.flash.bean.vo.query;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.Collection;
 import java.util.Date;
 
@@ -65,45 +63,52 @@ public class SimpleSpecification <T> implements Specification<T> {
      */
     private Predicate generatePredicate(Root<T> root, CriteriaBuilder cb, SearchFilter op) {
         Object value = op.value;
+        String[] names = StringUtils.split(op.fieldName, ".");
+        Path expression = root.get(names[0]);
+        for (int i = 1; i < names.length; i++) {
+            expression = expression.get(names[i]);
+        }
+
+
         switch (op.operator) {
             case EQ:
-                return cb.equal(root.get(op.fieldName), value);
+                return cb.equal(expression, value);
             case NE:
-                return cb.notEqual(root.get(op.fieldName), value);
+                return cb.notEqual(expression, value);
             case GTE:
-                return cb.greaterThanOrEqualTo(root.get(op.fieldName), (Comparable) value);
+                return cb.greaterThanOrEqualTo(expression, (Comparable) value);
             case LTE:
-                return cb.lessThanOrEqualTo(root.get(op.fieldName) , (Comparable) value);
+                return cb.lessThanOrEqualTo(expression , (Comparable) value);
             case GT:
-                return cb.greaterThan(root.get(op.fieldName), (Comparable) value);
+                return cb.greaterThan(expression, (Comparable) value);
             case LT:
-                return cb.lessThan(root.get(op.fieldName), (Comparable) value);
+                return cb.lessThan(expression, (Comparable) value);
             case IN:
                 if(value.getClass().isArray()){
-                    return root.get(op.fieldName).in((Object[]) value);
+                    return expression.in((Object[]) value);
                 } else{
-                    return root.get(op.fieldName).in((Collection) value);
+                    return expression.in((Collection) value);
                 }
             case NOTIN:
                 if (value instanceof Collection) {
-                    return cb.not(root.get(op.fieldName).in((Collection) value));
+                    return cb.not(expression.in((Collection) value));
                 }
-                return cb.not(root.get(op.fieldName).in(value));
+                return cb.not(expression.in(value));
             case LIKE:
-                return cb.like(root.get(op.fieldName).as(String.class), "%" + value + "%");
+                return cb.like(expression.as(String.class), "%" + value + "%");
             case LIKEL:
-                return cb.like(root.get(op.fieldName).as(String.class), value + "%");
+                return cb.like(expression.as(String.class), value + "%");
             case LIKER:
-                return cb.like(root.get(op.fieldName).as(String.class), "%" + value);
+                return cb.like(expression.as(String.class), "%" + value);
             case ISNULL:
-                return cb.isNull(root.get(op.fieldName));
+                return cb.isNull(expression);
             case ISNOTNULL:
-                return cb.isNotNull(root.get(op.fieldName));
+                return cb.isNotNull(expression);
 
             case BETWEEN:
                 if (value instanceof Date[]) {
                     Date[] dateArray = (Date[]) value;
-                    return cb.between(root.get(op.fieldName), dateArray[0], dateArray[1]);
+                    return cb.between(expression, dateArray[0], dateArray[1]);
                 }
             default:
                 return null;

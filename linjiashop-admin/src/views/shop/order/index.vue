@@ -10,8 +10,8 @@
         </el-col>
         <el-col :span="6">
           <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
-          <el-button type="primary" size="mini" icon="el-icon-document" @click.native="refresh">{{ $t('button.export') }}</el-button>
-          <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="refresh">{{ $t('button.refresh') }}</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-document" @click.native="exportXls">{{ $t('button.export') }}</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.refresh') }}</el-button>
         </el-col>
       </el-row>
     </div>

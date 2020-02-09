@@ -14,7 +14,7 @@ export default {
       listLoading: true,
       selRow: {},
       logVisible: false,
-      logs:[]
+      logs: []
     }
   },
   filters: {
@@ -46,7 +46,8 @@ export default {
       this.fetchData()
     },
     reset() {
-      this.listQuery.id = ''
+      this.listQuery.mobile = ''
+      this.listQuery.orderSn = ''
       this.fetchData()
     },
     handleFilter() {
@@ -90,7 +91,8 @@ export default {
     },
     sendOut(id) {
       //todo 发货只是更改订单状态为已发货，正常发货需要填写物流信息
-      this.$confirm(this.$t('common.optionConfirm'), this.$t('common.tooltip'), {
+      //this.$t('common.optionConfirm')
+      this.$confirm('发货只是更改订单状态为已发货，正常发货需要填写物流信息,功能完善中，确认发货?', this.$t('common.tooltip'), {
         confirmButtonText: this.$t('button.submit'),
         cancelButtonText: this.$t('button.cancel'),
         type: 'warning'
@@ -108,18 +110,24 @@ export default {
     viewLog(id) {
       this.logs = []
       this.logVisible = true
-      orderApi.getLogs(id).then( response=>{
+      orderApi.getLogs(id).then(response => {
         this.logs = response.data
       })
     },
-    addComment(id){
+    addComment(id) {
       console.log('idOrder', id)
       this.$prompt('请输入备注信息', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消'
-      }).then(({ value }) => {
-        orderApi.addComment(id,value)
+      }).then(({value}) => {
+        orderApi.addComment(id, value)
       }).catch(() => {
+      })
+    },
+    exportXls() {
+      this.$message({
+        message: '开发中',
+        type: 'success'
       })
     }
   }

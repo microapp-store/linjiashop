@@ -44,7 +44,7 @@ public class OrderEnum {
 
     public enum  PayTypeEnum {
         UN_PAY("alipay", "支付宝"),
-        UN_SEND("wechat", "微信支付");
+        UN_SEND("wxpay", "微信支付");
 
 
         private String value;

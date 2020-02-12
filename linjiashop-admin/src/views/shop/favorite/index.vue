@@ -1,13 +1,5 @@
 <template>
     <div class="app-container">
-        <div class="block">
-            <el-row>
-                <el-col :span="24">
-                    <el-button type="primary" size="mini"  icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
-                </el-col>
-            </el-row>
-        </div>
-
 
         <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
                   @current-change="handleCurrentChange">

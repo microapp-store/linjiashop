@@ -56,15 +56,24 @@ INSERT INTO `t_message_template` (`id`, `create_by`, `create_time`, `modify_by`,
 -- ----------------------------
 -- Records of t_shop_address.sql
 -- ----------------------------
-INSERT INTO `t_shop_address` (`id`, `create_time`, `modify_time`, `address_detail`, `city`, `area_code`, `district`, `id_user`, `is_default`, `tel`, `post_code`, `province`, `name`, `is_delete`) VALUES (1, NULL, NULL, '人民路12号', '北京市', '110101', '东城区', 1, 1, '15011113333', NULL, '北京市', '路飞', 0);
-INSERT INTO `t_shop_address` (`id`, `create_time`, `modify_time`, `address_detail`, `city`, `area_code`, `district`, `id_user`, `is_default`, `tel`, `post_code`, `province`, `name`, `is_delete`) VALUES (2, NULL, NULL, '和平路32号', '深圳市', '440304', '福田区', 1, 0, '15111112222', NULL, '广东省', '索隆', 0);
+INSERT INTO `t_shop_address` (`id`, `create_time`, `modify_time`, `address_detail`, `area_code`, `city`, `district`, `id_user`, `is_default`, `is_delete`, `name`, `post_code`, `province`, `tel`) VALUES (1, NULL, NULL, '人民路12号', '110101', '北京市', '东城区', 1, 1, 0, '路飞', NULL, '北京市', '15011113333');
+INSERT INTO `t_shop_address` (`id`, `create_time`, `modify_time`, `address_detail`, `area_code`, `city`, `district`, `id_user`, `is_default`, `is_delete`, `name`, `post_code`, `province`, `tel`) VALUES (2, NULL, NULL, '和平路32号', '440304', '深圳市', '福田区', 1, 0, 0, '索隆', NULL, '广东省', '15111112222');
+INSERT INTO `t_shop_address` (`id`, `create_time`, `modify_time`, `address_detail`, `area_code`, `city`, `district`, `id_user`, `is_default`, `is_delete`, `name`, `post_code`, `province`, `tel`) VALUES (3, '2020-2-11 18:29:41', NULL, '风车村11号', '370405', '枣庄市', '台儿庄区', 2, 1, 0, '路飞太郎', '', '山东省', '13581640280');
+INSERT INTO `t_shop_address` (`id`, `create_time`, `modify_time`, `address_detail`, `area_code`, `city`, `district`, `id_user`, `is_default`, `is_delete`, `name`, `post_code`, `province`, `tel`) VALUES (4, '2020-2-11 18:32:14', NULL, '可可西亚村1号', '210782', '锦州市', '北镇市', 3, 1, 0, '小贼猫', '', '辽宁省', '13123234325');
+INSERT INTO `t_shop_address` (`id`, `create_time`, `modify_time`, `address_detail`, `area_code`, `city`, `district`, `id_user`, `is_default`, `is_delete`, `name`, `post_code`, `province`, `tel`) VALUES (5, '2020-2-11 18:34:16', NULL, '北海路11号', '321012', '扬州市', '江都区', 4, 1, 0, '绿藻头', '', '江苏省', '13523921111');
 
 -- ----------------------------
 -- Records of t_shop_cart.sql
 -- ----------------------------
-INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_user`, `id_sku`) VALUES (9, '2019-12-14 23:18:02', NULL, '1', 1, 1, 3);
-INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_user`, `id_sku`) VALUES (10, '2019-12-14 23:18:21', NULL, '1', 20, 1, NULL);
-INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_user`, `id_sku`) VALUES (11, '2019-12-14 23:18:30', NULL, '1', 6, 1, NULL);
+INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_sku`, `id_user`) VALUES (9, '2019-12-14 23:18:02', NULL, '1', 1, 3, 1);
+INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_sku`, `id_user`) VALUES (10, '2019-12-14 23:18:21', NULL, '1', 20, NULL, 1);
+INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_sku`, `id_user`) VALUES (11, '2019-12-14 23:18:30', NULL, '1', 6, NULL, 1);
+INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_sku`, `id_user`) VALUES (20, '2020-2-11 18:16:22', NULL, '1', 16, NULL, 4);
+INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_sku`, `id_user`) VALUES (21, '2020-2-11 18:16:43', NULL, '1', 10, NULL, 4);
+INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_sku`, `id_user`) VALUES (22, '2020-2-11 18:17:24', NULL, '2', 12, NULL, 2);
+INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_sku`, `id_user`) VALUES (23, '2020-2-11 18:20:39', NULL, '1', 9, NULL, 2);
+INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_sku`, `id_user`) VALUES (24, '2020-2-11 18:21:12', NULL, '1', 8, NULL, 2);
+INSERT INTO `t_shop_cart` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_sku`, `id_user`) VALUES (25, '2020-2-11 18:21:24', NULL, '1', 16, NULL, 2);
 
 -- ----------------------------
 -- Records of t_shop_category.sql
@@ -116,12 +125,18 @@ INSERT INTO `t_shop_goods` (`id`, `create_by`, `create_time`, `modify_by`, `modi
 -- ----------------------------
 -- Records of t_shop_order.sql
 -- ----------------------------
-INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `id_express`, `shipping_sn`, `shipping_amount`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (1, '2019-12-14 23:09:57', NULL, NULL, NULL, NULL, 1, 1, '', '20191214230956111128', 1, NULL, '409700', NULL, NULL, NULL, NULL, 1, '409700', NULL);
-INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `id_express`, `shipping_sn`, `shipping_amount`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (2, '2019-12-14 23:12:49', NULL, NULL, NULL, NULL, 2, 1, '', '20191214231249046951', 2, 'alipay', '849700', NULL, NULL, NULL, NULL, 2, '849700', NULL);
-INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `id_express`, `shipping_sn`, `shipping_amount`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (3, '2019-12-14 23:16:57', NULL, NULL, NULL, NULL, 2, 1, '', '20191214231656504561', 2, 'wechat', '189800', 1, '23479238719734', '0', '2019-12-15 23:16:57', 3, '189800', NULL);
-INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `id_express`, `shipping_sn`, `shipping_amount`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (4, '2019-12-14 23:17:24', NULL, NULL, NULL, NULL, 2, 1, '', '20191214231724727283', 2, 'wechat', '299900', 2, '23523523523523', '0', '2019-12-15 23:16:57', 4, '299900', NULL);
-INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `id_express`, `shipping_sn`, `shipping_amount`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (5, '2019-12-15 23:17:24', NULL, NULL, NULL, NULL, 1, 1, NULL, '20191215231724727284', 2, 'alipay', '749900', 3, '2515432532523', '0', '2019-12-15 23:16:57', 6, '749900', NULL);
-INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `id_express`, `shipping_sn`, `shipping_amount`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (6, '2019-12-16 23:17:24', NULL, NULL, NULL, NULL, 1, 1, NULL, '20191216231724727285', 2, 'alipay', '749900', 4, '2351543253253', '0', '2019-12-17 23:17:24', 7, '749900', NULL);
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_express`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_sn`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (1, '2019-12-14 23:09:57', NULL, NULL, NULL, NULL, 1, NULL, 1, '', '20191214230956111128', 1, NULL, '409700', NULL, NULL, NULL, 1, '409700', NULL);
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_express`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_sn`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (2, '2019-12-14 23:12:49', NULL, NULL, NULL, NULL, 2, NULL, 1, '', '20191214231249046951', 2, 'alipay', '849700', NULL, NULL, NULL, 2, '849700', NULL);
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_express`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_sn`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (3, '2019-12-14 23:16:57', NULL, NULL, NULL, NULL, 2, 1, 1, '', '20191214231656504561', 2, 'wxpay', '189800', '0', '23479238719734', '2019-12-15 23:16:57', 3, '189800', NULL);
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_express`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_sn`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (4, '2019-12-14 23:17:24', NULL, NULL, NULL, NULL, 2, 2, 1, '', '20191214231724727283', 2, 'wxpay', '299900', '0', '23523523523523', '2019-12-15 23:16:57', 4, '299900', NULL);
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_express`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_sn`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (5, '2019-12-15 23:17:24', NULL, NULL, NULL, NULL, 1, 3, 1, NULL, '20191215231724727284', 2, 'alipay', '749900', '0', '2515432532523', '2019-12-15 23:16:57', 6, '749900', NULL);
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_express`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_sn`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (6, '2019-12-16 23:17:24', NULL, NULL, NULL, NULL, 1, 4, 1, NULL, '20191216231724727285', 2, 'alipay', '749900', '0', '2351543253253', '2019-12-17 23:17:24', 7, '749900', NULL);
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_express`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_sn`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (7, '2020-2-11 18:11:56', NULL, NULL, NULL, NULL, 5, NULL, 4, '', '20200211181156538552', 1, NULL, '899800', NULL, NULL, NULL, 1, '899800', NULL);
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_express`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_sn`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (8, '2020-2-11 18:12:21', NULL, NULL, NULL, NULL, 5, NULL, 4, '', '20200211181221328831', 2, 'alipay', '549700', NULL, NULL, NULL, 2, '549700', NULL);
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_express`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_sn`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (9, '2020-2-11 18:14:34', NULL, NULL, NULL, NULL, 3, NULL, 2, '', '20200211181434810410', 1, NULL, '199900', NULL, NULL, NULL, 1, '199900', NULL);
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_express`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_sn`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (10, '2020-2-11 18:14:54', NULL, '周末不要配送', NULL, NULL, 3, 4, 2, '', '20200211181454797051', 2, 'wxpay', '149800', '0', '92398238523', NULL, 3, '149800', NULL);
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_express`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_sn`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (11, '2020-2-11 18:15:22', NULL, NULL, NULL, NULL, 4, NULL, 3, '', '20200211181522894019', 2, 'wxpay', '74900', NULL, NULL, NULL, 2, '74900', NULL);
+INSERT INTO `t_shop_order` (`id`, `create_time`, `modify_time`, `admin_message`, `confirm_receiving_time`, `coupon_price`, `id_address`, `id_express`, `id_user`, `message`, `order_sn`, `pay_status`, `pay_type`, `real_price`, `shipping_amount`, `shipping_sn`, `shipping_time`, `status`, `total_price`, `trade_amount`) VALUES (12, '2020-2-11 18:15:43', NULL, '隐私用品，做好包装', NULL, NULL, 4, NULL, 3, '', '20200211181543530332', 1, NULL, '449800', NULL, NULL, NULL, 1, '449800', NULL);
 
 -- ----------------------------
 -- Records of t_shop_order_log.sql
@@ -145,6 +160,18 @@ INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, 
 INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (17, '2019-12-17 23:17:29', NULL, '用户申请退款', 6);
 INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (18, '2019-12-18 10:17:29', NULL, '管理员处理退款申请', 6);
 INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (19, '2019-12-18 18:17:29', NULL, '用户确认退款成功', 6);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (20, '2020-2-11 18:11:56', '2020-2-11 18:11:56', '生成订单', 7);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (21, '2020-2-11 18:12:21', '2020-2-11 18:12:21', '生成订单', 8);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (22, '2020-2-11 18:14:34', '2020-2-11 18:14:34', '生成订单', 9);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (23, '2020-2-11 18:14:54', '2020-2-11 18:14:54', '生成订单', 10);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (24, '2020-2-11 18:15:22', '2020-2-11 18:15:22', '生成订单', 11);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (25, '2020-2-11 18:15:43', '2020-2-11 18:15:43', '生成订单', 12);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (26, '2020-2-11 18:37:16', '2020-2-11 18:37:16', '管理员(admin)添加备注：隐私用品，做好包装', 12);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (27, '2020-2-11 18:38:22', '2020-2-11 18:38:22', '管理员(admin)添加备注：周末不要配送', 10);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (28, '2020-2-12 21:17:58', '2020-2-12 21:17:58', '用户已付款', 8);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (29, '2020-2-12 21:20:04', '2020-2-12 21:20:04', '用户已付款', 11);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (30, '2020-2-12 21:45:33', '2020-2-12 21:45:33', '用户已付款', 10);
+INSERT INTO `t_shop_order_log` (`id`, `create_time`, `modify_time`, `descript`, `id_order`) VALUES (31, '2020-2-12 22:04:43', '2020-2-12 22:04:43', '管理员(admin)已发货', 10);
 
 -- ----------------------------
 -- Records of t_shop_order_item.sql
@@ -159,11 +186,22 @@ INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `i
 INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (8, '2019-12-14 23:17:24', NULL, '1', 5, 4, NULL, '299900', '299900');
 INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (9, '2019-12-15 23:17:24', NULL, '1', 16, 5, NULL, '749900', '749900');
 INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (10, '2019-12-16 23:17:24', NULL, '1', 16, 6, NULL, '749900', '749900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (11, '2020-2-11 18:11:56', NULL, '2', 13, 7, NULL, '449900', '899800');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (12, '2020-2-11 18:12:21', NULL, '1', 8, 8, NULL, '149900', '149900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (13, '2020-2-11 18:12:21', NULL, '2', 4, 8, NULL, '199900', '399800');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (14, '2020-2-11 18:14:34', NULL, '1', 4, 9, NULL, '199900', '199900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (15, '2020-2-11 18:14:54', NULL, '2', 1, 10, 4, '74900', '149800');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (16, '2020-2-11 18:15:22', NULL, '1', 2, 11, NULL, '74900', '74900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (17, '2020-2-11 18:15:43', NULL, '1', 23, 12, NULL, '229900', '229900');
+INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `id_goods`, `id_order`, `id_sku`, `price`, `total_price`) VALUES (18, '2020-2-11 18:15:43', NULL, '1', 6, 12, NULL, '219900', '219900');
 
 -- ----------------------------
 -- Records of t_shop_user.sql
 -- ----------------------------
-INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `last_login_time`, `mobile`, `nick_name`, `password`, `salt`, `gender`) VALUES (1, null, '2019-11-1 12:00:00', '2020-1-5 11:53:55', '15011112222', 'eniluzt', 'b5a51391f271f062867e5984e2fcffee', '8pgby', NULL);
+INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `gender`, `last_login_time`, `mobile`, `nick_name`, `password`, `salt`) VALUES (1, NULL, '2019-11-1 12:00:00', 'male', '2020-1-5 11:53:55', '15011112222', '艾尼路', 'b5a51391f271f062867e5984e2fcffee', '8pgby');
+INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `gender`, `last_login_time`, `mobile`, `nick_name`, `password`, `salt`) VALUES (2, NULL, '2020-2-11 18:03:48', 'male', NULL, '13581640280', '路飞', '154b20e371d69ccf7fab7402807a8b2d', 'q9i3r');
+INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `gender`, `last_login_time`, `mobile`, `nick_name`, `password`, `salt`) VALUES (3, NULL, '2020-2-11 18:10:12', 'female', NULL, '13123234325', '娜美', 'd6d47d83b728917df24b45bf136f7155', 'bd6nu');
+INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `gender`, `last_login_time`, `mobile`, `nick_name`, `password`, `salt`) VALUES (4, NULL, '2020-2-11 18:10:56', 'male', NULL, '13523921111', '香吉士', 'fa4ceda72c1fe22e062978a4282098f8', 'bzn8x');
 
 -- ----------------------------
 -- Records of t_sys_cfg.sql
@@ -645,6 +683,18 @@ INSERT INTO `t_promotion_topic` (`id`, `create_by`, `create_time`, `modify_by`, 
 -- ----------------------------
 INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (1, '2020-1-24 22:34:19', NULL, 1, 1);
 INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (2, '2020-1-24 22:34:19', NULL, 2, 1);
+INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (3, '2020-2-11 18:15:31', NULL, 23, 3);
+INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (4, '2020-2-11 18:16:23', NULL, 16, 4);
+INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (5, '2020-2-11 18:16:29', NULL, 24, 4);
+INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (6, '2020-2-11 18:17:13', NULL, 6, 2);
+INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (7, '2020-2-11 18:17:18', NULL, 22, 2);
+INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (8, '2020-2-11 18:17:38', NULL, 3, 2);
+INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (9, '2020-2-11 18:17:43', NULL, 15, 2);
+INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (10, '2020-2-11 18:17:49', NULL, 24, 2);
+INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (11, '2020-2-11 18:20:50', NULL, 12, 2);
+INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (12, '2020-2-11 18:21:10', NULL, 8, 2);
+INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (13, '2020-2-11 18:21:18', NULL, 20, 2);
+INSERT INTO `t_shop_favorite` (`id`, `create_time`, `modify_time`, `id_goods`, `id_user`) VALUES (14, '2020-2-11 18:21:26', NULL, 16, 2);
 
 -- ----------------------------
 -- Records of t_sys_express

@@ -35,7 +35,7 @@ public class UserController extends BaseController {
         ShopUser user = shopUserService.getCurrentUser();
         user.setNickName(userName);
         shopUserService.update(user);
-        return Rets.success();
+        return Rets.success(user);
     }
 
     @RequestMapping(value = "/updateGender/{gender}",method = RequestMethod.POST)
@@ -43,7 +43,7 @@ public class UserController extends BaseController {
         ShopUser user = shopUserService.getCurrentUser();
         user.setGender(gender);
         shopUserService.update(user);
-        return Rets.success();
+        return Rets.success(user);
     }
 
     @RequestMapping(value = "/updatePassword/{oldPwd}/{password}/{rePassword}",method = RequestMethod.POST)

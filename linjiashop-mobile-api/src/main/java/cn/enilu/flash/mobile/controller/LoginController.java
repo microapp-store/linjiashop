@@ -54,7 +54,7 @@ public class LoginController extends BaseController {
             ShopUser user = shopUserService.findByMobile(mobile);
             Boolean validateRet = shopUserService.validateSmsCode(mobile,smsCode);
 
-            Map<String, String> result = new HashMap<>(6);
+            Map<String, Object> result = new HashMap<>(6);
             if(validateRet) {
                 if(user==null){
                     //初始化6位密码
@@ -62,8 +62,8 @@ public class LoginController extends BaseController {
                     user = shopUserService.register(mobile,initPassword);
                     result.put("initPassword",initPassword);
                 }
-
                 String token = userService.loginForToken(new JwtUser(user));
+                result.put("user",user);
                 logger.info("token:{}",token);
                 result.put("token", token);
                 return Rets.success(result);

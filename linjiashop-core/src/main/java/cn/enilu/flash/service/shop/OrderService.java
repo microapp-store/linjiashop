@@ -94,6 +94,9 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
         if(status == OrderEnum.OrderStatusEnum.FINISHED.getId().intValue()){
             descript = "用户确认收货";
         }
+        if(status == OrderEnum.OrderStatusEnum.UN_SEND.getId().intValue()){
+            descript = "用户已付款";
+        }
          OrderLog orderLog = new OrderLog();
          orderLog.setIdOrder(order.getId());
          orderLog.setDescript(descript);
@@ -114,6 +117,20 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
         orderLog.setIdOrder(order.getId());
         orderLog.setDescript("管理员("+ JwtUtil.getUsername() +")添加备注："+message);
         orderLogRepository.save(orderLog);
+    }
+
+    /**
+     * todo 支付订单暂时没有真实实现，仅仅更改订单状态为已支付
+     * @param orderSn
+     * @param  payType
+     */
+    public void payment(String orderSn,String payType) {
+            Order order = getByOrderSn(orderSn);
+            order.setPayStatus(OrderEnum.PayStatusEnum.UN_SEND.getId());
+            order.setStatus(OrderEnum.OrderStatusEnum.UN_SEND.getId());
+            order.setRealPrice(order.getTotalPrice());
+            order.setPayType(payType);
+            updateOrder(order);
     }
 }
 

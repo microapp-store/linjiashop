@@ -1,3 +1,4 @@
+import orderApi from '@/api/orders'
 import {Button, Cell, CellGroup, NavBar, Radio, RadioGroup, Toast} from 'vant';
 
 export default {
@@ -21,7 +22,6 @@ export default {
         this.init()
     },
     computed: {},
-
     methods: {
         init() {
             let orderSn = this.$route.query.orderSn
@@ -31,6 +31,9 @@ export default {
         pay() {
             let payTypeName = this.payType == 'wxpay' ? '微信支付' : '支付宝'
             Toast('准备使用' + payTypeName + '支付')
+            orderApi.payment(this.order.orderSn,this.payType).then(response => {
+                console.log('payment',response)
+            })
             this.$router.push('/')
         },
         formatPrice(price) {

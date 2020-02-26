@@ -9,36 +9,22 @@ export default {
   setToken:function(token){
     localStorage.setItem(tokenKey,token)
   },
+  setUser:function(user){
+    this.set('user',JSON.stringify(user))
+
+  },
+  getUser:function(){
+     const user  = this.get('user')
+    return JSON.parse(user)
+  },
   removeToken:function(){
     localStorage.removeItem(tokenKey)
   },
   set:function(key,value){
-    localStorage.setItem(key,value)
+    localStorage.setItem(COOKIE_KEY_PRE+key,value)
   },
   get:function(key){
-    return localStorage.getItem(key)
+    return localStorage.getItem(COOKIE_KEY_PRE+key)
   }
 
 }
-// export function getToken() {
-//   // return Cookies.get(tokenKey)
-//   return localStorage.getItem(tokenKey)
-// }
-//
-// export function setToken(token) {
-//   // return Cookies.set(tokenKey, token)
-//   localStorage.setItem(tokenKey,token)
-// }
-//
-// export function removeToken() {
-//   return Cookies.remove(tokenKey)
-//   localStorage.removeItem(tokenKey)
-// }
-// export function set(key,value){
-//   // return Cookies.set(key,value)
-//   localStorage.setItem(key,value)
-// }
-// export  function get(key){
-//   // return Cookies.get(key)
-//   return localStorage.getItem(key)
-// }

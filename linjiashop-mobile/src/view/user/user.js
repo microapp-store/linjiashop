@@ -23,7 +23,6 @@ export default {
     methods: {
         init() {
             userApi.getUserInfo().then(response => {
-
             }).catch((err) => {
                 this.$router.replace({path:'login',query:{redirect:'user'}})
             })

@@ -1,6 +1,8 @@
 import loginApi from '@/api/login'
 import userApi from '@/api/user'
 import store from '@/store'
+import storage  from '@/utils/storage'
+
 import {Button, Cell, CellGroup, Col, Icon, Image, NavBar, Popup, Radio, RadioGroup, Row, Toast} from 'vant';
 
 const baseApi = process.env.VUE_APP_BASE_API
@@ -32,7 +34,8 @@ export default {
     },
     methods: {
         init() {
-            this.user = store.state.app.user
+            this.user =storage.getUser()// store.state.app.user
+            console.log('useraaaa',this.user)
             if (this.user.avatar) {
                 this.avatarUrl = baseApi + '/file/getImgStream?idFile=' + this.user.avatar
             }
@@ -53,6 +56,7 @@ export default {
             loginApi.logout().then(response => {
                 store.dispatch('app/toggleUser', {})
                 store.dispatch('app/toggleToken', '')
+
                 this.$router.push({path: '/index'})
             }).catch(err => {
             })

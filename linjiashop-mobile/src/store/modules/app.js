@@ -20,6 +20,7 @@ const mutations = {
     },
     TOGGLE_USER: (state, user) => {
         state.user = user
+        storage.setUser(user)
 
     },
     TOGGLE_TOKEN: (state, token) => {

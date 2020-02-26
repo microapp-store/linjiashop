@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
+import storage from '@/utils/storage'
 Vue.use(Router)
 
 const routes = [
@@ -177,7 +178,7 @@ router.beforeEach((to, from, next) => {
     }
     // 判断该路由是否需要登录权限
     if (to.meta.requireAuth) {
-        if(store.state.app.token){
+        if(storage.getToken()){
             next();
         } else {
             next({

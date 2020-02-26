@@ -1,5 +1,6 @@
 import loginApi from '@/api/login'
 import store from '@/store'
+import storage  from '@/utils/storage'
 import { Row, Col, Icon, Cell, CellGroup,Field,Button,Toast,
     Tabbar,
     TabbarItem,Dialog} from 'vant';
@@ -53,6 +54,11 @@ export default {
             this.show2 = false;
             this.show1 = true;
         },
+        resetForLogin(){
+            //登录成功后初始化数据状态
+            //清空缓存中的地址信息
+            storage.set('chosenAddressId','')
+        },
         loginOrRegister(){
             loginApi.loginOrReg(this.mobile,this.smsCode).then( response=> {
                 store.dispatch('app/toggleToken',response.data.token)
@@ -60,6 +66,7 @@ export default {
                 if(response.data.initPassword){
                     Toast({duration:8000,message:'欢迎新用户，请谨慎保管您的初始密码：'+response.data.initPassword})
                 }
+                this.resetForLogin()
                 if(this.redirect){
                     this.$router.push({path: this.redirect})
                 }else {
@@ -73,6 +80,7 @@ export default {
             loginApi.loginByPassword(this.mobile,this.password).then( response=> {
                 store.dispatch('app/toggleToken',response.data.token)
                 store.dispatch('app/toggleUser',response.data.user)
+                this.resetForLogin()
                 if(this.redirect){
                    this.$router.push({path: this.redirect})
                 }else {

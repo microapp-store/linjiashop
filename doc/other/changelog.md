@@ -8,6 +8,10 @@
 - 针对订单全流程生命周期添加操作日志
 - 基础程序封装支持关联查询
 
+### Fix
+- 【H5】用户提交订单的时候收货地址缓存问题
+- 【H5】用户跳转到其他页面再跳转回来会话信息丢失的问题
+
 
 ## v0.3 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.3)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.3)
 ### Issue 
@@ -25,6 +29,7 @@
 - 【后台管理】修复并完善权限配置功能
 - 【后台管理】商品编辑菜单数据初始化错误
 - 【后台管理】修改管理员密码后缓存处理错误导致重新登录失败
+- 【后台管理】 banner上传问题
 
 ## v0.2 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.2)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.2)
 ### Issue

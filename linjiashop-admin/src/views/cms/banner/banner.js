@@ -200,7 +200,7 @@ export default {
     handleUploadSuccess(response, raw) {
       this.loadingInstance.close()
       if (response.code === 20000) {
-        this.uploadFileId = response.data.id
+        this.uploadFileId = response.data.realFileName
         this.form.fileName = response.data.originalFileName
       } else {
         this.$message({

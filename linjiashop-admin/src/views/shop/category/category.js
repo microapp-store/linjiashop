@@ -1,4 +1,5 @@
-import {getList, remove, save, getBanners,removeBanner} from '@/api/shop/category'
+import categoryApi from '@/api/shop/category'
+import attrKeyApi from '@/api/shop/attrKey'
 import {getApiUrl} from '@/utils/utils'
 import permission from '@/directive/permission/index.js'
 export default {
@@ -29,6 +30,11 @@ export default {
         activeName:'first',
         visible: false,
         list:[]
+      },
+      attrKey: {
+        idCategory:'',
+        visible:false,
+        list:[]
       }
     }
   },
@@ -51,7 +57,7 @@ export default {
     },
     fetchData() {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
+      categoryApi.getList(this.listQuery).then(response => {
         this.list = response.data.records
         this.listLoading = false
         this.total = response.data.total
@@ -107,7 +113,7 @@ export default {
     save() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
-          save({
+          categoryApi.save({
             name: this.form.name,
             url: this.form.url,
             icon: this.form.icon,
@@ -151,7 +157,7 @@ export default {
           cancelButtonText: this.$t('button.cancel'),
           type: 'warning'
         }).then(() => {
-          remove(id).then(response => {
+          categoryApi.remove(id).then(response => {
             this.$message({
               message: this.$t('common.optionSuccess'),
               type: 'success'
@@ -167,14 +173,13 @@ export default {
     bannerMgr(idCategory) {
       this.banner.visible = true
       this.banner.idCategory = idCategory
-      getBanners(idCategory).then( response=>{
+      categoryApi.getBanners(idCategory).then( response=>{
         this.banner.list = response.data
         console.log('banner',this.banner)
       })
     },
     bannerRemove(id) {
-      console.log('item',id)
-      removeBanner(this.banner.idCategory,id).then( response =>{
+      categoryApi.removeBanner(this.banner.idCategory,id).then( response =>{
         this.$message({
           message: this.$t('common.optionSuccess'),
           type: 'success'
@@ -184,10 +189,78 @@ export default {
 
     },
     bannerEdit() {
-
     },
     addBanner(){
       this.$router.push({path:'banner',query:{idCategory:this.banner.idCategory}})
+    },
+    attrKeyMgr(idCategory){
+      this.attrKey.visible=true
+      this.attrKey.idCategory = idCategory
+      categoryApi.getAttrKeys(idCategory).then(response => {
+        this.attrKey.list = response.data
+      })
+    },
+    attrKeyAdd(){
+      this.$prompt('请输入属性名', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
+        if(!value || value === ''){
+          this.$message({
+            type: 'warning',
+            message: '属性名不能为空'
+          })
+        }
+        attrKeyApi.save({attrName:value,idCategory:this.attrKey.idCategory}).then(response => {
+          this.$message({
+            type: 'success',
+            message: '新增属性成功'
+          })
+          categoryApi.getAttrKeys(this.attrKey.idCategory).then( response2=>{
+            this.attrKey.list = response2.data
+          })
+
+        })
+
+      })
+    },
+    attrKeyEdit(item){
+      console.log('item',item)
+      this.$prompt('请输入属性名', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        inputValue:item.attrName,
+      }).then(({ value }) => {
+        if(!value || value === ''){
+          this.$message({
+            type: 'warning',
+            message: '属性名不能为空'
+          })
+        }
+          attrKeyApi.updateAttrName(item.id,value).then(response => {
+            item.attrName = value
+            this.$message({
+              type: 'success',
+              message: '编辑成功'
+            })
+          })
+          return
+
+      })
+
+    },
+    attrKeyRemove(id){
+      console.log('id',id)
+      attrKeyApi.remove(id).then( response => {
+        this.$message({
+          type: 'success',
+          message: '删除成功'
+        })
+        categoryApi.getAttrKeys(this.attrKey.idCategory).then( response2=>{
+          this.attrKey.list = response2.data
+        })
+      })
+
     }
 
 

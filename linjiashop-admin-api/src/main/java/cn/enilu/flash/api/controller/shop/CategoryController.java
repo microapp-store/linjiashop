@@ -4,6 +4,7 @@ import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.dictmap.CommonDict;
 import cn.enilu.flash.bean.entity.cms.Banner;
+import cn.enilu.flash.bean.entity.shop.AttrKey;
 import cn.enilu.flash.bean.entity.shop.Category;
 import cn.enilu.flash.bean.entity.shop.CategoryBannerRel;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
@@ -11,8 +12,10 @@ import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
+import cn.enilu.flash.service.shop.AttrKeyService;
 import cn.enilu.flash.service.shop.CategoryBannerRelService;
 import cn.enilu.flash.service.shop.CategoryService;
+import cn.enilu.flash.service.shop.GoodsService;
 import cn.enilu.flash.utils.Lists;
 import cn.enilu.flash.utils.factory.Page;
 import cn.enilu.flash.web.controller.BaseController;
@@ -32,6 +35,10 @@ public class CategoryController extends BaseController {
 	private CategoryService categoryService;
 	@Autowired
 	private CategoryBannerRelService categoryBannerRelService;
+	@Autowired
+	private AttrKeyService attrKeyService;
+	@Autowired
+	private GoodsService goodsService;
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public Object list() {
@@ -48,11 +55,11 @@ public class CategoryController extends BaseController {
 	@RequestMapping(method = RequestMethod.POST)
 	@BussinessLog(value = "编辑商品类别", key = "name",dict= CommonDict.class)
 	@RequiresPermissions(value = {Permission.CATEGORY_EDIT})
-	public Object save(@ModelAttribute Category tShopCategory){
-		if(tShopCategory.getId()==null){
-			categoryService.insert(tShopCategory);
+	public Object save(@ModelAttribute Category category){
+		if(category.getId()==null){
+			categoryService.insert(category);
 		}else {
-			categoryService.update(tShopCategory);
+			categoryService.update(category);
 		}
 		return Rets.success();
 	}
@@ -62,6 +69,10 @@ public class CategoryController extends BaseController {
 	public Object remove(Long id){
 		if (id == null) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+		}
+		long goodsCount = goodsService.count(SearchFilter.build("idCategory",id));
+		if(goodsCount>0){
+			throw new ApplicationException(BizExceptionEnum.DATA_CANNOT_REMOVE);
 		}
 		categoryService.deleteById(id);
 		return Rets.success();
@@ -78,6 +89,15 @@ public class CategoryController extends BaseController {
 		});
 
 		return Rets.success(bannerList);
+	}
+	@RequestMapping(value ="getAttrKeys/{idCategory}",method = RequestMethod.GET)
+	public Object getAttrKeys(@PathVariable("idCategory") Long idCategory){
+		if (idCategory == null) {
+			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+		}
+		List<AttrKey> list = attrKeyService.queryBy(idCategory);
+		return Rets.success(list);
+
 	}
 	@RequestMapping(value="/removeBanner/{idCategory}/{idBanner}",method = RequestMethod.DELETE)
 	@RequiresPermissions(value = {Permission.CATEGORY_EDIT})

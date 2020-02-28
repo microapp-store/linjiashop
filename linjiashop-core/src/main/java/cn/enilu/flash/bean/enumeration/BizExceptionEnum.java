@@ -10,6 +10,10 @@ import cn.enilu.flash.bean.exception.ServiceExceptionEnum;
 public enum BizExceptionEnum implements ServiceExceptionEnum {
 
 	/**
+	 * 数据引用
+	 */
+	DATA_CANNOT_REMOVE(500,"该数据存在关联数据，无法删除"),
+	/**
 	 * 字典
 	 */
 	DICT_EXISTED(400,"字典已经存在"),
@@ -59,7 +63,7 @@ public enum BizExceptionEnum implements ServiceExceptionEnum {
 		this.code = code;
 		this.message = message;
 	}
-	
+
 	private Integer code;
 
 	private String message;

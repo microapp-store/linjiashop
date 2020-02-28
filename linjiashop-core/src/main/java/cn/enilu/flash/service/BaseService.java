@@ -8,7 +8,6 @@ import cn.enilu.flash.utils.Lists;
 import cn.enilu.flash.utils.factory.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -57,7 +56,8 @@ public abstract class BaseService<T, ID extends Serializable, R extends BaseRepo
     }
 
     @Override
-    @Cacheable(value = Cache.APPLICATION, key = "#root.targetClass.simpleName+':'+#id")
+    //暂时不使用缓存，因为前后端分离，使用本地缓存无法做到数据同步更新，后面可以考虑使用redis缓存来替代ehcache
+    //@Cacheable(value = Cache.APPLICATION, key = "#root.targetClass.simpleName+':'+#id")
     public T get(ID id) {
         return dao.findById(id).get();
     }

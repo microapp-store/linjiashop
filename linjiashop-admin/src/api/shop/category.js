@@ -1,56 +1,60 @@
 import request from '@/utils/request'
 
-export function getList(params) {
+export default {
+
+  getList: function (params) {
     return request({
-        url: '/shop/category/list',
-        method: 'get',
-        params
+      url: '/shop/category/list',
+      method: 'get',
+      params
     })
-}
+  },
 
-export function getCategories() {
-  return request({
-    url: '/shop/category/getAll',
-    method: 'get'
-  })
-}
-
-export function getBanners(id) {
-  return request({
-    url: '/shop/category/getBanners/'+id,
-    method: 'get'
-  })
-}
-export function save(params) {
+  getCategories: function () {
     return request({
-        url: '/shop/category',
-        method: 'post',
-        params
+      url: '/shop/category/getAll',
+      method: 'get'
     })
-}
+  },
 
-export function remove(id) {
+  getBanners: function (id) {
     return request({
-        url: '/shop/category',
-        method: 'delete',
-        params: {
-            id: id
-        }
+      url: '/shop/category/getBanners/' + id,
+      method: 'get'
     })
-}
-
-
-
-export function removeBanner(id,idBanner) {
-  return request({
-    url: '/shop/category/removeBanner/'+id+'/'+idBanner,
-    method: 'delete'
-  })
-}
-
-export function setCategoryBanner(id,idBanner) {
-  return request({
-    url: '/shop/category/setBanner/'+id+'/'+idBanner,
-    method: 'post'
-  })
+  },
+  getAttrKeys: function (id) {
+    return request({
+      url: '/shop/category/getAttrKeys/' + id,
+      method: 'get'
+    })
+  },
+  save: function (params) {
+    return request({
+      url: '/shop/category',
+      method: 'post',
+      params
+    })
+  },
+  remove: function (id) {
+    return request({
+      url: '/shop/category',
+      method: 'delete',
+      params: {
+        id: id
+      }
+    })
+  },
+  removeBanner: function (id, idBanner) {
+    return request({
+      url: '/shop/category/removeBanner/' + id + '/' + idBanner,
+      method: 'delete'
+    })
+  },
+  setCategoryBanner: function (id, idBanner) {
+    return request({
+      url: '/shop/category/setBanner/' + id + '/' + idBanner,
+      method: 'post'
+    })
+  }
 }

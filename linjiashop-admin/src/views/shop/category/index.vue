@@ -20,7 +20,12 @@
             </el-table-column>
           <el-table-column label="Banner管理">
             <template slot-scope="scope">
-              <el-button type="primary" size="mini"  icon="el-icon-edit" @click.native="bannerMgr(scope.row.id)">管理</el-button>
+              <el-button type="primary" size="mini"  icon="el-icon-picture" @click.native="bannerMgr(scope.row.id)">管理</el-button>
+            </template>
+          </el-table-column>
+          <el-table-column label="属性管理">
+            <template slot-scope="scope">
+              <el-button type="primary" size="mini"  icon="el-icon-s-operation" @click.native="attrKeyMgr(scope.row.id)">管理</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -95,6 +100,29 @@
           </el-tab-pane>
 
         </el-tabs>
+      </el-dialog>
+      <el-dialog
+        title="属性管理"
+        :visible.sync="attrKey.visible"
+        width="70%">
+        <el-row>
+          <el-col :span="24">
+            <el-button type="success" size="mini"  icon="el-icon-plus" @click.native="attrKeyAdd" v-permission="['/category/edit']">{{ $t('button.add') }}</el-button>
+          </el-col>
+        </el-row>
+        <el-table :data="attrKey.list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row>
+          <el-table-column label="属性名">
+            <template slot-scope="scope">
+              {{scope.row.attrName}}
+            </template>
+          </el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+              <el-button type="primary" size="mini"  icon="el-icon-edit" @click.native="attrKeyEdit(scope.row)">编辑</el-button>
+              <el-button type="danger" size="mini"  icon="el-icon-delete" @click.native="attrKeyRemove(scope.row.id)">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
       </el-dialog>
     </div>
 </template>

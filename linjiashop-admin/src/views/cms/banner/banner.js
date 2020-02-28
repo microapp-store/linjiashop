@@ -1,5 +1,5 @@
 import { remove, getList, save } from '@/api/cms/banner'
-import {setCategoryBanner} from '@/api/shop/category'
+import categoryApi from '@/api/shop/category'
 import { getToken } from '@/utils/auth'
 import { Loading } from 'element-ui'
 import { getApiUrl } from '@/utils/utils'
@@ -149,7 +149,7 @@ export default {
     },
     setBanner(){
       if( this.shopCategory.idBanner) {
-        setCategoryBanner(this.shopCategory.id, this.shopCategory.idBanner).then(response => {
+        categoryApi.setCategoryBanner(this.shopCategory.id, this.shopCategory.idBanner).then(response => {
           this.$message({
             message: '设置成功',
             type: 'success'

@@ -3,7 +3,7 @@ import plugins from '@/components/editContainer/plugins'
 import toolbar from '@/components/editContainer/toolbar'
 import goodsApi from '@/api/shop/goods'
 import {getAttrBy} from '@/api/shop/attrVal'
-import {getCategories} from '@/api/shop/category'
+import categoryApi from '@/api/shop/category'
 import {getApiUrl} from '@/utils/utils'
 import {getToken} from '@/utils/auth'
 import goodsSku from "../../../api/shop/goodsSku";
@@ -143,7 +143,7 @@ export default {
         })
 
       }
-      getCategories().then(response => {
+     categoryApi.getCategories().then(response => {
         this.categories = response.data
       })
     },

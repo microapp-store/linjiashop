@@ -48,7 +48,22 @@ public class AttrKeyController {
 		if (StringUtil.isEmpty(id)) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
 		}
+		AttrKey attrKey = attrKeyService.get(id);
+		if(!attrKey.getAttrVals().isEmpty()){
+			throw new ApplicationException(BizExceptionEnum.DATA_CANNOT_REMOVE);
+		}
 		attrKeyService.deleteById(id);
+		return Rets.success();
+	}
+	@RequestMapping(value="updateAttrName",method = RequestMethod.POST)
+	@BussinessLog(value = "修改商品属性名", key = "id",dict= CommonDict.class)
+	public Object updateAttrName(@RequestParam("id") Long id,@RequestParam("attrName") String attrName){
+		if (StringUtil.isEmpty(id)) {
+			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+		}
+		AttrKey attrKey = attrKeyService.get(id);
+		attrKey.setAttrName(attrName);
+		attrKeyService.update(attrKey);
 		return Rets.success();
 	}
 }

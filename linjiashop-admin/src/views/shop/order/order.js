@@ -8,8 +8,13 @@ export default {
         page: 1,
         limit: 20,
         mobile: undefined,
-        orderSn: undefined
+        orderSn: undefined,
+        status:undefined,
+        date:undefined,
+        startDate:undefined,
+        endDate:undefined
       },
+      orderDate:undefined,
       total: 0,
       list: null,
       listLoading: true,
@@ -22,6 +27,44 @@ export default {
         id:'',
         idExpress:'',
         shippingSn:''
+      },
+      query:{
+        button:{
+          lastStatus:'all',
+          lastDate:'all',
+          showCustomer:false,
+          css:{
+            status: {
+              all: 'primary',
+              unPay: 'default',
+              unSend: 'default',
+              sended: 'default',
+              finished: 'default',
+              cancel: 'default',
+              refundIng: 'default',
+              refund: 'default'
+            },
+            date:{
+              all: 'primary',
+              today: 'default',
+              yesterday: 'default',
+              seven: 'default',
+              thirty:'default',
+              month: 'default',
+              year: 'default',
+              customer: 'default'
+            }
+          },
+          tag:{
+            unPay:0,
+            unSend:0,
+            sended:0,
+            finished:0,
+            cancel:0,
+            refundIng:0,
+            refund:0
+          }
+        }
       }
     }
   },
@@ -41,9 +84,20 @@ export default {
   methods: {
     init() {
       this.fetchData()
+      orderApi.getOrderStatistic().then(response => {
+        const data  = response.data
+        for(const key in data){
+          this.query.button.tag[key] = data[key]
+        }
+      })
     },
     fetchData() {
       this.listLoading = true
+      if(this.orderDate){
+        this.listQuery['startDate'] = this.orderDate[0]
+        this.listQuery['endDate'] = this.orderDate[1]
+      }
+
       orderApi.getList(this.listQuery).then(response => {
         this.list = response.data.records
         this.listLoading = false
@@ -57,6 +111,34 @@ export default {
       this.listQuery.mobile = ''
       this.listQuery.orderSn = ''
       this.fetchData()
+    },
+    queryByState(status){
+      const lastStatus = this.query.button.lastStatus
+      this.query.button.css.status[lastStatus]='default'
+      this.query.button.css.status[status] = 'primary'
+      this.query.button.lastStatus = status
+      if(status !== 'all') {
+        this.listQuery.status = status
+      }else{
+        this.listQuery.status = ''
+      }
+      this.fetchData()
+    },
+    queryByDate(date){
+      const lastDate = this.query.button.lastDate
+      this.query.button.css.date[lastDate]='default'
+      this.query.button.css.date[date] = 'primary'
+      this.query.button.lastDate = date
+      if(date !== 'all' && date !=='customer') {
+        this.listQuery.date = date
+      }
+      if(date === 'customer'){
+        this.query.button.showCustomer=true
+      }else{
+        this.query.button.showCustomer=false
+      }
+      this.fetchData()
+      console.log('date',date)
     },
     handleFilter() {
       this.listQuery.page = 1
@@ -149,7 +231,6 @@ export default {
       orderApi.exportXls(this.listQuery).then(response => {
         window.location.href= getApiUrl() + '/file/download?idFile='+response.data.id
       })
-
     }
   }
 }

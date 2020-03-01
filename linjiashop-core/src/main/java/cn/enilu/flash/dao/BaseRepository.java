@@ -7,6 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 封装基础的dao接口
@@ -23,7 +24,7 @@ public interface BaseRepository<T, ID extends Serializable> extends JpaRepositor
      * @param sql
      * @return
      */
-    List<Object[]> queryBySql(String sql);
+    List<Map> queryBySql(String sql);
 
     /**
      * 根据原生sql查询对象列表

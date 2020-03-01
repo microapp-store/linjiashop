@@ -122,7 +122,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getTime(Date date) {
-		return formatDate(date, "yyyy-MM-dd HH:mm:ss");
+		return formatDate(date, DATE_TIME_FMT);
 	}
 
 	public static String formatDate(Date date, String pattern) {
@@ -166,7 +166,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static Date parseTime(String date) {
-		return parse(date,"yyyy-MM-dd HH:mm:ss");
+		return parse(date,DATE_TIME_FMT);
 	}
 
 	/**
@@ -208,6 +208,12 @@ public class DateUtil {
 		return tl.get();
 	}
 
+	public static  String formatDate(Date date){
+		return format(date,DATE_FMT);
+	}
+	public static  String formatTime(Date date){
+		return format(date,DATE_TIME_FMT);
+	}
 	/**
 	 * 格式化日期
 	 *
@@ -233,7 +239,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static boolean isValidDate(String s) {
-		return parse(s, "yyyy-MM-dd HH:mm:ss") != null;
+		return parse(s, DATE_TIME_FMT) != null;
 	}
 
 	/**
@@ -258,6 +264,33 @@ public class DateUtil {
 	}
 
 	/**
+	 * 获取昨天
+	 * @return
+	 */
+	public static Date getPreday() {
+		return  getPreday(1);
+	}
+
+	/**
+	 * 获取之前N天
+	 * @param day
+	 * @return
+	 */
+	public static Date getPreday(Integer day) {
+		return  getAfterDay(-1*day);
+	}
+
+	/**
+	 * 获取之后N天
+	 * @param day
+	 * @return
+	 */
+	public static Date getAfterDay(Integer day) {
+		Calendar today = Calendar.getInstance();
+		today.add(Calendar.DATE, day);
+		return today.getTime();
+	}
+	/**
 	 * <li>功能描述：时间相减得到天数
 	 *
 	 * @param beginDateStr
@@ -268,7 +301,7 @@ public class DateUtil {
 	public static long getDaySub(String beginDateStr, String endDateStr) {
 		long day = 0;
 		SimpleDateFormat format = new SimpleDateFormat(
-				"yyyy-MM-dd");
+				DATE_FMT);
 		Date beginDate = null;
 		Date endDate = null;
 
@@ -279,7 +312,6 @@ public class DateUtil {
 			e.printStackTrace();
 		}
 		day = (endDate.getTime() - beginDate.getTime()) / (24 * 60 * 60 * 1000);
-		// System.out.println("相隔的天数="+day);
 
 		return day;
 	}
@@ -290,17 +322,14 @@ public class DateUtil {
 	 * @param days
 	 * @return
 	 */
-	public static String getAfterDayDate(String days) {
+	public static Date getAfterDayDate(String days) {
 		int daysInt = Integer.parseInt(days);
 
 		Calendar canlendar = Calendar.getInstance(); // java.util包
 		canlendar.add(Calendar.DATE, daysInt); // 日期减 如果不够减会将月变动
 		Date date = canlendar.getTime();
+		return date;
 
-		SimpleDateFormat sdfd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dateStr = sdfd.format(date);
-
-		return dateStr;
 	}
 
 	/**
@@ -320,6 +349,88 @@ public class DateUtil {
 		String dateStr = sdf.format(date);
 
 		return dateStr;
+	}
+
+	/**
+	 * 获取本月1号00:00:00
+	 * @return
+	 */
+	public static Date getCurrentMonth(){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		return calendar.getTime();
+	}
+
+	/**
+	 * 获取本年一月一日00:00:00
+	 * @return
+	 */
+	public static Date getCurrentYear(){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(Calendar.MONTH, Calendar.JANUARY);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		return calendar.getTime();
+	}
+
+
+	/**
+	 * 根据自定义日期范围获取精确的日期范围
+	 *
+	 * @param date 自定义日期范围包括：today(今天),yesterday(昨天),seven(最近7天),thirty(最近30天),month(本月),year(本年)
+	 * @return
+	 */
+	public static  Date[] getDateRange(String date){
+		Date start = null;
+		Date end = null;
+		Date now = new Date();
+		String nowFormat = formatDate(now);
+		if(StringUtil.isEmpty(date)){
+			return null;
+		}
+		switch (date){
+			case "today":
+				start = parseTime(nowFormat+" 00:00:00");
+				end = parseTime(nowFormat+" 23:59:59");
+				break;
+			case "yesterday":
+				Date yesterday = getPreday();
+				String yesterdayFmt = formatDate(yesterday);
+				start = parseTime(yesterdayFmt+" 00:00:00");
+				end = parseTime(yesterdayFmt+ " 23:59:59");
+				break;
+			case "seven":
+				Date last7Date = getPreday(7);
+				start = parseTime(format(last7Date)+" 00:00:00");
+				end = parseTime(nowFormat+" 00:00:00");
+				break;
+			case "thirty":
+				Date last30Date = getPreday(30);
+				start = parseTime(format(last30Date)+" 00:00:00");
+				end = parseTime(nowFormat+" 00:00:00");
+				break;
+			case "month":
+				start = getCurrentMonth();
+				end = parseTime(nowFormat+" 00:00:00");
+				break;
+			case "year":
+				start = getCurrentYear();
+				end = parseTime(nowFormat+" 00:00:00");
+				break;
+
+			default:
+					break;
+
+		}
+		return new Date[]{start,end};
+
 	}
 
 

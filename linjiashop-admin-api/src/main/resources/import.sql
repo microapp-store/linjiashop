@@ -602,7 +602,7 @@ INSERT INTO `t_sys_role` (`id`, `create_by`, `create_time`, `modify_by`, `modify
 -- ----------------------------
 -- Records of t_sys_task.sql
 -- ----------------------------
-INSERT INTO `t_sys_task` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `concurrent`, `cron`, `data`, `disabled`, `exec_at`, `exec_result`, `job_class`, `job_group`, `name`, `note`) VALUES (1, 1, '2018-12-28 09:54:00', -1, '2020-1-20 10:04:57', 0, '0 0/30 * * * ?', '{\n\"appname\": \"web-flash\",\n\"version\":1}', 0, '2020-1-20 10:04:57', '执行成功', 'cn.enilu.flash.service.task.job.HelloJob', 'default', '测试任务', '测试任务,每30分钟执行一次');
+INSERT INTO `t_sys_task` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `concurrent`, `cron`, `data`, `disabled`, `exec_at`, `exec_result`, `job_class`, `job_group`, `name`, `note`) VALUES (1, 1, '2018-12-28 09:54:00', -1, '2020-1-20 10:04:57', 0, '0 0/30 * * * ?', '{\n\"appname\": \"linjiashop\",\n\"version\":1}', 0, '2020-1-20 10:04:57', '执行成功', 'cn.enilu.flash.service.task.job.HelloJob', 'default', '测试任务', '测试任务,每30分钟执行一次');
 INSERT INTO `t_sys_task` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `concurrent`, `cron`, `data`, `disabled`, `exec_at`, `exec_result`, `job_class`, `job_group`, `name`, `note`) VALUES (2, 1, '2020-1-19 17:40:02', -1, '2020-1-20 10:04:57', 0, '0 0 0/1 * * ?', '', 0, '2020-1-19 19:25:00', '执行失败', 'cn.enilu.flash.service.task.job.UpdateWeixinTokenJob', NULL, '更新微信token', '获取微信token，每小时获取一次');
 
 -- ----------------------------

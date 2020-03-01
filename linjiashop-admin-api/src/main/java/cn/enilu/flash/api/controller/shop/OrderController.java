@@ -37,15 +37,47 @@ public class OrderController {
     @Autowired
     private FileService fileService;
 
+    /**
+     * 获取订单统计信息
+     * todo 真实生产可以考虑将订单数量信息通过队列形式更新在redis等缓存中，然后从缓存获取，这里暂时从数据库直接统计
+     * @return
+     */
+    @RequestMapping(value = "/getOrderStatistic", method = RequestMethod.GET)
+    public Object getOrderStatistic(){
+        List<Map> list = orderService.queryBySql("SELECT status,count(1) as count FROM `t_shop_order` GROUP BY status");
+        Map result = Maps.newHashMap();
+        for(Map map:list){
+            String statusStr = OrderEnum.getStatusStr((Integer) map.get("status"));
+            result.put(statusStr,map.get("count"));
+        }
+        return Rets.success(result);
+    }
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Object list(@RequestParam(value = "mobile", required = false) String mobile,
-                       @RequestParam(value = "orderSn", required = false) String orderSn) {
+                       @RequestParam(value = "orderSn", required = false) String orderSn,
+                        @RequestParam(value = "status", required = false) String status,
+                       @RequestParam(value = "date", required = false) String date,
+                       @RequestParam(value = "startDate", required = false) String startDate,
+                       @RequestParam(value = "endDate", required = false) String endDate) {
         Page<Order> page = new PageFactory<Order>().defaultPage();
         page.addFilter("user.mobile", mobile);
         page.addFilter("orderSn", orderSn);
+        if(StringUtil.isNotEmpty(status)){
+            page.addFilter("status",OrderEnum.getStatusByStr(status));
+        }
+        if(StringUtil.isNotEmpty(date)){
+            Date[] rangeDate = DateUtil.getDateRange(date);
+            page.addFilter("createTime", SearchFilter.Operator.GTE,rangeDate[0]);
+            page.addFilter("createTime", SearchFilter.Operator.LTE,rangeDate[1]);
+        }
+        if(StringUtil.isNotEmpty(startDate) && StringUtil.isNotEmpty(endDate)){
+            page.addFilter("createTime", SearchFilter.Operator.GTE,DateUtil.parseDate(startDate));
+            page.addFilter("createTime", SearchFilter.Operator.LTE,DateUtil.parseDate(endDate));
+        }
         page = orderService.queryPage(page);
         return Rets.success(page);
     }
+
     @RequestMapping(value = "/export",method = RequestMethod.GET)
     public Object export(@RequestParam(value = "mobile", required = false) String mobile,
                          @RequestParam(value = "orderSn", required = false) String orderSn) {

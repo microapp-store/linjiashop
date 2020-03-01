@@ -1,11 +1,15 @@
 package cn.enilu.flash.dao;
 
+import org.hibernate.query.internal.NativeQueryImpl;
+import org.hibernate.transform.Transformers;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 基础dao实现类
@@ -28,8 +32,12 @@ public class BaseRepositoryImpl<T, ID extends Serializable>
     }
 
     @Override
-    public List<Object[]> queryBySql(String sql) {
-        return entityManager.createNativeQuery(sql).getResultList();
+    public List<Map> queryBySql(String sql) {
+        Query query = entityManager.createNativeQuery(sql);
+        query.unwrap(NativeQueryImpl.class)
+                .setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List list = query.getResultList();
+        return list;
     }
 
     @Override

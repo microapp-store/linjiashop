@@ -33,6 +33,70 @@ public class OrderEnum {
         }
     }
 
+    public static String getStatusStr(Integer status){
+        String statusStr = null;
+        switch (status){
+            case 1:
+                statusStr = "unPay";
+                break;
+            case 2:
+                statusStr = "unSend";
+                break;
+            case 3:
+                statusStr = "sended";
+                break;
+            case 4:
+                statusStr = "finished";
+                break;
+            case 5:
+                statusStr = "cancel";
+                break;
+            case 6:
+                statusStr = "refundIng";
+                break;
+            case 7:
+                statusStr = "refund";
+                break;
+                default:
+                    break;
+
+
+        }
+        return statusStr;
+
+    }
+    public static  Integer getStatusByStr(String statusStr){
+        Integer state = null;
+        switch (statusStr){
+            case "unPay":
+                state = 1;
+                break;
+            case "unSend":
+                state =2;
+                break;
+            case "sended":
+                state = 3;
+                break;
+            case "finished":
+                state = 4;
+                break;
+            case "cancel":
+                state = 5;
+                break;
+            case "refundIng":
+                state = 6;
+                break;
+            case "refund":
+                state = 7;
+                break;
+                default:
+                    state = null;
+                    break;
+
+        }
+        return state;
+    }
+
     public static  OrderStatusEnum get(Integer status){
         for(OrderStatusEnum se : OrderStatusEnum.values()){
             if(se.getId().intValue() == status.intValue()){

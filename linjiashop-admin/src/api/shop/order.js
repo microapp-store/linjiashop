@@ -8,7 +8,12 @@ export  default {
       params
     })
   },
-
+  getOrderStatistic:function(){
+    return request({
+      url: '/shop/order/getOrderStatistic',
+      method: 'get'
+    })
+  },
   exportXls: function (params) {
     return request({
       url: '/shop/order/export',

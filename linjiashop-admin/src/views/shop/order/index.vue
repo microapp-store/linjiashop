@@ -2,6 +2,49 @@
   <div class="app-container">
     <div class="block">
       <el-row  :gutter="20">
+        <el-col :span="24">
+          <el-row>
+            <el-col :span="2" style=";margin-top:.5rem;">
+              <span style="font-size:.9rem">订单状态：</span>
+            </el-col>
+            <el-col :span="22">
+              <el-button :type="query.button.css.status.all" size="small" @click.native="queryByState('all')" >全部</el-button>
+              <el-button  size="mini" :type="query.button.css.status.unPay" @click.native="queryByState('unPay')">待付款 &nbsp;<el-tag type="success"  size="mini">{{query.button.tag.unPay}}</el-tag></el-button>
+              <el-button  size="mini" :type="query.button.css.status.unSend" @click.native="queryByState('unSend')">待发货&nbsp;<el-tag type="danger"  size="mini">{{query.button.tag.unSend}}</el-tag></el-button>
+              <el-button  size="mini" :type="query.button.css.status.sended" @click.native="queryByState('sended')">已发货&nbsp;<el-tag type="info"  size="mini">{{query.button.tag.sended}}</el-tag></el-button>
+              <el-button  size="mini" :type="query.button.css.status.finished" @click.native="queryByState('finished')">已完成&nbsp;<el-tag type="info"  size="mini">{{query.button.tag.finished}}</el-tag></el-button>
+              <el-button  size="mini" :type="query.button.css.status.cancel" @click.native="queryByState('cancel')">已取消&nbsp;<el-tag type="info"  size="mini">{{query.button.tag.cancel}}</el-tag></el-button>
+              <el-button  size="mini" :type="query.button.css.status.refundIng" @click.native="queryByState('refundIng')">退款中&nbsp;<el-tag type="danger"  size="mini">{{query.button.tag.refundIng}}</el-tag></el-button>
+              <el-button  size="mini" :type="query.button.css.status.refund" @click.native="queryByState('refund')">已退款&nbsp;<el-tag type="info"  size="mini">{{query.button.tag.refund}}</el-tag></el-button>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="2" style=";margin-top:.5rem;">
+              <span style="font-size:.9rem;">下单日期：</span>
+            </el-col>
+            <el-col :span="22">
+              <el-button size="small" :type="query.button.css.date.all"  @click.native="queryByDate('all')">全部</el-button>
+              <el-button  size="small" :type="query.button.css.date.today"  @click.native="queryByDate('today')">今天</el-button>
+              <el-button  size="small" :type="query.button.css.date.yesterday"  @click.native="queryByDate('yesterday')">昨天</el-button>
+              <el-button  size="small" :type="query.button.css.date.seven"  @click.native="queryByDate('seven')">最近7天</el-button>
+              <el-button  size="small" :type="query.button.css.date.thirty"  @click.native="queryByDate('thirty')">最近30天</el-button>
+              <el-button  size="small" :type="query.button.css.date.month"  @click.native="queryByDate('month')">本月</el-button>
+              <el-button  size="small" :type="query.button.css.date.year"  @click.native="queryByDate('year')">本年</el-button>
+              <el-button  size="small" :type="query.button.css.date.customer"  @click.native="queryByDate('customer')">自定义</el-button>
+              <el-date-picker
+                v-show="query.button.showCustomer"
+                v-model="orderDate"
+                size="mini"
+                type="daterange"
+                range-separator="至"
+                value-format="yyyy-MM-dd"
+                start-placeholder="开始日期"
+                end-placeholder="截至日期">
+              </el-date-picker>
+            </el-col>
+          </el-row>
+          <br>
+        </el-col>
         <el-col :span="4">
           <el-input v-model="listQuery.mobile" size="mini" placeholder="手机号"></el-input>
         </el-col>
@@ -11,7 +54,7 @@
         <el-col :span="6">
           <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
           <el-button type="primary" size="mini" icon="el-icon-document" @click.native="exportXls">{{ $t('button.export') }}</el-button>
-          <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.refresh') }}</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
         </el-col>
       </el-row>
     </div>
@@ -68,7 +111,7 @@
 
               操作
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item v-if="scope.row.statusName === '待付款'">修改订单</el-dropdown-item>
+              <!--<el-dropdown-item v-if="scope.row.statusName === '待付款'">修改订单</el-dropdown-item>-->
               <el-dropdown-item @click.native="addComment(scope.row.id)">订单备注</el-dropdown-item>
               <el-dropdown-item v-if="scope.row.statusName==='已发货'" @click.native="viewShippingInfo(scope.row)">物流信息</el-dropdown-item>
               <el-dropdown-item v-if="scope.row.statusName === '待发货'" @click.native="openSendOutForm(scope.row.id)">立即发货</el-dropdown-item>

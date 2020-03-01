@@ -105,7 +105,7 @@ linjiashop包含了后台管理功能和手机端商城业务功能
     GRANT ALL privileges ON linjiashop.* TO 'linjiashop'@'%';
     flush privileges;
     ```     
-- 下载项目测试数据的图片：链接：[https://pan.baidu.com/s/1V1QTSLspuDRuwI7H9TjcOA](https://pan.baidu.com/s/1V1QTSLspuDRuwI7H9TjcOA) 提取码：dyj6 ，将图片存放到t_sys_cfg表中system.file.upload.path配置的目录下
+- 下载项目测试数据的图片：链接：[https://pan.baidu.com/s/1V1QTSLspuDRuwI7H9TjcOA](https://pan.baidu.com/s/1V1QTSLspuDRuwI7H9TjcOA) 提取码：dyj6 ，将图片存放到t_sys_cfg表中system.file.upload.path配置的目录下(注意该目录未绝对路径，该目录可以通过“系统管理”-“参数管理”进行配置)
 - 启动后台管理
     - 启动后台管理api服务:linjiashop-admin-api
         - 修改linjiashop-admin-api中数据库连接配置

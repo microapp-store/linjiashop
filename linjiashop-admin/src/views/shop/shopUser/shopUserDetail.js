@@ -8,7 +8,8 @@ export default {
       userInfo: {info:{}},
       idUser: '',
       apiUrl: getApiUrl(),
-      addressList:[]
+      addressList:[],
+      avatarUrl:''
     }
   },
   created() {
@@ -24,6 +25,8 @@ export default {
       if (this.idUser) {
         getUserInfo(this.idUser).then(response => {
           this.userInfo = response.data
+          console.log('userInfo',this.userInfo)
+          this.avatarUrl = this.apiUrl + '/file/getImgStream?idFile='+response.data.info.avatar
         })
         getList({
           page: 1,

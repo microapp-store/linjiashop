@@ -37,7 +37,7 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "sendSmsCode",method = RequestMethod.POST)
     public Object sendSmsCode(@RequestParam String mobile){
         String smsCode = shopUserService.sendSmsCode(mobile);
-        //todo 测试环境直接返回验证码，生成环境切忌返回该验证码
+        //todo 测试环境直接返回验证码，生产环境切忌返回该验证码
         return Rets.success(smsCode);
     }
     /**
@@ -63,6 +63,8 @@ public class LoginController extends BaseController {
                     result.put("initPassword",initPassword);
                 }
                 String token = userService.loginForToken(new JwtUser(user));
+                user.setLastLoginTime(new Date());
+                shopUserService.update(user);
                 result.put("user",user);
                 logger.info("token:{}",token);
                 result.put("token", token);

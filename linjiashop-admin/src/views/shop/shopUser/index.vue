@@ -41,6 +41,22 @@
     </div>
     <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
               @current-change="handleCurrentChange">
+      <el-table-column label="ID">
+        <template slot-scope="scope">
+          {{scope.row.id}}
+        </template>
+      </el-table-column>
+      <el-table-column label="头像">
+        <template slot-scope="scope">
+          <el-avatar   :src="scope.row.img" v-show="scope.row.avatar"></el-avatar>
+          <el-avatar  v-show="!scope.row.avatar"  icon="el-icon-user-solid"></el-avatar>
+        </template>
+      </el-table-column>
+      <el-table-column label="昵称">
+        <template slot-scope="scope">
+          {{scope.row.nickName}}
+        </template>
+      </el-table-column>
       <el-table-column label="手机号">
         <template slot-scope="scope">
           <router-link :to="{path:'shopUserDetail?id='+scope.row.id}">
@@ -49,15 +65,9 @@
 
         </template>
       </el-table-column>
-      <el-table-column label="昵称">
+      <el-table-column label="性别">
         <template slot-scope="scope">
-          {{scope.row.nickName}}
-        </template>
-      </el-table-column>
-      <el-table-column label="头像">
-        <template slot-scope="scope">
-          <el-avatar   :src="scope.row.img" v-show="scope.row.avatar"></el-avatar>
-          <el-avatar  v-show="!scope.row.avatar"  icon="el-icon-user-solid"></el-avatar>
+          {{scope.row.gender}}
         </template>
       </el-table-column>
       <el-table-column label="注册时间">

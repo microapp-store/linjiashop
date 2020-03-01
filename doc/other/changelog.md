@@ -6,15 +6,17 @@
 - 【后台管理】增加订单发货功能
 - 【后台管理】增加导出订单excel报表功能
 - 针对订单全流程生命周期添加操作日志
-- 基础程序封装支持关联查询
+- 基础框架封装支持关联查询；封装根据原生sql语句查询返回List<Map>代替List<Object[]>
 - 【后台管理】商品类别中维护该类商品规格名信息
+- 【后台管理】订单管理增加高级检索功能
 
 ### Fix
 - 【H5】用户提交订单的时候收货地址缓存问题
 - 【H5】用户跳转到其他页面再跳转回来会话信息丢失的问题
 
 
-## v0.3 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.3)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.3)
+## v0.3
+ [gitee](https://gitee.com/microapp/linjiashop/releases/v0.3)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.3)
 ### Issue 
 - 【后台管理】压缩svg图标
 - 【H5】新增未登录状态和购物车为空状态下的购物车界面
@@ -32,7 +34,8 @@
 - 【后台管理】修改管理员密码后缓存处理错误导致重新登录失败
 - 【后台管理】 banner上传问题
 
-## v0.2 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.2)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.2)
+## v0.2
+ [gitee](https://gitee.com/microapp/linjiashop/releases/v0.2)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.2)
 ### Issue
 - 【API】 Token过期自动刷新
 - 【后台管理】 用户列表增加用户头像，注册时间列，添加过滤功能，增加用户详情页内容
@@ -47,7 +50,8 @@
 - 【H5，后台管理】用户户没有权限操作的时候浏览器自动弹出验证框的问题
 
 
-## v0.1[gitee](https://gitee.com/microapp/linjiashop/releases/v0.1)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.1)
+## v0.1
+[gitee](https://gitee.com/microapp/linjiashop/releases/v0.1)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.1)
 ### Issue
 - 【后台管理】  基础的管理功能：用户，权限，菜单，角色，定时任务，消息发送，日志，监控
 - 【后台管理】  业务功能：商品类别维护，商品维护，banner维护，订单管理，购物车列表，用户列表

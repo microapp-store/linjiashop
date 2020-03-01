@@ -5,20 +5,21 @@
     <el-form ref="form"   label-width="120px" label-position="left">
       <el-row>
         <h3>基本信息</h3>
-        <el-col :span="12">
-          <el-form-item label="手机号">
-           <span>{{userInfo.info.mobile}}</span>
-          </el-form-item>
-        </el-col>
+
         <el-col :span="12">
           <el-form-item label="头像">
-            <el-avatar   :src="apiUrl+ '/file/getImgStream?idFile=' + userInfo.info.avatar" v-show="userInfo.info.avatar"></el-avatar>
+            <el-avatar   :src="avatarUrl" v-show="userInfo.info.avatar"></el-avatar>
             <el-avatar  v-show="!userInfo.info.avatar"  icon="el-icon-user-solid"></el-avatar>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="昵称">
             <span>{{userInfo.info.nickName}}</span>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="手机号">
+            <span>{{userInfo.info.mobile}}</span>
           </el-form-item>
         </el-col>
         <el-col :span="12">

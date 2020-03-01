@@ -17,6 +17,7 @@ import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.utils.factory.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,10 +87,12 @@ public class ShopUserController {
 		SearchFilter filter = SearchFilter.build("idUser",id);
 		Long  cartCount = cartService.count(filter);
 		Long orderCount = orderService.count(filter);
+		ShopUser shopUser1 = new ShopUser();
+		BeanUtils.copyProperties(shopUser,shopUser1,"password","salt");
 		Map<String,Object> data = Maps.newHashMap(
 				"cartCount",cartCount,
 				"orderCount",orderCount,
-				"info",shopUser
+				"info",shopUser1
 		);
 		return Rets.success(data);
 	}

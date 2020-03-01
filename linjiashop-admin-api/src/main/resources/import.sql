@@ -198,10 +198,10 @@ INSERT INTO `t_shop_order_item` (`id`, `create_time`, `modify_time`, `count`, `i
 -- ----------------------------
 -- Records of t_shop_user.sql
 -- ----------------------------
-INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `gender`, `last_login_time`, `mobile`, `nick_name`, `password`, `salt`) VALUES (1, NULL, '2019-11-1 12:00:00', 'male', '2020-1-5 11:53:55', '15011112222', '艾尼路', 'b5a51391f271f062867e5984e2fcffee', '8pgby');
-INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `gender`, `last_login_time`, `mobile`, `nick_name`, `password`, `salt`) VALUES (2, NULL, '2020-2-11 18:03:48', 'male', NULL, '13581640280', '路飞', '154b20e371d69ccf7fab7402807a8b2d', 'q9i3r');
-INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `gender`, `last_login_time`, `mobile`, `nick_name`, `password`, `salt`) VALUES (3, NULL, '2020-2-11 18:10:12', 'female', NULL, '13123234325', '娜美', 'd6d47d83b728917df24b45bf136f7155', 'bd6nu');
-INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `gender`, `last_login_time`, `mobile`, `nick_name`, `password`, `salt`) VALUES (4, NULL, '2020-2-11 18:10:56', 'male', NULL, '13523921111', '香吉士', 'fa4ceda72c1fe22e062978a4282098f8', 'bzn8x');
+INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `gender`, `last_login_time`, `mobile`, `nick_name`, `password`, `salt`) VALUES (1, '449c2a9d-a7f9-4dd7-b0b2-a176ff8bf25a.jpeg', '2019-11-1 12:00:00', 'male', '2020-3-1 16:48:26', '15011112222', '艾尼路', 'b5a51391f271f062867e5984e2fcffee', '8pgby');
+INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `gender`, `last_login_time`, `mobile`, `nick_name`, `password`, `salt`) VALUES (2, '184e85a7-41dd-4d1b-b67a-2632372ba257.jpg', '2020-2-11 18:03:48', 'male', NULL, '13581640280', '路飞', '154b20e371d69ccf7fab7402807a8b2d', 'q9i3r');
+INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `gender`, `last_login_time`, `mobile`, `nick_name`, `password`, `salt`) VALUES (3, '2c650bc2-666e-4621-92cd-36b4165d527c.jpeg', '2020-2-11 18:10:12', 'female', NULL, '13123234325', '娜美', 'd6d47d83b728917df24b45bf136f7155', 'bd6nu');
+INSERT INTO `t_shop_user` (`id`, `avatar`, `create_time`, `gender`, `last_login_time`, `mobile`, `nick_name`, `password`, `salt`) VALUES (4, '5422cb7c-015d-4c1b-a0d3-612c0d010d65.jpg', '2020-2-11 18:10:56', 'male', NULL, '13523921111', '香吉士', 'fa4ceda72c1fe22e062978a4282098f8', 'bzn8x');
 
 -- ----------------------------
 -- Records of t_sys_cfg.sql
@@ -377,7 +377,10 @@ INSERT INTO `t_sys_file_info` (`id`, `create_by`, `create_time`, `modify_by`, `m
 INSERT INTO `t_sys_file_info` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `original_file_name`, `real_file_name`) VALUES (155, 1, '2020-1-9 20:02:03', NULL, NULL, 'topic6.jpg', '7e195bf0-b450-4a1c-934d-80df766581a0.jpg');
 INSERT INTO `t_sys_file_info` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `original_file_name`, `real_file_name`) VALUES (156, 1, '2020-1-13 11:39:35', NULL, NULL, '机器人1.jpg', '477bc0ea-60a8-4edb-b115-6ae6c92bd678.jpg');
 INSERT INTO `t_sys_file_info` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `original_file_name`, `real_file_name`) VALUES (157, 1, '2020-1-13 11:39:38', NULL, NULL, '机器人2.jpg', '91b9b06d-c157-4ba2-bdc4-8f21fd2820c8.jpg');
-
+INSERT INTO `t_sys_file_info` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `original_file_name`, `real_file_name`) VALUES (158, 1, '2020-3-1 16:49:53', NULL, NULL, '8b7a39cd8c7f7e8de7ea0975c4c25a20.jpeg', '449c2a9d-a7f9-4dd7-b0b2-a176ff8bf25a.jpeg');
+INSERT INTO `t_sys_file_info` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `original_file_name`, `real_file_name`) VALUES (159, 2, '2020-3-1 16:50:56', NULL, NULL, 'a8e875870d1b4ad700a8d0c54d4fd3b0.jpg', '184e85a7-41dd-4d1b-b67a-2632372ba257.jpg');
+INSERT INTO `t_sys_file_info` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `original_file_name`, `real_file_name`) VALUES (160, 3, '2020-3-1 16:52:02', NULL, NULL, '03d00430ff1823f2a1d9fae4e3616f8b.jpeg', '2c650bc2-666e-4621-92cd-36b4165d527c.jpeg');
+INSERT INTO `t_sys_file_info` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `original_file_name`, `real_file_name`) VALUES (161, 4, '2020-3-1 16:52:47', NULL, NULL, 'dc241354f9bf60c9a88d5a6ebeac90f3.jpg', '5422cb7c-015d-4c1b-a0d3-612c0d010d65.jpg');
 -- ----------------------------
 -- Records of t_sys_login_log.sql
 -- ----------------------------

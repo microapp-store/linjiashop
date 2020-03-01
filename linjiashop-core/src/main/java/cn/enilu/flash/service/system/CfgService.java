@@ -45,4 +45,10 @@ public class CfgService  extends BaseService<Cfg,Long,CfgRepository> {
     public Cfg getByCfgName(String cfgName) {
         return get(SearchFilter.build("cfgName",cfgName));
     }
+
+    public void update(String cfgName, String cfgValue) {
+            Cfg cfg = getByCfgName(cfgName);
+            cfg.setCfgValue(cfgValue);
+            update(cfg);
+    }
 }

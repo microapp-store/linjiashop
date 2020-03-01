@@ -3,7 +3,6 @@ package cn.enilu.flash.service.task.job;
 import cn.enilu.flash.bean.entity.system.Cfg;
 import cn.enilu.flash.service.system.CfgService;
 import cn.enilu.flash.service.task.JobExecuter;
-import cn.enilu.flash.utils.DateUtil;
 import org.nutz.json.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +25,7 @@ public class HelloJob extends JobExecuter {
     @Override
     public void execute(Map<String, Object> dataMap) throws Exception {
         Cfg cfg = cfgService.get(1L);
-        cfg.setCfgDesc("update by "+ DateUtil.getTime());
+        cfg.setCfgDesc("应用名称");
         cfgService.update(cfg);
         logger.info("hello :"+ Json.toJson(dataMap));
     }

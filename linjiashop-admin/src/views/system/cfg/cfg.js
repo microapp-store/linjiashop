@@ -1,4 +1,4 @@
-import { remove, getList, save, exportXls } from '@/api/system/cfg'
+import { remove, getList, save, exportXls,getByPrefix,saveGroup } from '@/api/system/cfg'
 import { getApiUrl } from '@/utils/utils'
 
 export default {
@@ -22,7 +22,16 @@ export default {
       total: 0,
       list: null,
       listLoading: true,
-      selRow: {}
+      selRow: {},
+      actvieGroup:'all',
+      cfgGroups:[
+        {name:'全部配置',value:'all'},
+        {name:'系统配置',value:'system'},
+        {name:'公众号配置',value:'weixin'},
+        {name:'消息配置',value:'api.tencent.sms'}
+      ],
+      cfgList:[],
+      cfg:{}
     }
   },
   filters: {
@@ -173,6 +182,24 @@ export default {
     exportXls() {
       exportXls(this.listQuery).then(response => {
         window.location.href= getApiUrl() + '/file/download?idFile='+response.data.id
+      })
+    },
+    changeGroup(tab,event){
+      if(tab.name === 'all'){
+        return
+      }
+      getByPrefix({cfgGroup:tab.name}).then(response => {
+        this.cfgList = response.data.list
+        this.cfg = response.data.map
+      })
+    },
+    saveGroup(){
+      saveGroup({json:JSON.stringify(this.cfg)}).then(response =>{
+        this.$message({
+          message: this.$t('common.optionSuccess'),
+          type: 'success'
+        })
+        this.fetchData()
       })
     }
 

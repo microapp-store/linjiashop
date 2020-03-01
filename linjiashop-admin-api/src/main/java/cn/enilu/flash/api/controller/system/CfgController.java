@@ -1,6 +1,5 @@
 package cn.enilu.flash.api.controller.system;
 
-import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.dictmap.CfgDict;
@@ -17,13 +16,17 @@ import cn.enilu.flash.service.system.LogObjectHolder;
 import cn.enilu.flash.utils.Maps;
 import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.utils.factory.Page;
+import cn.enilu.flash.web.controller.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.nutz.json.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Map;
 
 /**
  * CfgController
@@ -55,6 +58,22 @@ public class CfgController extends BaseController {
         }
         page = cfgService.queryPage(page);
         return Rets.success(page);
+    }
+
+    /**
+     * 分组查询参数
+     * @param cfgGroup
+     * @return
+     */
+    @RequestMapping(value = "/getByPrefix",method = RequestMethod.GET)
+    @RequiresPermissions(value = {Permission.CFG})
+    public Object list(@RequestParam(required = false) String cfgGroup) {
+        List<Cfg> list = cfgService.queryAll(SearchFilter.build("cfgName", SearchFilter.Operator.LIKEL,cfgGroup));
+        Map map = Maps.newHashMap();
+        for(Cfg cfg:list){
+            map.put(cfg.getCfgName(),cfg.getCfgValue());
+        }
+        return Rets.success(Maps.newHashMap("list",list,"map",map));
     }
 
     /**
@@ -102,6 +121,18 @@ public class CfgController extends BaseController {
             throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
         }
         cfgService.deleteById(id);
+        return Rets.success();
+    }
+
+    @RequestMapping(value="saveGroup",method = RequestMethod.POST)
+    @BussinessLog(value = "编辑参数")
+    @RequiresPermissions(value = {Permission.CFG_EDIT})
+    public Object saveGroup(String json){
+
+        Map<String,String> map = Json.fromJson(Map.class,json);
+        for(Map.Entry<String,String> entry:map.entrySet()){
+            cfgService.update(entry.getKey(),entry.getValue());
+        }
         return Rets.success();
     }
 }

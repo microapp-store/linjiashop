@@ -7,7 +7,21 @@ export function getList(params) {
     params
   })
 }
+export function getByPrefix(params) {
+  return request({
+    url: '/cfg/getByPrefix',
+    method: 'get',
+    params
+  })
+}
 
+export function saveGroup(params){
+  return request({
+    url: '/cfg/saveGroup',
+    method: 'post',
+    params
+  })
+}
 
 export function exportXls(params) {
   return request({

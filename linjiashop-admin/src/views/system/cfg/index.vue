@@ -1,99 +1,130 @@
 <template>
   <div class="app-container">
     <div class="block">
-      <el-row  :gutter="20">
-        <el-col :span="6">
-          <el-input v-model="listQuery.cfgName" size="mini" :placeholder="$t('config.name')"></el-input>
-        </el-col>
-        <el-col :span="6">
-          <el-input v-model="listQuery.cfgValue" size="mini"  :placeholder="$t('config.value')"></el-input>
-        </el-col>
-        <el-col :span="6">
-          <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
-          <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
-        </el-col>
-      </el-row>
-      <br>
-      <el-row>
-        <el-col :span="24">
-          <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
-          <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
-          <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
-          <el-button type="info" size="mini" icon="el-icon-document" @click.native="exportXls">{{ $t('button.export') }}</el-button>
-        </el-col>
-      </el-row>
-    </div>
-
-
-    <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
-    @current-change="handleCurrentChange">
-
-      <el-table-column label="ID">
-        <template slot-scope="scope">
-          {{scope.row.id}}
-        </template>
-      </el-table-column>
-      <el-table-column :label="$t('config.name')">
-        <template slot-scope="scope">
-          {{scope.row.cfgName}}
-        </template>
-      </el-table-column>
-      <el-table-column :label="$t('config.value')">
-        <template slot-scope="scope">
-          {{scope.row.cfgValue}}
-        </template>
-      </el-table-column>
-      <el-table-column :label="$t('config.descript')">
-        <template slot-scope="scope">
-          {{scope.row.cfgDesc}}
-        </template>
-      </el-table-column>
-
-    </el-table>
-
-    <el-pagination
-      background
-      layout="total, sizes, prev, pager, next, jumper"
-      :page-sizes="[10, 20, 50, 100,500]"
-      :page-size="listQuery.limit"
-      :total="total"
-      @size-change="changeSize"
-      @current-change="fetchPage"
-      @prev-click="fetchPrev"
-      @next-click="fetchNext">
-    </el-pagination>
-
-    <el-dialog
-      :title="formTitle"
-      :visible.sync="formVisible"
-      width="70%">
-      <el-form ref="form" :model="form" :rules="rules" label-width="150px">
-        <el-row>
-          <el-col :span="12">
-            <el-form-item :label="$t('config.name')" prop="cfgName">
-              <el-input v-model="form.cfgName" minlength=1></el-input>
-            </el-form-item>
+      <el-tabs type="card" v-model="actvieGroup" @tab-click="changeGroup">
+        <el-tab-pane
+          :key="item.name"
+          v-for="(item, index) in cfgGroups"
+          :label="item.name"
+          :name="item.value"
+        >
+          {{item.content}}
+        </el-tab-pane>
+      </el-tabs>
+      <div v-show="actvieGroup !== 'all'">
+        <el-form   label-width="160px">
+        <el-form-item
+          :key="item.cfgName"
+          v-for="(item, index) in cfgList"
+          :label="item.cfgDesc">
+          <el-input type="textarea" v-model="cfg[item.cfgName]"  ></el-input>
+        </el-form-item>
+          <br>
+          <el-form-item>
+            <el-button type="primary" @click="saveGroup">{{ $t('button.submit') }}</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+      <div v-show="actvieGroup === 'all'">
+        <el-row :gutter="20">
+          <el-col :span="6">
+            <el-input v-model="listQuery.cfgName" size="mini" :placeholder="$t('config.name')"></el-input>
           </el-col>
-          <el-col :span="12">
-            <el-form-item :label="$t('config.value')" prop="cfgValue">
-              <el-input v-model="form.cfgValue"  minlength=1></el-input>
-            </el-form-item>
+          <el-col :span="6">
+            <el-input v-model="listQuery.cfgValue" size="mini" :placeholder="$t('config.value')"></el-input>
           </el-col>
-
-
-          <el-col :span="12">
-            <el-form-item :label="$t('config.descript')" prop="cfgDesc">
-              <el-input v-model="form.cfgDesc"></el-input>
-            </el-form-item>
+          <el-col :span="6">
+            <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}
+            </el-button>
+            <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}
+            </el-button>
           </el-col>
         </el-row>
-        <el-form-item>
-          <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
-          <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>
-        </el-form-item>
+        <br>
+        <el-row>
+          <el-col :span="24">
+            <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}
+            </el-button>
+            <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}
+            </el-button>
+            <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}
+            </el-button>
+            <el-button type="info" size="mini" icon="el-icon-document" @click.native="exportXls">{{ $t('button.export') }}
+            </el-button>
+          </el-col>
+        </el-row>
 
-      </el-form>
-    </el-dialog>
+
+        <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
+                  @current-change="handleCurrentChange">
+
+          <el-table-column label="ID">
+            <template slot-scope="scope">
+              {{scope.row.id}}
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('config.name')">
+            <template slot-scope="scope">
+              {{scope.row.cfgName}}
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('config.value')">
+            <template slot-scope="scope">
+              {{scope.row.cfgValue}}
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('config.descript')">
+            <template slot-scope="scope">
+              {{scope.row.cfgDesc}}
+            </template>
+          </el-table-column>
+
+        </el-table>
+
+        <el-pagination
+          background
+          layout="total, sizes, prev, pager, next, jumper"
+          :page-sizes="[10, 20, 50, 100,500]"
+          :page-size="listQuery.limit"
+          :total="total"
+          @size-change="changeSize"
+          @current-change="fetchPage"
+          @prev-click="fetchPrev"
+          @next-click="fetchNext">
+        </el-pagination>
+      </div>
+      <el-dialog
+        :title="formTitle"
+        :visible.sync="formVisible"
+        width="70%">
+        <el-form ref="form" :model="form" :rules="rules" label-width="150px">
+          <el-row>
+            <el-col :span="12">
+              <el-form-item :label="$t('config.name')" prop="cfgName">
+                <el-input v-model="form.cfgName" minlength=1></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item :label="$t('config.value')" prop="cfgValue">
+                <el-input v-model="form.cfgValue" minlength=1></el-input>
+              </el-form-item>
+            </el-col>
+
+
+            <el-col :span="12">
+              <el-form-item :label="$t('config.descript')" prop="cfgDesc">
+                <el-input v-model="form.cfgDesc"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-form-item>
+            <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
+            <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>
+          </el-form-item>
+
+        </el-form>
+      </el-dialog>
+    </div>
   </div>
 </template>
 

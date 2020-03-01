@@ -134,11 +134,11 @@ export default {
       }
       if(date === 'customer'){
         this.query.button.showCustomer=true
+        return
       }else{
         this.query.button.showCustomer=false
       }
       this.fetchData()
-      console.log('date',date)
     },
     handleFilter() {
       this.listQuery.page = 1
@@ -218,7 +218,6 @@ export default {
       })
     },
     addComment(id) {
-      console.log('idOrder', id)
       this.$prompt('请输入备注信息', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消'

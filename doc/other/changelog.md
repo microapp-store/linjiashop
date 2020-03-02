@@ -1,5 +1,6 @@
 # Change log
 ## v0.4
+[gitee](https://gitee.com/microapp/linjiashop/releases/v0.4) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.4)
 ### Issue
 - 【后台管理】管理员给订单添加备注信息
 - 【后台管理】维护物流公司
@@ -26,7 +27,7 @@
 
 
 ## v0.3
- [gitee](https://gitee.com/microapp/linjiashop/releases/v0.3)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.3)
+ [gitee](https://gitee.com/microapp/linjiashop/releases/v0.3)
 ### Issue 
 - 【后台管理】压缩svg图标
 - 【H5】新增未登录状态和购物车为空状态下的购物车界面
@@ -45,7 +46,7 @@
 - 【后台管理】 banner上传问题
 
 ## v0.2
- [gitee](https://gitee.com/microapp/linjiashop/releases/v0.2)[github](https://github.com/microapp-store/linjiashop/releases/tag/v0.2)
+ [gitee](https://gitee.com/microapp/linjiashop/releases/v0.2) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.2)
 ### Issue
 - 【API】 Token过期自动刷新
 - 【后台管理】 用户列表增加用户头像，注册时间列，添加过滤功能，增加用户详情页内容

@@ -131,6 +131,8 @@ export default {
       this.query.button.lastDate = date
       if(date !== 'all' && date !=='customer') {
         this.listQuery.date = date
+      }else{
+        this.listQuery.date = ''
       }
       if(date === 'customer'){
         this.query.button.showCustomer=true

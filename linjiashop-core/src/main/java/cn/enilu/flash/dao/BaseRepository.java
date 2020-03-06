@@ -25,7 +25,6 @@ public interface BaseRepository<T, ID extends Serializable> extends JpaRepositor
      * @return
      */
     List<Map> queryBySql(String sql);
-
     /**
      * 根据原生sql查询对象列表
      * @param sql

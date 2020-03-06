@@ -34,7 +34,7 @@ public class ${table.ControllerClassName} {
 		return Rets.success(page);
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	@BussinessLog(value = "编辑${table.Label}", key = "name",dict= CommonDict.class)
+	@BussinessLog(value = "编辑${table.Label}", key = "name")
 	public Object save(@ModelAttribute ${table.EntityClassName} ${table.EntityInstanceName}){
 		if(${table.EntityInstanceName}.getId()==null){
 			${table.ServiceInstanceName}.insert(${table.EntityInstanceName});
@@ -44,7 +44,7 @@ public class ${table.ControllerClassName} {
 		return Rets.success();
 	}
 	@RequestMapping(method = RequestMethod.DELETE)
-	@BussinessLog(value = "删除${table.Label}", key = "id",dict= CommonDict.class)
+	@BussinessLog(value = "删除${table.Label}", key = "id")
 	public Object remove(Long id){
 		if (StringUtil.isEmpty(id)) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);

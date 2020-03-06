@@ -2,7 +2,6 @@ package cn.enilu.flash.api.controller.shop;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
-import cn.enilu.flash.bean.dictmap.CommonDict;
 import cn.enilu.flash.bean.entity.shop.GoodsSku;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.Permission;
@@ -10,6 +9,7 @@ import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.GoodsSkuService;
+import cn.enilu.flash.service.system.LogObjectHolder;
 import cn.enilu.flash.utils.Lists;
 import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.utils.factory.Page;
@@ -41,7 +41,7 @@ public class GoodsSkuController {
 		return Rets.success(page);
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	@BussinessLog(value = "编辑商品SKU", key = "name",dict= CommonDict.class)
+	@BussinessLog(value = "编辑商品SKU", key = "name")
 	@RequiresPermissions(value = {Permission.GOODS_EDIT})
 	public Object save(@RequestBody GoodsSku sku){
 		List<String> codeArr = Arrays.asList(sku.getCode().split(","));
@@ -67,6 +67,7 @@ public class GoodsSkuController {
 				SearchFilter.build("code",code)
 		));
 		if(oldSku!=null){
+			LogObjectHolder.me().set(oldSku);
 			oldSku.setMarketingPrice(sku.getMarketingPrice());
 			oldSku.setPrice(sku.getPrice());
 			oldSku.setStock(sku.getStock());
@@ -79,7 +80,7 @@ public class GoodsSkuController {
 
 	}
 	@RequestMapping(method = RequestMethod.DELETE)
-	@BussinessLog(value = "删除商品SKU", key = "id",dict= CommonDict.class)
+	@BussinessLog(value = "删除商品SKU", key = "id")
 	@RequiresPermissions(value = {Permission.GOODS_EDIT})
 	public Object remove(Long id){
 		if (StringUtil.isEmpty(id)) {

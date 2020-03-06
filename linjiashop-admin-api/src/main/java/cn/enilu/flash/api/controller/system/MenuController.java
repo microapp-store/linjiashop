@@ -4,7 +4,7 @@ import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.constant.state.MenuStatus;
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.core.AuthorizationUser;
-import cn.enilu.flash.bean.dictmap.MenuDict;
+
 import cn.enilu.flash.bean.entity.system.Menu;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.Permission;
@@ -64,7 +64,7 @@ public class MenuController extends BaseController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @BussinessLog(value = "编辑菜单", key = "name", dict = MenuDict.class)
+    @BussinessLog(value = "编辑菜单", key = "name")
     @RequiresPermissions(value = {Permission.MENU_EDIT})
     public Object save(@ModelAttribute @Valid Menu menu) {
         //判断是否存在该编号
@@ -81,13 +81,15 @@ public class MenuController extends BaseController {
         if(menu.getId()==null){
             menuService.insert(menu);
         }else {
+            Menu old = menuService.get(menu.getId());
+            LogObjectHolder.me().set(old);
             menuService.update(menu);
         }
         return Rets.success();
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    @BussinessLog(value = "删除菜单", key = "id", dict = MenuDict.class)
+    @BussinessLog(value = "删除菜单", key = "id")
     @RequiresPermissions(value = {Permission.MENU_DEL})
     public Object remove(@RequestParam Long id) {
         logger.info("id:{}", id);

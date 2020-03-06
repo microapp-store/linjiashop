@@ -2,7 +2,7 @@ package cn.enilu.flash.api.controller.shop;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
-import cn.enilu.flash.bean.dictmap.CommonDict;
+
 import cn.enilu.flash.bean.entity.cms.Banner;
 import cn.enilu.flash.bean.entity.shop.AttrKey;
 import cn.enilu.flash.bean.entity.shop.Category;
@@ -53,7 +53,7 @@ public class CategoryController extends BaseController {
 		return Rets.success(categories);
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	@BussinessLog(value = "编辑商品类别", key = "name",dict= CommonDict.class)
+	@BussinessLog(value = "编辑商品类别", key = "name")
 	@RequiresPermissions(value = {Permission.CATEGORY_EDIT})
 	public Object save(@ModelAttribute Category category){
 		if(category.getId()==null){
@@ -64,7 +64,7 @@ public class CategoryController extends BaseController {
 		return Rets.success();
 	}
 	@RequestMapping(method = RequestMethod.DELETE)
-	@BussinessLog(value = "删除商品类别", key = "id",dict= CommonDict.class)
+	@BussinessLog(value = "删除商品类别", key = "id")
 	@RequiresPermissions(value = {Permission.CATEGORY_EDIT})
 	public Object remove(Long id){
 		if (id == null) {

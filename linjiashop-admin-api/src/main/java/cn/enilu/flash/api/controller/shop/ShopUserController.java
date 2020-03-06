@@ -1,8 +1,6 @@
 package cn.enilu.flash.api.controller.shop;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
-import cn.enilu.flash.bean.core.BussinessLog;
-import cn.enilu.flash.bean.dictmap.CommonDict;
 import cn.enilu.flash.bean.entity.shop.ShopUser;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
@@ -58,16 +56,6 @@ public class ShopUserController {
 		page = shopUserService.queryPage(page);
 		return Rets.success(page);
 	}
-	@RequestMapping(method = RequestMethod.POST)
-	@BussinessLog(value = "编辑用户", key = "name",dict= CommonDict.class)
-	public Object save(@ModelAttribute ShopUser tShopUser){
-		if(tShopUser.getId()==null){
-			shopUserService.insert(tShopUser);
-		}else {
-			shopUserService.update(tShopUser);
-		}
-		return Rets.success();
-	}
 
 	@RequestMapping(value="{id}",method = RequestMethod.GET)
 	public Object get(@PathVariable("id") Long id){
@@ -95,14 +83,5 @@ public class ShopUserController {
 				"info",shopUser1
 		);
 		return Rets.success(data);
-	}
-	@RequestMapping(method = RequestMethod.DELETE)
-	@BussinessLog(value = "删除用户", key = "id",dict= CommonDict.class)
-	public Object remove(Long id){
-		if (id == null) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
-		}
-		shopUserService.deleteById(id);
-		return Rets.success();
 	}
 }

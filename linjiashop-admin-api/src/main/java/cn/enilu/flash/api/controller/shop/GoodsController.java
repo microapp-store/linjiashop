@@ -2,7 +2,6 @@ package cn.enilu.flash.api.controller.shop;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
-import cn.enilu.flash.bean.dictmap.CommonDict;
 import cn.enilu.flash.bean.entity.shop.Goods;
 import cn.enilu.flash.bean.entity.shop.GoodsSku;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
@@ -12,6 +11,7 @@ import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.GoodsService;
 import cn.enilu.flash.service.shop.GoodsSkuService;
+import cn.enilu.flash.service.system.LogObjectHolder;
 import cn.enilu.flash.utils.factory.Page;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -39,7 +39,7 @@ public class GoodsController {
 		return Rets.success(page);
 	}
 	@RequestMapping(value = "/saveBaseInfo",method = RequestMethod.POST)
-	@BussinessLog(value = "保存商品基本信息", key = "name",dict= CommonDict.class)
+	@BussinessLog(value = "保存商品基本信息", key = "name")
 	@RequiresPermissions(value = {Permission.GOODS_EDIT})
 	public Object saveBaseInfo(@RequestBody Goods goods){
 		if(goods.getId()==null){
@@ -48,7 +48,7 @@ public class GoodsController {
 		return Rets.success(goods.getId());
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	@BussinessLog(value = "编辑商品", key = "name",dict= CommonDict.class)
+	@BussinessLog(value = "编辑商品", key = "name")
 	@RequiresPermissions(value = {Permission.GOODS_EDIT})
 	public Object save(@RequestBody @Valid Goods goods){
 		if(goods.getPrice() ==null){
@@ -72,6 +72,7 @@ public class GoodsController {
 			goodsService.insert(goods);
 		}else {
 			Goods old = goodsService.get(goods.getId());
+			LogObjectHolder.me().set(old);
 			goods.setCreateBy(old.getCreateBy());
 			goods.setCreateTime(old.getCreateTime());
 			goodsService.update(goods);
@@ -79,7 +80,7 @@ public class GoodsController {
 		return Rets.success();
 	}
 	@RequestMapping(method = RequestMethod.DELETE)
-	@BussinessLog(value = "删除商品", key = "id",dict= CommonDict.class)
+	@BussinessLog(value = "删除商品", key = "id")
 	@RequiresPermissions(value = {Permission.GOODS_EDIT})
 	public Object remove(Long id){
 		if (id == null) {
@@ -98,6 +99,7 @@ public class GoodsController {
 	}
 	@RequestMapping(value="/changeIsOnSale",method = RequestMethod.POST)
 	@RequiresPermissions(value = {Permission.GOODS_EDIT})
+	@BussinessLog(value = "上架/下架商品", key = "id")
 	public Object changeIsOnSale(@RequestParam("id")  Long id,@RequestParam("isOnSale") Boolean isOnSale){
 		if (id == null) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);

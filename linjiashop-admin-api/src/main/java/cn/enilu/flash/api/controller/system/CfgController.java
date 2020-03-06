@@ -2,7 +2,6 @@ package cn.enilu.flash.api.controller.system;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
-import cn.enilu.flash.bean.dictmap.CfgDict;
 import cn.enilu.flash.bean.entity.system.Cfg;
 import cn.enilu.flash.bean.entity.system.FileInfo;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
@@ -97,9 +96,10 @@ public class CfgController extends BaseController {
         return Rets.success(fileInfo);
     }
     @RequestMapping(method = RequestMethod.POST)
-    @BussinessLog(value = "编辑参数", key = "cfgName",dict= CfgDict.class)
+    @BussinessLog(value = "编辑参数", key = "cfgName")
     @RequiresPermissions(value = {Permission.CFG_EDIT})
     public Object save(@ModelAttribute @Valid Cfg cfg){
+
         if(cfg.getId()!=null){
             Cfg old = cfgService.get(cfg.getId());
             LogObjectHolder.me().set(old);
@@ -113,7 +113,7 @@ public class CfgController extends BaseController {
         return Rets.success();
     }
     @RequestMapping(method = RequestMethod.DELETE)
-    @BussinessLog(value = "删除参数", key = "id",     dict= CfgDict.class)
+    @BussinessLog(value = "删除参数", key = "id")
     @RequiresPermissions(value = {Permission.CFG_DEL})
     public Object remove(@RequestParam Long id){
         logger.info("id:{}",id);

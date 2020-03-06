@@ -16,6 +16,7 @@ import org.springframework.data.jpa.domain.Specification;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 基础服务类<br>
@@ -90,8 +91,17 @@ public abstract class BaseService<T, ID extends Serializable, R extends BaseRepo
     }
 
     @Override
-    public List queryBySql(String sql) {
+    public List<Map> queryBySql(String sql) {
         return dao.queryBySql(sql);
+    }
+
+    @Override
+    public Map getMapBySql(String sql) {
+        List<Map> list = queryBySql(sql);
+        if(list!=null&&!list.isEmpty()){
+            return list.get(0);
+        }
+        return null;
     }
 
     @Override

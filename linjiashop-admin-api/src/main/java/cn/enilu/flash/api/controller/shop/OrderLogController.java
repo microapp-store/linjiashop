@@ -1,20 +1,18 @@
 package cn.enilu.flash.api.controller.shop;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
-import cn.enilu.flash.bean.core.BussinessLog;
-import cn.enilu.flash.bean.dictmap.CommonDict;
 import cn.enilu.flash.bean.entity.shop.OrderLog;
-import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
-import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.OrderLogService;
-import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.utils.factory.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -34,24 +32,5 @@ public class OrderLogController {
 	Page<OrderLog> page = new PageFactory<OrderLog>().defaultPage();
 		page = orderLogService.queryPage(page);
 		return Rets.success(page);
-	}
-	@RequestMapping(method = RequestMethod.POST)
-	@BussinessLog(value = "编辑订单日志", key = "name",dict= CommonDict.class)
-	public Object save(@ModelAttribute OrderLog tShopOrderLog){
-		if(tShopOrderLog.getId()==null){
-			orderLogService.insert(tShopOrderLog);
-		}else {
-			orderLogService.update(tShopOrderLog);
-		}
-		return Rets.success();
-	}
-	@RequestMapping(method = RequestMethod.DELETE)
-	@BussinessLog(value = "删除订单日志", key = "id",dict= CommonDict.class)
-	public Object remove(Long id){
-		if (StringUtil.isEmpty(id)) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
-		}
-		orderLogService.deleteById(id);
-		return Rets.success();
 	}
 }

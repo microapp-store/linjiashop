@@ -5,7 +5,6 @@ import cn.enilu.flash.service.shop.CartService;
 import cn.enilu.flash.service.shop.OrderService;
 import cn.enilu.flash.service.shop.ShopUserService;
 import cn.enilu.flash.utils.Maps;
-import cn.enilu.flash.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,12 +26,13 @@ public class DashboardService {
         long orderCount = orderService.count();
         long userCount = shopUserService.count();
         long cartCount = cartService.count();
-        Object orderSumPrice = orderService.get("select sum(real_price) from t_shop_order where status<>"+ OrderEnum.OrderStatusEnum.UN_PAY.getId());
+
+        Map orderSumPrice = orderService.getMapBySql("select sum(real_price) as realPrice from t_shop_order where status<>"+ OrderEnum.OrderStatusEnum.UN_PAY.getId());
         Map result = Maps.newHashMap(
                 "orderCount",orderCount,
                 "userCount",userCount,
                 "cartCount",cartCount,
-                "orderSumPrice", StringUtil.isNotNullOrEmpty(orderSumPrice)?Double.valueOf(orderSumPrice.toString())/100:"0"
+                "orderSumPrice", orderSumPrice!=null?(Double.valueOf(orderSumPrice.get("realPrice").toString())/100):"0"
         );
         return result;
     }

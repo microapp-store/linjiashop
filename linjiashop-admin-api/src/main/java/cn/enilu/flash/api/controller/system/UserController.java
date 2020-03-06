@@ -1,11 +1,9 @@
 package cn.enilu.flash.api.controller.system;
 
-import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.constant.Const;
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.constant.state.ManagerStatus;
 import cn.enilu.flash.bean.core.BussinessLog;
-import cn.enilu.flash.bean.dictmap.UserDict;
 import cn.enilu.flash.bean.dto.UserDto;
 import cn.enilu.flash.bean.entity.system.User;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
@@ -14,10 +12,15 @@ import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.core.factory.UserFactory;
+import cn.enilu.flash.service.system.LogObjectHolder;
 import cn.enilu.flash.service.system.ManagerService;
-import cn.enilu.flash.utils.*;
+import cn.enilu.flash.utils.BeanUtil;
+import cn.enilu.flash.utils.MD5;
+import cn.enilu.flash.utils.RandomUtil;
+import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.utils.factory.Page;
 import cn.enilu.flash.warpper.UserWarpper;
+import cn.enilu.flash.web.controller.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -58,7 +61,7 @@ public class UserController extends BaseController {
         return Rets.success(page);
     }
     @RequestMapping(method = RequestMethod.POST)
-    @BussinessLog(value = "编辑管理员", key = "name", dict = UserDict.class)
+    @BussinessLog(value = "编辑管理员", key = "name")
     @RequiresPermissions(value = {Permission.USER_EDIT})
     public Object save( @Valid UserDto user,BindingResult result){
         if(user.getId()==null) {
@@ -73,13 +76,15 @@ public class UserController extends BaseController {
             user.setStatus(ManagerStatus.OK.getCode());
             managerService.insert(UserFactory.createUser(user, new User()));
         }else{
+
             User oldUser = managerService.get(user.getId());
+            LogObjectHolder.me().set(oldUser);
             managerService.update(UserFactory.updateUser(user,oldUser));
         }
         return Rets.success();
     }
 
-    @BussinessLog(value = "删除管理员", key = "userId", dict = UserDict.class)
+    @BussinessLog(value = "删除管理员", key = "userId")
     @RequestMapping(method = RequestMethod.DELETE)
     @RequiresPermissions(value = {Permission.USER_DEL})
     public Object remove(@RequestParam Long userId){
@@ -94,7 +99,7 @@ public class UserController extends BaseController {
         managerService.update(user);
         return Rets.success();
     }
-    @BussinessLog(value="设置用户角色",key="userId",dict=UserDict.class)
+    @BussinessLog(value="设置用户角色",key="userId")
     @RequestMapping(value="/setRole",method = RequestMethod.GET)
     @RequiresPermissions(value = {Permission.USER_EDIT})
     public Object setRole(@RequestParam("userId") Long userId, @RequestParam("roleIds") String roleIds) {

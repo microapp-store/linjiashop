@@ -3,7 +3,7 @@ package cn.enilu.flash.api.controller.system;
 import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.constant.Const;
 import cn.enilu.flash.bean.core.BussinessLog;
-import cn.enilu.flash.bean.dictmap.RoleDict;
+
 import cn.enilu.flash.bean.entity.system.Role;
 import cn.enilu.flash.bean.entity.system.User;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
@@ -55,18 +55,20 @@ public class RoleController extends BaseController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @BussinessLog(value = "编辑角色", key = "name", dict = RoleDict.class)
+    @BussinessLog(value = "编辑角色", key = "name")
     @RequiresPermissions(value = {Permission.ROLE_EDIT})
     public Object save(@Valid Role role){
         if(role.getId()==null) {
             roleService.insert(role);
         }else{
+            Role old = roleService.get(role.getId());
+            LogObjectHolder.me().set(old);
             roleService.update(role);
         }
         return Rets.success();
     }
     @RequestMapping(method = RequestMethod.DELETE)
-    @BussinessLog(value = "删除角色", key = "roleId", dict = RoleDict.class)
+    @BussinessLog(value = "删除角色", key = "roleId")
     @RequiresPermissions(value = {Permission.ROLE_DEL})
     public Object remove(@RequestParam Long roleId){
         logger.info("id:{}",roleId);
@@ -91,7 +93,7 @@ public class RoleController extends BaseController {
     }
 
     @RequestMapping(value = "/savePermisson",method = RequestMethod.POST)
-    @BussinessLog(value = "配置角色权限", key = "roleId", dict = RoleDict.class)
+    @BussinessLog(value = "配置角色权限", key = "roleId")
     @RequiresPermissions(value = {Permission.ROLE_EDIT})
     public Object setAuthority(Long roleId, String
             permissions) {

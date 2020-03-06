@@ -2,7 +2,7 @@ package cn.enilu.flash.api.controller.shop;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
-import cn.enilu.flash.bean.dictmap.CommonDict;
+
 import cn.enilu.flash.bean.entity.shop.Order;
 import cn.enilu.flash.bean.entity.system.FileInfo;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
@@ -98,7 +98,7 @@ public class OrderController {
         return Rets.success(fileInfo);
     }
     @RequestMapping(value = "/sendOut/{id}", method = RequestMethod.POST)
-    @BussinessLog(value = "发货", key = "id", dict = CommonDict.class)
+    @BussinessLog(value = "发货", key = "id")
     public Object sendOut(@PathVariable("id") Long id,
                           @RequestParam("idExpress") Long idExpress,
                           @RequestParam("shippingSn") String shippingSn,
@@ -112,7 +112,7 @@ public class OrderController {
         return Rets.success();
     }
     @RequestMapping(value = "/comment/{id}", method = RequestMethod.POST)
-    @BussinessLog(value = "管理员添加备注", key = "id", dict = CommonDict.class)
+    @BussinessLog(value = "管理员添加备注", key = "id")
     public Object comment(@PathVariable("id") Long id,@RequestParam("message") String message) {
         Order order = orderService.get(id);
         order.setAdminMessage(message);
@@ -120,17 +120,6 @@ public class OrderController {
         return Rets.success();
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
-    @BussinessLog(value = "删除订单", key = "id", dict = CommonDict.class)
-    public Object remove(Long id) {
-        if (id == null) {
-            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
-        }
-        Order order = orderService.get(id);
-        order.setStatus(OrderEnum.OrderStatusEnum.CANCEL.getId());
-        orderService.updateOrder(order);
-        return Rets.success();
-    }
 
     @RequestMapping(value = "{orderSn}", method = RequestMethod.GET)
     public Object get(@PathVariable("orderSn") String orderSn) {

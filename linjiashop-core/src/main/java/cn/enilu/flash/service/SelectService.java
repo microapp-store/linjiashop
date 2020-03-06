@@ -5,6 +5,7 @@ import cn.enilu.flash.utils.factory.Page;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -22,6 +23,8 @@ public interface SelectService <T, ID> {
     T get(SearchFilter filter);
     T get(List<SearchFilter> filters);
     Object get(String sql);
+    List<Map> queryBySql(String sql);
+    Map getMapBySql(String sql);
 
     /**
      * 根据多个主键查询
@@ -35,7 +38,6 @@ public interface SelectService <T, ID> {
      * @return 所有结果,如果无结果则返回空集合
      */
     List<T> queryAll();
-    List queryBySql(String sql);
 
     /**
      * 查询所有结果

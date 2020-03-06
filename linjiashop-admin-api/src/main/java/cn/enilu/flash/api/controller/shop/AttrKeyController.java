@@ -5,7 +5,7 @@ import cn.enilu.flash.service.shop.AttrKeyService;
 
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.constant.factory.PageFactory;
-import cn.enilu.flash.bean.dictmap.CommonDict;
+
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
@@ -33,7 +33,7 @@ public class AttrKeyController {
 		return Rets.success(page);
 	}
 	@RequestMapping(method = RequestMethod.POST)
-	@BussinessLog(value = "编辑商品属性名", key = "name",dict= CommonDict.class)
+	@BussinessLog(value = "编辑商品属性名", key = "name")
 	public Object save(@ModelAttribute AttrKey tShopGoodsAttrKey){
 		if(tShopGoodsAttrKey.getId()==null){
 			attrKeyService.insert(tShopGoodsAttrKey);
@@ -43,7 +43,7 @@ public class AttrKeyController {
 		return Rets.success();
 	}
 	@RequestMapping(method = RequestMethod.DELETE)
-	@BussinessLog(value = "删除商品属性名", key = "id",dict= CommonDict.class)
+	@BussinessLog(value = "删除商品属性名", key = "id")
 	public Object remove(Long id){
 		if (StringUtil.isEmpty(id)) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
@@ -56,7 +56,7 @@ public class AttrKeyController {
 		return Rets.success();
 	}
 	@RequestMapping(value="updateAttrName",method = RequestMethod.POST)
-	@BussinessLog(value = "修改商品属性名", key = "id",dict= CommonDict.class)
+	@BussinessLog(value = "修改商品属性名", key = "id")
 	public Object updateAttrName(@RequestParam("id") Long id,@RequestParam("attrName") String attrName){
 		if (StringUtil.isEmpty(id)) {
 			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);

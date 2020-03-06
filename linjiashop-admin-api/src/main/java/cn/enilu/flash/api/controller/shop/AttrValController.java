@@ -2,7 +2,7 @@ package cn.enilu.flash.api.controller.shop;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
-import cn.enilu.flash.bean.dictmap.CommonDict;
+
 import cn.enilu.flash.bean.entity.shop.AttrKey;
 import cn.enilu.flash.bean.entity.shop.AttrVal;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
@@ -56,7 +56,7 @@ public class AttrValController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @BussinessLog(value = "编辑商品属性值", key = "name", dict = CommonDict.class)
+    @BussinessLog(value = "编辑商品属性值", key = "name")
     public Object save(@ModelAttribute AttrVal tShopGoodsAttrVal) {
         if (tShopGoodsAttrVal.getId() == null) {
             attrValService.insert(tShopGoodsAttrVal);
@@ -67,7 +67,7 @@ public class AttrValController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    @BussinessLog(value = "删除商品属性值", key = "id", dict = CommonDict.class)
+    @BussinessLog(value = "删除商品属性值", key = "id")
     public Object remove(Long id) {
         if (StringUtil.isEmpty(id)) {
             throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);

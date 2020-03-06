@@ -2,7 +2,7 @@ package cn.enilu.flash.api.controller.promotion;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
-import cn.enilu.flash.bean.dictmap.CommonDict;
+
 import cn.enilu.flash.bean.entity.promotion.Topic;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.Permission;
@@ -39,7 +39,7 @@ public class TopicController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	@BussinessLog(value = "编辑专题", key = "name",dict= CommonDict.class)
+	@BussinessLog(value = "编辑专题", key = "name")
 	@RequiresPermissions(value = {Permission.TOPIC_EDIT})
 	public Object save(@ModelAttribute Topic topic){
 		if(topic.getId()==null){
@@ -51,7 +51,7 @@ public class TopicController {
 		return Rets.success();
 	}
 	@RequestMapping(method = RequestMethod.DELETE)
-	@BussinessLog(value = "删除专题", key = "id",dict= CommonDict.class)
+	@BussinessLog(value = "删除专题", key = "id")
 	@RequiresPermissions(value = {Permission.TOPIC_DEL})
 	public Object remove(Long id){
 		if (StringUtil.isEmpty(id)) {

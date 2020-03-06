@@ -52,7 +52,7 @@
              <span>{{ props.row.method }}</span>
            </el-form-item>
            <el-form-item label="时间">
-             <span>{{ props.row.createtime }}</span>
+             <span>{{ props.row.createTime }}</span>
            </el-form-item>
            <el-form-item label="内容">
              <span>{{ props.row.regularMessage }}</span>
@@ -75,7 +75,7 @@
      </el-table-column>
      <el-table-column
        label="时间"
-       prop="createtime">
+       prop="createTime">
      </el-table-column>
    </el-table>
 

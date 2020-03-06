@@ -33,6 +33,6 @@ public class LoginLog {
     @Column
     private String ip;
     @CreationTimestamp
-    @Column(name = "create_time",columnDefinition="DATETIME COMMENT '创建时间'")
+    @Column(columnDefinition="DATETIME COMMENT '创建时间'")
     private Date createTime;
 }

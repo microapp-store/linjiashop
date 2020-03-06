@@ -2,10 +2,8 @@ package cn.enilu.flash.warpper;
 
 import cn.enilu.flash.core.factory.Contrast;
 import cn.enilu.flash.service.system.impl.ConstantFactory;
-import cn.enilu.flash.utils.DateUtil;
 import cn.enilu.flash.utils.StringUtil;
 
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -23,7 +21,6 @@ public class LogWarpper extends BaseControllerWarpper {
     @Override
     public void warpTheMap(Map<String, Object> map) {
         String message = (String) map.get("message");
-
         Long userid = Long.valueOf(map.get("userid").toString());
         map.put("userName", ConstantFactory.me().getUserNameById(userid));
 
@@ -32,7 +29,7 @@ public class LogWarpper extends BaseControllerWarpper {
             String subMessage = message.substring(0, 100) + "...";
             map.put("message", subMessage);
         }
-        map.put("createtime",DateUtil.format((Date) map.get("createTime"),"yyyy-MM-dd hh:MM:ss"));
+
         //如果信息中包含分割符号;;;   则分割字符串返给前台
         if (StringUtil.isNotEmpty(message) && message.indexOf(Contrast.SEPARATOR) != -1) {
             String[] msgs = message.split(Contrast.SEPARATOR);

@@ -1,7 +1,7 @@
 package cn.enilu.flash.warpper;
 
-import cn.enilu.flash.core.factory.Contrast;
 import cn.enilu.flash.service.system.impl.ConstantFactory;
+import cn.enilu.flash.utils.BeanUtil;
 import cn.enilu.flash.utils.StringUtil;
 
 import java.util.Map;
@@ -31,8 +31,8 @@ public class LogWarpper extends BaseControllerWarpper {
         }
 
         //如果信息中包含分割符号;;;   则分割字符串返给前台
-        if (StringUtil.isNotEmpty(message) && message.indexOf(Contrast.SEPARATOR) != -1) {
-            String[] msgs = message.split(Contrast.SEPARATOR);
+        if (StringUtil.isNotEmpty(message) && message.indexOf(BeanUtil.SEPARATOR) != -1) {
+            String[] msgs = message.split(BeanUtil.SEPARATOR);
             map.put("regularMessage",msgs);
         }else{
             map.put("regularMessage",message);

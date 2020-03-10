@@ -119,10 +119,37 @@
           <el-table-column label="操作">
             <template slot-scope="scope">
               <el-button type="primary" size="mini"  icon="el-icon-edit" @click.native="attrKeyEdit(scope.row)">编辑</el-button>
+              <el-button type="primary" size="mini"  icon="el-icon-edit" @click.native="openAttrValDialog(scope.row)">编辑属性值</el-button>
               <el-button type="danger" size="mini"  icon="el-icon-delete" @click.native="attrKeyRemove(scope.row.id)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
+
+      </el-dialog>
+      <el-dialog
+        title="属性值管理"
+        :visible.sync="attrVal.visible"
+        width="50%">
+        <el-row>
+          <el-row>
+            <el-col :span="24">
+              <el-button type="success" size="mini"  icon="el-icon-plus" @click.native="attrValAdd" v-permission="['/category/edit']">{{ $t('button.add') }}</el-button>
+            </el-col>
+          </el-row>
+          <el-table :data="attrVal.list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row>
+            <el-table-column label="属性值">
+              <template slot-scope="scope">
+                {{scope.row.attrVal}}
+              </template>
+            </el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button type="primary" size="mini"  icon="el-icon-edit" @click.native="attrValEdit(scope.row)">编辑</el-button>
+                <el-button type="danger" size="mini"  icon="el-icon-delete" @click.native="attrValRemove(scope.row.id)">删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-row>
       </el-dialog>
     </div>
 </template>

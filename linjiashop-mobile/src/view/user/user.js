@@ -29,6 +29,7 @@ export default {
                 }else{
                     //todo 如果需要获取用户的微信openid，恢复下面代码
                     //const userAgent = window.navigator.userAgent.toLowerCase()
+                    //使用微信访问本系统的时候获取微信openid，否则不获取
                     //if(userAgent.indexOf('micromessenger'>-1)) {
                     //    this.processOpenid();
                     //}

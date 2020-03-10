@@ -67,8 +67,9 @@ module.exports = {
                 children: [
                     '/develop/develop',
                     '/develop/api',
-                    'develop/banner',
-                    '/develop/attribute'
+                    '/develop/banner',
+                    '/develop/attribute',
+                    '/develop/wechat'
                 ]
             },
             {

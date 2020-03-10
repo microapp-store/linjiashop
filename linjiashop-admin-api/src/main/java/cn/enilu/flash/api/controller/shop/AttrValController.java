@@ -1,8 +1,6 @@
 package cn.enilu.flash.api.controller.shop;
 
-import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
-
 import cn.enilu.flash.bean.entity.shop.AttrKey;
 import cn.enilu.flash.bean.entity.shop.AttrVal;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
@@ -14,7 +12,6 @@ import cn.enilu.flash.service.shop.AttrValService;
 import cn.enilu.flash.utils.Lists;
 import cn.enilu.flash.utils.Maps;
 import cn.enilu.flash.utils.StringUtil;
-import cn.enilu.flash.utils.factory.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,20 +45,26 @@ public class AttrValController {
         ));
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Object list() {
-        Page<AttrVal> page = new PageFactory<AttrVal>().defaultPage();
-        page = attrValService.queryPage(page);
-        return Rets.success(page);
+    @RequestMapping(value = "getAttrVals", method = RequestMethod.GET)
+    public Object getAttrVals(@RequestParam("idAttrKey")Long idAttrKey) {
+        List<AttrVal> list  = attrValService.queryAll(SearchFilter.build("idAttrKey",idAttrKey));
+        return Rets.success(list);
     }
-
     @RequestMapping(method = RequestMethod.POST)
-    @BussinessLog(value = "编辑商品属性值", key = "name")
-    public Object save(@ModelAttribute AttrVal tShopGoodsAttrVal) {
-        if (tShopGoodsAttrVal.getId() == null) {
-            attrValService.insert(tShopGoodsAttrVal);
+    @BussinessLog(value = "编辑商品属性值", key = "attrVal")
+    public Object save(@RequestParam("idAttrKey")Long idAttrKey,
+                       @RequestParam(value = "id",required = false)Long id,
+                       @RequestParam("attrVal")String attrVal) {
+        AttrVal entity = new AttrVal();
+        if(id!=null){
+            entity = attrValService.get(id);
+        }
+        entity.setIdAttrKey(idAttrKey);
+        entity.setAttrVal(attrVal);
+        if (id == null) {
+            attrValService.insert(entity);
         } else {
-            attrValService.update(tShopGoodsAttrVal);
+            attrValService.update(entity);
         }
         return Rets.success();
     }
@@ -73,6 +76,17 @@ public class AttrValController {
             throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
         }
         attrValService.deleteById(id);
+        return Rets.success();
+    }
+    @RequestMapping(value="updateAttrVal",method = RequestMethod.POST)
+    @BussinessLog(value = "修改商品属性值", key = "id")
+    public Object updateAttrName(@RequestParam("id") Long id,@RequestParam("attrVal") String attrVal){
+        if (StringUtil.isEmpty(id)) {
+            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+        }
+        AttrVal attrValEntity = attrValService.get(id);
+        attrValEntity.setAttrVal(attrVal);
+        attrValService.update(attrValEntity);
         return Rets.success();
     }
 }

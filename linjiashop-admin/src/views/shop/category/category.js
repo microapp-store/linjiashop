@@ -1,5 +1,6 @@
 import categoryApi from '@/api/shop/category'
 import attrKeyApi from '@/api/shop/attrKey'
+import attrValApi from '@/api/shop/attrVal'
 import {getApiUrl} from '@/utils/utils'
 import permission from '@/directive/permission/index.js'
 export default {
@@ -33,6 +34,11 @@ export default {
       },
       attrKey: {
         idCategory:'',
+        visible:false,
+        list:[]
+      },
+      attrVal:{
+        idAttrKey:'',
         visible:false,
         list:[]
       }
@@ -261,8 +267,80 @@ export default {
         })
       })
 
-    }
+    },
+    openAttrValDialog(item){
+      this.attrVal.idAttrKey = item.id
+      this.attrVal.visible=true
+      console.log('item',item)
+      attrValApi.getAttrVals(this.attrVal.idAttrKey).then( response2=>{
+        this.attrVal.list = response2.data
+      })
+    },
+    attrValAdd(){
+      this.$prompt('请输入属性名', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
+        if(!value || value === ''){
+          this.$message({
+            type: 'warning',
+            message: '属性名不能为空'
+          })
+        }
+        attrValApi.save({attrVal:value,idAttrKey:this.attrVal.idAttrKey}).then(response => {
+          this.$message({
+            type: 'success',
+            message: '新增属性成功'
+          })
+          attrValApi.getAttrVals(this.attrVal.idAttrKey).then( response2=>{
+            this.attrVal.list = response2.data
+          })
 
+        })
+
+      })
+    },
+    attrValEdit(item){
+      console.log('item',item)
+      this.$prompt('请输入属性名', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        inputValue:item.attrVal,
+      }).then(({ value }) => {
+        if(!value || value === ''){
+          this.$message({
+            type: 'warning',
+            message: '属性名不能为空'
+          })
+        }
+        attrValApi.updateAttrVal(item.id,value).then(response => {
+          item.attrName = value
+          this.$message({
+            type: 'success',
+            message: '编辑成功'
+          })
+          attrValApi.getAttrVals(this.attrVal.idAttrKey).then( response2=>{
+            this.attrVal.list = response2.data
+          })
+        })
+        return
+
+      })
+
+    },
+    attrValRemove(id){
+      console.log('id',id)
+      attrValApi.remove(id).then( response => {
+        this.$message({
+          type: 'success',
+          message: '删除成功'
+        })
+        attrValApi.getAttrVals(this.attrVal.idAttrKey).then( response2=>{
+          this.attrVal.list = response2.data
+        })
+      })
+
+    }
 
   }
 }

@@ -34,10 +34,11 @@ export default {
     },
     methods: {
         init() {
-            this.user =storage.getUser()// store.state.app.user
-            console.log('useraaaa',this.user)
+            this.user =storage.getUser()
             if (this.user.avatar) {
                 this.avatarUrl = baseApi + '/file/getImgStream?idFile=' + this.user.avatar
+            }else if(this.user.wechatHeadImgUrl){
+                this.avatarUrl = this.user.wechatHeadImgUrl
             }
         },
         onClickLeft() {
@@ -52,7 +53,6 @@ export default {
             })
         },
         onLogout() {
-            console.log('logout')
             loginApi.logout().then(response => {
                 store.dispatch('app/toggleUser', {})
                 store.dispatch('app/toggleToken', '')

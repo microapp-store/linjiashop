@@ -110,6 +110,6 @@ export default {
                 this.second = 60
                 clearTimeout(timer)
             }
-        },
+        }
     }
 };

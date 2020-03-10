@@ -49,5 +49,19 @@ export default {
             }
         })
     },
+    getWxSign:function(params){
+        return request({
+            url: '/user/getWxSign',
+            method: 'post',
+            params
+        })
+    },
+    getWxOpenId:function(params){
+        return request({
+            url: '/user/getWxOpenId',
+            method: 'post',
+            params
+        })
+    }
 }
 

@@ -33,7 +33,25 @@ public class StringUtil {
         }
         return false;
     }
-
+    static Pattern letterPattern = Pattern.compile("[a-z A-Z]");
+    public static  boolean isLetter(char c){
+        return letterPattern.matcher(String.valueOf(c)).matches();
+    }
+    /**
+     * 判断字符串的内容是否是数字
+     */
+    public static boolean isNumeric(String str) {
+        if (str == null) {
+            return false;
+        }
+        int sz = str.length();
+        for (int i = 0; i < sz; ++i) {
+            if (!(Character.isDigit(str.charAt(i)))) {
+                return false;
+            }
+        }
+        return true;
+    }
     /**
      * 是否包含空字符串
      *
@@ -386,5 +404,36 @@ public class StringUtil {
             return new String(data);
         }
         return new String(data, charset);
+    }
+
+    /**
+     * 过滤特殊字符
+     *
+     * @param nickname
+     * @return
+     */
+    public static String filterSpecialChar(String nickname) {
+        if (nickname == null) {
+            return null;
+        }
+        nickname = nickname.replaceAll("[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]", "");
+        return nickname;
+    }
+    public static  String getValidChar(String nickName){
+        nickName = filterSpecialChar(nickName);
+        StringBuilder result = new StringBuilder();
+        for(char a:nickName.toCharArray()){
+            if(isChinese(a)){
+                result.append(a);
+            }
+            if(isNumeric(String.valueOf(a))){
+                result.append(a);
+            }
+            if(isLetter(a)){
+                result.append(a);
+            }
+
+        }
+        return result.toString();
     }
 }

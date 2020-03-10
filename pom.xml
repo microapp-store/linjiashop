@@ -53,6 +53,7 @@
         <kaptcha.version>2.3.2</kaptcha.version>
         <github.kaptcha.version>1.0.0</github.kaptcha.version>
         <lombok.version>1.18.0</lombok.version>
+        <userAgent.version>1.21</userAgent.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -120,6 +121,11 @@
                 <groupId>com.google.zxing</groupId>
                 <artifactId>core</artifactId>
                 <version>${zxing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>eu.bitwalker</groupId>
+                <artifactId>UserAgentUtils</artifactId>
+                <version>${userAgent.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.velocity</groupId>

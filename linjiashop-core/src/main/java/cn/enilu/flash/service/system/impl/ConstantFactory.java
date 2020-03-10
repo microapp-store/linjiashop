@@ -6,9 +6,9 @@ import cn.enilu.flash.bean.constant.state.MenuStatus;
 import cn.enilu.flash.bean.entity.system.*;
 import cn.enilu.flash.bean.vo.DictVo;
 import cn.enilu.flash.bean.vo.SpringContextHolder;
-import cn.enilu.flash.cache.ConfigCache;
 import cn.enilu.flash.cache.DictCache;
 import cn.enilu.flash.dao.system.*;
+import cn.enilu.flash.service.system.CfgService;
 import cn.enilu.flash.service.system.IConstantFactory;
 import cn.enilu.flash.service.system.LogObjectHolder;
 import cn.enilu.flash.utils.Convert;
@@ -41,7 +41,7 @@ public class ConstantFactory implements IConstantFactory {
     private UserRepository userRepository = SpringContextHolder.getBean(UserRepository.class);
     private MenuRepository menuRepository = SpringContextHolder.getBean(MenuRepository.class);
     private NoticeRepository sysNoticeRepository = SpringContextHolder.getBean(NoticeRepository.class);
-    private ConfigCache configCache = SpringContextHolder.getBean(ConfigCache.class);
+    private CfgService cfgService = SpringContextHolder.getBean(CfgService.class);
 
     public static IConstantFactory me() {
         return SpringContextHolder.getBean("constantFactory");
@@ -392,7 +392,7 @@ public class ConstantFactory implements IConstantFactory {
         if (StringUtil.isNotEmpty(val)) {
             return val;
         }
-        val = (String) configCache.get(cfgName);
+        val = cfgService.getCfgValue(cfgName);
         set(CacheKey.CFG + cfgName, val);
         return val;
     }

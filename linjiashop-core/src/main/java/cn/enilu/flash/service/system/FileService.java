@@ -1,12 +1,11 @@
 package cn.enilu.flash.service.system;
 
+import cn.enilu.flash.bean.constant.CfgKey;
 import cn.enilu.flash.bean.constant.cache.Cache;
 import cn.enilu.flash.bean.constant.cache.CacheKey;
 import cn.enilu.flash.bean.entity.system.FileInfo;
-import cn.enilu.flash.bean.enumeration.ConfigKeyEnum;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.bean.vo.shop.Base64File;
-import cn.enilu.flash.cache.ConfigCache;
 import cn.enilu.flash.cache.TokenCache;
 import cn.enilu.flash.dao.system.FileInfoRepository;
 import cn.enilu.flash.security.JwtUtil;
@@ -32,7 +31,7 @@ import java.util.UUID;
 public class FileService extends BaseService<FileInfo,Long,FileInfoRepository> {
     private Logger logger;
     @Autowired
-    private ConfigCache configCache;
+    private CfgService cfgService;
     @Autowired
     private FileInfoRepository fileInfoRepository;
     @Autowired
@@ -49,7 +48,7 @@ public class FileService extends BaseService<FileInfo,Long,FileInfoRepository> {
         String realFileName =   uuid +"."+ originalFileName.split("\\.")[originalFileName.split("\\.").length-1];
         try {
 
-            File file = new File(configCache.get(ConfigKeyEnum.SYSTEM_FILE_UPLOAD_PATH.getValue()) + File.separator+realFileName);
+            File file = new File(cfgService.getCfgValue(CfgKey.SYSTEM_FILE_UPLOAD_PATH) + File.separator+realFileName);
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
@@ -72,7 +71,7 @@ public class FileService extends BaseService<FileInfo,Long,FileInfoRepository> {
         String originalFileName = base64File.getName();
         String realFileName =   uuid +"."+ originalFileName.split("\\.")[originalFileName.split("\\.").length-1];
         try {
-            File file = new File(configCache.get(ConfigKeyEnum.SYSTEM_FILE_UPLOAD_PATH.getValue()) + File.separator+realFileName);
+            File file = new File(cfgService.getCfgValue(CfgKey.SYSTEM_FILE_UPLOAD_PATH) + File.separator+realFileName);
             if(base64ToFile(base64File.getBase64(),file)){
                 return save(originalFileName,file);
             }
@@ -125,7 +124,7 @@ public class FileService extends BaseService<FileInfo,Long,FileInfoRepository> {
      */
     public FileInfo createExcel(String template, String fileName, Map<String, Object> data){
         FileOutputStream outputStream = null;
-        File file = new File(configCache.get(ConfigKeyEnum.SYSTEM_FILE_UPLOAD_PATH.getValue()) + File.separator+UUID.randomUUID().toString()+".xlsx");
+        File file = new File(cfgService.getCfgValue(CfgKey.SYSTEM_FILE_UPLOAD_PATH) + File.separator+UUID.randomUUID().toString()+".xlsx");
         try {
 
             // 定义输出类型
@@ -184,13 +183,13 @@ public class FileService extends BaseService<FileInfo,Long,FileInfoRepository> {
     @Cacheable(value = Cache.APPLICATION, key = "'" + CacheKey.FILE_INFO + "'+#id")
     public FileInfo get(Long id){
         FileInfo fileInfo = fileInfoRepository.getOne(id);
-        fileInfo.setAblatePath(configCache.get(ConfigKeyEnum.SYSTEM_FILE_UPLOAD_PATH.getValue()) + File.separator+fileInfo.getRealFileName());
+        fileInfo.setAblatePath(cfgService.getCfgValue(CfgKey.SYSTEM_FILE_UPLOAD_PATH) + File.separator+fileInfo.getRealFileName());
         return fileInfo;
     }
 
     public FileInfo getByName(String fileName) {
         FileInfo fileInfo =  get(SearchFilter.build("realFileName",fileName));
-        fileInfo.setAblatePath(configCache.get(ConfigKeyEnum.SYSTEM_FILE_UPLOAD_PATH.getValue()) + File.separator+fileInfo.getRealFileName());
+        fileInfo.setAblatePath(cfgService.getCfgValue(CfgKey.SYSTEM_FILE_UPLOAD_PATH) + File.separator+fileInfo.getRealFileName());
         return fileInfo;
     }
 }

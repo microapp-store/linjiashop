@@ -27,7 +27,7 @@ public class ConfigCacheImpl implements ConfigCache {
     private CacheDao cacheDao;
 
     @Override
-    public Object get(String key) {
+    public String get(String key) {
         return (String) cacheDao.hget(CacheDao.CONSTANT,key);
     }
 
@@ -35,7 +35,7 @@ public class ConfigCacheImpl implements ConfigCache {
     public String get(String key, boolean local) {
         String ret = null;
         if(local) {
-             ret = (String) get(key);
+             ret = get(key);
         }else{
             ret = cfgRepository.findByCfgName(key).getCfgValue();
             set(key,ret);
@@ -45,7 +45,7 @@ public class ConfigCacheImpl implements ConfigCache {
 
     @Override
     public String get(String key, String def) {
-        String ret = (String) get(key);
+        String ret =  get(key);
         if(StringUtil.isEmpty(ret)){
             return ret;
         }

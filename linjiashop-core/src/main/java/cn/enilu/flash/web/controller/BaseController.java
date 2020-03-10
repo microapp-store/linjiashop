@@ -7,6 +7,8 @@ import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.web.ApiConstants;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import eu.bitwalker.useragentutils.OperatingSystem;
+import eu.bitwalker.useragentutils.UserAgent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -128,6 +130,13 @@ public class BaseController {
         JSONObject json = JSONObject.parseObject(jsonStr);
         return JSON.toJavaObject(json, klass);
     }
-
+    public String detectOS(HttpServletRequest req) {
+        if (req != null) {
+            UserAgent userAgent = UserAgent.parseUserAgentString(req.getHeader("User-Agent"));
+            OperatingSystem os = userAgent.getOperatingSystem();
+            return os.getName();
+        }
+        return null;
+    }
 
 }

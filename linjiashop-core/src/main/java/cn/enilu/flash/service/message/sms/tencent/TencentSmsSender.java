@@ -1,8 +1,8 @@
 package cn.enilu.flash.service.message.sms.tencent;
 
-import cn.enilu.flash.bean.enumeration.ConfigKeyEnum;
-import cn.enilu.flash.cache.ConfigCache;
+import cn.enilu.flash.bean.constant.CfgKey;
 import cn.enilu.flash.service.message.sms.SmsSender;
+import cn.enilu.flash.service.system.CfgService;
 import cn.enilu.flash.utils.StringUtil;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
@@ -15,12 +15,12 @@ import org.springframework.stereotype.Service;
 public class TencentSmsSender implements SmsSender {
     private Logger logger = LoggerFactory.getLogger(TencentSmsSender.class);
     @Autowired
-    private ConfigCache configCache;
+    private CfgService cfgService;
     @Override
     public boolean sendSms(String tplCode, String receiver, String[] args, String content) {
-        Integer appid = Integer.valueOf((String) configCache.get(ConfigKeyEnum.API_TENCENT_SMS_APPID.getValue()));
-        String appkey = (String) configCache.get(ConfigKeyEnum.API_TENCENT_SMS_APPKEY.getValue());
-        String smsSign = (String) configCache.get(ConfigKeyEnum.API_TENCENT_SMS_SIGN.getValue());
+        Integer appid = Integer.valueOf( cfgService.getCfgValue(CfgKey.API_TENCENT_SMS_APPID));
+        String appkey = cfgService.getCfgValue(CfgKey.API_TENCENT_SMS_APPKEY);
+        String smsSign = cfgService.getCfgValue(CfgKey.API_TENCENT_SMS_SIGN);
         SmsSingleSender ssender = new SmsSingleSender(appid, appkey);
         SmsSingleSenderResult result = null;
         try{

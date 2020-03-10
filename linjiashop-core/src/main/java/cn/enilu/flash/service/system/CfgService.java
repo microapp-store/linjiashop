@@ -46,6 +46,18 @@ public class CfgService  extends BaseService<Cfg,Long,CfgRepository> {
         return get(SearchFilter.build("cfgName",cfgName));
     }
 
+    /**
+     * 根据参数名获取参数值
+     * 系统获取参数值统一使用该方法
+     * 如果参数无法做到后台管理系统和用户端系统同步，这里建议直接从数据库获取
+     * todo 建议生产中使用redis来统一管理该参数，这里从redis缓存中获取
+     * @param cfgName
+     * @return
+     */
+    public String getCfgValue(String cfgName) {
+        return getByCfgName(cfgName).getCfgValue();
+    }
+
     public void update(String cfgName, String cfgValue) {
             Cfg cfg = getByCfgName(cfgName);
             cfg.setCfgValue(cfgValue);

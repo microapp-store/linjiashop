@@ -16,7 +16,7 @@ public interface Cache {
 	 * @param key
 	 * @return
 	 */
-	Object get(String key);
+	String get(String key);
 
 
 	/**

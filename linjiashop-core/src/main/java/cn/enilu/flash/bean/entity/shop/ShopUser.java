@@ -39,5 +39,11 @@ public class ShopUser  implements Serializable {
     private String gender;
     @Column(columnDefinition = "DATETIME COMMENT '最后登陆时间'")
     private Date lastLoginTime;
+    @Column(columnDefinition = "VARCHAR(64) comment '微信OpenID'")
+    private String wechatOpenId;
+    @Column(columnDefinition = "VARCHAR(32) comment '微信昵称'")
+    private String wechatNickName;
+    @Column(columnDefinition = "VARCHAR(128) comment '微信头像'")
+    private String wechatHeadImgUrl;
 
 }

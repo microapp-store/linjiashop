@@ -52,8 +52,8 @@ public class DictCacheImpl implements DictCache {
     }
 
     @Override
-    public Object get(String key) {
-        return cacheDao.hget(CacheDao.CONSTANT,CacheKey.DICT+key);
+    public String get(String key) {
+        return (String) cacheDao.hget(CacheDao.CONSTANT,CacheKey.DICT+key);
     }
 
     @Override

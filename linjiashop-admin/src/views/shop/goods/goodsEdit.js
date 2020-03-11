@@ -2,7 +2,7 @@ import editorImage from '@/components/Tinymce'
 import plugins from '@/components/editContainer/plugins'
 import toolbar from '@/components/editContainer/toolbar'
 import goodsApi from '@/api/shop/goods'
-import {getAttrBy} from '@/api/shop/attrVal'
+import attrValApi from '@/api/shop/attrVal'
 import categoryApi from '@/api/shop/category'
 import {getApiUrl} from '@/utils/utils'
 import {getToken} from '@/utils/auth'
@@ -136,7 +136,7 @@ export default {
             }
           }
           this.setContent(this.form.detail)
-          getAttrBy(this.form.idCategory).then(response2 => {
+          attrValApi.getAttrBy(this.form.idCategory).then(response2 => {
               this.attrKeyList = response2.data.keyList
               this.attrValList = response2.data.valList
           })

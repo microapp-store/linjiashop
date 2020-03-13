@@ -76,8 +76,8 @@ public abstract class BaseService<T, ID extends Serializable, R extends BaseRepo
     }
 
     @Override
-    public Object get(String sql) {
-        return dao.getBySql(sql);
+    public Object get(String sql,Class<?> klass) {
+        return dao.getBySql(sql,klass);
     }
 
     @Override

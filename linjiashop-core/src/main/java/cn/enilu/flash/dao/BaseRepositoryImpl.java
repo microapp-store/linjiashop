@@ -1,7 +1,9 @@
 package cn.enilu.flash.dao;
 
+import cn.enilu.flash.utils.Lists;
 import org.hibernate.query.internal.NativeQueryImpl;
 import org.hibernate.transform.Transformers;
+import org.nutz.mapl.Mapl;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
@@ -41,12 +43,20 @@ public class BaseRepositoryImpl<T, ID extends Serializable>
     }
 
     @Override
-    public Object getBySql(String sql) {
-        List list = entityManager.createNativeQuery(sql).getResultList();
+    public List<?> queryBySql(String sql, Class<?> klass) {
+        List<Map> list = queryBySql(sql);
         if(list.isEmpty()){
             return null;
         }
-        return list.get(0);
+        List result = Lists.newArrayList();
+        for(Map map :list){
+            try {
+                Object bean = Mapl.maplistToObj(map,klass);
+                result.add(bean);
+            }catch (Exception e){
+            }
+        }
+        return result;
     }
     @Override
     public T getOne(ID id){
@@ -71,5 +81,14 @@ public class BaseRepositoryImpl<T, ID extends Serializable>
     @Override
     public List<T> query(String sql) {
         return entityManager.createNativeQuery(sql,klass).getResultList();
+    }
+
+    @Override
+    public Object getBySql(String sql, Class<?> klass) {
+        List list = queryBySql(sql,klass);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
     }
 }

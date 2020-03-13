@@ -22,7 +22,7 @@ public interface SelectService <T, ID> {
     T get(ID id);
     T get(SearchFilter filter);
     T get(List<SearchFilter> filters);
-    Object get(String sql);
+    Object get(String sql,Class<?> klass);
     List<Map> queryBySql(String sql);
     Map getMapBySql(String sql);
 

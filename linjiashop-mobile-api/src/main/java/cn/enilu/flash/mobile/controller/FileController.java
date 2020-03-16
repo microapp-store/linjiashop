@@ -65,7 +65,7 @@ public class FileController extends BaseController {
      * @param fileName
      */
     @RequestMapping(value="download",method = RequestMethod.GET)
-    public void download(@RequestParam("idFile") String fileName){
+    public void download(@RequestParam("fileName") String fileName){
         FileInfo fileInfo = fileService.getByName(fileName);
         fileName = StringUtil.isEmpty(fileName)? fileInfo.getOriginalFileName():fileName;
         HttpServletResponse response = HttpUtil.getResponse();

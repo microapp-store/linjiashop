@@ -28,6 +28,7 @@ public class SearchFilter {
         return new SearchFilter(fieldName, Operator.EQ, value);
     }
 
+
     public static SearchFilter build(String fieldName, Operator operator, Object value) {
         return new SearchFilter(fieldName, operator, value);
     }

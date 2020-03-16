@@ -69,7 +69,7 @@
         const objKeyArr = Object.keys(this.listObj)
         for (let i = 0, len = objKeyArr.length; i < len; i++) {
           if (this.listObj[objKeyArr[i]].uid === uid) {
-            this.listObj[objKeyArr[i]].url = this.fileUrl + '/download?idFile=' + response.data.id
+            this.listObj[objKeyArr[i]].url = this.fileUrl + '/download?fileName=' + response.data.realFileName
             this.listObj[objKeyArr[i]].hasSuccess = true
             return
           }

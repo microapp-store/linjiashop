@@ -47,13 +47,12 @@ public class FileController extends BaseController {
 
     /**
      * 下载文件
-     * @param idFile
+     * @param fileName
      * @param fileName
      */
     @RequestMapping(value="download",method = RequestMethod.GET)
-    public void download(@RequestParam("idFile") Long idFile,
-                           @RequestParam(value = "fileName",required = false) String fileName){
-        FileInfo fileInfo = fileService.get(idFile);
+    public void download(@RequestParam("fileName") String fileName){
+        FileInfo fileInfo = fileService.getByName(fileName);
         fileName = StringUtil.isEmpty(fileName)? fileInfo.getOriginalFileName():fileName;
         HttpServletResponse response = HttpUtil.getResponse();
         response.setContentType("application/x-download");

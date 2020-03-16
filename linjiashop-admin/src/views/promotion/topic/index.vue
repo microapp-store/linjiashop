@@ -121,7 +121,8 @@
                 v-model="form.idArticle"
                 filterable
                 remote
-                placeholder="请输入文章关键字搜索"
+                no-data-text="无数据,可在CMS管理-文章管理中新建专题文章"
+                placeholder="请输入文章关键字搜索2"
                 :remote-method="searchArticle"
                 :loading="searchLoading">
                 <el-option

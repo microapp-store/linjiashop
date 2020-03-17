@@ -49,7 +49,6 @@ public class MenuController extends BaseController {
     private TokenCache tokenCache;
 
     @RequestMapping(value = "/listForRouter", method = RequestMethod.GET)
-    @RequiresPermissions(value = {Permission.MENU})
     public Object listForRouter() {
         AuthorizationUser shiroUser = tokenCache.getUser(HttpUtil.getToken());
 

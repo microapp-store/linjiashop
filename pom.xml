@@ -54,6 +54,7 @@
         <github.kaptcha.version>1.0.0</github.kaptcha.version>
         <lombok.version>1.18.0</lombok.version>
         <userAgent.version>1.21</userAgent.version>
+        <weixin.java.pay.version>3.3.0</weixin.java.pay.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -309,6 +310,18 @@
                 <version>1.0.6</version>
             </dependency>
             <!-- message end-->
+
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-pay</artifactId>
+                <version>${weixin.java.pay.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-miniapp</artifactId>
+                <version>${weixin.java.pay.version}</version>
+            </dependency>
+
         </dependencies>
 
     </dependencyManagement>

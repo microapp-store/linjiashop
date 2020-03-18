@@ -64,7 +64,7 @@ export default {
         submit() {
             order.save({idAddress:this.addr.id,message:this.message}).then( response => {
                 let order = response.data
-                this.$router.push({path:'payment',query:{orderNo:order.orderSn,totalPrice:order.totalPrice}})
+                this.$router.push({path:'payment',query:{orderSn:order.orderSn,totalPrice:order.totalPrice}})
             })
         },
         formatPrice(price) {

@@ -140,7 +140,7 @@ _商品素材取自小米商城_
 ## 技术交流
 - 关注公众号：嗨客帝国，点击对应的项目菜单进群交流。
 ![公众号二维码](doc/img/haike.jpg)
-- 微信：myenilu,添加请备注：邻家小铺
+
 ## 在线文档
 - 项目文档：[http://microapp.gitee.io/linjiashop](http://microapp.gitee.io/linjiashop/)
 - 该项目克隆并扩展自[web-flash](https://github.com/enilu/web-flash),所以开发的时候多看看web-flash的[在线文档](http://enilu.gitee.io/web-flash)

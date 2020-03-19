@@ -66,8 +66,12 @@ public class Order extends ShopBaseEntity {
     private Date confirmReceivingTime;
     @Column(columnDefinition = "VARCHAR(16) COMMENT '实付类型:alipay,wechat'")
     private String payType;
-    @Column(columnDefinition = "INT COMMENT '支付状态1:未付款;2:已付款'")
+    @Column(columnDefinition = "INT COMMENT '支付状态1:未付款;2:已付款,3:支付中'")
     private Integer payStatus;
+    @Column(columnDefinition = "VARCHAR(32) COMMENT '支付流水号'")
+    private String payId;
+    @Column(columnDefinition = "VARCHAR(32) COMMENT '支付成功时间'")
+    private Date payTime;
 
 
     public String getStatusName(){
@@ -87,5 +91,9 @@ public class Order extends ShopBaseEntity {
             return OrderEnum.get(payType).getValue();
         }
         return null;
+    }
+
+    public Boolean hasPayed(){
+        return OrderEnum.PayStatusEnum.UN_SEND.getId().equals(payStatus);
     }
 }

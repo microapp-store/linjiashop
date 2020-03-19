@@ -43,7 +43,7 @@ public class ShopUser  implements Serializable {
     private String wechatOpenId;
     @Column(columnDefinition = "VARCHAR(32) comment '微信昵称'")
     private String wechatNickName;
-    @Column(columnDefinition = "VARCHAR(128) comment '微信头像'")
+    @Column(columnDefinition = "VARCHAR(256) comment '微信头像'")
     private String wechatHeadImgUrl;
 
 }

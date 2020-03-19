@@ -108,7 +108,7 @@ public class OrderController {
         order.setShippingSn(shippingSn);
         order.setShippingAmount(new BigDecimal(shippingAmount));
         order.setStatus(OrderEnum.OrderStatusEnum.SENDED.getId());
-        orderService.updateOrder(order);
+        orderService.send(order);
         return Rets.success();
     }
     @RequestMapping(value = "/comment/{id}", method = RequestMethod.POST)

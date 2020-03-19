@@ -7,6 +7,7 @@
 ### Fixes
 - 后台管理(admin-api)和用户端(mobile-api)参数由于缓存无法同步的问题 
 - 【后台管理】业务日志和登录日志创建日期不显示的问题
+- 【后台管理】不配置菜单权限时登录管理员无法获取并生成左侧菜单树
 
 ## v0.4
 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.4) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.4)

@@ -24,8 +24,6 @@ import java.util.List;
 public class OrderService extends BaseService<Order, Long, OrderRepository> {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
     private OrderItemRepository orderItemRepository;
     @Autowired
     private OrderLogRepository orderLogRepository;
@@ -55,6 +53,9 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
 
     }
 
+    public void updateOrder(Order order){
+        update(order);
+    }
     /**
      * 用户取消订单
      * @param orderSn
@@ -62,7 +63,9 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
     public void cancel(String orderSn) {
         Order order = getByOrderSn(orderSn);
         order.setStatus(OrderEnum.OrderStatusEnum.CANCEL.getId());
-       updateOrder(order);
+        String descript  = "用户取消订单";
+        saveOrderLog(order,descript);;
+        updateOrder(order);
 
     }
 
@@ -77,31 +80,24 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
     public Order confirmReceive(String orderSn) {
         Order order = getByOrderSn(orderSn);
         order.setStatus(OrderEnum.OrderStatusEnum.FINISHED.getId());
+        String descript = "客户确认收货";
+        saveOrderLog(order,descript);
         updateOrder(order);
         return order;
     }
 
-    public void updateOrder(Order order) {
-        int status = order.getStatus();
-        String descript = "";
+    public void startPay(Order order){
+        order.setPayStatus(OrderEnum.PayStatusEnum.PAYING.getId());
+        saveOrderLog(order,"客户发起支付");
+        updateOrder(order);
 
-        if(status == OrderEnum.OrderStatusEnum.CANCEL.getId().intValue()){
-            descript = "用户取消订单";
-        }
-        if(status == OrderEnum.OrderStatusEnum.SENDED.getId().intValue()){
-            descript = "管理员("+JwtUtil.getUsername()+")已发货";
-         }
-        if(status == OrderEnum.OrderStatusEnum.FINISHED.getId().intValue()){
-            descript = "用户确认收货";
-        }
-        if(status == OrderEnum.OrderStatusEnum.UN_SEND.getId().intValue()){
-            descript = "用户已付款";
-        }
-         OrderLog orderLog = new OrderLog();
-         orderLog.setIdOrder(order.getId());
-         orderLog.setDescript(descript);
-         orderLogRepository.save(orderLog);
-         update(order);
+    }
+
+    private void saveOrderLog(Order order,String descript){
+        OrderLog orderLog = new OrderLog();
+        orderLog.setIdOrder(order.getId());
+        orderLog.setDescript(descript);
+        orderLogRepository.save(orderLog);
     }
 
 
@@ -130,7 +126,16 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
             order.setStatus(OrderEnum.OrderStatusEnum.UN_SEND.getId());
             order.setRealPrice(order.getTotalPrice());
             order.setPayType(payType);
-            updateOrder(order);
+        updateOrder(order);
+            String descript = "用户已付款";
+            saveOrderLog(order,descript);
+
+    }
+
+    public void send(Order order) {
+        String descript = "管理员("+JwtUtil.getUsername()+")已发货";
+        updateOrder(order);
+        saveOrderLog(order,descript);
     }
 }
 

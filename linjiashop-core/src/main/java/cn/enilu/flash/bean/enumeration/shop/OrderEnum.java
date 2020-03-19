@@ -140,7 +140,8 @@ public class OrderEnum {
 
     public enum  PayStatusEnum {
         UN_PAY(1, "未付款"),
-        UN_SEND(2, "已付款");
+        UN_SEND(2, "已付款"),
+        PAYING(3, "支付中");
 
 
         private String value;

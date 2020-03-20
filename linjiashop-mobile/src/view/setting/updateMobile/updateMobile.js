@@ -2,7 +2,7 @@ import userApi from '@/api/user'
 import {Button, Cell, CellGroup, Col, Field, NavBar, Row, Toast} from 'vant'
 import store from '@/store'
 import util from '@/utils/util'
-
+import storage from '@/utils/storage'
 export default {
     components: {
         [Row.name]: Row,
@@ -30,7 +30,8 @@ export default {
     },
     methods: {
         init() {
-            this.oldMobile = util.formatMobile(store.state.app.user.mobile)
+            const user = storage.getUser()
+            this.oldMobile = util.formatMobile(user.mobile)
         },
         onClickLeft() {
             this.$router.go(-1)

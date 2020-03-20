@@ -1,7 +1,7 @@
 import cart from '@/api/cart'
 import { Checkbox, CheckboxGroup, Card, SubmitBar, Toast, NavBar, Tabbar, TabbarItem,Stepper, Button, Icon  } from 'vant';
 const baseApi = process.env.VUE_APP_BASE_API
-import store from '@/store'
+import storage from '@/utils/storage'
 export default {
     components: {
         [Card.name]: Card,
@@ -41,7 +41,9 @@ export default {
 
     methods: {
         init(){
-            const user = store.state.app.user
+            //const user = store.state.app.user
+            const user = storage.getUser()
+            console.log('user',user)
             this.isLogin = user.nickName
             if(this.isLogin) {
                 cart.queryByUser().then(response => {

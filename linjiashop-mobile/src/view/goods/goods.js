@@ -1,7 +1,7 @@
 import goods from '@/api/goods'
 import cart from '@/api/cart'
 import favorite from '@/api/favorite'
-import store from '@/store'
+import storage from '@/utils/storage'
 
 import {
     Cell,
@@ -70,7 +70,6 @@ export default {
         };
     },
     created() {
-        console.log('init')
         this.init()
     },
     computed: {
@@ -93,8 +92,7 @@ export default {
                 }
                 this.goods = goods
 
-                const user = store.state.app.user
-                console.log('user',user)
+                const user = storage.getUser()
                 if(user.nickName) {
                     //获取当前用户购物车商品数量
                     cart.count().then(response => {

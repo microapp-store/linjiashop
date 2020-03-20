@@ -14,8 +14,8 @@ export default {
 
   },
   getUser:function(){
-     const user  = this.get('user')
-    return JSON.parse(user)
+    const user  = JSON.parse(this.get('user'))
+    return user
   },
   removeToken:function(){
     localStorage.removeItem(tokenKey)

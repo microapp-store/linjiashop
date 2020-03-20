@@ -1,7 +1,7 @@
 import userApi from '@/api/user'
 import {Button, Cell, CellGroup, Field, Image, NavBar, Toast, Uploader} from 'vant'
 import store from '@/store'
-
+import storage from '@/utils/storage'
 const baseApi = process.env.VUE_APP_BASE_API
 export default {
     components: {
@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         init() {
-            this.user = store.state.app.user
+            this.user = storage.getUser()// store.state.app.user
             if (this.user.avatar) {
                 this.avatarUrl = baseApi + '/file/getImgStream?idFile=' + this.user.avatar
             }
@@ -33,7 +33,6 @@ export default {
             this.$router.go(-1)
         },
         afterRead(vantFile) {
-            console.log('上传成功', vantFile)
             userApi.upload({
                 name: vantFile.file.name,
                 type: vantFile.file.type,

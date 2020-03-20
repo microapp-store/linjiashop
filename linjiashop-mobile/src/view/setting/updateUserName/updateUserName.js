@@ -1,7 +1,7 @@
 import userApi from '@/api/user'
 import {Button, Cell, CellGroup, Field, NavBar, Toast} from 'vant'
 import store from '@/store'
-
+import storage from '@/utils/storage'
 export default {
     components: {
         [Button.name]: Button,
@@ -21,7 +21,7 @@ export default {
     },
     methods: {
         init() {
-            this.userName =store.state.app.user.nickName
+            this.userName = storage.getUser().nickName
         },
         onClickLeft() {
             this.$router.go(-1)

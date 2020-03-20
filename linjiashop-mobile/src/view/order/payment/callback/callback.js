@@ -20,6 +20,7 @@ export default {
     methods: {
         init() {
             const orderSn = this.$route.params.orderSn
+            alert(orderSn)
             this.orderSn = orderSn
             payApi.queryResult(orderSn).then(res => {
                 if(res.data === true){

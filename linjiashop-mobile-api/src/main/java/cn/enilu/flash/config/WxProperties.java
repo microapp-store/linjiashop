@@ -1,9 +1,7 @@
 package cn.enilu.flash.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
 @ConfigurationProperties(prefix = "wx")
 public class WxProperties {
 

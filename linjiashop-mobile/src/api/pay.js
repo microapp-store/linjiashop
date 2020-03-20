@@ -14,6 +14,12 @@ export default {
             url: '/user/updateUserName/' + userName,
             method: 'post'
         })
+    },
+    queryResult:function(orderSn){
+        return request({
+            url: '/pay/queryResult/' + orderSn,
+            method: 'get'
+        })
     }
 }
 

@@ -1,4 +1,4 @@
-package cn.enilu.flash.service.api;
+package cn.enilu.flash.service;
 
 import cn.enilu.flash.bean.entity.shop.Order;
 import cn.enilu.flash.bean.entity.shop.ShopUser;

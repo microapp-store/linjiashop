@@ -36,12 +36,8 @@ export default {
             if(this.payType === 'wxpay'){
                 this.wxPrepare()
             }else{
-
+                Toast('支付宝支付对接中...')
             }
-            // orderApi.payment(this.order.orderSn,this.payType).then(response => {
-            //     console.log('payment',response)
-            // })
-            // this.$router.push('/')
         },
         formatPrice(price) {
             return (price / 100).toFixed(2);
@@ -95,10 +91,12 @@ export default {
                     success: function (res) {
                         // 支付成功后的回调函数
                         console.log('res',res)
+                        this.$router.push('/payment/callback/'+this.orderSn)
                     },
                     fail: function (res) {
                         //失败回调函数
                         console.log('res',res)
+                        Toast('支付失败')
                     }
                 })
             })

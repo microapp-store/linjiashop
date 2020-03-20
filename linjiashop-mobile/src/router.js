@@ -126,6 +126,14 @@ const routes = [
         }
     },
     {
+        name: 'payment/callback/:orderSn',
+        component: () => import('./view/order/payment/callback'),
+        meta: {
+            requireAuth: true,
+            title: '支付结果'
+        }
+    },
+    {
         name: 'checkout',
         component: () => import('./view/order/checkout'),
         meta: {

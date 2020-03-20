@@ -2,18 +2,16 @@ package cn.enilu.flash.mobile.controller;
 
 import cn.enilu.flash.bean.entity.shop.Order;
 import cn.enilu.flash.bean.entity.shop.ShopUser;
+import cn.enilu.flash.bean.enumeration.shop.OrderEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
-import cn.enilu.flash.service.api.WeixinPayService;
+import cn.enilu.flash.service.WeixinPayService;
 import cn.enilu.flash.service.shop.OrderService;
 import cn.enilu.flash.service.shop.ShopUserService;
 import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.web.controller.BaseController;
 import com.github.binarywang.wxpay.bean.order.WxPayMpOrderResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author ：enilu
@@ -55,5 +53,18 @@ public class PayController extends BaseController {
     public Object wxNotify(){
         String  msg = weixinPayService.resultNotify();
         return Rets.success(msg);
+    }
+
+    /**
+     * 查询支付结果
+     * @param orderSn
+     * @return
+     */
+    @RequestMapping(value = "queryResult/{orderSn}",method = RequestMethod.GET)
+    public Object wxNotify(@PathVariable("orderSn") String orderSn){
+        Order order = orderService.getByOrderSn(orderSn);
+        Boolean payResult = OrderEnum.PayStatusEnum.UN_SEND.getId().equals(order.getPayStatus())
+                && OrderEnum.PayStatusEnum.UN_SEND.getId().equals(order.getStatus());
+        return Rets.success(payResult);
     }
 }

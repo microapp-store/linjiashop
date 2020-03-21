@@ -30,9 +30,6 @@ export default {
             this.order ={orderSn:orderSn,totalPrice:totalPrice}
         },
         pay() {
-            let payTypeName = this.payType == 'wxpay' ? '微信支付' : '支付宝'
-            Toast('准备使用' + payTypeName + '支付')
-
             if(this.payType === 'wxpay'){
                 this.wxPrepare()
             }else{
@@ -46,7 +43,6 @@ export default {
             payApi.wxPrepare({orderSn:this.order.orderSn}).then(res => {
                 // 存储微信支付数据data
                 let data = res.data
-                console.log("即将跳转微信支付")
                 //函数为分装过得  (就是调用微信支付)
                 this.wxPay(
                     {
@@ -73,7 +69,7 @@ export default {
             let packageValue = data.package
             let paySign = data.paySign
             let signType = data.signType
-            console.log('发起微信支付')
+            const that = this
             //下面要发起微信支付了
             wx.config({
                 debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -92,12 +88,10 @@ export default {
                     paySign: paySign, // 支付签名
                     success: function (res) {
                         // 支付成功后的回调函数
-                        console.log('res',res)
-                        this.$router.push('/payment/callback/'+this.order.orderSn)
+                        that.$router.push('/payment/callback/'+this.order.orderSn)
                     },
                     fail: function (res) {
                         //失败回调函数
-                        console.log('res',res)
                         Toast('支付失败')
                     }
                 })

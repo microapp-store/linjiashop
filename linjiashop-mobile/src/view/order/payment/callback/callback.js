@@ -20,7 +20,6 @@ export default {
     methods: {
         init() {
             const orderSn = this.$route.params.orderSn
-            alert(orderSn)
             this.orderSn = orderSn
             payApi.queryResult(orderSn).then(res => {
                 if(res.data === true){
@@ -33,11 +32,9 @@ export default {
             })
         },
         toIndex(){
-            alert('index')
             this.$router.push('/index')
         },
         toOrder(){
-            alert('order'+this.orderSn)
             this.$router.push('/order/detail/'+this.orderSn)
         }
     }

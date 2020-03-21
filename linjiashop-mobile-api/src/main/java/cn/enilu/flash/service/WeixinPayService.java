@@ -9,7 +9,6 @@ import com.github.binarywang.wxpay.bean.notify.WxPayNotifyResponse;
 import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
 import com.github.binarywang.wxpay.bean.order.WxPayMpOrderResult;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
-import com.github.binarywang.wxpay.bean.result.BaseWxPayResult;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
@@ -23,7 +22,6 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * 微信支付
@@ -53,6 +51,7 @@ public class WeixinPayService {
             return  result;
         } catch (WxPayException e) {
             logger.error("微信支付异常",e);
+
         }
         return null;
     }
@@ -90,8 +89,7 @@ public class WeixinPayService {
         String orderSn = result.getOutTradeNo();
         String payId = result.getTransactionId();
 
-        // 分转化成元
-        String totalFee = BaseWxPayResult.fenToYuan(result.getTotalFee());
+        Integer totalFee =  result.getTotalFee();
         Order order = orderService.getByOrderSn(orderSn);
         if (order == null) {
             return WxPayNotifyResponse.fail("订单不存在 sn=" + orderSn);
@@ -103,15 +101,12 @@ public class WeixinPayService {
         }
 
         // 检查支付订单金额
-        if (!totalFee.equals(order.getTotalPrice().toString())) {
+        if (totalFee.intValue()!=order.getTotalPrice().intValue()) {
             return WxPayNotifyResponse.fail(order.getOrderSn() + " : 支付金额不符合 totalFee=" + totalFee);
         }
 
         order.setPayId(payId);
-        order.setPayTime(new Date());
-        order.setStatus(OrderEnum.OrderStatusEnum.UN_SEND.getId());
-        order.setPayStatus(OrderEnum.PayStatusEnum.UN_SEND.getId());
-        orderService.updateOrder(order);
+        orderService.paySuccess(order, OrderEnum.PayTypeEnum.UN_SEND.getKey());
 
 
         //todo 发送短信通知

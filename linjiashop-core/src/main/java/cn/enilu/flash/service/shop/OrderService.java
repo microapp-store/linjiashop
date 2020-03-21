@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -116,18 +117,18 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
     }
 
     /**
-     * todo 支付订单暂时没有真实实现，仅仅更改订单状态为已支付
-     * @param orderSn
+     * 支付成功，更新订单数据
+     * @param order
      * @param  payType
      */
-    public void payment(String orderSn,String payType) {
-            Order order = getByOrderSn(orderSn);
+    public void paySuccess(Order order,String payType) {
+             order.setPayTime(new Date());
             order.setPayStatus(OrderEnum.PayStatusEnum.UN_SEND.getId());
             order.setStatus(OrderEnum.OrderStatusEnum.UN_SEND.getId());
             order.setRealPrice(order.getTotalPrice());
             order.setPayType(payType);
-        updateOrder(order);
-            String descript = "用户已付款";
+            updateOrder(order);
+            String descript = "用户付款成功";
             saveOrderLog(order,descript);
 
     }

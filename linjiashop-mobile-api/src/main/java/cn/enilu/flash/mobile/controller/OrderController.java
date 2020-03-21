@@ -114,10 +114,4 @@ public class OrderController extends BaseController {
         Order order = orderService.confirmReceive(orderSn);
         return Rets.success(order);
      }
-     @RequestMapping(value = "payment/{orderSn}",method = RequestMethod.POST)
-     public Object payment(@PathVariable("orderSn") String orderSn,
-                           @RequestParam("payType") String payType){
-         orderService.payment(orderSn,payType);
-         return Rets.success();
-     }
 }

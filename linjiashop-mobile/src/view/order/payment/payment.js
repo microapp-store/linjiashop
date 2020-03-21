@@ -1,4 +1,3 @@
-import orderApi from '@/api/orders'
 import payApi from '@/api/pay'
 import {Button, Cell, CellGroup, NavBar, Radio, RadioGroup, Toast} from 'vant'
 import wx from 'weixin-js-sdk'
@@ -33,6 +32,7 @@ export default {
         pay() {
             let payTypeName = this.payType == 'wxpay' ? '微信支付' : '支付宝'
             Toast('准备使用' + payTypeName + '支付')
+
             if(this.payType === 'wxpay'){
                 this.wxPrepare()
             }else{
@@ -59,6 +59,8 @@ export default {
                     }
 
                 )
+            }).catch(err =>{
+                Toast('系统异常，青稍后再试')
             })
 
         },
@@ -68,7 +70,7 @@ export default {
             let timestamp = data.timeStamp
             let nonceStr = data.nonceStr
             let signature = data.signature
-            let packages = data.package
+            let packages = data.packageValue
             let paySign = data.paySign
             let signType = data.signType
             console.log('发起微信支付')
@@ -91,7 +93,7 @@ export default {
                     success: function (res) {
                         // 支付成功后的回调函数
                         console.log('res',res)
-                        this.$router.push('/payment/callback/'+this.orderSn)
+                        this.$router.push('/payment/callback/'+this.order.orderSn)
                     },
                     fail: function (res) {
                         //失败回调函数

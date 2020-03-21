@@ -55,19 +55,6 @@ export default {
             url: '/user/order/confirm/'+orderSn,
             method: 'post'
         })
-    },
-    /**
-     * 支付订单
-     * @param orderSn
-     */
-    payment(orderSn,payType){
-        return request({
-            url: '/user/order/payment/'+orderSn,
-            method: 'post',
-            params:{
-                payType:payType
-            }
-        })
     }
 
 }

@@ -42,14 +42,17 @@ public class PayController extends BaseController {
 //                "signType","aaa",
 //                "timeStamp","aa"
 //        );
-        return Rets.success(wxOrder);
+        if(wxOrder!=null) {
+            return Rets.success(wxOrder);
+        }
+        return Rets.failure("数据准备异常");
     }
 
     /**
      * 微信支付回调
      * @return
      */
-    @RequestMapping(value = "wx/notify",method = RequestMethod.GET)
+    @RequestMapping(value = "wx/notify",method = RequestMethod.POST)
     public Object wxNotify(){
         String  msg = weixinPayService.resultNotify();
         return Rets.success(msg);

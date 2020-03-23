@@ -44,10 +44,20 @@ public class WeixinService {
         String jsapiTicket = getJsapiTicket(accessToken);
 
         Cfg tokenCfg = cfgService.getByCfgName(CfgKey.WX_ACCESS_TOKEN);
+        if(tokenCfg==null){
+            tokenCfg = new Cfg();
+            tokenCfg.setCfgName(CfgKey.WX_ACCESS_TOKEN);
+            tokenCfg.setCfgDesc("微信token，通过定时任务获取");
+        }
         tokenCfg.setCfgValue(accessToken);
         cfgService.saveOrUpdate(tokenCfg);
 
         Cfg tidCfg = cfgService.getByCfgName(CfgKey.WX_JS_API_TICKET);
+        if(tidCfg==null){
+            tidCfg = new Cfg();
+            tidCfg.setCfgName(CfgKey.WX_JS_API_TICKET);
+            tidCfg.setCfgDesc("微信ticket，通过定时任务获取");
+        }
         tidCfg.setCfgValue(jsapiTicket);
         cfgService.saveOrUpdate(tidCfg);
     }

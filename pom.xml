@@ -310,7 +310,7 @@
                 <version>1.0.6</version>
             </dependency>
             <!-- message end-->
-
+            <!--微信支付 start-->
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-pay</artifactId>

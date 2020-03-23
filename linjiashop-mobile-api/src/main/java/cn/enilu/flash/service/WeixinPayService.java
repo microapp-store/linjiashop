@@ -107,8 +107,6 @@ public class WeixinPayService {
 
         order.setPayId(payId);
         orderService.paySuccess(order, OrderEnum.PayTypeEnum.UN_SEND.getKey());
-
-
         //todo 发送短信通知
         //todo 发送微信模板消息
         return WxPayNotifyResponse.success("支付成功！");

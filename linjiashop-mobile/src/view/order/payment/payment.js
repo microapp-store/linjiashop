@@ -88,7 +88,7 @@ export default {
                     paySign: paySign, // 支付签名
                     success: function (res) {
                         // 支付成功后的回调函数
-                        that.$router.push('/payment/callback/'+this.order.orderSn)
+                        that.$router.push('/payment/callback/'+that.order.orderSn)
                     },
                     fail: function (res) {
                         //失败回调函数

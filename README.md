@@ -143,8 +143,9 @@ _商品素材取自小米商城_
 
 ## 在线文档
 - 项目文档：[http://microapp.gitee.io/linjiashop](http://microapp.gitee.io/linjiashop/)
+- [商业支持](http://microapp.gitee.io/linjiashop/other/xiaomiquan.html)
 - 该项目克隆并扩展自[web-flash](https://github.com/enilu/web-flash),所以开发的时候多看看web-flash的[在线文档](http://enilu.gitee.io/web-flash)
 - 该项目手机端linjiashop-mobile使用有赞Vant组件库，开发过程可以参考Vant的[在线文档](https://youzan.github.io/vant/#/zh-CN/intro)
 - 该项目微信小程序使用mpvue+vant-weapp，开发过程请参考相关文档：[mpvue文档](http://mpvue.com/),[vant-weapp文档](https://youzan.github.io/vant-weapp/#/intro)
 - 该项目的业务功能和部分功能代码参考复用了[litemall](https://github.com/linlinjava/litemall)，感谢[linlinjava](https://github.com/linlinjava)
- 
+- [视频教程](http://microapp.gitee.io/linjiashop/other/video.html)

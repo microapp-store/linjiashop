@@ -140,4 +140,5 @@ linjiashop包含了后台管理功能和手机端商城业务功能
  
 ## 技术交流
 - QQ群：254059156
+- [商业支持](http://microapp.gitee.io/linjiashop/other/xiaomiquan.html)
 - 微信：myenilu,添加请备注：邻家小铺

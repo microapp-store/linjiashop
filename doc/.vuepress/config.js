@@ -28,6 +28,7 @@ module.exports = {
                     },
                     {text:'帮助',items:[
                             {text: '在线资源',link:'/base/resource'},
+                            {text:'付费社区',link:'/other/xiaomiquan'},
                             {text:'QQ群(254059156)',link:'https://jq.qq.com/?_wv=1027&k=5rEmcb6'},
                             {text:'作者blog',link:'http://blog.enilu.cn'},
                             {text:'商业支持',link:'https://www.microapp.store'},

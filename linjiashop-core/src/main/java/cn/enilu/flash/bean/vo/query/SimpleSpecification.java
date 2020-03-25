@@ -104,7 +104,6 @@ public class SimpleSpecification <T> implements Specification<T> {
                 return cb.isNull(expression);
             case ISNOTNULL:
                 return cb.isNotNull(expression);
-
             case BETWEEN:
                 if (value instanceof Date[]) {
                     Date[] dateArray = (Date[]) value;

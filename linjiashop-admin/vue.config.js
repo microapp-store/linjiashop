@@ -36,7 +36,7 @@ module.exports = {
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
         target: `http://localhost:8082`,
-        changeOrigin: true,
+        changeOrigin: true,// target是域名的话，需要这个参数
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }

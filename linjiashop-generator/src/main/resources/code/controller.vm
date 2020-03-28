@@ -5,12 +5,10 @@ import ${table.ServiceFullClassName};
 
 import ${table.basePackageName}.bean.core.BussinessLog;
 import ${table.basePackageName}.bean.constant.factory.PageFactory;
-import ${table.basePackageName}.bean.dictmap.CommonDict;
 import ${table.basePackageName}.bean.enumeration.BizExceptionEnum;
 import ${table.basePackageName}.bean.exception.ApplicationException;
 import ${table.basePackageName}.bean.vo.front.Rets;
 
-import ${table.basePackageName}.utils.Maps;
 import ${table.basePackageName}.utils.StringUtil;
 import ${table.basePackageName}.utils.factory.Page;
 
@@ -35,11 +33,11 @@ public class ${table.ControllerClassName} {
 	}
 	@RequestMapping(method = RequestMethod.POST)
 	@BussinessLog(value = "编辑${table.Label}", key = "name")
-	public Object save(@ModelAttribute ${table.EntityClassName} ${table.EntityInstanceName}){
-		if(${table.EntityInstanceName}.getId()==null){
-			${table.ServiceInstanceName}.insert(${table.EntityInstanceName});
+	public Object save(@ModelAttribute ${table.EntityClassName} ${table.entityNameLowerFirstChar}){
+		if(${table.entityNameLowerFirstChar}.getId()==null){
+			${table.ServiceInstanceName}.insert(${table.entityNameLowerFirstChar});
 		}else {
-			${table.ServiceInstanceName}.update(${table.EntityInstanceName});
+			${table.ServiceInstanceName}.update(${table.entityNameLowerFirstChar});
 		}
 		return Rets.success();
 	}

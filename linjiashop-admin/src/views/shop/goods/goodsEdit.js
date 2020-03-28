@@ -174,7 +174,7 @@ export default {
         }).then( response => {
           this.idGoods = response.data
         })
-        getAttrBy(this.form.idCategory).then(response2 => {
+        attrValApi.getAttrBy(this.form.idCategory).then(response2 => {
           this.attrKeyList = response2.data.keyList
           this.attrValList = response2.data.valList
         })

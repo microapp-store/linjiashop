@@ -29,9 +29,9 @@ module.exports = {
                     {text:'帮助',items:[
                             {text: '在线资源',link:'/base/resource'},
                             {text:'问答社区',link:'/other/xiaomiquan'},
+                            {text:'视频教程',link:'/other/video'},
                             {text:'QQ群(254059156)',link:'https://jq.qq.com/?_wv=1027&k=5rEmcb6'},
                             {text:'作者blog',link:'http://blog.enilu.cn'},
-                            {text:'商业支持',link:'https://www.microapp.store'},
                             {text:'FAQ',link:'/other/faq'},
                             {text:'Change Log',link:'/other/changelog'}
                     ]},

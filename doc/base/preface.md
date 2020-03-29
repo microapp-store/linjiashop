@@ -19,7 +19,10 @@ pageClass: getting-started
 - linjiashop 包含了app版本（基于flutter) 仓库地址[gitee](https://gitee.com/microapp/linjiashop-flutter),[github](https://github.com/microapp-store/linjiashop-flutter)
 - linjiashop 采用[web-flash](http://enilu.gitee.io/web-flash/)作为底层基础框架搭建，开发过程遇到问题请多阅读该项目文档，本文档重点对业务功能做介绍。 
 
-
+## 演示
+- 手机版本：[http://linjiashop.microapp.store](http://linjiashop.microapp.store)
+- 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 请不要随意删除测试数据，谢谢
+- [开发教程视频](../other/video.html)
 ## 功能模块
 linjiashop包含了后台管理功能和手机端商城业务功能
 - 基础模块
@@ -77,9 +80,6 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 ![效果](../img/app/mobile.gif)
 ### 后台管理
 ![后台管理](../img/admin.gif)
-## 演示
-- 手机版本：[http://linjiashop.microapp.store](http://linjiashop.microapp.store)
-- 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 请不要随意删除测试数据，谢谢
 
 ## 技术选型
 - 核心框架：Spring Boot
@@ -135,7 +135,7 @@ linjiashop包含了后台管理功能和手机端商城业务功能
     - 进入linjiashop-wxapp目录
         - 运行  npm install --registry=https://registry.npm.taobao.org
         - 运行npm run dev
-        - 启动微信开发工具打开linjiashop-wxapp/dist/wx 目录即可预览小程序
+        - 启动微信开发工具导入linjiashop-wxapp/dist/wx 目录即可预览小程序
  
  
 ## 技术交流

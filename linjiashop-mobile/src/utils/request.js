@@ -2,6 +2,8 @@ import axios from 'axios'
 import { router } from '@/router'
 import store from '@/store'
 import storage  from '@/utils/storage'
+
+import { Toast } from 'vant'
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
@@ -73,6 +75,7 @@ service.interceptors.response.use(
             })
             return Promise.reject(error.response.data.message)
           }else{
+            Toast.fail(error.response.data.message)
             return Promise.reject(error.response.data.message)
           }
           break;

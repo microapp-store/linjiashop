@@ -51,9 +51,8 @@ public class GoodsController {
 	@BussinessLog(value = "编辑商品", key = "name")
 	@RequiresPermissions(value = {Permission.GOODS_EDIT})
 	public Object save(@RequestBody @Valid Goods goods){
+		List<GoodsSku> skuList = goodsSkuService.queryAll(SearchFilter.build("idGoods",goods.getId()));
 		if(goods.getPrice() ==null){
-			//如果配置了price，说明是单规格商品，则将之前配置的sku库存皆设置为0
-			List<GoodsSku> skuList = goodsSkuService.queryAll(SearchFilter.build("idGoods",goods.getId()));
 			if(!skuList.isEmpty()){
 				int stock = 0;
 				for(GoodsSku sku:skuList){
@@ -61,11 +60,16 @@ public class GoodsController {
 				}
 				goods.setStock(stock);
 				goods.setPrice(skuList.get(0).getPrice());
-				goodsSkuService.update(skuList);
 			}else{
+				throw new ApplicationException(BizExceptionEnum.DATA_ERROR);
+			}
+		}else{
+			if(!skuList.isEmpty()){
+				//如果配置了price，说明是单规格商品，则将之前配置的sku库存皆设置为0;这里最好不要删除sku记录，避免之前下过的订单无法正确关联
 				for(GoodsSku sku:skuList){
-					goods.setStock(goods.getStock()+sku.getStock());
+					sku.setStock(0);
 				}
+				goodsSkuService.update(skuList);
 			}
 		}
 		if(goods.getId()==null){

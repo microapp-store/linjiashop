@@ -11,7 +11,7 @@
 - qq群里问过的问题很多，重复的问题也很多，但是qq记录搜索做的不太好，导致好问题无法沉淀下来，重复回答，浪费时间。
  
 ## 加入方式：
-- 方法1：邀请好友给以下两个项目（gitee上）star 10个(注意是合计10个即可，不是每个10个)即可，然后截图发给作者（微信：myenilu),作者核实过后会邀请你进来。[linjiashop](https://gitee.com/microapp/linjiashop),[web-flash](https://gitee.com/enilu/web-flash)
+- 方法1：邀请好友给以下两个项目（gitee上）star 10个(注意是合计10个即可，不是每个10个)即可，然后截图发给作者（微信：myenilu),作者核实过后会邀请你进来。[linjiashop](https://gitee.com/microapp/linjiashop),[web-flash](https://gitee.com/enilu/web-flash),然后截图发给作者（微信：myenilu),作者核实过后会邀请你进来。
 
 - 方法2：扫描下图知识星球二维码直接支付即可加入
 ![小密圈](../img/other/xiaomiquan.png)

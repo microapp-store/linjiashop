@@ -5,13 +5,19 @@
 - 对接微信-获取微信用户信息
 - 重构日志记录方式（直接使用实体类的comment注释代替自定义AbstractDictMap子类的方式来描述更改的字段信息）
 - 对接微信支付
+- 用户下单的时候判断库存避免超卖
+- mobile端针对后台的500错误使用toast提示统一显示处理
 ### Fixes
-
 - 【后台管理】商品编辑界面上传的图片无法显示
 - 【后台管理】新建立的角色配置给用户后无法登录
 - 后台管理(admin-api)和用户端(mobile-api)参数由于缓存无法同步的问题 
 - 【后台管理】业务日志和登录日志创建日期不显示的问题
 - 【后台管理】不配置菜单权限时登录管理员无法获取并生成左侧菜单树
+- BaseEntity使用hibernate的@CreationTimestamp和@UpdateTimestamp代替spring的@CreatedDate和@LastModifiedDate
+- 【后台管理】商品更新的时候从多规格更改位单规格的时候逻辑错误
+- 对下单的时候库存做事务管理和加锁处理，以避免超卖问题
+- 定时任务执行异常日志没有正常显示
+
 
 ## v0.4
 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.4) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.4)

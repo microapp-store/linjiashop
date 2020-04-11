@@ -57,8 +57,9 @@ public abstract class BaseService<T, ID extends Serializable, R extends BaseRepo
     }
 
     @Override
-    //暂时不使用缓存，因为前后端分离，使用本地缓存无法做到数据同步更新，后面可以考虑使用redis缓存来替代ehcache
-    //@Cacheable(value = Cache.APPLICATION, key = "#root.targetClass.simpleName+':'+#id")
+//    todo 暂时不使用缓存，因为前后端分离，使用本地缓存无法做到数据同步更新，后面可以考虑使用redis缓存来替代ehcache
+//    todo 如果针对get方法使用启用缓存功能，建议在更新数据的时候统一调用update方法，以避免使用其他方法而忘记使用CacheEvict没有更新缓存数据导致数据错乱
+//    @Cacheable(value = Cache.APPLICATION, key = "#root.targetClass.simpleName+':'+#id")
     public T get(ID id) {
         return dao.findById(id).get();
     }
@@ -155,7 +156,6 @@ public abstract class BaseService<T, ID extends Serializable, R extends BaseRepo
 
     @Override
     public long count() {
-
         return dao.count();
     }
 

@@ -65,11 +65,11 @@ public class UserService {
         //构建后台用户认证信息
         if(userType == JwtUser.MANAGER) {
             User user = userRepository.findByAccount(account);
-            userBean.setId(user.getId());            // 账号id
-            userBean.setAccount(user.getAccount());// 账号
-            userBean.setDeptId(user.getDeptid());    // 部门id
-            userBean.setDeptName(ConstantFactory.me().getDeptName(user.getDeptid()));// 部门名称
-            userBean.setName(user.getName());        // 用户名称
+            userBean.setId(user.getId());
+            userBean.setAccount(user.getAccount());
+            userBean.setDeptId(user.getDeptid());
+            userBean.setDeptName(ConstantFactory.me().getDeptName(user.getDeptid()));
+            userBean.setName(user.getName());
             userBean.setPassword(user.getPassword());
             Long[] roleArray = Convert.toLongArray(",", user.getRoleid());
             List<Long> roleList = new ArrayList<Long>();

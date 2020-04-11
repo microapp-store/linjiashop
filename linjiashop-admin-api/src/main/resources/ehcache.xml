@@ -50,7 +50,7 @@
            maxElementsInMemory="50000"
            timeToIdleSeconds="1800"
            timeToLiveSeconds="1800"
-           eternal="true"
+           eternal="false"
            clearOnFlush="false"
            overflowToDisk="true"
            diskSpoolBufferSizeMB="1024"

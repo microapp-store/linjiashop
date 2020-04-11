@@ -41,9 +41,13 @@ public class DictCacheImpl implements DictCache {
         if(children.isEmpty()) {
            continue;
         }
+        // id ：[{male},{female}]
         set(String.valueOf(dict.getId()), children);
+        // 性别：[{male},{female}]
         set(dict.getName(), children);
+
         for(Dict child:children){
+            // id(2):female
             set(CacheKey.DICT_NAME+String.valueOf(child.getId()),child.getName());
         }
 

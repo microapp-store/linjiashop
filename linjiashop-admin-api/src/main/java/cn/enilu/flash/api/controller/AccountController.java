@@ -75,7 +75,6 @@ public class AccountController extends BaseController {
                 return Rets.failure("输入的密码错误");
             }
 
-//            String token = JwtUtil.sign(new JwtUser(user),tokenExpireTime);
             String token = userService.loginForToken(new JwtUser(user));
             Map<String, String> result = new HashMap<>(1);
             logger.info("token:{}",token);

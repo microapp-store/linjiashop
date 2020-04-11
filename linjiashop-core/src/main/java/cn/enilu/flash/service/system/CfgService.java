@@ -43,6 +43,7 @@ public class CfgService  extends BaseService<Cfg,Long,CfgRepository> {
     }
 
     public Cfg getByCfgName(String cfgName) {
+
         return get(SearchFilter.build("cfgName",cfgName));
     }
 
@@ -55,6 +56,7 @@ public class CfgService  extends BaseService<Cfg,Long,CfgRepository> {
      * @return
      */
     public String getCfgValue(String cfgName) {
+//        return configCache.get(cfgName);
         return getByCfgName(cfgName).getCfgValue();
     }
 

@@ -2,7 +2,7 @@ package cn.enilu.flash.bean.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -27,7 +27,7 @@ public abstract class ShopBaseEntity implements Serializable {
     @CreationTimestamp
     @Column(name = "create_time",columnDefinition="DATETIME COMMENT '创建时间/注册时间'")
     private Date createTime;
-    @LastModifiedDate
+    @UpdateTimestamp
     @Column(name = "modify_time",columnDefinition="DATETIME COMMENT '最后更新时间'")
     private Date modifyTime;
 

@@ -36,6 +36,7 @@ public class CartController extends BaseController {
     }
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public Object add(@RequestBody CartVo cartVo){
+
         Long idUser = getIdUser();
         cartVo.setIdUser(idUser);
        Integer result = cartService.add(cartVo);
@@ -53,7 +54,13 @@ public class CartController extends BaseController {
                           @PathVariable("count") String count){
         Cart cart = cartService.get(id);
         cart.setCount(new BigDecimal(count));
-        cartService.update(cart);
+        CartVo cartVo = new CartVo();
+        cartVo.setIdUser(cart.getIdUser());
+        //修改订单中的数量的时候统一走cartService.add方法以便进行库存数量判断，避免超卖，
+        cartVo.setCount(Integer.valueOf(count)-cart.getCount().intValue());
+        cartVo.setIdGoods(cart.getIdGoods());
+        cartVo.setIdSku(cart.getIdSku());
+        cartService.add(cartVo);
         return Rets.success();
     }
     @RequestMapping(method = RequestMethod.DELETE)

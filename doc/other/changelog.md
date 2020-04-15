@@ -1,6 +1,7 @@
 # Change log
 
-## latest
+## v0.5
+[gitee](https://gitee.com/microapp/linjiashop/releases/v0.5) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.5)
 ### Issues
 - 对接微信-获取微信用户信息
 - 重构日志记录方式（直接使用实体类的comment注释代替自定义AbstractDictMap子类的方式来描述更改的字段信息）

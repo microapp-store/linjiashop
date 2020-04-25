@@ -45,6 +45,7 @@ export default {
       })
     },
     search() {
+      this.listQuery.page = 1
       this.fetchData()
     },
     reset() {
@@ -52,6 +53,7 @@ export default {
       this.listQuery.endTime = ''
       this.listQuery.logName = ''
       this.listQuery.logType = ''
+      this.listQuery.page = 1
       this.fetchData()
     },
     handleFilter() {

@@ -35,12 +35,14 @@ export default {
       })
     },
     search() {
+      this.listQuery.page = 1
       this.fetchData()
     },
     reset() {
       this.listQuery.logname = ''
       this.listQuery.beginTime = ''
       this.listQuery.endTime = ''
+      this.listQuery.page = 1
       this.fetchData()
     },
     handleFilter() {

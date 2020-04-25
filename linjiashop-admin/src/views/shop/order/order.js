@@ -105,11 +105,13 @@ export default {
       })
     },
     search() {
+      this.listQuery.page = 1
       this.fetchData()
     },
     reset() {
       this.listQuery.mobile = ''
       this.listQuery.orderSn = ''
+      this.listQuery.page = 1
       this.fetchData()
     },
     queryByState(status){

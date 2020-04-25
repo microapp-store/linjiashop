@@ -94,10 +94,12 @@ export default {
       })
     },
     search() {
+      this.listQuery.page = 1
       this.fetchData()
     },
     reset() {
       this.listQuery.name = ''
+      this.listQuery.page = 1
       this.fetchData()
     },
     handleFilter() {

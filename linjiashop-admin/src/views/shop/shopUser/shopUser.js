@@ -73,6 +73,7 @@ export default {
       })
     },
     search() {
+      this.listQuery.page = 1
       this.fetchData()
     },
     reset() {
@@ -84,6 +85,7 @@ export default {
       this.listQuery.endLastLoginTime = ''
       this.lastLoginTime = ''
       this.regDate = ''
+      this.listQuery.page = 1
       this.fetchData()
     },
     handleFilter() {

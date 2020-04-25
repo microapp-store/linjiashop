@@ -61,10 +61,12 @@ export default {
       })
     },
     search() {
+      this.listQuery.page = 1
       this.fetchData()
     },
     reset() {
       this.listQuery.id = ''
+      this.listQuery.page = 1
       this.fetchData()
     },
     handleFilter() {

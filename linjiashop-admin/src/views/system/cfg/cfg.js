@@ -74,11 +74,13 @@ export default {
       })
     },
     search() {
+      this.listQuery.page = 1
       this.fetchData()
     },
     reset() {
       this.listQuery.cfgName = ''
       this.listQuery.cfgValue = ''
+      this.listQuery.page = 1
       this.fetchData()
     },
     handleFilter() {

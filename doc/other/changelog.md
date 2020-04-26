@@ -1,5 +1,13 @@
 # Change log
+## latest
 
+### Issues
+
+### Fixes
+- 分页查询bug
+- 升级webpack导致的组件无法加载的问题
+- 定日日志任务异常日志没有正常显示
+- Fix 更新缓存的时候连带更新常量工具类中使用的本地(TimeCacheMap)缓存
 ## v0.5
 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.5) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.5)
 ### Issues

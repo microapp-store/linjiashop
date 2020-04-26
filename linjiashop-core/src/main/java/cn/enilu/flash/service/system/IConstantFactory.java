@@ -160,4 +160,6 @@ public interface IConstantFactory {
     Menu getMenu(Long id) ;
 
     Notice getNotice(Long id);
+
+    void cleanLocalCache();
 }

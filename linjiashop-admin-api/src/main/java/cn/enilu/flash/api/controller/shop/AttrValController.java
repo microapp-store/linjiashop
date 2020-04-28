@@ -59,12 +59,26 @@ public class AttrValController {
         if(id!=null){
             entity = attrValService.get(id);
         }
-        entity.setIdAttrKey(idAttrKey);
-        entity.setAttrVal(attrVal);
+        entity = attrValService.get(Lists.newArrayList(
+                SearchFilter.build("idAttrKey",idAttrKey),
+                SearchFilter.build("attrVal",attrVal)
+        ));
         if (id == null) {
-            attrValService.insert(entity);
+            if(entity==null) {
+                entity.setIdAttrKey(idAttrKey);
+                entity.setAttrVal(attrVal);
+                attrValService.insert(entity);
+            }else{
+                return  Rets.failure("不能添加重复的规格");
+            }
         } else {
-            attrValService.update(entity);
+            if(entity!=null){
+                return  Rets.failure("不能添加重复的规格");
+            }else {
+                entity.setIdAttrKey(idAttrKey);
+                entity.setAttrVal(attrVal);
+                attrValService.update(entity);
+            }
         }
         return Rets.success();
     }

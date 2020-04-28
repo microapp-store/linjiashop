@@ -179,7 +179,8 @@
               v-for="tag in tags"
               :key="tag.id"
               closable
-              :type="tag.id">
+              :type="tag.id"
+              @close="removeTag(tag)">
               {{tag.attrVal}}
             </el-tag>
             </el-form-item>

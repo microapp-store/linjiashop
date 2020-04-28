@@ -347,11 +347,31 @@ export default {
     addToTag(){
       for(let i=0;i<this.attrValList.length;i++){
         if(this.attrValList[i].id === this.attrValSel){
-          this.tags.push(this.attrValList[i])
+          const currentAttrVal = this.attrValList[i]
+          let isRepeat = false
+          let isRepeatAttrKey = false
+          this.tags.forEach(function(val){
+            if(val.id === currentAttrVal.id ){
+              isRepeat = true
+            }
+            if(val.idAttrKey === currentAttrVal.idAttrKey){
+              isRepeatAttrKey = true
+            }
+          })
+          if(isRepeat === false && isRepeatAttrKey === false) {
+            this.tags.push(currentAttrVal)
+          }else{
+            this.$message({
+              message: isRepeat==true?'请勿选择重复规格':'该属性已经选择一种规格值',
+              type: 'error'
+            })
+          }
           break
         }
       }
-
+    },
+    removeTag(tag) {
+      this.tags.splice(this.tags.indexOf(tag), 1);
     },
     submitAttrKeyForm() {
       if( this.attrKeyForm.attrName != ''){
@@ -402,6 +422,27 @@ export default {
       if(this.tags.length==0){
         this.$message({
           message: '请选择商品规格',
+          type: 'error'
+        })
+        return
+      }
+      if(!this.skuForm.stock){
+        this.$message({
+          message: '请输入库存数量',
+          type: 'error'
+        })
+        return
+      }
+      if(!this.skuForm.marketingPrice){
+        this.$message({
+          message: '请输入市场价',
+          type: 'error'
+        })
+        return
+      }
+      if(!this.skuForm.price){
+        this.$message({
+          message: '请输入价格',
           type: 'error'
         })
         return

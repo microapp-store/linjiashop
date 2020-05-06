@@ -5,11 +5,11 @@ import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.service.shop.FavoriteService;
 import cn.enilu.flash.web.controller.BaseController;
+import org.nutz.json.Json;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author ：enilu
@@ -33,11 +33,34 @@ public class FavoriteController extends BaseController {
         favoriteService.insert(favorite);
         return Rets.success();
     }
+    @RequestMapping(value = "/dislike/{idGoods}",method = RequestMethod.POST)
+    public Object disLike(@PathVariable("idGoods") long idGoods){
+        Long idUser = JwtUtil.getUserId();
+        Favorite old = favoriteService.get(idUser,idGoods);
+        if(old==null){
+            return Rets.failure("未收藏改商品");
+        }
+        favoriteService.delete(old);
+        return Rets.success();
+    }
+    @RequestMapping(value = "/dislikeBatch",method = RequestMethod.POST)
+    public Object disLike(@RequestBody List<Long> ids){
+        logger.info("ids:{}", Json.toJson(ids));
+        favoriteService.delete(ids);
+        return Rets.success();
+    }
+
     @RequestMapping(value = "/ifLike/{idGoods}",method = RequestMethod.GET)
     public Object ifLike(@PathVariable("idGoods") Long idGoods){
         Long idUser = JwtUtil.getUserId();
         Favorite favorite = favoriteService.get(idUser,idGoods);
         return Rets.success(favorite!=null);
     }
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    public Object list(){
+        List<Favorite> list = favoriteService.queryAll();
+        return Rets.success(list);
+    }
+
 
 }

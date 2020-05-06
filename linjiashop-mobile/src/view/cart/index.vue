@@ -10,7 +10,7 @@
                 style="margin-left:15px;"
           :title="item.title"
           :desc="item.goods.descript"
-          :num="item.count"
+
           :price="formatPrice(item.price)"
           :thumb="item.thumb"
         >

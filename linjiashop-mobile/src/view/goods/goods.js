@@ -138,6 +138,13 @@ export default {
                     this.ifLike = true
                     this.likeColor = 'red'
                 })
+            }else{
+                favorite.dislike(this.goods.id).then(response => {
+                    Toast('取消收藏成功')
+                    this.ifLike = false
+                    this.likeColor = 'black'
+                })
+
             }
         },
         onBuyClicked(skuData) {

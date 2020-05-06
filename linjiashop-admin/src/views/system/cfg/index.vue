@@ -113,7 +113,7 @@
 
 
             <el-col :span="12">
-              <el-form-item :label="$t('config.descript')" prop="cfgDesc">
+              <el-form-item :label="$t('config.descript')">
                 <el-input v-model="form.cfgDesc"></el-input>
               </el-form-item>
             </el-col>

@@ -126,6 +126,14 @@ const routes = [
         }
     },
     {
+        name: 'favorite',
+        component: () => import('./view/favorite'),
+        meta: {
+            requireAuth: true,
+            title: '喜欢的商品'
+        }
+    },
+    {
         name: 'payment/callback/:orderSn',
         component: () => import('./view/order/payment/callback'),
         meta: {

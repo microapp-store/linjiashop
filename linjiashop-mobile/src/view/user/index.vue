@@ -26,6 +26,7 @@
 
     <van-cell-group>
       <van-cell icon="location-o" title="收货地址" is-link to="address"/>
+      <van-cell icon="star-o" title="喜欢的商品" is-link to="favorite"/>
       <van-cell icon="points" title="我的积分" is-link @click="sorry"/>
       <van-cell icon="gold-coin-o" title="我的优惠券" is-link @click="sorry" />
       <van-cell icon="gift-o" title="我收到的礼物" is-link  @click="sorry"/>

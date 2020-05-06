@@ -25,7 +25,7 @@ import java.net.URLDecoder;
  * @version 2018-07-25
  */
 public class BaseController {
-    private static Logger logger = LoggerFactory.getLogger(BaseController.class);
+    protected static Logger logger = LoggerFactory.getLogger(BaseController.class);
     public Long getIdUser( ) {
         String token = HttpUtil.getRequest().getHeader("Authorization");
 

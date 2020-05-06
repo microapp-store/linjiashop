@@ -3,19 +3,16 @@
 
         <van-search placeholder="搜商品名称" v-model="listQuery.key"    @search="searchGoods" />
         <van-divider dashed>热门商品</van-divider>
-        <van-list v-model="loading"
-                  :immediate-check="false"
-                  >
+
 
         <van-card v-for="(goods,index) in goodsList" :key="index"
-                  :num="goods.stock"
                   :price="formatPrice(goods.price)"
                   :desc="goods.descript"
                   :title="goods.name"
                   :thumb="goods.img"
                   @click="viewGoodsDetail(goods.id)"
         />
-        </van-list>
+        <br><br><br>
         <van-tabbar v-model="activeFooter">
             <van-tabbar-item icon="home-o"  replace to="/index">首页</van-tabbar-item>
             <van-tabbar-item icon="search"  replace to="/search">发现</van-tabbar-item>

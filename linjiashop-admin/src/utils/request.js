@@ -80,8 +80,14 @@ service.interceptors.response.use(
       })
       return
     }
+    let errorMsg = ''
+    try {
+       errorMsg = error.response.data.errors[0].defaultMessage
+    }catch (e) {
+      errorMsg =  error.response.data.message
+    }
     Message({
-      message: error.response.data.message||error.msg ||"System error",
+      message: errorMsg,
       type: 'error',
       duration: 5 * 1000
     })

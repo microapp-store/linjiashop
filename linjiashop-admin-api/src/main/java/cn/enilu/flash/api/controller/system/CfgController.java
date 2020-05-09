@@ -99,7 +99,6 @@ public class CfgController extends BaseController {
     @BussinessLog(value = "编辑参数", key = "cfgName")
     @RequiresPermissions(value = {Permission.CFG_EDIT})
     public Object save(@ModelAttribute @Valid Cfg cfg){
-
         if(cfg.getId()!=null){
             Cfg old = cfgService.get(cfg.getId());
             LogObjectHolder.me().set(old);

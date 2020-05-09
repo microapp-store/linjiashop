@@ -118,6 +118,7 @@ export default {
     edit: 'Edit Config',
     nameInput: 'Input config name',
     valueInput: 'Input config value',
-    lengthValidation: ' must be between 2 and 20 characters'
+    lengthValidation: ' Must be between 2 and 20 characters',
+    lengthValidationCfgValue: 'Must be more than 2 characters'
   }
 }

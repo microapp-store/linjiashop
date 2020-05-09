@@ -117,7 +117,8 @@ export default {
     edit: '编辑参数',
     nameInput: '请输入参数名',
     valueInput: '请输入参数值',
-    lengthValidation: '长度在 2 到 20 个字符'
+    lengthValidation: '长度在 2 到 20 个字符',
+    lengthValidationCfgValue: '长度在必须大于2个字符'
   }
 }
 

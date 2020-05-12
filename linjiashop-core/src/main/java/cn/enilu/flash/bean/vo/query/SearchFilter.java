@@ -6,7 +6,7 @@ import cn.enilu.flash.utils.StringUtil;
 import java.util.Map;
 
 /**
- * descript
+ * 查询条件封装类
  *
  * @author ：enilu
  * @date ：Created in 2019/6/30 16:02
@@ -15,6 +15,7 @@ public class SearchFilter {
     public enum Operator {
         EQ, NE, LIKE, LIKEL, LIKER, GT, LT, GTE, LTE, IN, NOTIN, ISNULL, ISNOTNULL, BETWEEN
     }
+
     public enum Join {
         and, or
     }
@@ -28,14 +29,21 @@ public class SearchFilter {
         return new SearchFilter(fieldName, Operator.EQ, value);
     }
 
-
+    public static SearchFilter build(String fieldName,Operator operator) {
+        return new SearchFilter(fieldName,operator);
+    }
     public static SearchFilter build(String fieldName, Operator operator, Object value) {
         return new SearchFilter(fieldName, operator, value);
     }
 
 
-    public static  SearchFilter build (String fieldName, Object value,Join join) {
-        return new SearchFilter(fieldName,Operator.EQ,value,join);
+    public static SearchFilter build(String fieldName, Object value, Join join) {
+        return new SearchFilter(fieldName, Operator.EQ, value, join);
+
+    }
+    public SearchFilter(String fieldName, Operator operator) {
+        this.fieldName = fieldName;
+        this.operator = operator;
 
     }
     public SearchFilter(String fieldName, Operator operator, Object value) {
@@ -45,7 +53,8 @@ public class SearchFilter {
             this.operator = operator;
         }
     }
-    public SearchFilter(String fieldName, Operator operator, Object value,Join join) {
+
+    public SearchFilter(String fieldName, Operator operator, Object value, Join join) {
         if (!StringUtil.isNullOrEmpty(value)) {
             this.fieldName = fieldName;
             this.value = value;

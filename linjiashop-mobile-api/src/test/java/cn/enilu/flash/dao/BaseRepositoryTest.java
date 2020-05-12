@@ -19,6 +19,7 @@ public class BaseRepositoryTest extends BaseApplicationStartTest {
 
     @Test
     public void queryBySql(){
+
         String sql = "select sex,count(1) as count from t_sys_user group by sex";
         List list = userRepository.queryBySql(sql, UserVo.class);
         System.out.println(Json.toJson(list));

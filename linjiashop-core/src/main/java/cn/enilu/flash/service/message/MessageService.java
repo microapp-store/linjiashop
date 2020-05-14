@@ -4,6 +4,8 @@ package cn.enilu.flash.service.message;
 import cn.enilu.flash.bean.entity.message.Message;
 import cn.enilu.flash.bean.entity.message.MessageSender;
 import cn.enilu.flash.bean.entity.message.MessageTemplate;
+import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.SpringContextHolder;
 import cn.enilu.flash.dao.message.MessageRepository;
 import cn.enilu.flash.dao.message.MessagesenderRepository;
@@ -15,6 +17,7 @@ import cn.enilu.flash.utils.StringUtil;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.text.StrSubstitutor;
+import org.nutz.json.Json;
 import org.nutz.lang.Lang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,6 +77,8 @@ public class MessageService extends BaseService<Message,Long,MessageRepository> 
             isSuccess = this.sendSmsMessage(receiver, content, messageTemplate, args);
         }catch (Exception e){
             logger.error(e.getMessage(), e);
+            throw  new ApplicationException(ApplicationExceptionEnum.SERVER_ERROR);
+
         }
         saveMessage(0,tplCode,receiver,content,isSuccess);
     }
@@ -128,7 +133,7 @@ public class MessageService extends BaseService<Message,Long,MessageRepository> 
     private boolean sendSmsMessage( String receiver, String content,  MessageTemplate messageTemplate,String... args) throws Exception {
         String tplCode = getTpl(messageTemplate);
         SmsSender smsSender = getSmsSender(messageTemplate);
-
+        logger.info("receiver:{},content:{}\r\n,args:{}",receiver,content, Json.toJson(args));
         boolean success = false;
         String[] receivers = receiver.split(",|;", -1);
         for (String oneReceiver : receivers) {

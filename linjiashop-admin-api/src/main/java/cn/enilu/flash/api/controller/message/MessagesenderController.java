@@ -41,8 +41,11 @@ public class MessagesenderController {
     @RequestMapping(method = RequestMethod.POST)
     @BussinessLog(value = "编辑消息发送者", key = "name")
     @RequiresPermissions(value = {Permission.MSG_SENDER_EDIT})
-    public Object save(@ModelAttribute @Valid MessageSender tMessageSender) {
-        messagesenderService.save(tMessageSender);
+    public Object save(@ModelAttribute @Valid MessageSender messageSender) {
+        if(messageSender.getId()!=null){
+            MessageSender old = messagesenderService.get(messageSender.getId());
+        }
+        messagesenderService.save(messageSender);
         return Rets.success();
     }
 

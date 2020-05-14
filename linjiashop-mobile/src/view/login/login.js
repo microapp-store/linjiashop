@@ -94,8 +94,6 @@ export default {
             this.hasSendSms = true
             loginApi.sendSmsCode(this.mobile).then( response => {
                 this.setTimeOut()
-                const smsCode = response.data
-                Toast('提示：测试阶段不发送短信验证码：'+smsCode)
             })
         },
         setTimeOut () {

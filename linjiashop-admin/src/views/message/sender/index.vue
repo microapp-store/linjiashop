@@ -23,6 +23,11 @@
                     {{scope.row.className}}
                 </template>
             </el-table-column>
+          <el-table-column label="运营商模板编号">
+            <template slot-scope="scope">
+              {{scope.row.tplCode}}
+            </template>
+          </el-table-column>
         </el-table>
 
         <el-pagination
@@ -54,6 +59,11 @@
                             <el-input v-model="form.className" minlength=1></el-input>
                         </el-form-item>
                     </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="运营商模板编号"  >
+                      <el-input v-model="form.tplCode" minlength=1></el-input>
+                    </el-form-item>
+                  </el-col>
                 </el-row>
                 <el-form-item>
                     <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>

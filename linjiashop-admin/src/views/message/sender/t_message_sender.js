@@ -9,6 +9,7 @@ export default {
       form: {
         name:'',
         className:'',
+        tplCode:'',
         id: ''
       },
       listQuery: {
@@ -98,6 +99,8 @@ export default {
       this.form = {
         name:'',
         className:'',
+        createBy:'',
+        createTime:'',
         id: ''
       }
     },
@@ -111,8 +114,11 @@ export default {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           save({
-      name:this.form.name,
-      className:this.form.className,
+            name:this.form.name,
+            className:this.form.className,
+            tplCode:this.form.tplCode,
+            createBy:this.form.createBy,
+            createTime:this.form.createTime,
             id: this.form.id
           }).then(response => {
             this.$message({

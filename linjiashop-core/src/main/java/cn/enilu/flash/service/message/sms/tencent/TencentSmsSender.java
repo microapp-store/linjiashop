@@ -35,7 +35,7 @@ public class TencentSmsSender implements SmsSender {
                         content, "", "");
 
             }
-            logger.info(result.errMsg);
+            logger.info("腾讯短信发送结果:{}",result.errMsg);
             return result.result == 0;
         } catch (Exception e) {
                 logger.error("发送短信异常",e);

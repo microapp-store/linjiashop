@@ -3,6 +3,7 @@ package cn.enilu.flash.bean.entity.message;
 import cn.enilu.flash.bean.entity.BaseEntity;
 import lombok.Data;
 import org.hibernate.annotations.Table;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity(name="t_message_template")
 @Table(appliesTo = "t_message_template",comment = "消息模板")
+@EntityListeners(AuditingEntityListener.class)
 public class MessageTemplate extends BaseEntity {
     @Column(name="code",columnDefinition = "VARCHAR(32) COMMENT '编号'")
     @NotBlank(message = "编号不能为空")

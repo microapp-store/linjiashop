@@ -12,6 +12,9 @@ public interface CacheDao {
 
     String CONSTANT = "CONSTANT";
     String SESSION = "SESSION";
+    String MINUTE = "MINUTE";
+    String HOUR = "HOUR";
+    String DAY = "DAY";
 
     /**
      * 设置hash key值

@@ -61,6 +61,31 @@
            transactionalMode="off">
     </cache>
 
+
+    <cache name="DAY"
+           maxElementsInMemory="10000"
+           eternal="false"
+           timeToIdleSeconds="86400"
+           timeToLiveSeconds="86400"
+           overflowToDisk="false"
+           memoryStoreEvictionPolicy="LFU" />
+
+    <cache name="HOUR"
+           maxElementsInMemory="10000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false"
+           memoryStoreEvictionPolicy="LFU" />
+
+    <cache name="MINUTE"
+           maxElementsInMemory="10000"
+           eternal="false"
+           timeToIdleSeconds="60"
+           timeToLiveSeconds="60"
+           overflowToDisk="false"
+           memoryStoreEvictionPolicy="LFU" />
+
 </ehcache>
 
     <!--

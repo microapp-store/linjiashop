@@ -9,7 +9,7 @@
    
     CREATE DATABASE IF NOT EXISTS wt1hd DEFAULT CHARSET utf8 COLLATE utf8_general_ci; 
     CREATE USER '数据库账号'@'%' IDENTIFIED BY '数据库密码';
-    GRANT ALL privileges ON linjiashop.* TO 'linjiashop'@'localhost'; -- 限制只能本机访问
+    GRANT ALL privileges ON wt1hd.* TO 'wt1hd '@'localhost'; -- 限制只能本机访问
     flush privileges;
 ```
 - 在本地启动应用的时候自动生成表和插入初始化语句，然后将其通过mysqldump导出后，导入到服务器上的数据库

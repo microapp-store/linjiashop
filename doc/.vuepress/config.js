@@ -38,6 +38,7 @@ module.exports = {
 
                 ]
             },
+            {text: '上线笔记', link: '/online/summary'},
             {text: '捐赠',link:'/other/donate'},
             {text: 'Gitee', link: 'https://gitee.com/microapp/linjiashop'}
         ],
@@ -71,6 +72,16 @@ module.exports = {
                     '/develop/banner',
                     '/develop/attribute',
                     '/develop/wechat'
+                ]
+            },
+            {
+                title: '上线笔记',
+                collapsable: false,
+                children: [
+                    '/online/summary',
+                    '/online/day01',
+                    '/online/day02',
+                    '/online/day03'
                 ]
             },
             {

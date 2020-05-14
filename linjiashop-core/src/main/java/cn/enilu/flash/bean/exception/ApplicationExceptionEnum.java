@@ -23,8 +23,8 @@ public enum ApplicationExceptionEnum implements ServiceExceptionEnum{
 	 * 错误的请求
 	 */
 	REQUEST_NULL(400, "请求有错误"),
-	SERVER_ERROR(500, "服务器异常"),
-
+	SERVER_ERROR(500, "服务异常，请联系管理员"),
+	REQUEST_TOO_MANY(500, "请求频繁，请稍后重试"),
 	TASK_CONFIG_ERROR(500, "定时任务配置错误");
 
 	ApplicationExceptionEnum(int code, String message) {

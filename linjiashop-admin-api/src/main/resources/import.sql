@@ -43,7 +43,7 @@ INSERT INTO `t_message` (`id`, `create_by`, `create_time`, `modify_by`, `modify_
 -- ----------------------------
 -- Records of t_message_sender.sql
 -- ----------------------------
-INSERT INTO `t_message_sender` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `class_name`, `name`, `tpl_code`) VALUES (1, 1, '2019-12-10 18:57:57', NULL, NULL, 'tencentSmsSender', ' 腾讯短信服务', NULL);
+INSERT INTO `t_message_sender` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `class_name`, `name`, `tpl_code`) VALUES (1, 1, '2019-12-10 18:57:57', NULL, NULL, 'tencentSmsSender', ' 腾讯短信-注册登录短信验证码', '2873783');
 INSERT INTO `t_message_sender` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `class_name`, `name`, `tpl_code`) VALUES (2, 1, '2019-12-10 18:57:57', NULL, NULL, 'defaultEmailSender', '默认邮件发送器', NULL);
 
 -- ----------------------------
@@ -212,7 +212,7 @@ INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_
 INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (4, 1, '2020-1-1 17:06:43', 1, '2019-4-15 21:36:17', '腾讯sms接口appkey', 'api.tencent.sms.appkey', '需要去申请咯');
 INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (5, 1, '2020-1-1 17:06:43', 1, '2019-4-15 21:36:17', '腾讯sms接口签名参数', 'api.tencent.sms.sign', '需要去申请咯');
 INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (6, 1, '2020-1-19 17:06:54', 1, '2020-1-19 18:44:10', '微信商户id', 'weixin.app.id', 'wx1b39ed76db874344');
-INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (7, 1, '2020-1-19 17:06:54', 1, '2020-1-19 18:45:04', '微信密钥', 'weixin.app.secret', '69974b57973a854a14cdcc0ab22dc318');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (7, 1, '2020-1-19 17:06:54', 1, '2020-1-19 18:45:04', '微信密钥', 'weixin.app.secret', '23234234');
 INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (8, 1, '2020-1-19 17:06:54', -1, '2020-3-20 15:00:05', '微信token', 'weixin.access.token', '31_LPqJY3pxCSAzUD5gdgSbkmhdDcmzDJDDK6G2dC-FVkN4MFWRIkNFXfWvcn17eP0xihcpq9kqpjyb_bZAfXNhTkTQii92LZEUoJ2Q8C1aeS2VqxMQTHIk9P0Gl9h29N8lY0WO6sV5oEZQsNtVWNCeABAOFU');
 INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (9, 1, '2020-1-19 17:06:54', 1, '2020-3-20 14:31:59', '微信ticket', 'weixin.js.api.ticket', 'HoagFKDcsGMVCIY2vOjf9pIHYEf7W-G5zYtUhIs_q6gqnuHZTyJJz6HY0zEF_UCYRIwQVNRjDnlLtxDRbXyolQ');
 INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (10, 1, '2020-1-19 17:06:54', 1, '2020-1-19 18:45:04', '微信获取token的地址', 'weixin.access.token.url', 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s');

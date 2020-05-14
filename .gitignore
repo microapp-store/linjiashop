@@ -10,6 +10,5 @@ package-lock.json
 .vscode
 .settings
 .project
-lite
-doc/开发流水账.md
-
+application-wt1hd.properties
+import_waitan.sql

@@ -80,7 +80,7 @@ server {
                 proxy_set_header   X-Real-IP        $remote_addr;
                 proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
                 proxy_read_timeout 600s;
-                proxy_pass      http://localhost:8080/linjiashop-admin-api/;
+                proxy_pass      http://localhost:8080/wt1hd-admin-api/;
     }
 
     error_page   500 502 503 504  /50x.html;

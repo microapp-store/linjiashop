@@ -18,6 +18,7 @@ public class UserInfo {
     private String gender;
     private String wechatNickName;
     private String wechatHeadImgUrl;
+    private Boolean refreshWechatInfo = true;
 
     public String getNickName() {
         return StringUtil.isEmpty(nickName)?wechatNickName:nickName;

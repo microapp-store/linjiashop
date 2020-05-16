@@ -1,4 +1,6 @@
 import userApi from '@/api/user'
+import store from '@/store'
+
 import {Cell, CellGroup, Col, Icon, Row, Tabbar, TabbarItem, Toast,Dialog} from 'vant';
 
 export default {
@@ -25,20 +27,17 @@ export default {
         init() {
             userApi.getUserInfo().then(response => {
                 const url = window.location.href
+                store.dispatch('app/toggleUser',response.data)
+                if(response.data.refreshWechatInfo === false){
+                    return ;
+                }
                 if (url.indexOf('localhost') > -1 || url.indexOf('127.0.0.1') > -1) {
                     console.log('开发环境不获取openid')
                 } else {
                     const userAgent = window.navigator.userAgent.toLowerCase()
                     //使用微信访问本系统的时候获取微信openid，否则不获取
                     if (userAgent.indexOf('micromessenger') >-1) {
-                        Dialog.confirm({
-                            title: '确认',
-                            message: '将获取您的微信基本信息, 是否允许?'
-                        }).then(() => {
-                            this.processOpenid()
-                        }).catch(() => {
-                            // on cancel
-                        })
+                        this.processOpenid()
                     }
                 }
             }).catch((err) => {
@@ -55,18 +54,13 @@ export default {
         processOpenid() {
             let url = window.location.href;
             if (url.indexOf('code') > -1) {
-                try {
-                    const code = url.split('code=')[1].split("&")[0];
-                    userApi.getWxOpenId({
-                        "code": code
-                    }).then(res => {
+                const code = url.split('code=')[1].split("&")[0];
+                userApi.getWxOpenId({
+                    "code": code
+                }).then(res => {
 
-                    }).catch(err => {
-                        console.log(err.data.msg)
-                    })
-                } catch (e) {
-                    console.log('获取code异常', e);
-                }
+                })
+
             } else {
                 this.redirectForCode();
             }

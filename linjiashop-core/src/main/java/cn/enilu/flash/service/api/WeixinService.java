@@ -3,6 +3,8 @@ package cn.enilu.flash.service.api;
 import cn.enilu.flash.bean.constant.CfgKey;
 import cn.enilu.flash.bean.entity.shop.ShopUser;
 import cn.enilu.flash.bean.entity.system.Cfg;
+import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.shop.WechatInfo;
 import cn.enilu.flash.cache.CacheDao;
 import cn.enilu.flash.dao.shop.ShopUserRepository;
@@ -105,19 +107,27 @@ public class WeixinService {
       public boolean isAuth(ShopUser user, String code) {
           WechatInfo wechatInfo = cacheDao.hget(CacheDao.SESSION,"WECHAT_INFO"+user.getId(),WechatInfo.class);
           if(wechatInfo!=null){
+              logger.info("从缓存获取微信用户信息",Json.toJson(wechatInfo));
               return true;
           }
         if (StringUtil.isNotEmpty(code)) {
             // 第二步，通过code换取access_token和OpenId
             Map<String, Object> ret = getPrivateAccessToken(code);
+            logger.info("获取token:{}",Json.toJson(ret));
             if (ret != null && ret.get("errcode") == null) {
                 String openId = StringUtil.sNull(ret.get("openid"));
                 logger.info("用户:{}的openId:{}", user.getMobile(), openId);
+                if(StringUtil.isNotEmpty(user.getWechatOpenId()) && !StringUtil.equals(user.getWechatOpenId(),openId)){
+                    throw  new ApplicationException(ApplicationExceptionEnum.WECHAT_BIND_ANOTHER);
+                }
                 user.setWechatOpenId(openId);
                   wechatInfo = getWechatInfo(openId);
                 if (wechatInfo != null) {
                     user.setWechatNickName(StringUtil.getValidChar(wechatInfo.getNickName()));
                     user.setWechatHeadImgUrl(wechatInfo.getHeadUrl());
+                    if(StringUtil.equals(user.getNickName(),user.getMobile())){
+                        user.setNickName(user.getWechatNickName());
+                    }
                     shopUserRepository.save(user);
                     cacheDao.hset(CacheDao.SESSION,"WECHAT_INFO"+user.getId(),wechatInfo);
                     return true;

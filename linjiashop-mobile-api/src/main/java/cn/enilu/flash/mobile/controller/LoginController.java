@@ -64,7 +64,9 @@ public class LoginController extends BaseController {
                 String token = userService.loginForToken(new JwtUser(user));
                 user.setLastLoginTime(new Date());
                 shopUserService.update(user);
-                result.put("user",user);
+                UserInfo userInfo = new UserInfo();
+                BeanUtils.copyProperties(user,userInfo);
+                result.put("user",userInfo);
                 logger.info("token:{}",token);
                 result.put("token", token);
                 return Rets.success(result);

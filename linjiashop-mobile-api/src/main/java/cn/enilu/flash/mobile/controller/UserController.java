@@ -3,6 +3,8 @@ package cn.enilu.flash.mobile.controller;
 import cn.enilu.flash.bean.entity.shop.ShopUser;
 import cn.enilu.flash.bean.vo.UserInfo;
 import cn.enilu.flash.bean.vo.front.Rets;
+import cn.enilu.flash.bean.vo.shop.WechatInfo;
+import cn.enilu.flash.cache.CacheDao;
 import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.service.api.WeixinService;
 import cn.enilu.flash.service.shop.ShopUserService;
@@ -27,6 +29,8 @@ public class UserController extends BaseController {
     private ShopUserService shopUserService;
     @Autowired
     private WeixinService weixinService;
+    @Autowired
+    private CacheDao cacheDao;
     @RequestMapping(value = "/getInfo",method = RequestMethod.GET)
     public Object getInfo(){
         String token = getToken();
@@ -34,7 +38,11 @@ public class UserController extends BaseController {
          ShopUser shopUser = shopUserService.get(idUser);
         UserInfo userInfo = new UserInfo();
         BeanUtils.copyProperties(shopUser,userInfo);
-        return Rets.success(shopUser);
+        WechatInfo wechatInfo = cacheDao.hget(CacheDao.SESSION,"WECHAT_INFO"+shopUser.getId(),WechatInfo.class);
+        if(wechatInfo!=null){
+            userInfo.setRefreshWechatInfo(false);
+        }
+        return Rets.success(userInfo);
     }
     @RequestMapping(value = "/updateUserName/{userName}",method = RequestMethod.POST)
     public Object updateUserName(@PathVariable("userName") String userName){

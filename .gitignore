@@ -11,4 +11,5 @@ package-lock.json
 .settings
 .project
 application-wt1hd.properties
+application-demo.properties
 import_waitan.sql

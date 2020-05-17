@@ -16,8 +16,8 @@
 - linjiashop 包含了app版本（基于flutter) 仓库地址[gitee](https://gitee.com/microapp/linjiashop-flutter),[github](https://github.com/microapp-store/linjiashop-flutter) 
  
 ## 演示
-- 手机版本：[http://132.232.28.167:8088/mobile](http://132.232.28.167:8088/mobile) 
-- 后台管理：[http://132.232.28.167:8088](http://132.232.28.167:8088)
+- 手机版本：[http://linjiashop.microapp.store](http://linjiashop.microapp.store) 
+- 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store)
 - [开发教程视频](http://microapp.gitee.io/linjiashop/other/video.html)
 ## 功能模块
 linjiashop包含了后台管理功能和手机端商城业务功能

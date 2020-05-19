@@ -44,16 +44,25 @@ public class FileController extends BaseController {
             return Rets.failure("上传文件失败");
         }
     }
-
     /**
      * 下载文件
      * @param fileName
      * @param fileName
      */
     @RequestMapping(value="download",method = RequestMethod.GET)
-    public void download(@RequestParam("fileName") String fileName){
-        FileInfo fileInfo = fileService.getByName(fileName);
-        fileName = StringUtil.isEmpty(fileName)? fileInfo.getOriginalFileName():fileName;
+    public void download(@RequestParam(value = "fileName",required = false) String fileName,
+                         @RequestParam(value = "idFile",required = false) Long idFile){
+        FileInfo fileInfo = null;
+        if(StringUtil.isNotEmpty(fileName)) {
+            fileInfo = fileService.getByName(fileName);
+        }
+        if(idFile!=null){
+            fileInfo = fileService.get(idFile);
+        }
+        downloadFile(fileInfo);
+    }
+    public void downloadFile(FileInfo fileInfo){
+        String fileName = fileInfo.getOriginalFileName();
         HttpServletResponse response = HttpUtil.getResponse();
         response.setContentType("application/x-download");
         try {
@@ -88,7 +97,6 @@ public class FileController extends BaseController {
                 logger.error("close inputstream error", e);
             }
         }
-
     }
 
     /**
@@ -99,7 +107,7 @@ public class FileController extends BaseController {
     @RequestMapping(value="getImgBase64",method = RequestMethod.GET)
     public Object getImgBase64(@RequestParam("idFile")String fileName ){
         FileInfo fileInfo = fileService.getByName(fileName);
-//        FileInfo fileInfo = fileService.get(idFile);
+
         FileInputStream fis = null;
         try {
             File file = new File(fileInfo.getAblatePath());

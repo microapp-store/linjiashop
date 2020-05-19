@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     init() {
-      this.downloadUrl = getApiUrl() + '/file/download?idFile='
+      this.downloadUrl = getApiUrl() + '/file/download?'
       this.fetchData()
     },
     fetchData() {
@@ -68,7 +68,7 @@ export default {
       this.selRow = currentRow
     },
     download(id,fileName) {
-      window.location.href = this.downloadUrl + id+'&fileName='+fileName
+      window.location.href = this.downloadUrl + '&fileName='+fileName
     }
 
   }

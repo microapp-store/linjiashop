@@ -232,7 +232,7 @@ export default {
     },
     exportXls() {
       orderApi.exportXls(this.listQuery).then(response => {
-        window.location.href= getApiUrl() + '/file/download?idFile='+response.data.id
+        window.location.href= getApiUrl() + '/file/download?fileName='+response.data.realFileName
       })
     }
   }

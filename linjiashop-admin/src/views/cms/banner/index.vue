@@ -66,50 +66,63 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="150px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="标题" prop="title">
-              <el-input v-model="form.title" minlength=1></el-input>
-            </el-form-item>
+            <el-row>
+
+              <el-col :span="12">
+                <el-form-item label="banner图片">
+                  <el-upload
+                    class="upload-demo"
+                    drag
+                    multiple=false
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :before-upload="handleBeforeUpload"
+                    :on-success="handleUploadSuccess"
+                  >
+                    <i class="el-icon-upload"></i>
+                    <div class="el-upload__text">上传图片</div>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+            </el-row>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="打开的界面">
-              <el-input v-model="form.page"></el-input>
-            </el-form-item>
+            <el-row>
+              <el-col :span="24">
+                <el-form-item label="标题" prop="title">
+                  <el-input v-model="form.title" minlength=1></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="24">
+                <el-form-item label="打开的界面">
+                  <el-input v-model="form.page"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="24">
+                <el-form-item label="参数" prop="param">
+                  <el-input type="textarea" v-model="form.param"></el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="24">
+                <el-form-item label="类型">
+                  <el-select v-model="form.type" placeholder="请选择">
+                    <el-option
+                      v-for="item in options"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+                </el-form-item>
+              </el-col>
+            </el-row>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="参数" prop="param">
-              <el-input v-model="form.param"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="类型">
-              <el-select v-model="form.type" placeholder="请选择">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
+        </el-row>
 
 
-          <el-col :span="12">
-            <el-form-item label="banner图片">
-              <el-upload
-                class="upload-demo"
-                drag
-                multiple=false
-                :action="uploadUrl"
-                :headers="uploadHeaders"
-                :before-upload="handleBeforeUpload"
-                :on-success="handleUploadSuccess"
-              >
-                <i class="el-icon-upload"></i>
-                <div class="el-upload__text">上传图片</div>
-              </el-upload>
-            </el-form-item>
-          </el-col>
+
+
+
         </el-row>
         <el-form-item>
           <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>

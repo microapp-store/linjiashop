@@ -9,6 +9,7 @@ import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.cms.BannerService;
 import cn.enilu.flash.utils.StringUtil;
+import com.alibaba.fastjson.JSON;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,11 @@ public class BannerMgrController extends BaseController {
     @BussinessLog(value = "编辑banner", key = "title")
     @RequiresPermissions(value = {Permission.BANNER_EDIT})
     public Object save(@ModelAttribute @Valid Banner banner) {
+        if(StringUtil.isNotEmpty(banner.getParam())){
+            if(!JSON.isValid(banner.getParam())){
+                return Rets.failure("参数必须为json格式");
+            }
+        }
         if(banner.getId()==null){
             bannerService.insert(banner);
         }else {

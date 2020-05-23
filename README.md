@@ -18,6 +18,10 @@
 ## 演示
 - 手机版本：[http://linjiashop.microapp.store](http://linjiashop.microapp.store) 
 - 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store)
+- 公众号演示：关注公众号“外滩一号店"进行体验，或者扫描下面二维码关注
+
+    ![外滩一号店](https://gitee.com/microapp/linjiashop/raw/master/doc/img/online/wt1hd.jpg)
+
 - [开发教程视频](http://microapp.gitee.io/linjiashop/other/video.html)
 ## 功能模块
 linjiashop包含了后台管理功能和手机端商城业务功能

@@ -65,8 +65,12 @@ export default {
         this.list = response.data.records
         for (const index in this.list) {
           let item = this.list[index]
-          console.log(item)
-          item.img = getApiUrl() + '/file/getImgStream?idFile=' + item.avatar
+          if(item.wechatHeadImgUrl){
+           item.img = item.wechatHeadImgUrl
+          }else {
+            item.img = getApiUrl() + '/file/getImgStream?idFile=' + item.avatar
+          }
+          console.log('img',item.img)
         }
         this.listLoading = false
         this.total = response.data.total

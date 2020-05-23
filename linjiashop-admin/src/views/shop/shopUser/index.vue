@@ -48,8 +48,7 @@
       </el-table-column>
       <el-table-column label="头像">
         <template slot-scope="scope">
-          <el-avatar   :src="scope.row.img" v-show="scope.row.avatar"></el-avatar>
-          <el-avatar  v-show="!scope.row.avatar"  icon="el-icon-user-solid"></el-avatar>
+          <el-avatar   :src="scope.row.img"></el-avatar>
         </template>
       </el-table-column>
       <el-table-column label="昵称">

@@ -8,8 +8,8 @@
 
         <el-col :span="12">
           <el-form-item label="头像">
-            <el-avatar   :src="avatarUrl" v-show="userInfo.info.avatar"></el-avatar>
-            <el-avatar  v-show="!userInfo.info.avatar"  icon="el-icon-user-solid"></el-avatar>
+            <el-avatar   :src="avatarUrl" ></el-avatar>
+
           </el-form-item>
         </el-col>
         <el-col :span="12">

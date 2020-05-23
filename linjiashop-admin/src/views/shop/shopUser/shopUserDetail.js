@@ -25,8 +25,11 @@ export default {
       if (this.idUser) {
         getUserInfo(this.idUser).then(response => {
           this.userInfo = response.data
-          console.log('userInfo',this.userInfo)
-          this.avatarUrl = this.apiUrl + '/file/getImgStream?idFile='+response.data.info.avatar
+          if(this.userInfo.info.avatar!=='') {
+            this.avatarUrl = this.apiUrl + '/file/getImgStream?idFile=' + this.userInfo.info.avatar
+          }else{
+            this.avatarUrl = this.userInfo.info.wechatHeadImgUrl
+          }
         })
         getList({
           page: 1,

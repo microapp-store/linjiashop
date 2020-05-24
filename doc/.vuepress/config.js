@@ -82,7 +82,8 @@ module.exports = {
                     '/online/day01',
                     '/online/day02',
                     '/online/day04',
-                    '/online/day05'
+                    '/online/day05',
+                    '/online/day06'
                 ]
             },
             {

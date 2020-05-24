@@ -62,6 +62,7 @@ public class WeixinPayService {
         try {
             HttpServletRequest request = HttpUtil.getRequest();
             xmlResult = IOUtils.toString(request.getInputStream(), request.getCharacterEncoding());
+
         } catch (IOException e) {
             logger.error("解析微信支付结果通知异常",e);
             return WxPayNotifyResponse.fail(e.getMessage());

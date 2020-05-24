@@ -21,12 +21,14 @@ export default {
             checkedGoods: [],
             checkeAllCarts: [],
             cartList: [],
+            idCartList:[],
             checkedAll: true,
             addr: undefined,
             message:''
         };
     },
     mounted() {
+        this.idCartList = this.$route.query.ids
         this.init()
     },
     computed: {
@@ -49,7 +51,7 @@ export default {
     methods: {
         init() {
             const chosenAddressId = storage.get('chosenAddressId')
-            order.prepareCheckout({chosenAddressId:chosenAddressId}).then(response => {
+            order.prepareCheckout({chosenAddressId:chosenAddressId,idCarts:this.idCartList.join(',')}).then(response => {
                 let cartList = response.data.list
                 this.addr = response.data.addr
                 for (let index in cartList) {
@@ -62,7 +64,7 @@ export default {
             })
         },
         submit() {
-            order.save({idAddress:this.addr.id,message:this.message}).then( response => {
+            order.save({idAddress:this.addr.id,message:this.message,idCarts:this.idCartList.join(',')}).then( response => {
                 let order = response.data
                 this.$router.push({path:'payment',query:{orderSn:order.orderSn,totalPrice:order.totalPrice}})
             })

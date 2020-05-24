@@ -1,6 +1,11 @@
 <template>
   <div class="cart">
-    <van-checkbox-group class="card-goods" v-model="checkedGoods" v-if="isLogin && cartList.length>0">
+    <van-nav-bar
+            title="购物车"
+            :right-text="rightText"
+            @click-right="onClickRight"
+    />
+    <van-checkbox-group class="card-goods" v-model="checkedCartItem" v-if="isLogin && cartList.length>0">
       <div   v-for="item in cartList"
              :key="item.id"    class="card-goods__item">
       <van-checkbox
@@ -24,12 +29,23 @@
 
     </van-checkbox-group>
     <van-submit-bar
+            v-show="!showEdit"
       :price="totalPrice"
-      :disabled="!checkedGoods.length"
+      :disabled="!checkedCartItem.length"
       :button-text="submitBarText"
       @submit="submit"
       v-if="isLogin && cartList.length>0"
     >
+      <van-checkbox v-model="checkedAll" @click="checkAll" style="padding: 0 10px;">全选</van-checkbox>
+    </van-submit-bar>
+      <van-submit-bar
+              v-show="showEdit"
+              :price="totalPrice"
+              :disabled="!checkedCartItem.length"
+              button-text="删除"
+              @submit="remove"
+              v-if="isLogin && cartList.length>0"
+      >
       <van-checkbox v-model="checkedAll" @click="checkAll" style="padding: 0 10px;">全选</van-checkbox>
     </van-submit-bar>
     <div class="no-data" v-if="isLogin && cartList.length ===0 ">

@@ -34,14 +34,6 @@ public class PayController extends BaseController {
         }
         Order order = orderService.getByOrderSn(orderSn);
         WxPayMpOrderResult wxOrder = weixinPayService.prepare(user,order);
-//        Map map = Maps.newHashMap(
-//                "appId","aa",
-//                "nonceStr","aaa",
-//                "package","aaa",
-//                "paySign","aaa",
-//                "signType","aaa",
-//                "timeStamp","aa"
-//        );
         if(wxOrder!=null) {
             return Rets.success(wxOrder);
         }
@@ -55,7 +47,7 @@ public class PayController extends BaseController {
     @RequestMapping(value = "wx/notify",method = RequestMethod.POST)
     public Object wxNotify(){
         String  msg = weixinPayService.resultNotify();
-        return Rets.success(msg);
+        return msg;
     }
 
     /**

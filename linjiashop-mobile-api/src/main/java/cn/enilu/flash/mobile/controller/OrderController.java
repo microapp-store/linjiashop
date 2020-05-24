@@ -14,6 +14,7 @@ import cn.enilu.flash.service.shop.OrderService;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.Lists;
 import cn.enilu.flash.utils.Maps;
+import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.utils.factory.Page;
 import cn.enilu.flash.web.controller.BaseController;
 import org.slf4j.Logger;
@@ -58,9 +59,14 @@ public class OrderController extends BaseController {
     }
 
     @RequestMapping(value = "prepareCheckout",method = RequestMethod.GET)
-    public Object prepareCheckout(@RequestParam(value = "chosenAddressId",required = false) Long chosenAddressId){
+    public Object prepareCheckout(@RequestParam(value = "chosenAddressId",required = false) Long chosenAddressId,
+                                  @RequestParam(value = "idCarts") String idCarts){
         Long idUser = getIdUser(HttpUtil.getRequest());
-        List<Cart> list = cartService.queryAll(SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser));
+        List<SearchFilter> filters  =Lists.newArrayList(
+                SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser),
+                SearchFilter.build("id", SearchFilter.Operator.IN, StringUtil.splitForLong(idCarts,","))
+        );
+        List<Cart> list = cartService.queryAll(filters);
         Address address = null;
         logger.info("chosenAddressId：{}",chosenAddressId);
         if(chosenAddressId==null || chosenAddressId==0) {
@@ -75,11 +81,17 @@ public class OrderController extends BaseController {
     @RequestMapping(value = "save",method = RequestMethod.POST)
     public Object save(
             @RequestParam("idAddress") Long idAddress,
-            @RequestParam(value = "message",required = false) String message
+            @RequestParam(value = "message",required = false) String message,
+            @RequestParam(value = "idCarts") String idCarts
     ){
 
         Long idUser = getIdUser();
-        List<Cart> cartList = cartService.queryAll(SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser));
+        List<SearchFilter> filters  =Lists.newArrayList(
+                SearchFilter.build("idUser", SearchFilter.Operator.EQ,idUser),
+                SearchFilter.build("id", SearchFilter.Operator.IN, StringUtil.splitForLong(idCarts,","))
+        );
+        List<Cart> cartList = cartService.queryAll(filters);
+
         Order order = new Order();
         order.setIdUser(idUser);
         order.setIdAddress(idAddress);

@@ -301,7 +301,17 @@ public class StringUtil {
         }
         return null == charset ? str.getBytes() : str.getBytes(charset);
     }
-
+    public static  Long[] splitForLong(String str,String delimiter){
+        String[] arr = str.split(delimiter);
+        if(arr!=null&&arr.length>0){
+            Long[] ret = new Long[arr.length];
+            for(int i=0;i<ret.length;i++){
+                ret[i] = Long.valueOf(arr[i]);
+            }
+            return ret;
+        }
+        return null;
+    }
 
     /**
      * 切分字符串<br>

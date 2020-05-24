@@ -25,5 +25,12 @@ export default {
             url: '/user/cart/update/'+id+'/'+count,
             method: 'POST',
         })
+    },
+    remove:function(params){
+        return request({
+            url: '/user/cart',
+            method: 'DELETE',
+            data:params
+        })
     }
 }

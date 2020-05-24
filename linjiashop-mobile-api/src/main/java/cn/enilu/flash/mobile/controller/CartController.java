@@ -64,12 +64,15 @@ public class CartController extends BaseController {
         return Rets.success();
     }
     @RequestMapping(method = RequestMethod.DELETE)
-    public Object remove(@RequestParam Long id){
+    public Object remove(@RequestBody List<Long> ids){
         Long idUser = getIdUser();
-        Cart cart = cartService.get(id);
-        if(cart.getIdUser().intValue() == idUser.intValue()){
-            cartService.delete(cart);
+        for(Long id:ids){
+            Cart cart = cartService.get(id);
+            if(cart.getIdUser().intValue() == idUser.intValue()){
+                cartService.delete(cart);
+            }
         }
+
         return Rets.success();
     }
 }

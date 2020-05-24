@@ -1,13 +1,14 @@
 package cn.enilu.flash.bean.entity.shop;
 
 import cn.enilu.flash.bean.entity.BaseEntity;
-import cn.enilu.flash.bean.entity.ShopBaseEntity;
 import cn.enilu.flash.bean.entity.cms.Banner;
 import lombok.Data;
 import org.hibernate.annotations.Table;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.Transient;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
 @Data
 @Table(appliesTo = "t_shop_category",comment = "商品类别")
 @Entity(name="t_shop_category")
+@EntityListeners(AuditingEntityListener.class)
 public class Category extends BaseEntity {
     @Column(columnDefinition = "VARCHAR(16) COMMENT '名称'")
     private String name;

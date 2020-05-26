@@ -6,9 +6,9 @@ import cn.enilu.flash.bean.constant.state.ManagerStatus;
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.dto.UserDto;
 import cn.enilu.flash.bean.entity.system.User;
-import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.core.factory.UserFactory;
@@ -68,7 +68,7 @@ public class UserController extends BaseController {
             // 判断账号是否重复
             User theUser = managerService.findByAccount(user.getAccount());
             if (theUser != null) {
-                throw new ApplicationException(BizExceptionEnum.USER_ALREADY_REG);
+                throw new ApplicationException(ApplicationExceptionEnum.USER_ALREADY_REG);
             }
             // 完善账号信息
             user.setSalt(RandomUtil.getRandomString(5));
@@ -89,7 +89,7 @@ public class UserController extends BaseController {
     @RequiresPermissions(value = {Permission.USER_DEL})
     public Object remove(@RequestParam Long userId){
         if (userId == null) {
-            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+            throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
         }
         if(userId.intValue()<=2){
             return Rets.failure("不能删除初始用户");
@@ -104,11 +104,11 @@ public class UserController extends BaseController {
     @RequiresPermissions(value = {Permission.USER_EDIT})
     public Object setRole(@RequestParam("userId") Long userId, @RequestParam("roleIds") String roleIds) {
         if (BeanUtil.isOneEmpty(userId, roleIds)) {
-            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+            throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
         }
         //不能修改超级管理员
         if (userId.equals(Const.ADMIN_ID)) {
-            throw new ApplicationException(BizExceptionEnum.CANT_CHANGE_ADMIN);
+            throw new ApplicationException(ApplicationExceptionEnum.CANT_CHANGE_ADMIN);
         }
         User user = managerService.get(userId);
         user.setRoleid(roleIds);

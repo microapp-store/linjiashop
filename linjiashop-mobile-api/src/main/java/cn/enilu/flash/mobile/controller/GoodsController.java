@@ -8,7 +8,6 @@ import cn.enilu.flash.bean.entity.shop.GoodsSku;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.AttrKeyService;
-import cn.enilu.flash.service.shop.AttrValService;
 import cn.enilu.flash.service.shop.GoodsService;
 import cn.enilu.flash.service.shop.GoodsSkuService;
 import cn.enilu.flash.utils.Lists;
@@ -33,8 +32,7 @@ public class GoodsController extends BaseController {
     private GoodsService goodsService;
     @Autowired
     private GoodsSkuService goodsSkuService;
-    @Autowired
-    private AttrValService attrValService;
+
     @Autowired
     private AttrKeyService attrKeyService;
 
@@ -95,7 +93,8 @@ public class GoodsController extends BaseController {
     public Object get(@PathVariable Long id) {
         Goods goods = goodsService.get(id);
         List<GoodsSku> skuList = goodsSkuService.queryAll(Lists.newArrayList(
-                SearchFilter.build("idGoods", id)
+                SearchFilter.build("idGoods", id),
+                SearchFilter.build("isDeleted",false)
         ));
 
 

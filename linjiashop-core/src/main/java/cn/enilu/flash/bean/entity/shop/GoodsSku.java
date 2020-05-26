@@ -32,5 +32,7 @@ public class GoodsSku extends BaseEntity {
     private BigDecimal marketingPrice;
     @Column(name="stock",columnDefinition = "INT COMMENT '库存'")
     private Integer stock;
+    @Column(columnDefinition = "TINYINT COMMENT '是否删除1:是,0:否'")
+    private Boolean isDeleted=false;
 
 }

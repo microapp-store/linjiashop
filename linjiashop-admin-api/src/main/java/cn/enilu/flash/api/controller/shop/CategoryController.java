@@ -2,14 +2,13 @@ package cn.enilu.flash.api.controller.shop;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
-
 import cn.enilu.flash.bean.entity.cms.Banner;
 import cn.enilu.flash.bean.entity.shop.AttrKey;
 import cn.enilu.flash.bean.entity.shop.Category;
 import cn.enilu.flash.bean.entity.shop.CategoryBannerRel;
-import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.AttrKeyService;
@@ -68,11 +67,11 @@ public class CategoryController extends BaseController {
 	@RequiresPermissions(value = {Permission.CATEGORY_EDIT})
 	public Object remove(Long id){
 		if (id == null) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
 		}
 		long goodsCount = goodsService.count(SearchFilter.build("idCategory",id));
 		if(goodsCount>0){
-			throw new ApplicationException(BizExceptionEnum.DATA_CANNOT_REMOVE);
+			throw new ApplicationException(ApplicationExceptionEnum.DATA_CANNOT_REMOVE);
 		}
 		categoryService.deleteById(id);
 		return Rets.success();
@@ -80,7 +79,7 @@ public class CategoryController extends BaseController {
 	@RequestMapping(value="/getBanners/{idCategory}",method = RequestMethod.GET)
 	public Object getBanners(@PathVariable("idCategory") Long idCategory){
 		if (idCategory == null) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
 		}
 		List<CategoryBannerRel> relList = categoryBannerRelService.queryAll(SearchFilter.build("idCategory", SearchFilter.Operator.EQ,idCategory));
 		List<Banner> bannerList = Lists.newArrayList();
@@ -93,7 +92,7 @@ public class CategoryController extends BaseController {
 	@RequestMapping(value ="getAttrKeys/{idCategory}",method = RequestMethod.GET)
 	public Object getAttrKeys(@PathVariable("idCategory") Long idCategory){
 		if (idCategory == null) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
 		}
 		List<AttrKey> list = attrKeyService.queryBy(idCategory);
 		return Rets.success(list);
@@ -104,7 +103,7 @@ public class CategoryController extends BaseController {
 	public Object removeBanner(@PathVariable("idCategory") Long idCategory,
 							@PathVariable("idBanner") Long idBanner){
 		if (idCategory == null) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
 		}
 		CategoryBannerRel rel = categoryBannerRelService.get(Lists.newArrayList(
 				SearchFilter.build("idCategory",idCategory),
@@ -120,7 +119,7 @@ public class CategoryController extends BaseController {
 	public Object setBanner(@PathVariable("idCategory") Long idCategory,
 							@PathVariable("idBanner") Long idBanner){
 		if (idCategory == null) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
 		}
 		CategoryBannerRel rel = categoryBannerRelService.get(Lists.newArrayList(
 				SearchFilter.build("idCategory",idCategory),

@@ -3,9 +3,9 @@ package cn.enilu.flash.api.controller.shop;
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.entity.shop.GoodsSku;
-import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.GoodsSkuService;
@@ -36,7 +36,8 @@ public class GoodsSkuController {
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public Object list() {
-	Page<GoodsSku> page = new PageFactory<GoodsSku>().defaultPage();
+		Page<GoodsSku> page = new PageFactory<GoodsSku>().defaultPage();
+		page.addFilter("isDeleted",false);
 		page = goodsSkuService.queryPage(page);
 		return Rets.success(page);
 	}
@@ -84,9 +85,11 @@ public class GoodsSkuController {
 	@RequiresPermissions(value = {Permission.GOODS_EDIT})
 	public Object remove(Long id){
 		if (StringUtil.isEmpty(id)) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
 		}
-		goodsSkuService.deleteById(id);
+		GoodsSku sku = goodsSkuService.get(id);
+		sku.setIsDeleted(true);
+		goodsSkuService.update(sku);
 		return Rets.success();
 	}
 }

@@ -2,11 +2,10 @@ package cn.enilu.flash.api.controller.promotion;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
-
 import cn.enilu.flash.bean.entity.promotion.Topic;
-import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.promotion.TopicService;
@@ -55,7 +54,7 @@ public class TopicController {
 	@RequiresPermissions(value = {Permission.TOPIC_DEL})
 	public Object remove(Long id){
 		if (StringUtil.isEmpty(id)) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
 		}
 		topicService.deleteById(id);
 		return Rets.success();
@@ -65,7 +64,7 @@ public class TopicController {
 	@RequiresPermissions(value = {Permission.TOPIC_EDIT})
 	public Object changeIsOnSale(@RequestParam("id")  Long id,@RequestParam("disabled") Boolean disabled){
 		if (id == null) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
 		}
 		topicService.changeDisabled(id,disabled);
 		return Rets.success();

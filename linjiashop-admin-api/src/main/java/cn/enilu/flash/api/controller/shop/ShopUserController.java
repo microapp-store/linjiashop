@@ -2,8 +2,8 @@ package cn.enilu.flash.api.controller.shop;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.entity.shop.ShopUser;
-import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.CartService;
@@ -60,7 +60,7 @@ public class ShopUserController {
 	@RequestMapping(value="{id}",method = RequestMethod.GET)
 	public Object get(@PathVariable("id") Long id){
 		if (id == null) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
 		}
 		return Rets.success(shopUserService.get(id));
 	}
@@ -68,7 +68,7 @@ public class ShopUserController {
 	@RequestMapping(value="/info/{id}",method = RequestMethod.GET)
 	public Object getInfo(@PathVariable("id") Long id){
 		if (id == null) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
 		}
 		ShopUser shopUser = shopUserService.get(id);
 

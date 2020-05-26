@@ -8,6 +8,7 @@ import cn.enilu.flash.bean.vo.shop.GoodsVo;
 import cn.enilu.flash.dao.shop.GoodsRepository;
 import cn.enilu.flash.dao.system.FileInfoRepository;
 import cn.enilu.flash.service.BaseService;
+import cn.enilu.flash.utils.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,10 @@ public class GoodsService extends BaseService<Goods,Long,GoodsRepository>  {
     }
     public GoodsVo getDetail(Long id){
         Goods goods = get(id);
-        List<GoodsSku> skuList = goodsSkuService.queryAll(SearchFilter.build("idGoods",id));
+        List<GoodsSku> skuList = goodsSkuService.queryAll(Lists.newArrayList(
+                SearchFilter.build("idGoods",id),
+                SearchFilter.build("isDeleted",false)
+        ));
         GoodsVo vo = new GoodsVo();
         vo.setGoods(goods);
         vo.setSkuList(skuList);

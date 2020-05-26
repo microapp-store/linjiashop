@@ -2,12 +2,11 @@ package cn.enilu.flash.api.controller.shop;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
-
 import cn.enilu.flash.bean.entity.shop.Order;
 import cn.enilu.flash.bean.entity.system.FileInfo;
-import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.shop.OrderEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.security.JwtUtil;
@@ -124,7 +123,7 @@ public class OrderController {
     @RequestMapping(value = "{orderSn}", method = RequestMethod.GET)
     public Object get(@PathVariable("orderSn") String orderSn) {
         if (orderSn == null) {
-            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+            throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
         }
         Order order = orderService.getByOrderSn(orderSn);
         return Rets.success(order);

@@ -3,9 +3,9 @@ package cn.enilu.flash.api.controller.system;
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.entity.system.Express;
-import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.system.ExpressService;
@@ -73,7 +73,7 @@ public class ExpressController {
     @RequiresPermissions(value = {Permission.EXPRESS_EDIT})
     public Object remove(Long id) {
         if (StringUtil.isEmpty(id)) {
-            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+            throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
         }
         expressService.deleteById(id);
         return Rets.success();
@@ -84,7 +84,7 @@ public class ExpressController {
     @BussinessLog(value = "启用禁用物流公司", key = "id")
     public Object changeIsOnSale(@RequestParam("id")  Long id, @RequestParam("disabled") Boolean disabled){
         if (id == null) {
-            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+            throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
         }
         expressService.changeDisabled(id,disabled);
         return Rets.success();

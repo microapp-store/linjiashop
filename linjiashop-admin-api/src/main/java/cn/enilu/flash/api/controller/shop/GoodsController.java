@@ -4,14 +4,15 @@ import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.entity.shop.Goods;
 import cn.enilu.flash.bean.entity.shop.GoodsSku;
-import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.GoodsService;
 import cn.enilu.flash.service.shop.GoodsSkuService;
 import cn.enilu.flash.service.system.LogObjectHolder;
+import cn.enilu.flash.utils.Lists;
 import cn.enilu.flash.utils.factory.Page;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -51,7 +52,11 @@ public class GoodsController {
 	@BussinessLog(value = "编辑商品", key = "name")
 	@RequiresPermissions(value = {Permission.GOODS_EDIT})
 	public Object save(@RequestBody @Valid Goods goods){
-		List<GoodsSku> skuList = goodsSkuService.queryAll(SearchFilter.build("idGoods",goods.getId()));
+		List<SearchFilter> filters = Lists.newArrayList(
+				SearchFilter.build("idGoods",goods.getId()),
+				SearchFilter.build("isDeleted",false)
+		);
+		List<GoodsSku> skuList = goodsSkuService.queryAll(filters);
 		if(goods.getPrice() ==null){
 			if(!skuList.isEmpty()){
 				int stock = 0;
@@ -61,7 +66,7 @@ public class GoodsController {
 				goods.setStock(stock);
 				goods.setPrice(skuList.get(0).getPrice());
 			}else{
-				throw new ApplicationException(BizExceptionEnum.DATA_ERROR);
+				throw new ApplicationException(ApplicationExceptionEnum.DATA_ERROR);
 			}
 		}else{
 			if(!skuList.isEmpty()){
@@ -88,7 +93,7 @@ public class GoodsController {
 	@RequiresPermissions(value = {Permission.GOODS_EDIT})
 	public Object remove(Long id){
 		if (id == null) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
 		}
 		goodsService.deleteById(id);
 		return Rets.success();
@@ -97,7 +102,7 @@ public class GoodsController {
 	@RequestMapping(method = RequestMethod.GET)
 	public Object get(Long id){
 		if (id == null) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
 		}
 		return Rets.success(goodsService.getDetail(id));
 	}
@@ -106,7 +111,7 @@ public class GoodsController {
 	@BussinessLog(value = "上架/下架商品", key = "id")
 	public Object changeIsOnSale(@RequestParam("id")  Long id,@RequestParam("isOnSale") Boolean isOnSale){
 		if (id == null) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
 		}
 		goodsService.changeIsOnSale(id,isOnSale);
 		return Rets.success(goodsService.get(id));

@@ -1,24 +1,26 @@
 package cn.enilu.flash.api.controller.system;
 
-import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.constant.Const;
 import cn.enilu.flash.bean.core.BussinessLog;
-
 import cn.enilu.flash.bean.entity.system.Role;
 import cn.enilu.flash.bean.entity.system.User;
-import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.node.Node;
 import cn.enilu.flash.bean.vo.node.ZTreeNode;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.system.LogObjectHolder;
-import cn.enilu.flash.service.system.RoleService;
 import cn.enilu.flash.service.system.ManagerService;
+import cn.enilu.flash.service.system.RoleService;
 import cn.enilu.flash.service.system.impl.ConstantFactory;
-import cn.enilu.flash.utils.*;
+import cn.enilu.flash.utils.BeanUtil;
+import cn.enilu.flash.utils.Convert;
+import cn.enilu.flash.utils.Maps;
+import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.warpper.RoleWarpper;
+import cn.enilu.flash.web.controller.BaseController;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -73,7 +75,7 @@ public class RoleController extends BaseController {
     public Object remove(@RequestParam Long roleId){
         logger.info("id:{}",roleId);
         if (roleId==null) {
-            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+            throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
         }
         if(roleId.intValue()<2){
             return Rets.failure("不能删除初始角色");
@@ -98,7 +100,7 @@ public class RoleController extends BaseController {
     public Object setAuthority(Long roleId, String
             permissions) {
         if (roleId == null) {
-            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+            throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
         }
         roleService.setAuthority(roleId, permissions);
         return Rets.success();

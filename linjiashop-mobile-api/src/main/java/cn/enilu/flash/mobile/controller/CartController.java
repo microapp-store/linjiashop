@@ -5,8 +5,6 @@ import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.bean.vo.shop.CartVo;
 import cn.enilu.flash.service.shop.CartService;
-import cn.enilu.flash.service.shop.GoodsService;
-import cn.enilu.flash.service.shop.GoodsSkuService;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +22,6 @@ import java.util.List;
 public class CartController extends BaseController {
     @Autowired
     private CartService cartService;
-    @Autowired
-    private GoodsSkuService goodsSkuService;
-    @Autowired
-    private GoodsService goodsService;
     @RequestMapping(value = "/queryByUser",method = RequestMethod.GET)
     public Object getByUser(){
         Long idUser = getIdUser(HttpUtil.getRequest());

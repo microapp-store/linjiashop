@@ -3,8 +3,8 @@ package cn.enilu.flash.api.controller.shop;
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.entity.shop.AttrKey;
 import cn.enilu.flash.bean.entity.shop.AttrVal;
-import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.AttrKeyService;
@@ -87,7 +87,7 @@ public class AttrValController {
     @BussinessLog(value = "删除商品属性值", key = "id")
     public Object remove(Long id) {
         if (StringUtil.isEmpty(id)) {
-            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+            throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
         }
         attrValService.deleteById(id);
         return Rets.success();
@@ -96,7 +96,7 @@ public class AttrValController {
     @BussinessLog(value = "修改商品属性值", key = "id")
     public Object updateAttrName(@RequestParam("id") Long id,@RequestParam("attrVal") String attrVal){
         if (StringUtil.isEmpty(id)) {
-            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+            throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
         }
         AttrVal attrValEntity = attrValService.get(id);
         attrValEntity.setAttrVal(attrVal);

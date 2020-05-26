@@ -1,16 +1,16 @@
 package cn.enilu.flash.api.controller.system;
 
-import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.entity.system.Dept;
-import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.node.DeptNode;
 import cn.enilu.flash.service.system.DeptService;
 import cn.enilu.flash.service.system.LogObjectHolder;
 import cn.enilu.flash.utils.BeanUtil;
+import cn.enilu.flash.web.controller.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +44,7 @@ public class DeptContoller extends BaseController {
     @RequiresPermissions(value = {Permission.DEPT_EDIT})
     public Object save(@ModelAttribute @Valid Dept dept){
         if (BeanUtil.isOneEmpty(dept, dept.getSimplename())) {
-            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+            throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
         }
         if(dept.getId()!=null){
             Dept old = deptService.get(dept.getId());
@@ -68,7 +68,7 @@ public class DeptContoller extends BaseController {
     public Object remove(@RequestParam  Long id){
         logger.info("id:{}",id);
         if (id == null) {
-            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+            throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
         }
         deptService.deleteDept(id);
         return Rets.success();

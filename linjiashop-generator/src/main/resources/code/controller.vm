@@ -45,7 +45,7 @@ public class ${table.ControllerClassName} {
 	@BussinessLog(value = "删除${table.Label}", key = "id")
 	public Object remove(Long id){
 		if (StringUtil.isEmpty(id)) {
-			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
 		}
 		${table.ServiceInstanceName}.deleteById(id);
 		return Rets.success();

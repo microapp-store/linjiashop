@@ -2,11 +2,10 @@ package cn.enilu.flash.api.controller.message;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
-
 import cn.enilu.flash.bean.entity.message.MessageTemplate;
-import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.service.message.MessagetemplateService;
 import cn.enilu.flash.utils.factory.Page;
@@ -51,7 +50,7 @@ public class MessagetemplateController {
     @RequiresPermissions(value = {Permission.MSG_TPL_DEL})
     public Object remove(Long id) {
         if (id == null) {
-            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+            throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
         }
         messagetemplateService.deleteById(id);
         return Rets.success();

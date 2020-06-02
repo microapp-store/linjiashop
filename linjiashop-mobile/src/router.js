@@ -126,6 +126,14 @@ const routes = [
         }
     },
     {
+        name: 'order/expressInfo/:orderSn',
+        component: () => import('./view/order/expressInfo'),
+        meta: {
+            requireAuth: true,
+            title: '物流信息'
+        }
+    },
+    {
         name: 'favorite',
         component: () => import('./view/favorite'),
         meta: {

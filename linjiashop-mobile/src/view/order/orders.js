@@ -102,7 +102,9 @@ export default {
             order.remove(orderInfo.orderSn).then( response => {
                 this.getData()
             })
-
+        },
+        viewExpressInfo(orderSn){
+            this.$router.push('/order/expressInfo/'+orderSn)
         },
         getHandlerText(statusName){
             if(statusName==='已发货'){

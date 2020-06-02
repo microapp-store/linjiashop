@@ -217,7 +217,9 @@ INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_
 INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (9, 1, '2020-1-19 17:06:54', 1, '2020-3-20 14:31:59', '微信ticket', 'weixin.js.api.ticket', 'HoagFKDcsGMVCIY2vOjf9pIHYEf7W-G5zYtUhIs_q6gqnuHZTyJJz6HY0zEF_UCYRIwQVNRjDnlLtxDRbXyolQ');
 INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (10, 1, '2020-1-19 17:06:54', 1, '2020-1-19 18:45:04', '微信获取token的地址', 'weixin.access.token.url', 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s');
 INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (11, 1, '2020-1-19 17:06:54', 1, '2020-1-19 18:45:04', '微信获取ticket的地址', 'weixin.js.api.ticket.url', 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi');
-
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (12, 1, '2020-5-31 21:48:12', 1, '2020-5-31 21:48:12', '快递鸟接口地址', 'api.kdniao.url', 'http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (13, 1, '2020-5-31 21:48:12', 1, '2020-5-31 21:48:12', '快递鸟用户id', 'api.kdniao.userid', '快递鸟userid');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (14, 1, '2020-5-31 21:48:12', 1, '2020-5-31 21:48:12', '快递鸟apikey', 'api.kdniao.apikey', NULL);
 -- ----------------------------
 -- Records of t_sys_dept.sql
 -- ----------------------------

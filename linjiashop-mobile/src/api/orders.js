@@ -15,6 +15,16 @@ export default {
         })
     },
     /**
+     * 获取物流信息
+     * @param orderSn
+     */
+    getExpressInfo: function (orderSn) {
+        return request({
+            url: '/user/order/getExpressInfo/' + orderSn,
+            method: 'get'
+        })
+    },
+    /**
      * 取消订单
      * @param orderSn
      */

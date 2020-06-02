@@ -63,5 +63,11 @@ export  default {
         message: message
       }
     })
+  },
+  getShippingInfo:function(shippingSn,shipperCode){
+    return request({
+      url:'/shop/order/getShippingInfo/'+shippingSn+'/'+shipperCode,
+        method:'get'
+    })
   }
 }

@@ -97,6 +97,8 @@ export default {
                     //获取当前用户购物车商品数量
                     cart.count().then(response => {
                         this.cartCount = response.data ===0?'':response.data
+                    }).catch((err) => {
+
                     })
                     //判断当前用户是否收藏该产品
                     favorite.ifLike(this.goods.id).then(response => {
@@ -104,6 +106,8 @@ export default {
                             this.likeColor = 'red'
                             this.ifLike = true
                         }
+                    }).catch((err) => {
+
                     })
                 }
             }).catch((err) => {

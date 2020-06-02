@@ -14,6 +14,10 @@ public interface CfgKey {
     String API_TENCENT_SMS_APPKEY = "api.tencent.sms.appkey";
     String API_TENCENT_SMS_SIGN = "api.tencent.sms.sign";
 
+    String API_KDNIAO_URL = "api.kdniao.url";
+    String API_KDNIAO_USERID = "api.kdniao.userid";
+    String API_KDNIAO_APIKEY = "api.kdniao.apikey";
+
     String WX_APP_ID = "weixin.app.id";
     String WX_APP_SECRET = "weixin.app.secret";
     String WX_ACCESS_TOKEN_URL = "weixin.access.token.url";

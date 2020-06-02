@@ -1,5 +1,6 @@
 package cn.enilu.flash.api.controller.shop;
 
+import cn.enilu.flash.bean.constant.CfgKey;
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.entity.shop.Order;
@@ -10,7 +11,10 @@ import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.security.JwtUtil;
+import cn.enilu.flash.service.api.KdniaoResponse;
+import cn.enilu.flash.service.api.KdniaoService;
 import cn.enilu.flash.service.shop.OrderService;
+import cn.enilu.flash.service.system.CfgService;
 import cn.enilu.flash.service.system.FileService;
 import cn.enilu.flash.utils.DateUtil;
 import cn.enilu.flash.utils.Lists;
@@ -35,6 +39,10 @@ public class OrderController {
     private OrderService orderService;
     @Autowired
     private FileService fileService;
+    @Autowired
+    private KdniaoService kdniaoService;
+    @Autowired
+    private CfgService cfgService;
 
     /**
      * 获取订单统计信息
@@ -127,5 +135,14 @@ public class OrderController {
         }
         Order order = orderService.getByOrderSn(orderSn);
         return Rets.success(order);
+    }
+    @RequestMapping(value="/getShippingInfo/{shippingSn}/{shipperCode}")
+    public Object getShippingInfo(String shippingSn,String shipperCode){
+        String apiKdniaoUserid = cfgService.getCfgValue(CfgKey.API_KDNIAO_USERID);
+        if (StringUtil.isEmpty(apiKdniaoUserid)) {
+            return Rets.failure("你没有配置快递鸟服务参数");
+        }
+        KdniaoResponse response = kdniaoService.realTimeQuery(shippingSn,shipperCode);
+        return Rets.success(response);
     }
 }

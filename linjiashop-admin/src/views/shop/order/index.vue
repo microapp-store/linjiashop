@@ -185,6 +185,50 @@
 
       </el-form>
     </el-dialog>
+    <el-dialog
+      title="物流信息"
+      :visible.sync="shippingInfo.show"
+      width="80%">
+      <el-form ref="form"   label-width="120px">
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="快递公司"  >
+              <el-select v-model="shippingInfo.form.idExpress"   disabled>
+                <el-option
+                  v-for="item in expressList"
+                  :key="item.id"
+                  :label="item.name"
+                  :value="item.id">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="快递单号"  >
+              <el-input v-model="shippingInfo.form.shippingSn"  readOnly></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="物流进度">
+              <br>
+              <el-timeline :reverse="true">
+                <el-timeline-item
+                  v-for="(activity, index) in shippingInfo.form.traces"
+                  :key="index"
+                  :timestamp="activity.acceptTime">
+                  {{activity.acceptStation}}
+                </el-timeline-item>
+              </el-timeline>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item>
+
+          <el-button @click.native="shippingInfo.show = false">{{ $t('button.close') }}</el-button>
+        </el-form-item>
+
+      </el-form>
+    </el-dialog>
 
   </div>
 </template>

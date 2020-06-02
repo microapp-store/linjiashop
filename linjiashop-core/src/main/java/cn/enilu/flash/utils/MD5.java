@@ -177,8 +177,22 @@ public class MD5 {
 
         return md5StrBuff.toString();
     }
-
-    public static void main(String[] args) {
-        System.out.println(MD5.md5("enilu","lovemaggie"));
+    private static  String MD5(String str, String charset) throws Exception {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(str.getBytes(charset));
+        byte[] result = md.digest();
+        StringBuffer sb = new StringBuffer(32);
+        for (int i = 0; i < result.length; i++) {
+            int val = result[i] & 0xff;
+            if (val <= 0xf) {
+                sb.append("0");
+            }
+            sb.append(Integer.toHexString(val));
+        }
+        return sb.toString().toLowerCase();
+    }
+    public static void main(String[] args) throws Exception {
+        System.out.println(MD5.getMD5String("enilu"));
+        System.out.println(MD5("enilu","UTF-8"));
     }
 }

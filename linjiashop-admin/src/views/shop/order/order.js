@@ -22,11 +22,22 @@ export default {
       logVisible: false,
       logs: [],
       expressList:[],
+      //发货表单
       shipping:{
         show:false,
         id:'',
         idExpress:'',
         shippingSn:''
+      },
+      //物流信息
+      shippingInfo:{
+        show:false,
+        form: {
+          id: '',
+          idExpress: '',
+          shippingSn: '',
+          traces: []
+        }
       },
       query:{
         button:{
@@ -89,6 +100,9 @@ export default {
         for(const key in data){
           this.query.button.tag[key] = data[key]
         }
+      })
+      expressApi.queryAll().then( response=> {
+        this.expressList = response.data
       })
     },
     fetchData() {
@@ -184,16 +198,22 @@ export default {
       return (price / 100).toFixed(2);
     },
     viewShippingInfo(data){
-      this.shipping.idExpress = data.idExpress
-      this.shipping.shippingSn = data.shippingSn
-      this.openSendOutForm(data.id)
+      this.shippingInfo.form = data
+      const expressList = this.expressList
+      let shipperCode =''
+      for(const index in expressList){
+        const express = expressList[index]
+        if(express.id === data.idExpress){
+          shipperCode = express.code
+        }
+      }
+      orderApi.getShippingInfo(data.shippingSn,shipperCode).then( response => {
+        this.shippingInfo.form['traces'] = response.data.traces
+        this.shippingInfo.show = true
+      })
+
     },
     openSendOutForm(id){
-      if(this.expressList.length==0){
-        expressApi.queryAll().then( response=> {
-          this.expressList = response.data
-        })
-      }
       this.shipping.id = id
       this.shipping.show = true
     },

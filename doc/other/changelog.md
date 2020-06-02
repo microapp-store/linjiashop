@@ -1,9 +1,10 @@
 # Change log
-## latest
 
+## v0.6
+[gitee](https://gitee.com/microapp/linjiashop/releases/v0.6) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.6)
 ### Issues
 - echarts随着窗口缩放自适应
-- 【h5】用户个人中心增加收藏商品管理功能
+- 用户个人中心增加收藏商品管理功能
 - 对接快递鸟物流查询服务
 - 编辑sku使用逻辑删除代替物理删除
 - 购物车管理功能，可以删除购物车中的商品
@@ -16,6 +17,7 @@
 - 更新缓存的时候连带更新常量工具类中使用的本地(TimeCacheMap)缓存
 - 编辑商品规格信息的时候允许规格重复的问题
 - 商品类别中维护商品规格属性名的时候可以重复的问题
+
 ## v0.5
 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.5) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.5)
 ### Issues
@@ -39,13 +41,14 @@
 
 ## v0.4
 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.4) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.4)
+
 ### Issues
 - 【后台管理】管理员给订单添加备注信息
 - 【后台管理】维护物流公司
 - 【后台管理】增加订单发货功能
 - 【后台管理】增加导出订单excel报表功能
 - 针对订单全流程生命周期添加操作日志
-- 基础框架封装支持关联查询；封装根据原生sql语句查询返回List<Map>代替List<Object[]>
+- 基础框架封装支持关联查询；封装根据原生sql语句查询返回List Map代替List Object[]
 - 【后台管理】商品类别中维护该类商品规格名信息
 - 【后台管理】订单管理增加高级检索功能
 - 【后台管理】参数管理增加分组功能，方便分组维护参数

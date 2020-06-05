@@ -71,7 +71,8 @@ public class GoodsController extends BaseController {
     @RequestMapping(value = "/searchNew", method = RequestMethod.GET)
     public Object searchNew() {
         List<Goods> list = goodsService.queryAll(Lists.newArrayList(
-                SearchFilter.build("isNew", true)
+                SearchFilter.build("isNew", true),
+                SearchFilter.build("isOnSale", true)
         ));
         return Rets.success(list);
     }
@@ -84,7 +85,8 @@ public class GoodsController extends BaseController {
     @RequestMapping(value = "/searchHot", method = RequestMethod.GET)
     public Object searchHot() {
         List<Goods> list = goodsService.queryAll(Lists.newArrayList(
-                SearchFilter.build("isHot", true)
+                SearchFilter.build("isHot", true),
+                SearchFilter.build("isOnSale", true)
         ));
         return Rets.success(list);
     }

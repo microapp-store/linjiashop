@@ -43,7 +43,6 @@ export default {
             }
             if(this.$route.query.redirect){
                 this.redirect = this.$route.query.redirect
-                console.log('redirect',this.redirect)
             }
         },
         toLoginByPassword(){

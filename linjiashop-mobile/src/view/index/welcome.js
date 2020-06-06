@@ -1,7 +1,9 @@
 import categoryApi from '@/api/category'
 import goodsApi from '@/api/goods'
 import topicApi from '@/api/topic'
+import wechatApi from '@/api/wechat'
 import store from '@/store'
+import storage  from '@/utils/storage'
 const baseApi = process.env.VUE_APP_BASE_API
 import {
     Card,
@@ -66,9 +68,24 @@ export default {
     },
     mounted() {
         this.init()
+
     },
     methods: {
         init() {
+            const user = storage.getUser()
+            this.isLogin = user.nickName
+            if(!this.isLogin) {
+                const url = window.location.href
+                if (url.indexOf('localhost') > -1 || url.indexOf('127.0.0.1') > -1) {
+                    console.log('开发环境不获取openid')
+                } else {
+                    const userAgent = window.navigator.userAgent.toLowerCase()
+                    //使用微信访问本系统的时候获取微信openid，否则不获取
+                    if (userAgent.indexOf('micromessenger') > -1) {
+                        this.processOpenid()
+                    }
+                }
+            }
             let categoryData = store.state.app.category
             if (!categoryData || categoryData.length == 0) {
                 let platform = navigator.platform
@@ -141,7 +158,39 @@ export default {
         },
         toTopic(id) {
             this.$router.push({path: '/topic/'+id})
-          // Toast('敬请期待')
+        },
+        processOpenid() {
+            let url = window.location.href;
+            if (url.indexOf('code') > -1) {
+                const code = url.split('code=')[1].split("&")[0];
+                wechatApi.getWxOpenId({
+                    "code": code
+                }).then(res => {
+                    store.dispatch('app/toggleToken',res.data.token)
+                    store.dispatch('app/toggleUser',res.data.user)
+                    storage.set('chosenAddressId','')
+                })
+
+            } else {
+                this.redirectForCode();
+            }
+        },
+        redirectForCode() {
+            wechatApi.getWxSign({
+                "url": window.location.href
+            }).then(res => {
+                const rr = res.data;
+                const redirectUrl = window.location.href;
+                let param = 'appid=' + rr.appId
+                param += '&response_type=code'
+                param += '&scope=snsapi_base'
+                param += '&redirect_uri=' + encodeURIComponent(redirectUrl)
+                param += '&state=linjiashop#wechat_redirect'
+                console.log('url:', 'https://open.weixin.qq.com/connect/oauth2/authorize?' + param)
+                window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?' + param
+            }).catch(err => {
+
+            })
         }
 
     }

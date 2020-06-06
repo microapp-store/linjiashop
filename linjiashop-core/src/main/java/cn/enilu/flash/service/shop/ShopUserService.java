@@ -5,6 +5,7 @@ import cn.enilu.flash.bean.entity.shop.ShopUser;
 import cn.enilu.flash.bean.enumeration.MessageTemplateEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
+import cn.enilu.flash.bean.vo.shop.WechatInfo;
 import cn.enilu.flash.cache.CacheDao;
 import cn.enilu.flash.dao.shop.ShopUserRepository;
 import cn.enilu.flash.security.JwtUtil;
@@ -54,7 +55,7 @@ public class ShopUserService extends BaseService<ShopUser,Long,ShopUserRepositor
         Integer sendTimes =  cacheDao.hget(CacheDao.DAY,timesKey,Integer.class);
         sendTimes = sendTimes==null?0:sendTimes;
         if(sendTimes!=null&&sendTimes>3){
-            logger.info("{}:当天天发送短信验证码次数超限",mobile);
+            logger.info("{}:当天发送短信验证码次数超限",mobile);
             throw  new ApplicationException(ApplicationExceptionEnum.REQUEST_TOO_MANY);
         }
         cacheDao.hset(CacheDao.HOUR,key,smsCode);
@@ -63,9 +64,9 @@ public class ShopUserService extends BaseService<ShopUser,Long,ShopUserRepositor
         messageService.sendSms(MessageTemplateEnum.REGISTER_CODE.getCode(),mobile,smsCode);
         return true;
     }
-
+    //todo 该方法仅作测试环境使用
     public String sendSmsCodeForOldMobile(String mobile) {
-        //todo 发送短信验证码逻辑，暂不实现
+
         String smsCode = RandomUtil.getRandomNumber(4);
         cacheDao.hset(CacheDao.SESSION,mobile+"_smsCode",smsCode);
         HttpUtil.getRequest().getSession().setAttribute(mobile+"_smsCode",smsCode);
@@ -81,13 +82,25 @@ public class ShopUserService extends BaseService<ShopUser,Long,ShopUserRepositor
         user.setSalt(RandomUtil.getRandomString(5));
 
         user.setPassword(MD5.md5(initPwd, user.getSalt()));
-
         insert(user);
         return user;
     }
-
     public ShopUser getCurrentUser() {
         return get(JwtUtil.getUserId());
+    }
+
+    public ShopUser findByWechatOpenId(String openId) {
+        return shopUserRepository.findByWechatOpenId(openId);
+    }
+
+    public ShopUser registerByWechatInfo(WechatInfo wechatInfo) {
+        ShopUser user = new ShopUser();
+        user.setWechatOpenId(wechatInfo.getOpenId());
+        user.setWechatHeadImgUrl(wechatInfo.getHeadUrl());
+        user.setNickName(wechatInfo.getNickName());
+        user.setCreateTime(new Date());
+        insert(user);
+        return user;
     }
 }
 

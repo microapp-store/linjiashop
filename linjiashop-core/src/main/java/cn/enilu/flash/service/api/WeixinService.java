@@ -3,11 +3,9 @@ package cn.enilu.flash.service.api;
 import cn.enilu.flash.bean.constant.CfgKey;
 import cn.enilu.flash.bean.entity.shop.ShopUser;
 import cn.enilu.flash.bean.entity.system.Cfg;
-import cn.enilu.flash.bean.exception.ApplicationException;
-import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.shop.WechatInfo;
 import cn.enilu.flash.cache.CacheDao;
-import cn.enilu.flash.dao.shop.ShopUserRepository;
+import cn.enilu.flash.service.shop.ShopUserService;
 import cn.enilu.flash.service.system.CfgService;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.StringUtil;
@@ -36,17 +34,18 @@ public class WeixinService {
     @Autowired
     private CfgService cfgService;
     @Autowired
-    private ShopUserRepository shopUserRepository;
+    private ShopUserService shopUserService;
     @Autowired
     private CacheDao cacheDao;
     private Logger logger = LoggerFactory.getLogger(WeixinService.class);
+
     public void updateWeixinToken() {
         HttpUtil.trustEveryone();
         String accessToken = getAccessToken();
         String jsapiTicket = getJsapiTicket(accessToken);
 
         Cfg tokenCfg = cfgService.getByCfgName(CfgKey.WX_ACCESS_TOKEN);
-        if(tokenCfg==null){
+        if (tokenCfg == null) {
             tokenCfg = new Cfg();
             tokenCfg.setCfgName(CfgKey.WX_ACCESS_TOKEN);
             tokenCfg.setCfgDesc("微信token，通过定时任务获取");
@@ -55,7 +54,7 @@ public class WeixinService {
         cfgService.saveOrUpdate(tokenCfg);
 
         Cfg tidCfg = cfgService.getByCfgName(CfgKey.WX_JS_API_TICKET);
-        if(tidCfg==null){
+        if (tidCfg == null) {
             tidCfg = new Cfg();
             tidCfg.setCfgName(CfgKey.WX_JS_API_TICKET);
             tidCfg.setCfgDesc("微信ticket，通过定时任务获取");
@@ -68,9 +67,9 @@ public class WeixinService {
         String appId = cfgService.getCfgValue(CfgKey.WX_APP_ID);
         String appSecret = cfgService.getCfgValue(CfgKey.WX_APP_SECRET);
         String accessTokenUrl = cfgService.getCfgValue(CfgKey.WX_ACCESS_TOKEN_URL);
-        String url = String.format(accessTokenUrl, appId,appSecret);
+        String url = String.format(accessTokenUrl, appId, appSecret);
         String result = Http.get(url).getContent();
-        logger.info("获取微信token，\r\nurl : {},\r\n result : {}",url,result);
+        logger.info("获取微信token，\r\nurl : {},\r\n result : {}", url, result);
         Object object = Json.fromJson(StringUtil.sNull(result));
         String access_token = (String) Mapl.cell(object, "access_token");
         return access_token;
@@ -84,6 +83,7 @@ public class WeixinService {
         String ticket = (String) Mapl.cell(object, "ticket");
         return ticket;
     }
+
     public Map<String, Object> getPrivateAccessToken(String code) {
         String url = "https://api.weixin.qq.com/sns/oauth2/access_token";
         url += "?appid=" + cfgService.getCfgValue(CfgKey.WX_APP_ID);
@@ -104,43 +104,45 @@ public class WeixinService {
         }
         return null;
     }
-      public boolean isAuth(ShopUser user, String code) {
-          WechatInfo wechatInfo = cacheDao.hget(CacheDao.SESSION,"WECHAT_INFO"+user.getId(),WechatInfo.class);
-          if(wechatInfo!=null){
-              logger.info("从缓存获取微信用户信息",Json.toJson(wechatInfo));
-              return true;
-          }
+
+    public boolean isAuth(ShopUser user, String code) {
+        WechatInfo wechatInfo = null;
+        if (user != null) {
+            wechatInfo = cacheDao.hget(CacheDao.SESSION, "WECHAT_INFO" + user.getId(), WechatInfo.class);
+        }
+        if (wechatInfo != null) {
+            logger.info("从缓存获取微信用户信息", Json.toJson(wechatInfo));
+            return true;
+        }
         if (StringUtil.isNotEmpty(code)) {
-            // 第二步，通过code换取access_token和OpenId
-            Map<String, Object> ret = getPrivateAccessToken(code);
-            logger.info("获取token:{}",Json.toJson(ret));
-            if (ret != null && ret.get("errcode") == null) {
-                String openId = StringUtil.sNull(ret.get("openid"));
-                logger.info("用户:{}的openId:{}", user.getMobile(), openId);
-                if(StringUtil.isNotEmpty(user.getWechatOpenId()) && !StringUtil.equals(user.getWechatOpenId(),openId)){
-                    throw  new ApplicationException(ApplicationExceptionEnum.WECHAT_BIND_ANOTHER);
+            wechatInfo = getWechatInfoByCode(code);
+            if (wechatInfo != null) {
+                user.setWechatNickName(StringUtil.getValidChar(wechatInfo.getNickName()));
+                user.setWechatHeadImgUrl(wechatInfo.getHeadUrl());
+                if (StringUtil.equals(user.getNickName(), user.getMobile())) {
+                    user.setNickName(user.getWechatNickName());
                 }
-                user.setWechatOpenId(openId);
-                  wechatInfo = getWechatInfo(openId);
-                if (wechatInfo != null) {
-                    user.setWechatNickName(StringUtil.getValidChar(wechatInfo.getNickName()));
-                    user.setWechatHeadImgUrl(wechatInfo.getHeadUrl());
-                    if(StringUtil.equals(user.getNickName(),user.getMobile())){
-                        user.setNickName(user.getWechatNickName());
-                    }
-                    shopUserRepository.save(user);
-                    cacheDao.hset(CacheDao.SESSION,"WECHAT_INFO"+user.getId(),wechatInfo);
-                    return true;
-                }
-
-
+                shopUserService.update(user);
+                cacheDao.hset(CacheDao.SESSION, "WECHAT_INFO" + user.getId(), wechatInfo);
+                return true;
             }
         }
 
         return false;
     }
-    public WechatInfo getWechatInfo( String openId) {
-        String accessToken =cfgService.getCfgValue(CfgKey.WX_ACCESS_TOKEN);
+
+    public WechatInfo getWechatInfoByCode(String code) {
+        Map<String, Object> ret = getPrivateAccessToken(code);
+        logger.info("获取token:{}", Json.toJson(ret));
+        if (ret != null && ret.get("errcode") == null) {
+            String openId = StringUtil.sNull(ret.get("openid"));
+            return getWechatInfo(openId);
+        }
+        return null;
+    }
+
+    public WechatInfo getWechatInfo(String openId) {
+        String accessToken = cfgService.getCfgValue(CfgKey.WX_ACCESS_TOKEN);
         String url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + accessToken + "&openid=" + openId;
         String result = Http.get(url).getContent();
 
@@ -162,6 +164,7 @@ public class WeixinService {
         }
         return null;
     }
+
     private String createNonceStr() {
         return UUID.randomUUID().toString();
     }
@@ -169,6 +172,7 @@ public class WeixinService {
     private String createTimestamp() {
         return Long.toString(System.currentTimeMillis() / 1000);
     }
+
     private String byteToHex(final byte[] hash) {
         Formatter formatter = new Formatter();
         for (byte b : hash) {
@@ -178,6 +182,7 @@ public class WeixinService {
         formatter.close();
         return result;
     }
+
     public Map<String, String> getSign(String url) {
         Map<String, String> map = getSign(cfgService.getCfgValue(CfgKey.WX_JS_API_TICKET), url);
         map.put("appId", cfgService.getCfgValue(CfgKey.WX_APP_ID));

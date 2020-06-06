@@ -82,7 +82,6 @@ public class UserController extends BaseController {
     @RequestMapping(value = "sendSmsCode",method = RequestMethod.POST)
     public Object sendSmsCode(@RequestParam String mobile){
         String smsCode = shopUserService.sendSmsCodeForOldMobile(mobile);
-        //todo 测试环境直接返回验证码，生成环境切忌返回该验证码
         return Rets.success(smsCode);
     }
     @RequestMapping(value = "getWxOpenId",method = RequestMethod.POST)
@@ -95,17 +94,5 @@ public class UserController extends BaseController {
     public Object getWxSign(@RequestParam("url") String url) {
         Map<String, String> map = weixinService.getSign(url);
         return Rets.success(map);
-    }
-
-    /**
-     * 获取微信token，
-     * todo 该方法仅用作测试,微信token会通过后台管理中的定时任务定时更新
-     * @return
-     */
-    @RequestMapping(value="updateWxToken",method = RequestMethod.GET)
-    public Object updateWxToken(){
-        weixinService.updateWeixinToken();
-        return Rets.success();
-
     }
 }

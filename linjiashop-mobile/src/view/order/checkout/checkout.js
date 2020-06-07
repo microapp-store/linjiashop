@@ -64,6 +64,10 @@ export default {
             })
         },
         submit() {
+            if(!this.addr || !this.addr.id){
+                this.$router.push({path:'address'})
+                return
+            }
             order.save({idAddress:this.addr.id,message:this.message,idCarts:this.idCartList.join(',')}).then( response => {
                 let order = response.data
                 this.$router.push({path:'payment',query:{orderSn:order.orderSn,totalPrice:order.totalPrice}})

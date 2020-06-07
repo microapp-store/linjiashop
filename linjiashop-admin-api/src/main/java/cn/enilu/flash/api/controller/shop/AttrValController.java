@@ -65,6 +65,7 @@ public class AttrValController {
         ));
         if (id == null) {
             if(entity==null) {
+                entity = new AttrVal();
                 entity.setIdAttrKey(idAttrKey);
                 entity.setAttrVal(attrVal);
                 attrValService.insert(entity);
@@ -75,6 +76,7 @@ public class AttrValController {
             if(entity!=null){
                 return  Rets.failure("不能添加重复的规格");
             }else {
+                entity = new AttrVal();
                 entity.setIdAttrKey(idAttrKey);
                 entity.setAttrVal(attrVal);
                 attrValService.update(entity);

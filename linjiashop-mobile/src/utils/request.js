@@ -65,18 +65,30 @@ service.interceptors.response.use(
           return Promise.reject(error.response.data.message)
           break;
         case 500:
-          if(error.response.data.message && error.response.data.message.indexOf('relogin')>-1){
-            console.log('need relogin')
-            store.dispatch('app/toggleUser', {})
-            store.dispatch('app/toggleToken', '')
-            router.replace({
-              path: '/login',
-              query:{redirect:router.currentRoute.path}
-            })
-            return Promise.reject(error.response.data.message)
-          }else{
-            Toast.fail(error.response.data.message)
-            return Promise.reject(error.response.data.message)
+          if(error.response.data.message ) {
+            if (error.response.data.message.indexOf('relogin') > -1) {
+              console.log('need relogin')
+              store.dispatch('app/toggleUser', {})
+              store.dispatch('app/toggleToken', '')
+              router.replace({
+                path: '/login',
+                query: {redirect: router.currentRoute.path}
+              })
+              return Promise.reject(error.response.data.message)
+            } else if (error.response.data.message.indexOf('该手机号已经绑定其他微信号') > -1) {
+              store.dispatch('app/toggleUser', {})
+              store.dispatch('app/toggleToken', '')
+              Toast.fail(error.response.data.message)
+              router.replace({
+                path: '/login',
+                query: {redirect: router.currentRoute.path}
+              })
+
+              return Promise.reject(error.response.data.message)
+            }else {
+              Toast.fail(error.response.data.message)
+              return Promise.reject(error.response.data.message)
+            }
           }
           break;
         default:

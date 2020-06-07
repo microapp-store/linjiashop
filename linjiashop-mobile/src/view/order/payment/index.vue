@@ -15,22 +15,22 @@
                 <van-cell clickable @click="radio = 'wxpay'">
                     <img
 
-                            style="width:120px;margin-right: 200px;"
+                            style="height:32px;width:120px;"
                             slot="icon"
                             slot-scope="props"
                             src="@/assets/img/wxpay.png"
                     >
-                    <van-radio slot="right-icon" name="wxpay"/>
+                    <van-radio slot="right-icon" name="wxpay" style="padding-left:40%;"/>
                 </van-cell>
                 <van-cell clickable @click="radio = 'alipay'">
                     <img
 
-                            style="width:120px;margin-right: 200px;"
+                            style="height:32px;width:120px;"
                             slot="icon"
                             slot-scope="props"
                             src="@/assets/img/alipay.png"
                     >
-                    <van-radio slot="right-icon" name="alipay"/>
+                    <van-radio slot="right-icon" name="alipay"  style="padding-left:40%;"/>
                 </van-cell>
             </van-cell-group>
         </van-radio-group>

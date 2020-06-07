@@ -3,6 +3,8 @@ package cn.enilu.flash.service.api;
 import cn.enilu.flash.bean.constant.CfgKey;
 import cn.enilu.flash.bean.entity.shop.ShopUser;
 import cn.enilu.flash.bean.entity.system.Cfg;
+import cn.enilu.flash.bean.exception.ApplicationException;
+import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.shop.WechatInfo;
 import cn.enilu.flash.cache.CacheDao;
 import cn.enilu.flash.service.shop.ShopUserService;
@@ -117,6 +119,11 @@ public class WeixinService {
         if (StringUtil.isNotEmpty(code)) {
             wechatInfo = getWechatInfoByCode(code);
             if (wechatInfo != null) {
+
+                ShopUser old = shopUserService.findByWechatOpenId(wechatInfo.getOpenId());
+                if(old.getId().intValue()!=user.getId().intValue()){
+                    throw new ApplicationException(ApplicationExceptionEnum.WECHAT_BIND_ANOTHER);
+                }
                 user.setWechatNickName(StringUtil.getValidChar(wechatInfo.getNickName()));
                 user.setWechatHeadImgUrl(wechatInfo.getHeadUrl());
                 if (StringUtil.equals(user.getNickName(), user.getMobile())) {

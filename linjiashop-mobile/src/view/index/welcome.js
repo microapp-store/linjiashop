@@ -72,20 +72,21 @@ export default {
     },
     methods: {
         init() {
-            const user = storage.getUser()
-            this.isLogin = user.nickName
-            if(!this.isLogin) {
-                const url = window.location.href
-                if (url.indexOf('localhost') > -1 || url.indexOf('127.0.0.1') > -1) {
-                    console.log('开发环境不获取openid')
-                } else {
-                    const userAgent = window.navigator.userAgent.toLowerCase()
-                    //使用微信访问本系统的时候获取微信openid，否则不获取
-                    if (userAgent.indexOf('micromessenger') > -1) {
-                        this.processOpenid()
-                    }
-                }
-            }
+            //首页暂不自动获取微信信息
+            // const user = storage.getUser()
+            // this.isLogin = user.nickName
+            // if(!this.isLogin) {
+            //     const url = window.location.href
+            //     if (url.indexOf('localhost') > -1 || url.indexOf('127.0.0.1') > -1) {
+            //         console.log('开发环境不获取openid')
+            //     } else {
+            //         const userAgent = window.navigator.userAgent.toLowerCase()
+            //         //使用微信访问本系统的时候获取微信openid，否则不获取
+            //         if (userAgent.indexOf('micromessenger') > -1) {
+            //             this.processOpenid()
+            //         }
+            //     }
+            // }
             let categoryData = store.state.app.category
             if (!categoryData || categoryData.length == 0) {
                 let platform = navigator.platform

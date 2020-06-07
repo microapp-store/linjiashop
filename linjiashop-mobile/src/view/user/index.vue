@@ -32,6 +32,7 @@
       <van-cell icon="gift-o" title="我收到的礼物" is-link  @click="sorry"/>
       <van-cell icon="setting-o" title="设置" is-link to="setting"/>
     </van-cell-group>
+    <br><br>
     <van-tabbar v-model="activeFooter">
       <van-tabbar-item icon="home-o"  replace to="/index">首页</van-tabbar-item>
       <van-tabbar-item icon="search"  replace to="/search">发现</van-tabbar-item>

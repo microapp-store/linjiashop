@@ -55,7 +55,7 @@ public class KdniaoService {
                 "ShipperCode", shipperCode,
                 "LogisticCode", orderCode
         );
-        String jsonStr = JsonUtil.toJsonString(appParams);
+        String jsonStr = JsonUtil.toJson(appParams);
         String datasign = null;
         try {
             datasign = URLEncoder.encode(Base64Util.base64Encode(MD5.getMD5String((jsonStr + apiKey)).toLowerCase().getBytes()));

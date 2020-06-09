@@ -1,5 +1,6 @@
 package cn.enilu.flash.bean.entity.shop;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.Table;
 import org.springframework.data.annotation.CreatedDate;
@@ -18,7 +19,9 @@ import java.util.Date;
 @Data
 @Table(appliesTo = "t_shop_user",comment = "用户")
 @Entity(name="t_shop_user")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class ShopUser  implements Serializable {
+
     @Id
     @GeneratedValue
     private Long id;

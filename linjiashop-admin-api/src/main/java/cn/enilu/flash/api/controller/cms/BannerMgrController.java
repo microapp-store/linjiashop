@@ -1,5 +1,6 @@
 package cn.enilu.flash.api.controller.cms;
 
+import cn.enilu.flash.utils.JsonUtil;
 import cn.enilu.flash.web.controller.BaseController;
 import cn.enilu.flash.bean.core.BussinessLog;
 
@@ -9,7 +10,6 @@ import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.cms.BannerService;
 import cn.enilu.flash.utils.StringUtil;
-import com.alibaba.fastjson.JSON;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +31,7 @@ public class BannerMgrController extends BaseController {
     @RequiresPermissions(value = {Permission.BANNER_EDIT})
     public Object save(@ModelAttribute @Valid Banner banner) {
         if(StringUtil.isNotEmpty(banner.getParam())){
-            if(!JSON.isValid(banner.getParam())){
+            if(!JsonUtil.isJson(banner.getParam())){
                 return Rets.failure("参数必须为json格式");
             }
         }

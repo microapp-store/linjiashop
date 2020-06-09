@@ -3,10 +3,9 @@ package cn.enilu.flash.web.controller;
 
 import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.utils.HttpUtil;
+import cn.enilu.flash.utils.JsonUtil;
 import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.web.ApiConstants;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.slf4j.Logger;
@@ -127,8 +126,7 @@ public class BaseController {
         if (StringUtil.isEmpty(jsonStr)) {
             return null;
         }
-        JSONObject json = JSONObject.parseObject(jsonStr);
-        return JSON.toJavaObject(json, klass);
+        return JsonUtil.fromJson(klass,jsonStr);
     }
     public String detectOS(HttpServletRequest req) {
         if (req != null) {

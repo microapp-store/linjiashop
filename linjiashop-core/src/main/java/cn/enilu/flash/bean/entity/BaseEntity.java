@@ -1,5 +1,6 @@
 package cn.enilu.flash.bean.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -22,6 +23,7 @@ import java.util.Date;
  */
 @MappedSuperclass
 @Data
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public abstract class BaseEntity implements Serializable {
 
     @Id

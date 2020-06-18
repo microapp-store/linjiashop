@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * 基础服务类<br>
@@ -61,7 +62,8 @@ public abstract class BaseService<T, ID extends Serializable, R extends BaseRepo
 //    todo 如果针对get方法使用启用缓存功能，建议在更新数据的时候统一调用update方法，以避免使用其他方法而忘记使用CacheEvict没有更新缓存数据导致数据错乱
 //    @Cacheable(value = Cache.APPLICATION, key = "#root.targetClass.simpleName+':'+#id")
     public T get(ID id) {
-        return dao.findById(id).get();
+        Optional<T> o = dao.findById(id);
+        return o.isPresent()?o.get():null;
     }
 
     @Override

@@ -145,7 +145,8 @@ _商品素材取自小米商城_
 - 关注公众号：嗨客帝国，点击对应的项目菜单进群交流。
 
 ![公众号二维码](doc/img/haike.jpg)
-
+- 论坛提问：
+[http://bbs.enilu.cn](http://bbs.enilu.cn)
 ## 在线文档
 - 项目文档：[http://microapp.gitee.io/linjiashop](http://microapp.gitee.io/linjiashop/)
 - [商业支持](http://microapp.gitee.io/linjiashop/other/xiaomiquan.html)

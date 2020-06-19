@@ -91,7 +91,7 @@ export default {
         getBanners(categoryIndex) {
             let bannerList = null
             for (const i in this.navList) {
-                if (this.navList[i].id === categoryIndex) {
+                if (this.navList[i].id == categoryIndex) {
                     bannerList = this.navList[i].bannerList
                 }
             }

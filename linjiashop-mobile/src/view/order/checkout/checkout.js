@@ -44,7 +44,7 @@ export default {
             return '提交订单' + (count ? `(${count})` : '')
         },
         totalPrice() {
-            return this.cartList.reduce((total, item) => total + (this.checkedGoods.indexOf(item.id) !== -1 ? (parseFloat(item.goods.price) * item.count) : 0), 0)
+            return this.cartList.reduce((total, item) => total + (this.checkedGoods.indexOf(item.id) !== -1 ? (parseFloat(item.price) * item.count) : 0), 0)
         }
     },
 
@@ -56,7 +56,7 @@ export default {
                 this.addr = response.data.addr
                 for (let index in cartList) {
                     cartList[index].thumb = baseApi+ '/file/getImgStream?idFile=' + cartList[index].goods.pic
-                    this.checkedGoods.push(cartList[index].id + '')
+                    this.checkedGoods.push(cartList[index].id )
                 }
                 this.cartList = cartList
             }).catch((err) => {

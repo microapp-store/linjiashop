@@ -32,7 +32,8 @@ export default {
                 })
             }
         },
-        onSave(info) {
+        onSave(info){
+
             let addressEntity = {
                 province:info.province,
                 city:info.city,
@@ -49,7 +50,7 @@ export default {
             }
             address.save(addressEntity).then( response => {
                 Toast('保存成功')
-                this.$router.push('address')
+                this.$router.go(-1)
             }).catch( (err) => {
                 Toast.fail(err)
             })
@@ -83,7 +84,7 @@ export default {
         onDelete() {
             address.remove(this.addressInfo.id).then( response => {
                 Toast('删除成功')
-                this.$router.push('address')
+                this.$router.push({path:'address'})
             }).catch( (err) => {
                 Toast.fail(err)
             })

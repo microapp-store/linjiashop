@@ -51,12 +51,13 @@ export default {
                     for (const index in cartList) {
                         let cart = cartList[index]
                         cart.thumb = baseApi + '/file/getImgStream?idFile=' + cart.goods.pic
-                        this.checkedCartItem.push(cartList[index].id + '')
+                        this.checkedCartItem.push(cartList[index].id )
                     }
+
                     this.allCartItem = this.checkedCartItem
                     this.cartList = cartList
                 }).catch((err) => {
-
+                    console.log(err)
                 })
             }
         },

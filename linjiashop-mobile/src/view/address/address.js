@@ -25,7 +25,7 @@ export default {
         init(){
             address.queryByUser().then( response => {
                 this.list = response.data
-                for(var index in this.list){
+                for(const index in this.list){
                     if(this.list[index].isDefault === true){
                         this.chosenAddressId= this.list[index].id
                     }

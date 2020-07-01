@@ -31,11 +31,27 @@ public class Order extends ShopBaseEntity {
      */
     @Column(columnDefinition = "INT COMMENT '状态'")
     private Integer status;
+    /**
+     * 收件人信息使用 下面三个字段代替
+     */
+    @Deprecated
     @Column(name="id_address",columnDefinition = "BIGINT COMMENT '收货信息'")
     private Long idAddress;
+    /**
+     *  收件人信息使用 下面三个字段代替
+     */
+    @Deprecated
     @JoinColumn(name="id_address",  referencedColumnName="id",insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
     private Address address;
+
+    @Column(columnDefinition = "VARCHAR(32) COMMENT '收件人'")
+    private String consignee;
+    @Column(columnDefinition = "VARCHAR(16) COMMENT '收件人电话'")
+    private String mobile;
+    @Column(columnDefinition = "VARCHAR(64) COMMENT '收件地址'")
+    private String consigneeAddress;
+
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_order")
     private List<OrderItem> items;

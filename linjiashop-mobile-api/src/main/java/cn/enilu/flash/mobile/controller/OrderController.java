@@ -108,7 +108,11 @@ public class OrderController extends BaseController {
 
         Order order = new Order();
         order.setIdUser(idUser);
+        Address address = addressService.get(idAddress);
         order.setIdAddress(idAddress);
+        order.setConsignee(address.getName());
+        order.setConsigneeAddress(address.getWholeAddressInfo());
+        order.setMobile(address.getTel());
         BigDecimal totalPrice = new BigDecimal(0);
         List<OrderItem> itemList = Lists.newArrayList();
         for (Cart cart : cartList) {

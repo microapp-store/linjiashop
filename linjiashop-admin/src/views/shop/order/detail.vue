@@ -39,17 +39,17 @@
         <h3>收货信息</h3>
         <el-col :span="12">
           <el-form-item label="收货人">
-            <span>{{ form.address.name}}</span>
+            <span>{{ form.consignee}}</span>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="联系电话">
-            <span>{{ form.address.tel}}</span>
+            <span>{{ form.mobile}}</span>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="收货地址">
-            <span>{{ form.address.addressDetail}}</span>
+            <span>{{ form.consigneeAddress}}</span>
           </el-form-item>
         </el-col>
         <el-col :span="24">

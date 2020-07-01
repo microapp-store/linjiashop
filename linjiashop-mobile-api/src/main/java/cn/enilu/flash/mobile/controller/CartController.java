@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author ：enilu
@@ -58,7 +59,7 @@ public class CartController extends BaseController {
         return Rets.success();
     }
     @RequestMapping(method = RequestMethod.DELETE)
-    public Object remove(@RequestBody List<Long> ids){
+    public Object remove(@RequestBody Set<Long> ids){
         Long idUser = getIdUser();
         for(Long id:ids){
             Cart cart = cartService.get(id);

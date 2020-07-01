@@ -6,9 +6,9 @@
                 @click-left="onClickLeft"
         />
         <div class="order_detail">
-            <van-panel :title="order.address.name +' '+  order.address.tel" :status="order.statusName">
+            <van-panel :title="order.consignee +' '+  order.mobile" :status="order.statusName">
                 <div class="address_detail">
-                    {{order.address.province}}{{order.address.city}}{{order.address.district}}{{order.address.addressDetail}}
+                    {{order.consigneeAddress}}
                     <br>
                 </div>
                 <div slot="footer"

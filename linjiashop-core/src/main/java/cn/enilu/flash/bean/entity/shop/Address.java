@@ -39,4 +39,8 @@ public class Address extends ShopBaseEntity {
     @Column(columnDefinition = "tinyint COMMENT '是否删除'")
     private Boolean isDelete= false;
 
+    public String getWholeAddressInfo(){
+        return getProvince()+" "+getCity()+getDistrict()+getAddressDetail();
+    }
+
 }

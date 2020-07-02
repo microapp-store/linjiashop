@@ -2,8 +2,6 @@ package cn.enilu.flash.service.shop;
 
 
 import cn.enilu.flash.bean.entity.shop.Cart;
-import cn.enilu.flash.bean.entity.shop.Goods;
-import cn.enilu.flash.bean.entity.shop.GoodsSku;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.bean.vo.shop.CartVo;
 import cn.enilu.flash.dao.shop.CartRepository;
@@ -68,20 +66,20 @@ public class CartService extends BaseService<Cart,Long,CartRepository>  {
             result = 1;
         }
 
-        //减库存
-        if(idSku!=null){
-            GoodsSku goodsSku = goodsSkuRepository.getOne(idSku);
-            if(goodsSku.getStock()<count){
-                throw  new RuntimeException("库存不足");
-            }
-            goodsSku.setStock(goodsSku.getStock()-count);
-        }
-        Goods goods = goodsRepository.getOne(cartVo.getIdGoods());
-        if(goods.getStock()<count){
-            throw  new RuntimeException("库存不足");
-        }
-        goods.setStock(goods.getStock()-count);
-        goodsRepository.save(goods);
+        //减库存(添加到购物车暂不减库存)
+//        if(idSku!=null){
+//            GoodsSku goodsSku = goodsSkuRepository.getOne(idSku);
+//            if(goodsSku.getStock()<count){
+//                throw  new RuntimeException("库存不足");
+//            }
+//            goodsSku.setStock(goodsSku.getStock()-count);
+//        }
+//        Goods goods = goodsRepository.getOne(cartVo.getIdGoods());
+//        if(goods.getStock()<count){
+//            throw  new RuntimeException("库存不足");
+//        }
+//        goods.setStock(goods.getStock()-count);
+//        goodsRepository.save(goods);
         return result;
     }
 }

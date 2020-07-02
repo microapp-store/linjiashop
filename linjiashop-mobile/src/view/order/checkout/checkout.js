@@ -32,7 +32,6 @@ export default {
         if (typeof this.idCartList === 'string') {
             this.idCartList = new Array(this.idCartList);
         }
-        console.log('idCartList',this.idCartList)
         this.init()
     },
     computed: {

@@ -54,6 +54,7 @@ public class Order extends ShopBaseEntity {
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_order")
+    @org.hibernate.annotations.ForeignKey(name="none")
     private List<OrderItem> items;
     @Column(columnDefinition = "VARCHAR(64) COMMENT '订单备注'")
     private String message;

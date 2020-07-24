@@ -14,6 +14,7 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Lazy;
 
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
@@ -26,7 +27,7 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
     @Bean("securityManager")
-    public DefaultWebSecurityManager getManager(ApiRealm realm) {
+    public DefaultWebSecurityManager getManager(@Lazy ApiRealm realm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         // 使用自己的realm
         manager.setRealm(realm);

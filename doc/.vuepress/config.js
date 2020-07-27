@@ -3,7 +3,17 @@ module.exports = {
     description: '使用邻家小铺搭建自己的全平台商城系统',
     base: '/linjiashop/',
     head: [
-        ['link', { rel: 'shortcut icon', type: "image/x-icon", href: './favicon.ico' }]
+        ['link', { rel: 'shortcut icon', type: "image/x-icon", href: './favicon.ico' }],
+        ['script',{},`
+            var _hmt = _hmt || [];
+            (function() {
+              var hm = document.createElement("script");
+              hm.src = "https://hm.baidu.com/hm.js?9d53390a6ba903e20fabf2e207b3e9bb";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+            })();
+        `
+        ]
     ],
     evergreen: true,
     editLinkText:'在 GitHub 上编辑此页',

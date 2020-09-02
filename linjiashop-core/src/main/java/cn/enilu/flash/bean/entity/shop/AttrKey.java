@@ -24,6 +24,7 @@ public class AttrKey extends BaseEntity {
     private Long idCategory;
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name="id_attr_key")
+    @org.hibernate.annotations.ForeignKey(name="none") //该注解配合ManyToOne端的@ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT) 配置可以取消关联外键的创建
     private List<AttrVal> attrVals;
 
 }

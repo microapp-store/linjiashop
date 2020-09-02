@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -28,6 +29,11 @@ public class MenuService extends BaseService<Menu, Long, MenuRepository> {
     @Autowired
     private MenuRepository menuRepository;
 
+    /**
+     * 删除菜单
+     * @param menuId
+     */
+    @Transactional
     @Override
     public void deleteById(Long menuId) {
         //删除菜单

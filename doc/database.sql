@@ -31,7 +31,7 @@ CREATE TABLE `t_cms_article` (
   `img` varchar(64) DEFAULT NULL COMMENT '文章题图ID',
   `title` varchar(128) DEFAULT NULL COMMENT '标题',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='文章';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='文章';
 
 -- ----------------------------
 -- Records of t_cms_article
@@ -60,7 +60,7 @@ CREATE TABLE `t_cms_banner` (
   `type` varchar(32) DEFAULT NULL COMMENT '类型',
   `url` varchar(128) DEFAULT NULL COMMENT '点击banner跳转到url',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='文章';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COMMENT='文章';
 
 -- ----------------------------
 -- Records of t_cms_banner
@@ -87,7 +87,7 @@ CREATE TABLE `t_cms_channel` (
   `code` varchar(64) DEFAULT NULL COMMENT '编码',
   `name` varchar(64) DEFAULT NULL COMMENT '名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='文章栏目';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='文章栏目';
 
 -- ----------------------------
 -- Records of t_cms_channel
@@ -112,7 +112,7 @@ CREATE TABLE `t_cms_contacts` (
   `remark` varchar(128) DEFAULT NULL COMMENT '备注',
   `user_name` varchar(64) DEFAULT NULL COMMENT '邀约人名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='邀约信息';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='邀约信息';
 
 -- ----------------------------
 -- Records of t_cms_contacts
@@ -133,7 +133,7 @@ CREATE TABLE `t_covid_country` (
   `dead_count` int(11) DEFAULT NULL COMMENT '累计死亡人数',
   `name` varchar(64) DEFAULT NULL COMMENT '名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='新冠肺炎国家病例分布';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='新冠肺炎国家病例分布';
 
 -- ----------------------------
 -- Records of t_covid_country
@@ -156,7 +156,7 @@ CREATE TABLE `t_message` (
   `tpl_code` varchar(32) DEFAULT NULL COMMENT '模板编码',
   `type` varchar(32) DEFAULT NULL COMMENT '消息类型,0:短信,1:邮件',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='历史消息';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='历史消息';
 
 -- ----------------------------
 -- Records of t_message
@@ -177,7 +177,7 @@ CREATE TABLE `t_message_sender` (
   `name` varchar(64) DEFAULT NULL COMMENT '名称',
   `tpl_code` varchar(64) DEFAULT NULL COMMENT '短信运营商模板编号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='消息发送者';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='消息发送者';
 
 -- ----------------------------
 -- Records of t_message_sender
@@ -202,7 +202,7 @@ CREATE TABLE `t_message_template` (
   `title` varchar(64) DEFAULT NULL COMMENT '标题',
   `type` varchar(32) DEFAULT NULL COMMENT '消息类型,0:短信,1:邮件',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='消息模板';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='消息模板';
 
 -- ----------------------------
 -- Records of t_message_template
@@ -227,7 +227,7 @@ CREATE TABLE `t_promotion_topic` (
   `pv` bigint(20) DEFAULT NULL COMMENT '阅读量',
   `title` varchar(64) DEFAULT NULL COMMENT '标题',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='专题';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='专题';
 
 -- ----------------------------
 -- Records of t_promotion_topic
@@ -259,7 +259,7 @@ CREATE TABLE `t_shop_address` (
   `province` varchar(16) DEFAULT NULL COMMENT '省',
   `tel` varchar(16) DEFAULT NULL COMMENT '联系电话',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='收货地址';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='收货地址';
 
 -- ----------------------------
 -- Records of t_shop_address
@@ -283,7 +283,7 @@ CREATE TABLE `t_shop_attr_key` (
   `attr_name` varchar(32) DEFAULT NULL COMMENT '属性名',
   `id_category` bigint(20) DEFAULT NULL COMMENT '商品类别id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='商品属性名';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='商品属性名';
 
 -- ----------------------------
 -- Records of t_shop_attr_key
@@ -306,7 +306,7 @@ CREATE TABLE `t_shop_attr_val` (
   PRIMARY KEY (`id`),
   KEY `FKrl0c5wb1fo1fp087phw8n785d` (`id_attr_key`),
   CONSTRAINT `FKrl0c5wb1fo1fp087phw8n785d` FOREIGN KEY (`id_attr_key`) REFERENCES `t_shop_attr_key` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='商品属性值';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='商品属性值';
 
 -- ----------------------------
 -- Records of t_shop_attr_val
@@ -329,7 +329,7 @@ CREATE TABLE `t_shop_cart` (
   `id_sku` bigint(20) DEFAULT NULL COMMENT 'skuId',
   `id_user` bigint(20) DEFAULT NULL COMMENT '用户id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='购物车';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COMMENT='购物车';
 
 -- ----------------------------
 -- Records of t_shop_cart
@@ -358,7 +358,7 @@ CREATE TABLE `t_shop_category` (
   `name` varchar(16) DEFAULT NULL COMMENT '名称',
   `url` varchar(32) DEFAULT NULL COMMENT '链接地址',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='商品类别';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='商品类别';
 
 -- ----------------------------
 -- Records of t_shop_category
@@ -381,7 +381,7 @@ CREATE TABLE `t_shop_category_banner_rel` (
   `id_banner` bigint(20) DEFAULT NULL COMMENT 'banner id',
   `id_category` bigint(20) DEFAULT NULL COMMENT '类别id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='类别banner关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='类别banner关联表';
 
 -- ----------------------------
 -- Records of t_shop_category_banner_rel
@@ -405,7 +405,7 @@ CREATE TABLE `t_shop_favorite` (
   `id_goods` bigint(20) DEFAULT NULL COMMENT '商品id',
   `id_user` bigint(20) DEFAULT NULL COMMENT '用户id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='用户收藏';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='用户收藏';
 
 -- ----------------------------
 -- Records of t_shop_favorite
@@ -449,7 +449,7 @@ CREATE TABLE `t_shop_goods` (
   `price` varchar(16) DEFAULT NULL COMMENT '价格',
   `stock` int(11) DEFAULT NULL COMMENT '库存数量',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='商品';
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COMMENT='商品';
 
 -- ----------------------------
 -- Records of t_shop_goods
@@ -497,7 +497,7 @@ CREATE TABLE `t_shop_goods_sku` (
   `price` varchar(32) DEFAULT NULL COMMENT '价格',
   `stock` int(11) DEFAULT NULL COMMENT '库存',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='商品SKU';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='商品SKU';
 
 -- ----------------------------
 -- Records of t_shop_goods_sku
@@ -535,7 +535,7 @@ CREATE TABLE `t_shop_order` (
   `total_price` varchar(32) DEFAULT NULL COMMENT '总金额',
   `trade_amount` varchar(32) DEFAULT NULL COMMENT '交易金额',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='订单';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COMMENT='订单';
 
 -- ----------------------------
 -- Records of t_shop_order
@@ -570,7 +570,7 @@ CREATE TABLE `t_shop_order_item` (
   PRIMARY KEY (`id`),
   KEY `FKa8kiyc9h5f6bn5617tdh6li9h` (`id_order`),
   CONSTRAINT `FKa8kiyc9h5f6bn5617tdh6li9h` FOREIGN KEY (`id_order`) REFERENCES `t_shop_order` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='订单明细';
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COMMENT='订单明细';
 
 -- ----------------------------
 -- Records of t_shop_order_item
@@ -605,7 +605,7 @@ CREATE TABLE `t_shop_order_log` (
   `descript` varchar(64) DEFAULT NULL COMMENT '日志详情',
   `id_order` bigint(20) DEFAULT NULL COMMENT '所属订单id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='订单日志';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COMMENT='订单日志';
 
 -- ----------------------------
 -- Records of t_shop_order_log
@@ -660,7 +660,7 @@ CREATE TABLE `t_shop_user` (
   `wechat_nick_name` varchar(32) DEFAULT NULL COMMENT '微信昵称',
   `wechat_open_id` varchar(64) DEFAULT NULL COMMENT '微信OpenID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='用户';
 
 -- ----------------------------
 -- Records of t_shop_user
@@ -684,7 +684,7 @@ CREATE TABLE `t_sys_cfg` (
   `cfg_name` varchar(256) DEFAULT NULL COMMENT '参数名',
   `cfg_value` varchar(512) DEFAULT NULL COMMENT '参数值',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='系统参数';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='系统参数';
 
 -- ----------------------------
 -- Records of t_sys_cfg
@@ -722,7 +722,7 @@ CREATE TABLE `t_sys_dept` (
   `tips` varchar(255) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='部门';
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COMMENT='部门';
 
 -- ----------------------------
 -- Records of t_sys_dept
@@ -747,7 +747,7 @@ CREATE TABLE `t_sys_dict` (
   `pid` bigint(20) DEFAULT NULL,
   `tips` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8 COMMENT='字典';
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COMMENT='字典';
 
 -- ----------------------------
 -- Records of t_sys_dict
@@ -784,7 +784,7 @@ CREATE TABLE `t_sys_express` (
   `name` varchar(32) DEFAULT NULL COMMENT '公司名称',
   `sort` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='物流公司';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='物流公司';
 
 -- ----------------------------
 -- Records of t_sys_express
@@ -809,7 +809,7 @@ CREATE TABLE `t_sys_file_info` (
   `original_file_name` varchar(255) DEFAULT NULL,
   `real_file_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8 COMMENT='文件';
+) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8mb4 COMMENT='文件';
 
 -- ----------------------------
 -- Records of t_sys_file_info
@@ -960,7 +960,7 @@ CREATE TABLE `t_sys_login_log` (
   `succeed` varchar(255) DEFAULT NULL,
   `userid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='登录日志';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='登录日志';
 
 -- ----------------------------
 -- Records of t_sys_login_log
@@ -996,7 +996,7 @@ CREATE TABLE `t_sys_menu` (
   `url` varchar(32) DEFAULT NULL COMMENT '链接',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_s37unj3gh67ujhk83lqva8i1t` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8 COMMENT='菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COMMENT='菜单';
 
 -- ----------------------------
 -- Records of t_sys_menu
@@ -1103,7 +1103,7 @@ CREATE TABLE `t_sys_notice` (
   `title` varchar(255) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='通知';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='通知';
 
 -- ----------------------------
 -- Records of t_sys_notice
@@ -1125,7 +1125,7 @@ CREATE TABLE `t_sys_operation_log` (
   `succeed` varchar(255) DEFAULT NULL,
   `userid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作日志';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='操作日志';
 
 -- ----------------------------
 -- Records of t_sys_operation_log
@@ -1140,7 +1140,7 @@ CREATE TABLE `t_sys_relation` (
   `menuid` bigint(20) DEFAULT NULL,
   `roleid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8 COMMENT='菜单角色关系';
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COMMENT='菜单角色关系';
 
 -- ----------------------------
 -- Records of t_sys_relation
@@ -1265,7 +1265,7 @@ CREATE TABLE `t_sys_role` (
   `tips` varchar(255) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='角色';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='角色';
 
 -- ----------------------------
 -- Records of t_sys_role
@@ -1294,7 +1294,7 @@ CREATE TABLE `t_sys_task` (
   `name` varchar(50) DEFAULT NULL COMMENT '任务名',
   `note` varchar(255) DEFAULT NULL COMMENT '任务说明',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='定时任务';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='定时任务';
 
 -- ----------------------------
 -- Records of t_sys_task
@@ -1314,7 +1314,7 @@ CREATE TABLE `t_sys_task_log` (
   `job_exception` text COMMENT '抛出异常',
   `name` varchar(50) DEFAULT NULL COMMENT '任务名',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COMMENT='定时任务日志';
 
 -- ----------------------------
 -- Records of t_sys_task_log
@@ -1375,7 +1375,7 @@ CREATE TABLE `t_sys_user` (
   `status` int(11) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='账号';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='账号';
 
 -- ----------------------------
 -- Records of t_sys_user

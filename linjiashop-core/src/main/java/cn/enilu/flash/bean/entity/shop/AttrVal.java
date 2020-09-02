@@ -21,5 +21,8 @@ public class AttrVal extends BaseEntity {
     private Long idAttrKey;
     @Column(name="attr_val",columnDefinition = "VARCHAR(32) COMMENT '属性值'")
     private String attrVal;
+    @JoinColumn(name = "id_attr_key", insertable = false, updatable = false, foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
+    @ManyToOne(fetch = FetchType.LAZY)
+    private AttrKey attrKey;
 
 }

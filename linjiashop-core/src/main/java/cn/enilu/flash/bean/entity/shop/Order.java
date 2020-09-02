@@ -3,6 +3,7 @@ package cn.enilu.flash.bean.entity.shop;
 import cn.enilu.flash.bean.entity.ShopBaseEntity;
 import cn.enilu.flash.bean.entity.system.Express;
 import cn.enilu.flash.bean.enumeration.shop.OrderEnum;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.Table;
 
@@ -54,6 +55,8 @@ public class Order extends ShopBaseEntity {
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_order")
+    @org.hibernate.annotations.ForeignKey(name="none")
+    @JsonManagedReference
     private List<OrderItem> items;
     @Column(columnDefinition = "VARCHAR(64) COMMENT '订单备注'")
     private String message;

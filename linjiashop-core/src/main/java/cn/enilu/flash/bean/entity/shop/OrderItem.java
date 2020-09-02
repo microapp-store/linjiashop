@@ -1,6 +1,7 @@
 package cn.enilu.flash.bean.entity.shop;
 
 import cn.enilu.flash.bean.entity.ShopBaseEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import org.hibernate.annotations.Table;
 
@@ -24,6 +25,7 @@ public class OrderItem extends ShopBaseEntity {
     private Goods goods;
     @JoinColumn(name = "id_order", insertable = false, updatable = false, foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Order order;
     @Column(name = "id_sku", columnDefinition = "BIGINT COMMENT 'skuId'")
     private Long idSku;

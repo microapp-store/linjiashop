@@ -1,16 +1,13 @@
 /*
 Navicat MySQL Data Transfer
-
-Source Server         : localhost
-Source Server Version : 50725
-Source Host           : localhost:3306
+Source Server Version : 50730
 Source Database       : linjiashop
 
 Target Server Type    : MYSQL
-Target Server Version : 50725
+Target Server Version : 50730
 File Encoding         : 65001
 
-Date: 2020-06-02 15:44:09
+Date: 2020-09-18 08:22:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,7 +28,7 @@ CREATE TABLE `t_cms_article` (
   `img` varchar(64) DEFAULT NULL COMMENT '文章题图ID',
   `title` varchar(128) DEFAULT NULL COMMENT '标题',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='文章';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='文章';
 
 -- ----------------------------
 -- Records of t_cms_article
@@ -60,7 +57,7 @@ CREATE TABLE `t_cms_banner` (
   `type` varchar(32) DEFAULT NULL COMMENT '类型',
   `url` varchar(128) DEFAULT NULL COMMENT '点击banner跳转到url',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COMMENT='文章';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='文章';
 
 -- ----------------------------
 -- Records of t_cms_banner
@@ -87,7 +84,7 @@ CREATE TABLE `t_cms_channel` (
   `code` varchar(64) DEFAULT NULL COMMENT '编码',
   `name` varchar(64) DEFAULT NULL COMMENT '名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='文章栏目';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='文章栏目';
 
 -- ----------------------------
 -- Records of t_cms_channel
@@ -112,33 +109,12 @@ CREATE TABLE `t_cms_contacts` (
   `remark` varchar(128) DEFAULT NULL COMMENT '备注',
   `user_name` varchar(64) DEFAULT NULL COMMENT '邀约人名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='邀约信息';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='邀约信息';
 
 -- ----------------------------
 -- Records of t_cms_contacts
 -- ----------------------------
 INSERT INTO `t_cms_contacts` VALUES ('1', '1', '2019-07-31 17:44:27', null, '2019-07-31 17:44:27', 'test@qq.com', '15011111111', '测试联系，哈哈哈', '张三');
-
--- ----------------------------
--- Table structure for `t_covid_country`
--- ----------------------------
-DROP TABLE IF EXISTS `t_covid_country`;
-CREATE TABLE `t_covid_country` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `create_by` bigint(20) DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间/注册时间',
-  `modify_by` bigint(20) DEFAULT NULL COMMENT '最后更新人',
-  `modify_time` datetime DEFAULT NULL COMMENT '最后更新时间',
-  `count` int(11) DEFAULT NULL COMMENT '累计确诊人数',
-  `dead_count` int(11) DEFAULT NULL COMMENT '累计死亡人数',
-  `name` varchar(64) DEFAULT NULL COMMENT '名称',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='新冠肺炎国家病例分布';
-
--- ----------------------------
--- Records of t_covid_country
--- ----------------------------
-INSERT INTO `t_covid_country` VALUES ('1', null, null, null, null, '80000', '4000', '中国');
 
 -- ----------------------------
 -- Table structure for `t_message`
@@ -156,7 +132,7 @@ CREATE TABLE `t_message` (
   `tpl_code` varchar(32) DEFAULT NULL COMMENT '模板编码',
   `type` varchar(32) DEFAULT NULL COMMENT '消息类型,0:短信,1:邮件',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='历史消息';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='历史消息';
 
 -- ----------------------------
 -- Records of t_message
@@ -177,7 +153,7 @@ CREATE TABLE `t_message_sender` (
   `name` varchar(64) DEFAULT NULL COMMENT '名称',
   `tpl_code` varchar(64) DEFAULT NULL COMMENT '短信运营商模板编号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='消息发送者';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='消息发送者';
 
 -- ----------------------------
 -- Records of t_message_sender
@@ -202,7 +178,7 @@ CREATE TABLE `t_message_template` (
   `title` varchar(64) DEFAULT NULL COMMENT '标题',
   `type` varchar(32) DEFAULT NULL COMMENT '消息类型,0:短信,1:邮件',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='消息模板';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='消息模板';
 
 -- ----------------------------
 -- Records of t_message_template
@@ -227,7 +203,7 @@ CREATE TABLE `t_promotion_topic` (
   `pv` bigint(20) DEFAULT NULL COMMENT '阅读量',
   `title` varchar(64) DEFAULT NULL COMMENT '标题',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='专题';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='专题';
 
 -- ----------------------------
 -- Records of t_promotion_topic
@@ -259,7 +235,7 @@ CREATE TABLE `t_shop_address` (
   `province` varchar(16) DEFAULT NULL COMMENT '省',
   `tel` varchar(16) DEFAULT NULL COMMENT '联系电话',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='收货地址';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='收货地址';
 
 -- ----------------------------
 -- Records of t_shop_address
@@ -283,7 +259,7 @@ CREATE TABLE `t_shop_attr_key` (
   `attr_name` varchar(32) DEFAULT NULL COMMENT '属性名',
   `id_category` bigint(20) DEFAULT NULL COMMENT '商品类别id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='商品属性名';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='商品属性名';
 
 -- ----------------------------
 -- Records of t_shop_attr_key
@@ -306,7 +282,7 @@ CREATE TABLE `t_shop_attr_val` (
   PRIMARY KEY (`id`),
   KEY `FKrl0c5wb1fo1fp087phw8n785d` (`id_attr_key`),
   CONSTRAINT `FKrl0c5wb1fo1fp087phw8n785d` FOREIGN KEY (`id_attr_key`) REFERENCES `t_shop_attr_key` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='商品属性值';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='商品属性值';
 
 -- ----------------------------
 -- Records of t_shop_attr_val
@@ -329,7 +305,7 @@ CREATE TABLE `t_shop_cart` (
   `id_sku` bigint(20) DEFAULT NULL COMMENT 'skuId',
   `id_user` bigint(20) DEFAULT NULL COMMENT '用户id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COMMENT='购物车';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='购物车';
 
 -- ----------------------------
 -- Records of t_shop_cart
@@ -358,7 +334,7 @@ CREATE TABLE `t_shop_category` (
   `name` varchar(16) DEFAULT NULL COMMENT '名称',
   `url` varchar(32) DEFAULT NULL COMMENT '链接地址',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='商品类别';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='商品类别';
 
 -- ----------------------------
 -- Records of t_shop_category
@@ -381,7 +357,7 @@ CREATE TABLE `t_shop_category_banner_rel` (
   `id_banner` bigint(20) DEFAULT NULL COMMENT 'banner id',
   `id_category` bigint(20) DEFAULT NULL COMMENT '类别id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COMMENT='类别banner关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='类别banner关联表';
 
 -- ----------------------------
 -- Records of t_shop_category_banner_rel
@@ -405,7 +381,7 @@ CREATE TABLE `t_shop_favorite` (
   `id_goods` bigint(20) DEFAULT NULL COMMENT '商品id',
   `id_user` bigint(20) DEFAULT NULL COMMENT '用户id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='用户收藏';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='用户收藏';
 
 -- ----------------------------
 -- Records of t_shop_favorite
@@ -449,7 +425,7 @@ CREATE TABLE `t_shop_goods` (
   `price` varchar(16) DEFAULT NULL COMMENT '价格',
   `stock` int(11) DEFAULT NULL COMMENT '库存数量',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COMMENT='商品';
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='商品';
 
 -- ----------------------------
 -- Records of t_shop_goods
@@ -497,7 +473,7 @@ CREATE TABLE `t_shop_goods_sku` (
   `price` varchar(32) DEFAULT NULL COMMENT '价格',
   `stock` int(11) DEFAULT NULL COMMENT '库存',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='商品SKU';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='商品SKU';
 
 -- ----------------------------
 -- Records of t_shop_goods_sku
@@ -535,7 +511,7 @@ CREATE TABLE `t_shop_order` (
   `total_price` varchar(32) DEFAULT NULL COMMENT '总金额',
   `trade_amount` varchar(32) DEFAULT NULL COMMENT '交易金额',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COMMENT='订单';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='订单';
 
 -- ----------------------------
 -- Records of t_shop_order
@@ -570,7 +546,7 @@ CREATE TABLE `t_shop_order_item` (
   PRIMARY KEY (`id`),
   KEY `FKa8kiyc9h5f6bn5617tdh6li9h` (`id_order`),
   CONSTRAINT `FKa8kiyc9h5f6bn5617tdh6li9h` FOREIGN KEY (`id_order`) REFERENCES `t_shop_order` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COMMENT='订单明细';
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='订单明细';
 
 -- ----------------------------
 -- Records of t_shop_order_item
@@ -605,7 +581,7 @@ CREATE TABLE `t_shop_order_log` (
   `descript` varchar(64) DEFAULT NULL COMMENT '日志详情',
   `id_order` bigint(20) DEFAULT NULL COMMENT '所属订单id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COMMENT='订单日志';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='订单日志';
 
 -- ----------------------------
 -- Records of t_shop_order_log
@@ -660,12 +636,12 @@ CREATE TABLE `t_shop_user` (
   `wechat_nick_name` varchar(32) DEFAULT NULL COMMENT '微信昵称',
   `wechat_open_id` varchar(64) DEFAULT NULL COMMENT '微信OpenID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='用户';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户';
 
 -- ----------------------------
 -- Records of t_shop_user
 -- ----------------------------
-INSERT INTO `t_shop_user` VALUES ('1', '449c2a9d-a7f9-4dd7-b0b2-a176ff8bf25a.jpeg', '2019-11-01 12:00:00', 'male', '2020-06-02 15:05:09', '15011112222', '艾尼路', 'b5a51391f271f062867e5984e2fcffee', '8pgby', null, null, null);
+INSERT INTO `t_shop_user` VALUES ('1', '449c2a9d-a7f9-4dd7-b0b2-a176ff8bf25a.jpeg', '2019-11-01 12:00:00', 'male', '2020-03-01 16:48:26', '15011112222', '艾尼路', 'b5a51391f271f062867e5984e2fcffee', '8pgby', null, null, null);
 INSERT INTO `t_shop_user` VALUES ('2', '184e85a7-41dd-4d1b-b67a-2632372ba257.jpg', '2020-02-11 18:03:48', 'male', null, '13581640280', '路飞', '154b20e371d69ccf7fab7402807a8b2d', 'q9i3r', null, null, null);
 INSERT INTO `t_shop_user` VALUES ('3', '2c650bc2-666e-4621-92cd-36b4165d527c.jpeg', '2020-02-11 18:10:12', 'female', null, '13123234325', '娜美', 'd6d47d83b728917df24b45bf136f7155', 'bd6nu', null, null, null);
 INSERT INTO `t_shop_user` VALUES ('4', '5422cb7c-015d-4c1b-a0d3-612c0d010d65.jpg', '2020-02-11 18:10:56', 'male', null, '13523921111', '香吉士', 'fa4ceda72c1fe22e062978a4282098f8', 'bzn8x', null, null, null);
@@ -684,7 +660,7 @@ CREATE TABLE `t_sys_cfg` (
   `cfg_name` varchar(256) DEFAULT NULL COMMENT '参数名',
   `cfg_value` varchar(512) DEFAULT NULL COMMENT '参数值',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='系统参数';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='系统参数';
 
 -- ----------------------------
 -- Records of t_sys_cfg
@@ -700,8 +676,8 @@ INSERT INTO `t_sys_cfg` VALUES ('8', '1', '2020-01-19 17:06:54', '-1', '2020-03-
 INSERT INTO `t_sys_cfg` VALUES ('9', '1', '2020-01-19 17:06:54', '1', '2020-03-20 14:31:59', '微信ticket', 'weixin.js.api.ticket', 'HoagFKDcsGMVCIY2vOjf9pIHYEf7W-G5zYtUhIs_q6gqnuHZTyJJz6HY0zEF_UCYRIwQVNRjDnlLtxDRbXyolQ');
 INSERT INTO `t_sys_cfg` VALUES ('10', '1', '2020-01-19 17:06:54', '1', '2020-01-19 18:45:04', '微信获取token的地址', 'weixin.access.token.url', 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s');
 INSERT INTO `t_sys_cfg` VALUES ('11', '1', '2020-01-19 17:06:54', '1', '2020-01-19 18:45:04', '微信获取ticket的地址', 'weixin.js.api.ticket.url', 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi');
-INSERT INTO `t_sys_cfg` VALUES ('12', '1', '2020-05-31 21:48:12', '1', '2020-05-31 21:48:12', '快递鸟接口地址', 'api.kdniao.url', null);
-INSERT INTO `t_sys_cfg` VALUES ('13', '1', '2020-05-31 21:48:12', '1', '2020-05-31 21:48:12', '快递鸟用户id', 'api.kdniao.userid', '1111');
+INSERT INTO `t_sys_cfg` VALUES ('12', '1', '2020-05-31 21:48:12', '1', '2020-05-31 21:48:12', '快递鸟接口地址', 'api.kdniao.url', 'http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx');
+INSERT INTO `t_sys_cfg` VALUES ('13', '1', '2020-05-31 21:48:12', '1', '2020-05-31 21:48:12', '快递鸟用户id', 'api.kdniao.userid', '快递鸟userid');
 INSERT INTO `t_sys_cfg` VALUES ('14', '1', '2020-05-31 21:48:12', '1', '2020-05-31 21:48:12', '快递鸟apikey', 'api.kdniao.apikey', null);
 
 -- ----------------------------
@@ -722,7 +698,7 @@ CREATE TABLE `t_sys_dept` (
   `tips` varchar(255) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COMMENT='部门';
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='部门';
 
 -- ----------------------------
 -- Records of t_sys_dept
@@ -747,7 +723,7 @@ CREATE TABLE `t_sys_dict` (
   `pid` bigint(20) DEFAULT NULL,
   `tips` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COMMENT='字典';
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8 COMMENT='字典';
 
 -- ----------------------------
 -- Records of t_sys_dict
@@ -784,7 +760,7 @@ CREATE TABLE `t_sys_express` (
   `name` varchar(32) DEFAULT NULL COMMENT '公司名称',
   `sort` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='物流公司';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='物流公司';
 
 -- ----------------------------
 -- Records of t_sys_express
@@ -809,7 +785,7 @@ CREATE TABLE `t_sys_file_info` (
   `original_file_name` varchar(255) DEFAULT NULL,
   `real_file_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8mb4 COMMENT='文件';
+) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8 COMMENT='文件';
 
 -- ----------------------------
 -- Records of t_sys_file_info
@@ -960,15 +936,13 @@ CREATE TABLE `t_sys_login_log` (
   `succeed` varchar(255) DEFAULT NULL,
   `userid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='登录日志';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='登录日志';
 
 -- ----------------------------
 -- Records of t_sys_login_log
 -- ----------------------------
 INSERT INTO `t_sys_login_log` VALUES ('1', '2019-11-18 20:05:52', '127.0.0.1', '登录日志', null, '成功', '1');
 INSERT INTO `t_sys_login_log` VALUES ('2', '2019-11-20 10:45:10', '127.0.0.1', '登录日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('3', '2020-06-02 11:55:33', '127.0.0.1', '退出日志', null, '成功', '1');
-INSERT INTO `t_sys_login_log` VALUES ('4', '2020-06-02 11:55:54', '127.0.0.1', '登录日志', null, '成功', '1');
 
 -- ----------------------------
 -- Table structure for `t_sys_menu`
@@ -996,7 +970,7 @@ CREATE TABLE `t_sys_menu` (
   `url` varchar(32) DEFAULT NULL COMMENT '链接',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_s37unj3gh67ujhk83lqva8i1t` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COMMENT='菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8 COMMENT='菜单';
 
 -- ----------------------------
 -- Records of t_sys_menu
@@ -1006,21 +980,10 @@ INSERT INTO `t_sys_menu` VALUES ('2', '1', '2019-07-31 22:04:30', '1', '2019-03-
 INSERT INTO `t_sys_menu` VALUES ('3', '1', '2019-07-31 22:04:30', '1', '2019-06-02 10:09:09', 'operationMgr', 'layout', '0', 'operation', '1', null, '1', '运维管理', '6', '0', '[0],', '1', null, '/optionMgr');
 INSERT INTO `t_sys_menu` VALUES ('4', '1', '2019-07-31 22:04:30', '1', '2019-04-16 18:59:15', 'mgr', 'views/system/user/index', '0', 'user', '1', null, '2', '用户管理', '1', 'system', '[0],[system],', '1', null, '/mgr');
 INSERT INTO `t_sys_menu` VALUES ('5', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'mgrAdd', null, '0', null, '0', null, '3', '添加用户', '1', 'mgr', '[0],[system],[mgr],', '1', null, '/mgr/add');
-INSERT INTO `t_sys_menu` VALUES ('6', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'mgrEdit', null, '0', null, '0', null, '3', '修改用户', '2', 'mgr', '[0],[system],[mgr],', '1', null, '/mgr/edit');
-INSERT INTO `t_sys_menu` VALUES ('7', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'mgrDelete', null, '0', null, '0', '0', '3', '删除用户', '3', 'mgr', '[0],[system],[mgr],', '1', null, '/mgr/delete');
 INSERT INTO `t_sys_menu` VALUES ('8', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'mgrReset', null, '0', null, '0', '0', '3', '重置密码', '4', 'mgr', '[0],[system],[mgr],', '1', null, '/mgr/reset');
-INSERT INTO `t_sys_menu` VALUES ('9', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'mgrFreeze', null, '0', null, '0', '0', '3', '冻结用户', '5', 'mgr', '[0],[system],[mgr],', '1', null, '/mgr/freeze');
-INSERT INTO `t_sys_menu` VALUES ('10', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'mgrUnfreeze', null, '0', null, '0', '0', '3', '解除冻结用户', '6', 'mgr', '[0],[system],[mgr],', '1', null, '/mgr/unfreeze');
-INSERT INTO `t_sys_menu` VALUES ('11', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'mgrSetRole', null, '0', null, '0', '0', '3', '分配角色', '7', 'mgr', '[0],[system],[mgr],', '1', null, '/mgr/setRole');
 INSERT INTO `t_sys_menu` VALUES ('12', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'role', 'views/system/role/index', '0', 'peoples', '1', '0', '2', '角色管理', '2', 'system', '[0],[system],', '1', null, '/role');
 INSERT INTO `t_sys_menu` VALUES ('13', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'roleAdd', null, '0', null, '0', '0', '3', '添加角色', '1', 'role', '[0],[system],[role],', '1', null, '/role/add');
-INSERT INTO `t_sys_menu` VALUES ('14', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'roleEdit', null, '0', null, '0', '0', '3', '修改角色', '2', 'role', '[0],[system],[role],', '1', null, '/role/edit');
-INSERT INTO `t_sys_menu` VALUES ('15', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'roleDelete', null, '0', null, '0', '0', '3', '删除角色', '3', 'role', '[0],[system],[role],', '1', null, '/role/remove');
-INSERT INTO `t_sys_menu` VALUES ('16', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'roleSetAuthority', null, '0', null, '0', '0', '3', '配置权限', '4', 'role', '[0],[system],[role],', '1', null, '/role/setAuthority');
 INSERT INTO `t_sys_menu` VALUES ('17', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'menu', 'views/system/menu/index', '0', 'menu', '1', '0', '2', '菜单管理', '4', 'system', '[0],[system],', '1', null, '/menu');
-INSERT INTO `t_sys_menu` VALUES ('18', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'menuAdd', null, '0', null, '0', '0', '3', '添加菜单', '1', 'menu', '[0],[system],[menu],', '1', null, '/menu/add');
-INSERT INTO `t_sys_menu` VALUES ('19', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'menuEdit', null, '0', null, '0', '0', '3', '修改菜单', '2', 'menu', '[0],[system],[menu],', '1', null, '/menu/edit');
-INSERT INTO `t_sys_menu` VALUES ('20', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'menuDelete', null, '0', null, '0', '0', '3', '删除菜单', '3', 'menu', '[0],[system],[menu],', '1', null, '/menu/remove');
 INSERT INTO `t_sys_menu` VALUES ('21', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'dept', 'views/system/dept/index', '0', 'dept', '1', null, '2', '部门管理', '3', 'system', '[0],[system],', '1', null, '/dept');
 INSERT INTO `t_sys_menu` VALUES ('22', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'dict', 'views/system/dict/index', '0', 'dict', '1', null, '2', '字典管理', '4', 'system', '[0],[system],', '1', null, '/dict');
 INSERT INTO `t_sys_menu` VALUES ('23', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'deptEdit', null, '0', null, '0', null, '3', '修改部门', '1', 'dept', '[0],[system],[dept],', '1', null, '/dept/update');
@@ -1103,7 +1066,7 @@ CREATE TABLE `t_sys_notice` (
   `title` varchar(255) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='通知';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='通知';
 
 -- ----------------------------
 -- Records of t_sys_notice
@@ -1125,7 +1088,7 @@ CREATE TABLE `t_sys_operation_log` (
   `succeed` varchar(255) DEFAULT NULL,
   `userid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='操作日志';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作日志';
 
 -- ----------------------------
 -- Records of t_sys_operation_log
@@ -1140,7 +1103,7 @@ CREATE TABLE `t_sys_relation` (
   `menuid` bigint(20) DEFAULT NULL,
   `roleid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COMMENT='菜单角色关系';
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8 COMMENT='菜单角色关系';
 
 -- ----------------------------
 -- Records of t_sys_relation
@@ -1265,7 +1228,7 @@ CREATE TABLE `t_sys_role` (
   `tips` varchar(255) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='角色';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='角色';
 
 -- ----------------------------
 -- Records of t_sys_role
@@ -1294,13 +1257,13 @@ CREATE TABLE `t_sys_task` (
   `name` varchar(50) DEFAULT NULL COMMENT '任务名',
   `note` varchar(255) DEFAULT NULL COMMENT '任务说明',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='定时任务';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='定时任务';
 
 -- ----------------------------
 -- Records of t_sys_task
 -- ----------------------------
-INSERT INTO `t_sys_task` VALUES ('1', '1', '2018-12-28 09:54:00', '-1', '2020-06-02 12:00:00', '0', '0 0/30 * * * ?', '{\n\"appname\": \"linjiashop\",\n\"version\":1}', '0', '2020-06-02 12:00:00', '执行成功', 'cn.enilu.flash.service.task.job.HelloJob', 'default', '测试任务', '测试任务,每30分钟执行一次');
-INSERT INTO `t_sys_task` VALUES ('2', '1', '2020-01-19 17:40:02', '-1', '2020-06-02 12:00:01', '0', '0 0 0/1 * * ?', '', '0', '2020-06-02 12:00:00', '执行失败', 'cn.enilu.flash.service.task.job.UpdateWeixinTokenJob', null, '更新微信token', '获取微信token，每小时获取一次');
+INSERT INTO `t_sys_task` VALUES ('1', '1', '2018-12-28 09:54:00', '-1', '2020-01-20 10:04:57', '0', '0 0/30 * * * ?', '{\n\"appname\": \"linjiashop\",\n\"version\":1}', '0', '2020-01-20 10:04:57', '执行成功', 'cn.enilu.flash.service.task.job.HelloJob', 'default', '测试任务', '测试任务,每30分钟执行一次');
+INSERT INTO `t_sys_task` VALUES ('2', '1', '2020-01-19 17:40:02', '-1', '2020-01-20 10:04:57', '0', '0 0 0/1 * * ?', '', '0', '2020-01-19 19:25:00', '执行失败', 'cn.enilu.flash.service.task.job.UpdateWeixinTokenJob', null, '更新微信token', '获取微信token，每小时获取一次');
 
 -- ----------------------------
 -- Table structure for `t_sys_task_log`
@@ -1314,7 +1277,7 @@ CREATE TABLE `t_sys_task_log` (
   `job_exception` text COMMENT '抛出异常',
   `name` varchar(50) DEFAULT NULL COMMENT '任务名',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COMMENT='定时任务日志';
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
 
 -- ----------------------------
 -- Records of t_sys_task_log
@@ -1348,8 +1311,6 @@ INSERT INTO `t_sys_task_log` VALUES ('26', '2019-11-20 09:30:00', '1', '1', null
 INSERT INTO `t_sys_task_log` VALUES ('27', '2019-11-20 10:00:00', '1', '1', null, '测试任务');
 INSERT INTO `t_sys_task_log` VALUES ('28', '2019-11-20 10:30:00', '1', '1', null, '测试任务');
 INSERT INTO `t_sys_task_log` VALUES ('29', '2019-11-20 11:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('30', '2020-06-02 12:00:00', '1', '1', null, '测试任务');
-INSERT INTO `t_sys_task_log` VALUES ('31', '2020-06-02 12:00:00', '0', '2', '执行失败\njavax.validation.ConstraintViolationException: Validation failed for classes [cn.enilu.flash.bean.entity.system.Cfg] during update time for groups [javax.validation.groups.Default, ]\nList of constraint violations:[\n	ConstraintViolationImpl{interpolatedMessage=\'参数值不能为空\', propertyPath=cfgValue, rootBeanClass=class cn.enilu.flash.bean.entity.system.Cfg, messageTemplate=\'参数值不能为空\'}\n]\r\n	at org.hibernate.cfg.beanvalidation.BeanValidationEventListener.validate(BeanValidationEventListener.java:140)\r\n	at org.hibernate.cfg.beanvalidation.BeanValidationEventListener.onPreUpdate(BeanValidationEventListener.java:88)\r\n	at org.hibernate.action.internal.EntityUpdateAction.preUpdate(EntityUpdateAction.java:248)\r\n	at org.hibernate.action.internal.EntityUpdateAction.execute(EntityUpdateAction.java:119)\r\n	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:604)\r\n	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:478)\r\n	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:356)\r\n	at org.hibernate.event.internal.DefaultAutoFlushEventListener.onAutoFlush(DefaultAutoFlushEventListener.java:50)\r\n	at org.hibernate.internal.SessionImpl.autoFlushIfRequired(SessionImpl.java:1415)\r\n	at org.hibernate.internal.SessionImpl.list(SessionImpl.java:1501)\r\n	at org.hibernate.query.internal.AbstractProducedQuery.doList(AbstractProducedQuery.java:1537)\r\n	at org.hibernate.query.internal.AbstractProducedQuery.list(AbstractProducedQuery.java:1505)\r\n	at org.hibernate.query.Query.getResultList(Query.java:135)\r\n	at org.hibernate.query.criteria.internal.compile.CriteriaQueryTypeQueryAdapter.getResultList(CriteriaQueryTypeQueryAdapter.java:74)\r\n	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:306)\r\n	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:73)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:359)\r\n	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:200)\r\n	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:644)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\r\n	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.doInvoke(RepositoryFactorySupport.java:608)\r\n	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.lambda$invoke$3(RepositoryFactorySupport.java:595)\r\n	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.invoke(RepositoryFactorySupport.java:595)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\r\n	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:59)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\r\n	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:294)\r\n	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\r\n	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\r\n	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:135)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\r\n	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:93)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\r\n	at org.springframework.data.repository.core.support.SurroundingTransactionDetectorMethodInterceptor.invoke(SurroundingTransactionDetectorMethodInterceptor.java:61)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\r\n	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212)\r\n	at com.sun.proxy.$Proxy154.findAll(Unknown Source)\r\n	at cn.enilu.flash.cache.impl.ConfigCacheImpl.cache(ConfigCacheImpl.java:71)\r\n	at cn.enilu.flash.service.system.CfgService.saveOrUpdate(CfgService.java:36)\r\n	at cn.enilu.flash.service.system.CfgService$$FastClassBySpringCGLIB$$ada4e0b1.invoke(<generated>)\r\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)\r\n	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:749)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)\r\n	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:294)\r\n	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\r\n	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)\r\n	at cn.enilu.flash.service.system.CfgService$$EnhancerBySpringCGLIB$$2ce521c5.saveOrUpdate(<generated>)\r\n	at cn.enilu.flash.service.system.CfgService$$FastClassBySpringCGLIB$$ada4e0b1.invoke(<generated>)\r\n	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)\r\n	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:749)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)\r\n	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:294)\r\n	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)\r\n	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\r\n	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)\r\n	at cn.enilu.flash.service.system.CfgService$$EnhancerBySpringCGLIB$$f35dabf9.saveOrUpdate(<generated>)\r\n	at cn.enilu.flash.service.api.WeixinService.updateWeixinToken(WeixinService.java:55)\r\n	at cn.enilu.flash.service.task.job.UpdateWeixinTokenJob.execute(UpdateWeixinTokenJob.java:22)\r\n	at cn.enilu.flash.service.task.JobExecuter.execute(JobExecuter.java:53)\r\n	at cn.enilu.flash.service.task.TaskUtils.executeJob(TaskUtils.java:37)\r\n	at cn.enilu.flash.service.task.BaseJob.execute(BaseJob.java:18)\r\n	at org.quartz.core.JobRunShell.run(JobRunShell.java:202)\r\n	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573)\r\n', '更新微信token');
 
 -- ----------------------------
 -- Table structure for `t_sys_user`
@@ -1375,7 +1336,7 @@ CREATE TABLE `t_sys_user` (
   `status` int(11) DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='账号';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='账号';
 
 -- ----------------------------
 -- Records of t_sys_user

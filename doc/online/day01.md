@@ -21,7 +21,7 @@
 _服务器已经做过备案，没做过备案的同学可以自己根据阿里云的提示做即可，这个不麻烦_    
 
 ## 要有域名
-- 之前申请了microapp.store域名，打算使用两个耳机域名分别做后台管理和手机h5
+- 之前申请了microapp.store域名，打算使用两个二级域名分别做后台管理和手机h5
 - 后台管理：wt1hd-admin.microapp.store
 - 手机h5：wt1hd.microapp.store
 

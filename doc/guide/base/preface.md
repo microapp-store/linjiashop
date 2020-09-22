@@ -62,26 +62,26 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 <table>
 <tr>
 <td>
-<img src="../img/app/home.png" width="300"/></td>
+<img src="../../img/app/home.png" width="300"/></td>
 <td>
-<img src="../img/app/find.png" width="300"/></td>
+<img src="../../img/app/find.png" width="300"/></td>
 </tr>
 <tr>
 <td>
-<img src="../img/app/guige.jpg" width="300"/></td>
+<img src="../../img/app/guige.jpg" width="300"/></td>
 <td>
-<img src="../img/app/login.png" width="300"/></td>
+<img src="../../img/app/login.png" width="300"/></td>
 </tr>
 <tr>
 <td>
-<img src="../img/app/mine.png" width="300"/></td>
+<img src="../../img/app/mine.png" width="300"/></td>
 <td>
-<img src="../img/app/cart.png" width="300"/></td>
+<img src="../../img/app/cart.png" width="300"/></td>
 </tr>
 </table>
 
 ### Android
-![效果](../img/app/mobile.gif)
+![效果](../../img/app/mobile.gif)
 ### 后台管理
 ![后台管理](../img/admin.gif)
 
@@ -144,5 +144,5 @@ linjiashop包含了后台管理功能和手机端商城业务功能
  
 ## 技术交流
 - QQ群：254059156
-- [商业支持](http://microapp.gitee.io/linjiashop/other/xiaomiquan.html)
+- [商业支持](../other/xiaomiquan.html)
 - 微信：myenilu,添加请备注：邻家小铺

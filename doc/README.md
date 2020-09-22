@@ -3,7 +3,7 @@ home: true
 heroImage: /logo.jpg
 heroText: ''
 actionText: 快速开始 →
-actionLink: /base/preface
+actionLink: /guide/base/preface
 footer: MIT Licensed | Copyright © 2019-present microapp.store
 ---
 

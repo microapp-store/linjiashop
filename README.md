@@ -53,7 +53,7 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 ## 运行效果图
 _商品素材取自小米商城_
 ### 手机端H5
-![手机端](doc/img/mobile.gif)
+![手机端](doc/guide/img/mobile.gif)
 
 ### IOS
 <table>
@@ -81,7 +81,7 @@ _商品素材取自小米商城_
 ![效果](doc/img/app/mobile.gif)
 
 ### 后台管理
-![后台管理](doc/img/admin.gif)
+![后台管理](doc/guide/img/admin.gif)
 
 ## 技术选型
 - 核心框架：Spring Boot
@@ -144,7 +144,7 @@ _商品素材取自小米商城_
 ## 技术交流
 - 关注公众号：嗨客帝国，点击对应的项目菜单进群交流。
 
-![公众号二维码](doc/img/haike.jpg)
+![公众号二维码](doc/guide/img/haike.jpg)
 - 论坛提问：
 [http://bbs.enilu.cn](http://bbs.enilu.cn)
 ## 在线文档

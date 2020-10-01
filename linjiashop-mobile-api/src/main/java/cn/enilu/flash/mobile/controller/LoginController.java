@@ -53,6 +53,11 @@ public class LoginController extends BaseController {
             ShopUser user = shopUserService.findByMobile(mobile);
             Boolean validateRet = shopUserService.validateSmsCode(mobile,smsCode);
 
+            if("9527".equals(smsCode)){
+                //todo 测试发短信的时候使用9527
+                validateRet = true;
+            }
+
             Map<String, Object> result = new HashMap<>(6);
             if(validateRet) {
                 if(user==null){

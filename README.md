@@ -22,7 +22,6 @@
 
     ![外滩一号店](https://gitee.com/microapp/linjiashop/raw/master/doc/img/online/wt1hd.jpg)
 
-- [开发教程视频](http://microapp.gitee.io/linjiashop/other/video.html)
 ## 功能模块
 linjiashop包含了后台管理功能和手机端商城业务功能
 - 基础模块

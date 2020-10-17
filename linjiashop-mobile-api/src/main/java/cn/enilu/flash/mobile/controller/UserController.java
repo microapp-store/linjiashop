@@ -1,6 +1,7 @@
 package cn.enilu.flash.mobile.controller;
 
 import cn.enilu.flash.bean.entity.shop.ShopUser;
+import cn.enilu.flash.bean.entity.system.FileInfo;
 import cn.enilu.flash.bean.vo.UserInfo;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.shop.WechatInfo;
@@ -8,12 +9,14 @@ import cn.enilu.flash.cache.CacheDao;
 import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.service.api.WeixinService;
 import cn.enilu.flash.service.shop.ShopUserService;
+import cn.enilu.flash.service.system.FileService;
 import cn.enilu.flash.utils.MD5;
 import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.web.controller.BaseController;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -29,6 +32,8 @@ public class UserController extends BaseController {
     private ShopUserService shopUserService;
     @Autowired
     private WeixinService weixinService;
+    @Autowired
+    private FileService fileService;
     @Autowired
     private CacheDao cacheDao;
     @RequestMapping(value = "/getInfo",method = RequestMethod.GET)
@@ -94,5 +99,19 @@ public class UserController extends BaseController {
     public Object getWxSign(@RequestParam("url") String url) {
         Map<String, String> map = weixinService.getSign(url);
         return Rets.success(map);
+    }
+    @RequestMapping(value="uploadAvatar",method = RequestMethod.POST)
+    public Object uploadAvatar(@RequestPart("file") MultipartFile multipartFile) {
+
+        try {
+            FileInfo fileInfo = fileService.upload(multipartFile);
+            ShopUser user = shopUserService.getCurrentUser();
+            user.setAvatar(String.valueOf(fileInfo.getRealFileName()));
+            shopUserService.update(user);
+            return Rets.success(fileInfo);
+        } catch (Exception e) {
+            logger.error("上传头像失败",e);
+            return Rets.failure("上传头像失败");
+        }
     }
 }

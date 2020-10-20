@@ -36,8 +36,11 @@ public class LoginController extends BaseController {
     private Logger logger = LoggerFactory.getLogger(LoginController.class);
     @RequestMapping(value = "sendSmsCode",method = RequestMethod.POST)
     public Object sendSmsCode(@RequestParam String mobile){
-        shopUserService.sendSmsCode(mobile);
-        return Rets.success();
+        //测试环境
+        String ret = shopUserService.sendSmsCodeForTest(mobile);
+        //生产环境
+//        Boolean ret shopUserService.sendSmsCode(mobile);
+        return Rets.success(ret);
     }
     /**
      * 使用手机号和短信验证码登录或者注册
@@ -52,11 +55,6 @@ public class LoginController extends BaseController {
             //1,
             ShopUser user = shopUserService.findByMobile(mobile);
             Boolean validateRet = shopUserService.validateSmsCode(mobile,smsCode);
-
-            if("9527".equals(smsCode)){
-                //todo 测试发短信的时候使用9527
-                validateRet = true;
-            }
 
             Map<String, Object> result = new HashMap<>(6);
             if(validateRet) {

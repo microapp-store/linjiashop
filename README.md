@@ -16,11 +16,13 @@
 - linjiashop 包含了app版本（基于flutter) 仓库地址[gitee](https://gitee.com/microapp/linjiashop-flutter),[github](https://github.com/microapp-store/linjiashop-flutter) 
  
 ## 演示
-- 手机版本：[http://linjiashop.microapp.store](http://linjiashop.microapp.store) 
-- 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store)
+- 手机版本：[http://linjiashop.microapp.store](http://linjiashop.microapp.store) 演示账号/密码：15011112222/admin 
+- 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 管理员账号/密码：admin/admin
+
 - 公众号演示：关注公众号“外滩一号店"进行体验，或者扫描下面二维码关注
 
     ![外滩一号店](https://gitee.com/microapp/linjiashop/raw/master/doc/img/online/wt1hd.jpg)
+    注意上面后台管理和手机版本和公众号并不是一个环境，所有上面后台管理对商品的调整不会影响公众号中内容，公众号环境后台不对外开放。
 
 ## 功能模块
 linjiashop包含了后台管理功能和手机端商城业务功能

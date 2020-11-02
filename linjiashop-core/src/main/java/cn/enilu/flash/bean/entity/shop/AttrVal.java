@@ -1,6 +1,7 @@
 package cn.enilu.flash.bean.entity.shop;
 
 import cn.enilu.flash.bean.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -23,6 +24,7 @@ public class AttrVal extends BaseEntity {
     private String attrVal;
     @JoinColumn(name = "id_attr_key", insertable = false, updatable = false, foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private AttrKey attrKey;
 
 }

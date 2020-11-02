@@ -1,13 +1,16 @@
 /*
 Navicat MySQL Data Transfer
+
+Source Server         : aliyun
 Source Server Version : 50730
+Source Host           : 47.104.84.62:3306
 Source Database       : linjiashop
 
 Target Server Type    : MYSQL
 Target Server Version : 50730
 File Encoding         : 65001
 
-Date: 2020-09-18 08:22:32
+Date: 2020-10-08 23:04:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -279,9 +282,7 @@ CREATE TABLE `t_shop_attr_val` (
   `modify_time` datetime DEFAULT NULL COMMENT '最后更新时间',
   `attr_val` varchar(32) DEFAULT NULL COMMENT '属性值',
   `id_attr_key` bigint(20) DEFAULT NULL COMMENT '属性id',
-  PRIMARY KEY (`id`),
-  KEY `FKrl0c5wb1fo1fp087phw8n785d` (`id_attr_key`),
-  CONSTRAINT `FKrl0c5wb1fo1fp087phw8n785d` FOREIGN KEY (`id_attr_key`) REFERENCES `t_shop_attr_key` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='商品属性值';
 
 -- ----------------------------
@@ -478,10 +479,10 @@ CREATE TABLE `t_shop_goods_sku` (
 -- ----------------------------
 -- Records of t_shop_goods_sku
 -- ----------------------------
-INSERT INTO `t_shop_goods_sku` VALUES ('1', null, '2019-12-10 18:57:57', null, null, '1,3', '3GB+32GB,珊瑚橙', '1', null, null, '69900', '100');
-INSERT INTO `t_shop_goods_sku` VALUES ('2', null, '2019-12-10 18:57:57', null, null, '1,4', '3GB+32GB,深海蓝', '1', null, null, '69900', '100');
-INSERT INTO `t_shop_goods_sku` VALUES ('3', null, '2019-12-10 18:57:57', null, null, '2,3', '4GB+64GB,珊瑚橙', '1', null, '79900', '74900', '100');
-INSERT INTO `t_shop_goods_sku` VALUES ('4', null, '2019-12-10 18:57:57', null, null, '2,4', '4GB+64GB,深海蓝', '1', null, '79900', '74900', '100');
+INSERT INTO `t_shop_goods_sku` VALUES ('1', null, '2019-12-10 18:57:57', null, null, '1,3', '3GB+32GB,珊瑚橙', '1', '0', null, '69900', '100');
+INSERT INTO `t_shop_goods_sku` VALUES ('2', null, '2019-12-10 18:57:57', null, null, '1,4', '3GB+32GB,深海蓝', '1', '0', null, '69900', '100');
+INSERT INTO `t_shop_goods_sku` VALUES ('3', null, '2019-12-10 18:57:57', null, null, '2,3', '4GB+64GB,珊瑚橙', '1', '0', '79900', '74900', '100');
+INSERT INTO `t_shop_goods_sku` VALUES ('4', null, '2019-12-10 18:57:57', null, null, '2,4', '4GB+64GB,深海蓝', '1', '0', '79900', '74900', '100');
 
 -- ----------------------------
 -- Table structure for `t_shop_order`
@@ -493,11 +494,14 @@ CREATE TABLE `t_shop_order` (
   `modify_time` datetime DEFAULT NULL COMMENT '最后更新时间',
   `admin_message` varchar(256) DEFAULT NULL COMMENT '管理员备注',
   `confirm_receiving_time` datetime DEFAULT NULL COMMENT '确认收货时间',
+  `consignee` varchar(32) DEFAULT NULL COMMENT '收件人',
+  `consignee_address` varchar(64) DEFAULT NULL COMMENT '收件地址',
   `coupon_price` varchar(32) DEFAULT NULL COMMENT '优惠券抵扣金额',
   `id_address` bigint(20) DEFAULT NULL COMMENT '收货信息',
   `id_express` bigint(20) DEFAULT NULL COMMENT '快递公司',
   `id_user` bigint(20) DEFAULT NULL COMMENT '用户id',
   `message` varchar(64) DEFAULT NULL COMMENT '订单备注',
+  `mobile` varchar(16) DEFAULT NULL COMMENT '收件人电话',
   `order_sn` varchar(32) DEFAULT NULL COMMENT '订单号',
   `pay_id` varchar(32) DEFAULT NULL COMMENT '支付流水号',
   `pay_status` int(11) DEFAULT NULL COMMENT '支付状态1:未付款;2:已付款,3:支付中',
@@ -516,18 +520,18 @@ CREATE TABLE `t_shop_order` (
 -- ----------------------------
 -- Records of t_shop_order
 -- ----------------------------
-INSERT INTO `t_shop_order` VALUES ('1', '2019-12-14 23:09:57', null, null, null, null, '1', null, '1', '', '20191214230956111128', null, '1', null, null, '409700', null, null, null, '1', '409700', null);
-INSERT INTO `t_shop_order` VALUES ('2', '2019-12-14 23:12:49', null, null, null, null, '2', null, '1', '', '20191214231249046951', null, '2', null, 'alipay', '849700', null, null, null, '2', '849700', null);
-INSERT INTO `t_shop_order` VALUES ('3', '2019-12-14 23:16:57', null, null, null, null, '2', '1', '1', '', '20191214231656504561', null, '2', null, 'wxpay', '189800', '0', '23479238719734', '2019-12-15 23:16:57', '3', '189800', null);
-INSERT INTO `t_shop_order` VALUES ('4', '2019-12-14 23:17:24', null, null, null, null, '2', '2', '1', '', '20191214231724727283', null, '2', null, 'wxpay', '299900', '0', '23523523523523', '2019-12-15 23:16:57', '4', '299900', null);
-INSERT INTO `t_shop_order` VALUES ('5', '2019-12-15 23:17:24', null, null, null, null, '1', '3', '1', null, '20191215231724727284', null, '2', null, 'alipay', '749900', '0', '2515432532523', '2019-12-15 23:16:57', '6', '749900', null);
-INSERT INTO `t_shop_order` VALUES ('6', '2019-12-16 23:17:24', null, null, null, null, '1', '4', '1', null, '20191216231724727285', null, '2', null, 'alipay', '749900', '0', '2351543253253', '2019-12-17 23:17:24', '7', '749900', null);
-INSERT INTO `t_shop_order` VALUES ('7', '2020-02-11 18:11:56', null, null, null, null, '5', null, '4', '', '20200211181156538552', null, '1', null, null, '899800', null, null, null, '1', '899800', null);
-INSERT INTO `t_shop_order` VALUES ('8', '2020-02-11 18:12:21', null, null, null, null, '5', null, '4', '', '20200211181221328831', null, '2', null, 'alipay', '549700', null, null, null, '2', '549700', null);
-INSERT INTO `t_shop_order` VALUES ('9', '2020-02-11 18:14:34', null, null, null, null, '3', null, '2', '', '20200211181434810410', null, '1', null, null, '199900', null, null, null, '1', '199900', null);
-INSERT INTO `t_shop_order` VALUES ('10', '2020-02-11 18:14:54', null, '周末不要配送', null, null, '3', '4', '2', '', '20200211181454797051', null, '2', null, 'wxpay', '149800', '0', '92398238523', null, '3', '149800', null);
-INSERT INTO `t_shop_order` VALUES ('11', '2020-02-11 18:15:22', null, null, null, null, '4', null, '3', '', '20200211181522894019', null, '2', null, 'wxpay', '74900', null, null, null, '2', '74900', null);
-INSERT INTO `t_shop_order` VALUES ('12', '2020-02-11 18:15:43', null, '隐私用品，做好包装', null, null, '4', null, '3', '', '20200211181543530332', null, '1', null, null, '449800', null, null, null, '1', '449800', null);
+INSERT INTO `t_shop_order` VALUES ('1', '2019-12-14 23:09:57', null, null, null, '路飞', '北京市 北京市东城区人民路12号', null, '1', null, '1', '', '15011113333', '20191214230956111128', null, '1', null, null, '409700', null, null, null, '1', '409700', null);
+INSERT INTO `t_shop_order` VALUES ('2', '2019-12-14 23:12:49', null, null, null, '索隆', '广东省 深圳市福田区和平路32号', null, '2', null, '1', '', '15111112222', '20191214231249046951', null, '2', null, 'alipay', '849700', null, null, null, '2', '849700', null);
+INSERT INTO `t_shop_order` VALUES ('3', '2019-12-14 23:16:57', null, null, null, '索隆', '广东省 深圳市福田区和平路32号', null, '2', '1', '1', '', '15111112222', '20191214231656504561', null, '2', null, 'wxpay', '189800', '0', '23479238719734', '2019-12-15 23:16:57', '3', '189800', null);
+INSERT INTO `t_shop_order` VALUES ('4', '2019-12-14 23:17:24', null, null, null, '索隆', '广东省 深圳市福田区和平路32号', null, '2', '2', '1', '', '15111112222', '20191214231724727283', null, '2', null, 'wxpay', '299900', '0', '23523523523523', '2019-12-15 23:16:57', '4', '299900', null);
+INSERT INTO `t_shop_order` VALUES ('5', '2019-12-15 23:17:24', null, null, null, '路飞', '北京市 北京市东城区人民路12号', null, '1', '3', '1', null, '15011113333', '20191215231724727284', null, '2', null, 'alipay', '749900', '0', '2515432532523', '2019-12-15 23:16:57', '6', '749900', null);
+INSERT INTO `t_shop_order` VALUES ('6', '2019-12-16 23:17:24', null, null, null, '路飞', '北京市 北京市东城区人民路12号', null, '1', '4', '1', null, '15011113333', '20191216231724727285', null, '2', null, 'alipay', '749900', '0', '2351543253253', '2019-12-17 23:17:24', '7', '749900', null);
+INSERT INTO `t_shop_order` VALUES ('7', '2020-02-11 18:11:56', null, null, null, '绿藻头', '江苏省 扬州市江都区北海路11号', null, '5', null, '4', '', '13523921111', '20200211181156538552', null, '1', null, null, '899800', null, null, null, '1', '899800', null);
+INSERT INTO `t_shop_order` VALUES ('8', '2020-02-11 18:12:21', null, null, null, '绿藻头', '', null, '5', null, '4', '', '13523921111', '20200211181221328831', null, '2', null, 'alipay', '549700', null, null, null, '2', '549700', null);
+INSERT INTO `t_shop_order` VALUES ('9', '2020-02-11 18:14:34', null, null, null, '路飞太郎', '山东省 枣庄市台儿庄区风车村11号', null, '3', null, '2', '', '13581640280', '20200211181434810410', null, '1', null, null, '199900', null, null, null, '1', '199900', null);
+INSERT INTO `t_shop_order` VALUES ('10', '2020-02-11 18:14:54', null, '周末不要配送', null, '路飞太郎', '山东省 枣庄市台儿庄区风车村11号', null, '3', '4', '2', '', '13581640280', '20200211181454797051', null, '2', null, 'wxpay', '149800', '0', '92398238523', null, '3', '149800', null);
+INSERT INTO `t_shop_order` VALUES ('11', '2020-02-11 18:15:22', null, null, null, '张三', '上海市杨浦区xx路xxx号', null, '4', null, '3', '', '15011112222', '20200211181522894019', null, '2', null, 'wxpay', '74900', null, null, null, '2', '74900', null);
+INSERT INTO `t_shop_order` VALUES ('12', '2020-02-11 18:15:43', null, '隐私用品，做好包装', null, '张三', '上海市杨浦区xx路xxx号', null, '4', null, '3', '', '15011112222', '20200211181543530332', null, '1', null, null, '449800', null, null, null, '1', '449800', null);
 
 -- ----------------------------
 -- Table structure for `t_shop_order_item`
@@ -543,9 +547,7 @@ CREATE TABLE `t_shop_order_item` (
   `id_sku` bigint(20) DEFAULT NULL COMMENT 'skuId',
   `price` varchar(16) DEFAULT NULL COMMENT '单价',
   `total_price` varchar(16) DEFAULT NULL COMMENT '合计',
-  PRIMARY KEY (`id`),
-  KEY `FKa8kiyc9h5f6bn5617tdh6li9h` (`id_order`),
-  CONSTRAINT `FKa8kiyc9h5f6bn5617tdh6li9h` FOREIGN KEY (`id_order`) REFERENCES `t_shop_order` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='订单明细';
 
 -- ----------------------------
@@ -936,13 +938,15 @@ CREATE TABLE `t_sys_login_log` (
   `succeed` varchar(255) DEFAULT NULL,
   `userid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='登录日志';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='登录日志';
 
 -- ----------------------------
 -- Records of t_sys_login_log
 -- ----------------------------
 INSERT INTO `t_sys_login_log` VALUES ('1', '2019-11-18 20:05:52', '127.0.0.1', '登录日志', null, '成功', '1');
 INSERT INTO `t_sys_login_log` VALUES ('2', '2019-11-20 10:45:10', '127.0.0.1', '登录日志', null, '成功', '1');
+INSERT INTO `t_sys_login_log` VALUES ('3', '2020-10-08 23:03:21', '127.0.0.1', '退出日志', null, '成功', '1');
+INSERT INTO `t_sys_login_log` VALUES ('4', '2020-10-08 23:03:25', '127.0.0.1', '登录日志', null, '成功', '1');
 
 -- ----------------------------
 -- Table structure for `t_sys_menu`
@@ -980,10 +984,21 @@ INSERT INTO `t_sys_menu` VALUES ('2', '1', '2019-07-31 22:04:30', '1', '2019-03-
 INSERT INTO `t_sys_menu` VALUES ('3', '1', '2019-07-31 22:04:30', '1', '2019-06-02 10:09:09', 'operationMgr', 'layout', '0', 'operation', '1', null, '1', '运维管理', '6', '0', '[0],', '1', null, '/optionMgr');
 INSERT INTO `t_sys_menu` VALUES ('4', '1', '2019-07-31 22:04:30', '1', '2019-04-16 18:59:15', 'mgr', 'views/system/user/index', '0', 'user', '1', null, '2', '用户管理', '1', 'system', '[0],[system],', '1', null, '/mgr');
 INSERT INTO `t_sys_menu` VALUES ('5', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'mgrAdd', null, '0', null, '0', null, '3', '添加用户', '1', 'mgr', '[0],[system],[mgr],', '1', null, '/mgr/add');
+INSERT INTO `t_sys_menu` VALUES ('6', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'mgrEdit', null, '0', null, '0', null, '3', '修改用户', '2', 'mgr', '[0],[system],[mgr],', '1', null, '/mgr/edit');
+INSERT INTO `t_sys_menu` VALUES ('7', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'mgrDelete', null, '0', null, '0', '0', '3', '删除用户', '3', 'mgr', '[0],[system],[mgr],', '1', null, '/mgr/delete');
 INSERT INTO `t_sys_menu` VALUES ('8', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'mgrReset', null, '0', null, '0', '0', '3', '重置密码', '4', 'mgr', '[0],[system],[mgr],', '1', null, '/mgr/reset');
+INSERT INTO `t_sys_menu` VALUES ('9', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'mgrFreeze', null, '0', null, '0', '0', '3', '冻结用户', '5', 'mgr', '[0],[system],[mgr],', '1', null, '/mgr/freeze');
+INSERT INTO `t_sys_menu` VALUES ('10', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'mgrUnfreeze', null, '0', null, '0', '0', '3', '解除冻结用户', '6', 'mgr', '[0],[system],[mgr],', '1', null, '/mgr/unfreeze');
+INSERT INTO `t_sys_menu` VALUES ('11', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'mgrSetRole', null, '0', null, '0', '0', '3', '分配角色', '7', 'mgr', '[0],[system],[mgr],', '1', null, '/mgr/setRole');
 INSERT INTO `t_sys_menu` VALUES ('12', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'role', 'views/system/role/index', '0', 'peoples', '1', '0', '2', '角色管理', '2', 'system', '[0],[system],', '1', null, '/role');
 INSERT INTO `t_sys_menu` VALUES ('13', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'roleAdd', null, '0', null, '0', '0', '3', '添加角色', '1', 'role', '[0],[system],[role],', '1', null, '/role/add');
+INSERT INTO `t_sys_menu` VALUES ('14', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'roleEdit', null, '0', null, '0', '0', '3', '修改角色', '2', 'role', '[0],[system],[role],', '1', null, '/role/edit');
+INSERT INTO `t_sys_menu` VALUES ('15', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'roleDelete', null, '0', null, '0', '0', '3', '删除角色', '3', 'role', '[0],[system],[role],', '1', null, '/role/remove');
+INSERT INTO `t_sys_menu` VALUES ('16', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'roleSetAuthority', null, '0', null, '0', '0', '3', '配置权限', '4', 'role', '[0],[system],[role],', '1', null, '/role/setAuthority');
 INSERT INTO `t_sys_menu` VALUES ('17', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'menu', 'views/system/menu/index', '0', 'menu', '1', '0', '2', '菜单管理', '4', 'system', '[0],[system],', '1', null, '/menu');
+INSERT INTO `t_sys_menu` VALUES ('18', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'menuAdd', null, '0', null, '0', '0', '3', '添加菜单', '1', 'menu', '[0],[system],[menu],', '1', null, '/menu/add');
+INSERT INTO `t_sys_menu` VALUES ('19', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'menuEdit', null, '0', null, '0', '0', '3', '修改菜单', '2', 'menu', '[0],[system],[menu],', '1', null, '/menu/edit');
+INSERT INTO `t_sys_menu` VALUES ('20', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'menuDelete', null, '0', null, '0', '0', '3', '删除菜单', '3', 'menu', '[0],[system],[menu],', '1', null, '/menu/remove');
 INSERT INTO `t_sys_menu` VALUES ('21', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'dept', 'views/system/dept/index', '0', 'dept', '1', null, '2', '部门管理', '3', 'system', '[0],[system],', '1', null, '/dept');
 INSERT INTO `t_sys_menu` VALUES ('22', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'dict', 'views/system/dict/index', '0', 'dict', '1', null, '2', '字典管理', '4', 'system', '[0],[system],', '1', null, '/dict');
 INSERT INTO `t_sys_menu` VALUES ('23', '1', '2019-07-31 22:04:30', '1', '2019-07-31 22:04:30', 'deptEdit', null, '0', null, '0', null, '3', '修改部门', '1', 'dept', '[0],[system],[dept],', '1', null, '/dept/update');

@@ -67,7 +67,7 @@ export default {
     },
     methods: {
         init() {
-            this.activeNav = this.$route.query.itemId
+            this.activeNav = parseInt(this.$route.query.itemId)
             let categoryData = store.state.app.category
             if (!categoryData || categoryData.length == 0) {
                 let platform = navigator.platform

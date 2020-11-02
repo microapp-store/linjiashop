@@ -30,6 +30,7 @@ module.exports = {
                 items:[
                     {text:"项目",items:[
                             {text:'linjiashop-flutter(app)',link:'/ecosystem/app'},
+                            {text:'linjiashop-uniapp',link:'/ecosystem/uniapp'},
                             {text:'web-flash',link:'http://enilu.gitee.io/web-flash'},
                             {text:'code-generator',link:'http://enilu.gitee.io/web-flash/ecosystem/code-generator.html'},
                             {text:'database-doc-generator',link:'http://enilu.gitee.io/web-flash/ecosystem/database-doc-generator.html'},
@@ -111,7 +112,8 @@ module.exports = {
             title:'生态系统',
              collapsable: false,
             children: [
-            '/ecosystem/app'
+            '/ecosystem/app',
+            '/ecosystem/uniapp'
             ]
         }]
       }

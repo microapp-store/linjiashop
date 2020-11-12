@@ -121,11 +121,12 @@ public class WeixinService {
             if (wechatInfo != null) {
 
                 ShopUser old = shopUserService.findByWechatOpenId(wechatInfo.getOpenId());
-                if(old.getId().intValue()!=user.getId().intValue()){
+                if(old!=null && old.getId().intValue()!=user.getId().intValue()){
                     throw new ApplicationException(ApplicationExceptionEnum.WECHAT_BIND_ANOTHER);
                 }
                 user.setWechatNickName(StringUtil.getValidChar(wechatInfo.getNickName()));
                 user.setWechatHeadImgUrl(wechatInfo.getHeadUrl());
+                user.setWechatOpenId(wechatInfo.getOpenId());
                 if (StringUtil.equals(user.getNickName(), user.getMobile())) {
                     user.setNickName(user.getWechatNickName());
                 }

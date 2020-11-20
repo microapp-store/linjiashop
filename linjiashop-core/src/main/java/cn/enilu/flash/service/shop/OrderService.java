@@ -11,8 +11,7 @@ import cn.enilu.flash.dao.shop.OrderLogRepository;
 import cn.enilu.flash.dao.shop.OrderRepository;
 import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.service.BaseService;
-import cn.enilu.flash.utils.DateUtil;
-import cn.enilu.flash.utils.RandomUtil;
+import cn.enilu.flash.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,7 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
      * @return
      */
     public String getOrderSn() {
-        return DateUtil.getAllTime() + RandomUtil.getRandomNumber(6);
+        return StringUtil.getNewOrderNo();
     }
 
     public void save(Order order, List<OrderItem> itemList) {

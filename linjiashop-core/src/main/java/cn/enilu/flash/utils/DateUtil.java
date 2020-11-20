@@ -115,6 +115,9 @@ public class DateUtil {
 	public static String getAllTime() {
 		return formatDate(new Date(), "yyyyMMddHHmmss");
 	}
+	public static String getAllTime2() {
+		return formatDate(new Date(), "yyyyMMddHHmmssSSS");
+	}
 
 	/**
 	 * 获取YYYY-MM-DD HH:mm:ss格式

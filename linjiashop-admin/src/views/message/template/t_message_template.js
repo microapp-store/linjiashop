@@ -1,7 +1,9 @@
 import { remove, getList, save } from '@/api/message/template'
 import { queryAll } from '@/api/message/sender'
+import permission from '@/directive/permission/index.js'
 
 export default {
+  directives: { permission },
   data() {
     return {
       formVisible: false,
@@ -13,13 +15,16 @@ export default {
         content:'',
         cond:'',
         idMessageSender:'',
+        remoteTplCode:'',
         id: ''
       },
       sendList:[],
       listQuery: {
         page: 1,
         limit: 20,
-        id: undefined
+        id: '',
+        idMessageSender: '',
+        title: ''
       },
       total: 0,
       list: null,
@@ -35,18 +40,6 @@ export default {
         deleted: 'danger'
       }
       return statusMap[status]
-    }
-  },
-  computed: {
-
-    //表单验证
-    rules() {
-      return {
-        // cfgName: [
-        //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
-        //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
-        // ]
-      }
     }
   },
   created() {
@@ -73,6 +66,8 @@ export default {
     },
     reset() {
       this.listQuery.id = ''
+      this.listQuery.idMessageSender = ''
+      this.listQuery.title = ''
       this.listQuery.page = 1
       this.fetchData()
     },
@@ -109,6 +104,7 @@ export default {
         content:'',
         cond:'',
         idMessageSender:'',
+        remoteTplCode:'',
         id: ''
       }
     },
@@ -126,6 +122,7 @@ export default {
       title:this.form.title,
       content:this.form.content,
       cond:this.form.cond,
+      remoteTplCode:this.form.remoteTplCode,
       idMessageSender:this.form.idMessageSender,
             id: this.form.id
           }).then(response => {
@@ -151,6 +148,10 @@ export default {
       })
       return false
     },
+    editItem(record){
+      this.selRow= Object.assign({},record);
+      this.edit()
+    },
     edit() {
       if (this.checkSel()) {
         this.isAdd = false
@@ -158,6 +159,10 @@ export default {
         this.formTitle = '编辑消息模板'
         this.formVisible = true
       }
+    },
+    removeItem(record){
+      this.selRow = record
+      this.remove()
     },
     remove() {
       if (this.checkSel()) {

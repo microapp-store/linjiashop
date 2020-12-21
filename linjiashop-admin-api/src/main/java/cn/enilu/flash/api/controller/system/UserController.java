@@ -46,7 +46,8 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @RequiresPermissions(value = {Permission.USER})
     public Object list(@RequestParam(required = false) String account,
-                       @RequestParam(required = false) String name){
+                       @RequestParam(required = false) String name,
+                       @RequestParam(required = false) Integer sex){
         Page page = new PageFactory().defaultPage();
         if(StringUtil.isNotEmpty(name)){
             page.addFilter(SearchFilter.build("name", SearchFilter.Operator.LIKE, name));
@@ -54,7 +55,8 @@ public class UserController extends BaseController {
         if(StringUtil.isNotEmpty(account)){
             page.addFilter(SearchFilter.build("account", SearchFilter.Operator.LIKE, account));
         }
-        page.addFilter(SearchFilter.build("status",SearchFilter.Operator.GT,0));
+        page.addFilter( "status",SearchFilter.Operator.GT,0);
+        page.addFilter("sex", sex);
         page = managerService.queryPage(page);
         List list = (List) new UserWarpper(BeanUtil.objectsToMaps(page.getRecords())).warp();
         page.setRecords(list);

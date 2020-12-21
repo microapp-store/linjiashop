@@ -63,7 +63,8 @@ export default {
         page: 1,
         limit: 20,
         account: undefined,
-        name: undefined
+        name: undefined,
+        sex:undefined
       },
       total: 0,
       list: null,
@@ -107,6 +108,7 @@ export default {
       this.listQuery.account = ''
       this.listQuery.name = ''
       this.listQuery.page = 1
+      this.listQuery.sex=''
       this.fetchData()
     },
     handleFilter() {

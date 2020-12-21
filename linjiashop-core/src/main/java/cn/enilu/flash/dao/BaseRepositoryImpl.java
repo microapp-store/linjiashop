@@ -41,7 +41,14 @@ public class BaseRepositoryImpl<T, ID extends Serializable>
         List list = query.getResultList();
         return list;
     }
-
+    @Override
+    public List<Map> queryMapBySql(String sql) {
+        Query query = entityManager.createNativeQuery(sql);
+        query.unwrap(NativeQueryImpl.class)
+                .setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+        List list = query.getResultList();
+        return list;
+    }
     @Override
     public List<?> queryBySql(String sql, Class<?> klass) {
         List<Map> list = queryBySql(sql);
@@ -57,6 +64,23 @@ public class BaseRepositoryImpl<T, ID extends Serializable>
             }
         }
         return result;
+    }
+    @Override
+    public List<?> queryObjBySql(String sql, Class<?> klass) {
+        List<Map> list = queryMapBySql(sql);
+        if(list.isEmpty()){
+            return Lists.newArrayList();
+        }
+        List result = Lists.newArrayList();
+        for(Map map:list){
+            try {
+                Object bean = Mapl.maplistToObj(map, klass);
+                result.add(bean);
+            } catch (Exception e) {
+            }
+        }
+        return result ;
+
     }
     @Override
     public T getOne(ID id){

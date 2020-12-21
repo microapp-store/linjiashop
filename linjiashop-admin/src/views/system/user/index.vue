@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="block">
-      <el-row  :gutter="20">
+      <el-row :gutter="20">
         <el-col :span="6">
           <el-input v-model="listQuery.account" size="mini" placeholder="请输入帐号"></el-input>
         </el-col>
@@ -9,21 +9,31 @@
           <el-input v-model="listQuery.name" size="mini" placeholder="请输入姓名"></el-input>
         </el-col>
         <el-col :span="6">
-          <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
-          <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
+          <dict-select v-model="listQuery.sex" dict-name="性别" placeholder="请选择性别"/>
+        </el-col>
+        <el-col :span="6">
+          <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{
+              $t('button.search')
+            }}
+          </el-button>
+          <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{
+              $t('button.reset')
+            }}
+          </el-button>
         </el-col>
       </el-row>
       <br>
       <el-row>
         <el-col :span="24">
           <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add" v-permission="['/mgr/add']">
-            {{$t('button.add') }}
+            {{ $t('button.add') }}
           </el-button>
           <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit" v-permission="['/mgr/edit']">
-            {{$t('button.edit') }}
+            {{ $t('button.edit') }}
           </el-button>
-          <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove" v-permission="['/mgr/delete']">
-            {{$t('button.delete') }}
+          <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove"
+                     v-permission="['/mgr/delete']">
+            {{ $t('button.delete') }}
           </el-button>
           <el-button type="info" size="mini" icon="el-icon-role" @click.native="openRole">角色分配</el-button>
         </el-col>
@@ -32,51 +42,51 @@
 
 
     <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row
-    @current-change="handleCurrentChange">
+              @current-change="handleCurrentChange">
 
       <el-table-column label="账号">
         <template slot-scope="scope">
-          {{scope.row.account}}
+          {{ scope.row.account }}
         </template>
       </el-table-column>
       <el-table-column label="姓名">
         <template slot-scope="scope">
-          {{scope.row.name}}
+          {{ scope.row.name }}
         </template>
       </el-table-column>
       <el-table-column label="性别">
         <template slot-scope="scope">
-          {{scope.row.sexName}}
+          {{ scope.row.sexName }}
         </template>
       </el-table-column>
       <el-table-column label="角色">
         <template slot-scope="scope">
-          {{scope.row.roleName}}
+          {{ scope.row.roleName }}
         </template>
       </el-table-column>
       <el-table-column label="部门">
         <template slot-scope="scope">
-          {{scope.row.deptName}}
+          {{ scope.row.deptName }}
         </template>
       </el-table-column>
       <el-table-column label="邮箱">
         <template slot-scope="scope">
-          {{scope.row.email}}
+          {{ scope.row.email }}
         </template>
       </el-table-column>
       <el-table-column label="电话">
         <template slot-scope="scope">
-          {{scope.row.phone}}
+          {{ scope.row.phone }}
         </template>
       </el-table-column>
       <el-table-column label="创建时间">
         <template slot-scope="scope">
-          {{scope.row.createtime}}
+          {{ scope.row.createtime }}
         </template>
       </el-table-column>
       <el-table-column label="状态">
         <template slot-scope="scope">
-          {{scope.row.statusName}}
+          {{ scope.row.statusName }}
         </template>
       </el-table-column>
 
@@ -109,7 +119,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="姓名" prop="name">
-              <el-input v-model="form.name"  minlength=1></el-input>
+              <el-input v-model="form.name" minlength=1></el-input>
             </el-form-item>
           </el-col>
 
@@ -128,12 +138,12 @@
           </el-col>
           <el-col :span="12" v-show="isAdd">
             <el-form-item label="密码" prop="password">
-              <el-input v-model="form.password"  type="password"></el-input>
+              <el-input v-model="form.password" type="password"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12" v-show="isAdd">
             <el-form-item label="确认密码" prop="rePassword">
-              <el-input v-model="form.rePassword"  type="password"></el-input>
+              <el-input v-model="form.rePassword" type="password"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -142,7 +152,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="所属部门" >
+            <el-form-item label="所属部门">
               <el-input
                 placeholder="请选择所属部门"
                 v-model="form.deptName"
@@ -167,9 +177,9 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="出生日期">
-                <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday" style="width: 100%;">
+              <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday" style="width: 100%;">
 
-                </el-date-picker>
+              </el-date-picker>
             </el-form-item>
           </el-col>
         </el-row>
@@ -208,6 +218,6 @@
 
 <script src="./user.js"></script>
 <style rel="stylesheet/scss" lang="scss" scoped>
-  @import "src/styles/common.scss";
+@import "src/styles/common.scss";
 </style>
 

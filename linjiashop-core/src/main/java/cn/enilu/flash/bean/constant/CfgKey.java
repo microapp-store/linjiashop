@@ -14,6 +14,11 @@ public interface CfgKey {
     String API_TENCENT_SMS_APPKEY = "api.tencent.sms.appkey";
     String API_TENCENT_SMS_SIGN = "api.tencent.sms.sign";
 
+    String API_ALIYUN_SMS_ACCESS_KEY_ID="api.aliyun.sms.access.key.id";
+    String API_ALIYUN_SMS_ACCESS_SECRET="api.aliyun.sms.access.secret";
+    String API_ALIYUN_SMS_REGION_ID="api.aliyun.sms.region.id";
+    String API_ALIYUN_SMS_SIGN_NAME="api.aliyun.sms.sign.name";
+
     String API_KDNIAO_URL = "api.kdniao.url";
     String API_KDNIAO_USERID = "api.kdniao.userid";
     String API_KDNIAO_APIKEY = "api.kdniao.apikey";
@@ -24,6 +29,7 @@ public interface CfgKey {
     String WX_JS_API_TICKET_URL = "weixin.js.api.ticket.url";
     String WX_ACCESS_TOKEN = "weixin.access.token";
     String WX_JS_API_TICKET = "weixin.js.api.ticket";
+
 
 
 }

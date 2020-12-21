@@ -1,4 +1,11 @@
 # Change log
+## Latest
+### Issues
+- 去掉Menu中无用的status字段
+- 完善菜单管理逻辑，增加菜单图标选择，菜单类别等逻辑
+- 引入vue-select组件代替el-input+select的下拉选择用法
+- 添加DictSelct组件
+### Fixes
 
 ## v0.6
 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.6) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.6)

@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -51,12 +52,18 @@ public class StringUtil {
         }
         return true;
     }
-    /**
-     * 是否包含空字符串
-     *
-     * @param strs 字符串列表
-     * @return 是否包含空字符串
-     */
+
+    public static boolean isMobile(String mobiles) {
+        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
+        Matcher m = p.matcher(mobiles);
+        return m.matches();
+    }
+        /**
+         * 是否包含空字符串
+         *
+         * @param strs 字符串列表
+         * @return 是否包含空字符串
+         */
     public static boolean hasBlank(String... strs) {
         if (CollectionKit.isEmpty(strs)) {
             return true;

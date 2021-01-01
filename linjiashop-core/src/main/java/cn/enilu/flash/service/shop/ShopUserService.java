@@ -11,10 +11,7 @@ import cn.enilu.flash.dao.shop.ShopUserRepository;
 import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.service.BaseService;
 import cn.enilu.flash.service.message.MessageService;
-import cn.enilu.flash.utils.HttpUtil;
-import cn.enilu.flash.utils.MD5;
-import cn.enilu.flash.utils.RandomUtil;
-import cn.enilu.flash.utils.StringUtil;
+import cn.enilu.flash.utils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +57,7 @@ public class ShopUserService extends BaseService<ShopUser,Long,ShopUserRepositor
         cacheDao.hset(CacheDao.HOUR,key,smsCode);
         cacheDao.hset(CacheDao.DAY,timesKey,sendTimes++);
         logger.info("短信验证码:{}",smsCode);
-        messageService.sendSms(MessageTemplateEnum.REGISTER_CODE.getCode(),mobile,smsCode);
+        messageService.sendSms(MessageTemplateEnum.REGISTER_CODE.getCode(),mobile, Maps.newLinkedHashMap("code",smsCode));
         return true;
     }
 

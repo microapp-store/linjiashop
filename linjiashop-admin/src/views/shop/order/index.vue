@@ -215,8 +215,8 @@
                 <el-timeline-item
                   v-for="(activity, index) in shippingInfo.form.traces"
                   :key="index"
-                  :timestamp="activity.acceptTime">
-                  {{activity.acceptStation}}
+                  :timestamp="activity.AcceptTime">
+                  {{activity.AcceptStation}}
                 </el-timeline-item>
               </el-timeline>
             </el-form-item>

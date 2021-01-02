@@ -1,9 +1,11 @@
-package cn.enilu.flash.service.api;
+package cn.enilu.flash.service.api.express.kdniao;
 
 import cn.enilu.flash.bean.constant.CfgKey;
+import cn.enilu.flash.bean.entity.shop.ExpressInfo;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.cache.CacheDao;
+import cn.enilu.flash.service.api.express.ExpressApi;
 import cn.enilu.flash.service.system.CfgService;
 import cn.enilu.flash.utils.Base64Util;
 import cn.enilu.flash.utils.JsonUtil;
@@ -26,34 +28,25 @@ import java.util.Map;
  * @date ：Created in 2020/5/31 10:27
  */
 @Service
-public class KdniaoService {
+public class KdniaoService implements ExpressApi {
     private Logger logger = LoggerFactory.getLogger(KdniaoService.class);
     @Autowired
     private CfgService cfgService;
     @Autowired
     private CacheDao cacheDao;
 
-    /**
-     * 查询快递实时信息
-     *
-     * @param orderCode   快递单号
-     * @param shipperCode 快递公司编号
-     * @return
-     */
-    public KdniaoResponse realTimeQuery(String orderCode, String shipperCode) {
+    @Override
+    public ExpressInfo realTimeQuery(String orderNo, String company) {
 
-        KdniaoResponse kdniaoResponse = cacheDao.hget(CacheDao.HOUR, orderCode, KdniaoResponse.class);
-        if (kdniaoResponse != null) {
-            return kdniaoResponse;
-        }
+
         String url = cfgService.getCfgValue(CfgKey.API_KDNIAO_URL);
         String userId = cfgService.getCfgValue(CfgKey.API_KDNIAO_USERID);
         String apiKey = cfgService.getCfgValue(CfgKey.API_KDNIAO_APIKEY);
         logger.info("url:{}\nuserId:{}\napiKey:{}", url, userId, apiKey);
         Map appParams = Maps.newHashMap(
                 "OrderCode", "",
-                "ShipperCode", shipperCode,
-                "LogisticCode", orderCode
+                "ShipperCode", company,
+                "LogisticCode", orderNo
         );
         String jsonStr = JsonUtil.toJson(appParams);
         String datasign = null;
@@ -67,11 +60,29 @@ public class KdniaoService {
                     "DataType", "2"
             );
             Response response = Http.post2(url, params, 6000);
+            logger.info(response.getContent());
             if (response.isOK()) {
                 String content = response.getContent();
-                KdniaoResponse obj = JsonUtil.fromJson(KdniaoResponse.class, content);
-                cacheDao.hset(CacheDao.HOUR, orderCode, obj);
-                return obj;
+                KdniaoResponse kdniaoResponse = JsonUtil.fromJson(KdniaoResponse.class, content);
+                ExpressInfo expressInfo = new ExpressInfo();
+                expressInfo.setInfo(JsonUtil.toJson(kdniaoResponse.getTraces()));
+                int state = Integer.valueOf(kdniaoResponse.getState());
+                switch (state){
+                    case 2:
+                        //-在途中,
+                        expressInfo.setState(ExpressInfo.STATE_ING);
+                        break;
+                    case 3:
+                        //-签收,
+                        expressInfo.setState(ExpressInfo.STATE_FINISH);
+                        break;
+                    case 4:
+                        //-问题件
+                        expressInfo.setState(ExpressInfo.STATE_ERROR);
+                        break;
+                }
+
+                return expressInfo;
             }
         } catch (Exception e) {
             throw new ApplicationException(ApplicationExceptionEnum.SERVER_ERROR);

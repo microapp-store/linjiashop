@@ -219,6 +219,12 @@ INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_
 INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (12, 1, '2020-5-31 21:48:12', 1, '2020-5-31 21:48:12', '快递鸟接口地址', 'api.kdniao.url', 'http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx');
 INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (13, 1, '2020-5-31 21:48:12', 1, '2020-5-31 21:48:12', '快递鸟用户id', 'api.kdniao.userid', '快递鸟userid');
 INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (14, 1, '2020-5-31 21:48:12', 1, '2020-5-31 21:48:12', '快递鸟apikey', 'api.kdniao.apikey', NULL);
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (15, 1, '2021-1-2 23:24:43', 1, '2021-1-2 23:24:43', '阿里云短信accessKeyId', 'api.aliyun.sms.access.key.id', '');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (16, 1, '2021-1-2 23:24:43', 1, '2021-1-2 23:24:43', '阿里云短信accessSecret', 'api.aliyun.sms.access.secret', '');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (17, 1, '2021-1-2 23:24:43', 1, '2021-1-2 23:24:43', '阿里云短信regionId', 'api.aliyun.sms.region.id', 'cn-hangzhou');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (18, 1, '2021-1-2 23:24:43', 1, '2021-1-2 23:24:43', '阿里云短信签名', 'api.aliyun.sms.sign.name', 'ABC商城');
+INSERT INTO `t_sys_cfg` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `cfg_desc`, `cfg_name`, `cfg_value`) VALUES (19, 1, '2021-1-2 23:24:43', 1, '2021-1-2 23:24:43', '快递查询接口提供方', 'api.express.info.query.provider', 'kdniaoService');
+
 -- ----------------------------
 -- Records of t_sys_dept.sql
 -- ----------------------------

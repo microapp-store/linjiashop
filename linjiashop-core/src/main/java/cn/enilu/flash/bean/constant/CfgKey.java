@@ -31,5 +31,5 @@ public interface CfgKey {
     String WX_JS_API_TICKET = "weixin.js.api.ticket";
 
 
-
+    String API_EXPRESS_INFO_QUERY_PROVIDER ="api.express.info.query.provider" ;
 }

@@ -2,17 +2,14 @@ package cn.enilu.flash.mobile.controller;
 
 import cn.enilu.flash.bean.constant.CfgKey;
 import cn.enilu.flash.bean.constant.factory.PageFactory;
-import cn.enilu.flash.bean.entity.shop.Address;
-import cn.enilu.flash.bean.entity.shop.Cart;
-import cn.enilu.flash.bean.entity.shop.Order;
-import cn.enilu.flash.bean.entity.shop.OrderItem;
+import cn.enilu.flash.bean.entity.shop.*;
 import cn.enilu.flash.bean.enumeration.shop.OrderEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
-import cn.enilu.flash.service.api.KdniaoResponse;
-import cn.enilu.flash.service.api.KdniaoService;
+import cn.enilu.flash.service.api.express.kdniao.KdniaoResponse;
+import cn.enilu.flash.service.api.express.kdniao.KdniaoService;
 import cn.enilu.flash.service.shop.AddressService;
 import cn.enilu.flash.service.shop.CartService;
 import cn.enilu.flash.service.shop.OrderService;
@@ -150,12 +147,7 @@ public class OrderController extends BaseController {
     @RequestMapping(value = "getExpressInfo/{orderSn}", method = RequestMethod.GET)
     public Object getExpressInfo(@PathVariable(value = "orderSn") String orderSn) {
         Order order = orderService.getByOrderSn(orderSn);
-        String apiKdniaoUserid = cfgService.getCfgValue(CfgKey.API_KDNIAO_USERID);
-        if (StringUtil.isEmpty(apiKdniaoUserid)) {
-            //该商城暂无配置物流查询服务
-            throw new ApplicationException(ApplicationExceptionEnum.SERVER_ERROR);
-        }
-        KdniaoResponse response = kdniaoService.realTimeQuery(order.getShippingSn(), order.getExpress().getCode());
+        ExpressInfo response = orderService.getExpressInfo(order.getOrderSn());
         Map data = Maps.newHashMap(
                 "order", order,
                 "expressInfo", response

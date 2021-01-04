@@ -2,10 +2,17 @@
 ## Latest
 ### Issues
 - 去掉Menu中无用的status字段
-- 完善菜单管理逻辑，增加菜单图标选择，菜单类别等逻辑
+- 重构菜单功能，增加菜单图标选择，菜单类别等逻辑
 - 引入vue-select组件代替el-input+select的下拉选择用法
 - 添加DictSelct组件
+- 接入阿里云短信服务
+- 重构消息管理模块，将远程模板编号从消息发送其迁移到消息模板配置中
+- 优化订单号生成规则
+- 去掉BeanUtil中对com.sun包的引用
+- 完善物流跟踪服务，可通过配置切换具体的物流服务商(系统默认对接的快递鸟)
+
 ### Fixes
+- Fix 文件下载bug
 
 ## v0.6
 [gitee](https://gitee.com/microapp/linjiashop/releases/v0.6) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.6)

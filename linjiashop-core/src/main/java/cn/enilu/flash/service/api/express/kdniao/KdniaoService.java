@@ -36,7 +36,7 @@ public class KdniaoService implements ExpressApi {
     private CacheDao cacheDao;
 
     @Override
-    public ExpressInfo realTimeQuery(String orderNo, String company) {
+    public ExpressInfo realTimeQuery(String orderNo, String companyCode) {
 
 
         String url = cfgService.getCfgValue(CfgKey.API_KDNIAO_URL);
@@ -45,7 +45,7 @@ public class KdniaoService implements ExpressApi {
         logger.info("url:{}\nuserId:{}\napiKey:{}", url, userId, apiKey);
         Map appParams = Maps.newHashMap(
                 "OrderCode", "",
-                "ShipperCode", company,
+                "ShipperCode", companyCode,
                 "LogisticCode", orderNo
         );
         String jsonStr = JsonUtil.toJson(appParams);

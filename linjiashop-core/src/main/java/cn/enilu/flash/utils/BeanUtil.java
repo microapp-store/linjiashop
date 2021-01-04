@@ -2,11 +2,9 @@ package cn.enilu.flash.utils;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.springframework.beans.BeanUtils;
 import org.springframework.cglib.beans.BeanMap;
 
 import javax.persistence.Column;
-import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

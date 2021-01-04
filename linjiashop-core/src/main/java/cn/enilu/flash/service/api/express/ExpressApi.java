@@ -1,7 +1,6 @@
 package cn.enilu.flash.service.api.express;
 
 import cn.enilu.flash.bean.entity.shop.ExpressInfo;
-import cn.enilu.flash.service.api.express.kdniao.KdniaoResponse;
 
 /**
  * @author ：enilu
@@ -10,9 +9,9 @@ import cn.enilu.flash.service.api.express.kdniao.KdniaoResponse;
 public interface ExpressApi {
     /**
      * 查询快递实时信息
-     * @param orderNo
-     * @param company
+     * @param orderNo 快递单号
+     * @param companyCode 快递公司编码
      * @return
      */
-    ExpressInfo   realTimeQuery(String orderNo, String company) ;
+    ExpressInfo   realTimeQuery(String orderNo, String companyCode) ;
 }

@@ -54,4 +54,21 @@ public class ExpressInfo extends BaseEntity {
         }
         return Lists.newArrayList();
     }
+
+    public String getStateStr(){
+        String result = "";
+        switch (state){
+            case 0:
+               result = "在途中";
+               break;
+            case 1:
+                result = "已签收";
+                break;
+            case -1:
+                result = "问题件";
+                break;
+
+        }
+        return result;
+    }
 }

@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.URLEncoder;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -65,7 +67,9 @@ public class KdniaoService implements ExpressApi {
                 String content = response.getContent();
                 KdniaoResponse kdniaoResponse = JsonUtil.fromJson(KdniaoResponse.class, content);
                 ExpressInfo expressInfo = new ExpressInfo();
-                expressInfo.setInfo(JsonUtil.toJson(kdniaoResponse.getTraces()));
+                List<Trace> list = kdniaoResponse.getTraces();
+                Collections.reverse(list);
+                expressInfo.setInfo(JsonUtil.toJson(list));
                 int state = Integer.valueOf(kdniaoResponse.getState());
                 switch (state){
                     case 2:

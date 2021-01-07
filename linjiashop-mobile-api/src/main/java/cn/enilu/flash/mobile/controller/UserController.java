@@ -2,6 +2,7 @@ package cn.enilu.flash.mobile.controller;
 
 import cn.enilu.flash.bean.entity.shop.ShopUser;
 import cn.enilu.flash.bean.entity.system.FileInfo;
+import cn.enilu.flash.bean.vo.JwtUser;
 import cn.enilu.flash.bean.vo.UserInfo;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.shop.WechatInfo;
@@ -11,6 +12,7 @@ import cn.enilu.flash.service.api.WeixinService;
 import cn.enilu.flash.service.shop.ShopUserService;
 import cn.enilu.flash.service.system.FileService;
 import cn.enilu.flash.utils.MD5;
+import cn.enilu.flash.utils.RandomUtil;
 import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.web.controller.BaseController;
 import org.springframework.beans.BeanUtils;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -83,6 +87,19 @@ public class UserController extends BaseController {
         user.setPassword(MD5.md5(password,user.getSalt()));
         shopUserService.update(user);
         return Rets.success();
+    }
+    @RequestMapping(value = "/updatePassword_v2/{password}/{smsCode}",method = RequestMethod.POST)
+    public Object updatePassword(@PathVariable("password") String password,
+                                 @PathVariable("smsCode") String smsCode){
+        ShopUser user = shopUserService.getCurrentUser();
+        Boolean validateRet = shopUserService.validateSmsCode(user.getMobile(), smsCode);
+        if (validateRet) {
+            user.setPassword(MD5.md5(password,user.getSalt()));
+            shopUserService.update(user);
+            return Rets.success();
+        }
+        return Rets.failure("短信验证码错误");
+
     }
     @RequestMapping(value = "sendSmsCode",method = RequestMethod.POST)
     public Object sendSmsCode(@RequestParam String mobile){

@@ -152,8 +152,6 @@ _商品素材取自小米商城_
 - 关注公众号：<big>嗨客帝国</big>，点击对应的项目菜单进群交流。
 
 ![公众号二维码](doc/guide/img/haike.jpg)
-- 论坛提问：
-[http://bbs.enilu.cn](http://bbs.enilu.cn)
 ## 在线文档
 - 项目文档：[http://microapp.gitee.io/linjiashop](http://microapp.gitee.io/linjiashop/)
 - 该项目克隆并扩展自[web-flash](https://github.com/enilu/web-flash),所以开发的时候多看看web-flash的[在线文档](http://enilu.gitee.io/web-flash)

@@ -115,7 +115,7 @@ _商品素材取自小米商城_
 - 创建数据库：linjiashop
      ```sql
     CREATE DATABASE IF NOT EXISTS linjiashop DEFAULT CHARSET utf8 COLLATE utf8_general_ci; 
-    CREATE USER 'linjiashop'@'%' IDENTIFIED BY 'linjiashop191028';
+    CREATE USER 'linjiashop'@'%' IDENTIFIED BY 'linjiaSHOP@191028';
     GRANT ALL privileges ON linjiashop.* TO 'linjiashop'@'%';
     flush privileges;
     ```     

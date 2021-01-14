@@ -4,6 +4,8 @@ import cn.enilu.flash.bean.entity.shop.ShopUser;
 import cn.enilu.flash.bean.vo.JwtUser;
 import cn.enilu.flash.bean.vo.UserInfo;
 import cn.enilu.flash.bean.vo.front.Rets;
+import cn.enilu.flash.bean.vo.shop.WechatInfo;
+import cn.enilu.flash.cache.CacheDao;
 import cn.enilu.flash.security.UserService;
 import cn.enilu.flash.service.ApplicationProperties;
 import cn.enilu.flash.service.shop.ShopUserService;
@@ -35,6 +37,8 @@ public class LoginController extends BaseController {
     private ShopUserService shopUserService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CacheDao cacheDao;
     @Autowired
     private ApplicationProperties applicationProperties;
     private Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -88,6 +92,10 @@ public class LoginController extends BaseController {
                 shopUserService.update(user);
                 UserInfo userInfo = new UserInfo();
                 BeanUtils.copyProperties(user, userInfo);
+                WechatInfo wechatInfo = cacheDao.hget(CacheDao.SESSION,"WECHAT_INFO"+user.getId(),WechatInfo.class);
+                if(wechatInfo!=null){
+                    userInfo.setRefreshWechatInfo(false);
+                }
                 result.put("user", userInfo);
                 logger.info("token:{}", token);
                 result.put("token", token);
@@ -131,6 +139,10 @@ public class LoginController extends BaseController {
             shopUserService.update(user);
             UserInfo userInfo = new UserInfo();
             BeanUtils.copyProperties(user, userInfo);
+            WechatInfo wechatInfo = cacheDao.hget(CacheDao.SESSION,"WECHAT_INFO"+user.getId(),WechatInfo.class);
+            if(wechatInfo!=null){
+                userInfo.setRefreshWechatInfo(false);
+            }
             logger.info("token:{}", token);
             result.put("token", token);
             result.put("user", userInfo);

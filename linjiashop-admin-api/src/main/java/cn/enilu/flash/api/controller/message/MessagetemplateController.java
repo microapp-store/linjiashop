@@ -7,6 +7,7 @@ import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
+import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.message.MessagetemplateService;
 import cn.enilu.flash.utils.factory.Page;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -38,6 +39,10 @@ public class MessagetemplateController {
     @RequiresPermissions(value = {Permission.MSG_TPL_EDIT})
     public Object save(@ModelAttribute @Valid MessageTemplate messageTemplate) {
         if(messageTemplate.getId()==null){
+            MessageTemplate old = messagetemplateService.get(SearchFilter.build("code",messageTemplate.getCode()));
+            if(old!=null){
+                return Rets.failure("模板编码已被使用");
+            }
             messagetemplateService.insert(messageTemplate);
         }else {
             messagetemplateService.update(messageTemplate);

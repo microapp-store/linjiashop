@@ -5,7 +5,6 @@ import com.google.common.collect.Maps;
 import org.springframework.cglib.beans.BeanMap;
 
 import javax.persistence.Column;
-import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -150,9 +149,12 @@ public class BeanUtil {
                 if ("serialVersionUID".equals(field.getName())) {
                     continue;
                 }
-                PropertyDescriptor pd = new PropertyDescriptor(field.getName(), clazz);
-                Method getMethod = pd.getReadMethod();
+//                PropertyDescriptor pd = new PropertyDescriptor(field.getName(), clazz);
+                Method getMethod = getReadMethod(clazz,field.getName());
                 Object o1 = "null";
+                if(getMethod==null){
+                    continue;
+                }
                 if(StringUtil.isNotNullOrEmpty(pojo2.get("id"))) {
                     o1 = getMethod.invoke(pojo1);
                 }
@@ -195,5 +197,21 @@ public class BeanUtil {
         }
         return sb.toString();
 
+    }
+    public static  Method getReadMethod(Class clazz,String fieldName){
+        String camelFieldName =  StringUtil.firstCharToUpperCase(fieldName);
+        Method method  = null;
+        try {
+             method = clazz.getMethod("get"+camelFieldName);
+        } catch (NoSuchMethodException e) {
+        }
+        if(method==null){
+            try {
+                method = clazz.getMethod("is"+camelFieldName);
+            } catch (NoSuchMethodException e) {
+
+            }
+        }
+        return method;
     }
 }

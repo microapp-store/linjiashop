@@ -9,7 +9,6 @@ export default {
       form: {
         name:'',
         className:'',
-        tplCode:'',
         id: ''
       },
       listQuery: {
@@ -31,18 +30,6 @@ export default {
         deleted: 'danger'
       }
       return statusMap[status]
-    }
-  },
-  computed: {
-
-    //表单验证
-    rules() {
-      return {
-        // cfgName: [
-        //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
-        //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
-        // ]
-      }
     }
   },
   created() {
@@ -116,9 +103,6 @@ export default {
           save({
             name:this.form.name,
             className:this.form.className,
-            tplCode:this.form.tplCode,
-            createBy:this.form.createBy,
-            createTime:this.form.createTime,
             id: this.form.id
           }).then(response => {
             this.$message({

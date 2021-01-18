@@ -207,8 +207,8 @@ export default {
           shipperCode = express.code
         }
       }
-      orderApi.getShippingInfo(data.shippingSn,shipperCode).then( response => {
-        this.shippingInfo.form['traces'] = response.data.traces
+      orderApi.getExpressInfo(data.orderSn,shipperCode).then( response => {
+        this.shippingInfo.form['traces'] = response.data.infoList
         this.shippingInfo.show = true
       })
 

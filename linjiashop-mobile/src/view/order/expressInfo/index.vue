@@ -7,10 +7,10 @@
         />
         <div class="expressInfo">
             <van-steps direction="vertical" :active="0" class="traces">
-                <van-step v-for="(item, index) in expressInfo.traces"
+                <van-step v-for="(item, index) in expressInfo.infoList"
                           :key="index">
-                    <h3 class="station">{{item.acceptStation}}</h3>
-                    <p class="time">{{item.acceptTime}}</p>
+                    <h3 class="station">{{item.AcceptStation}}</h3>
+                    <p class="time">{{item.AcceptTime}}</p>
                 </van-step>
             </van-steps>
             <br><br><br>

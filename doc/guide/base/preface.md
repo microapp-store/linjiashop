@@ -114,7 +114,7 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 - 创建数据库：linjiashop
      ```sql
     CREATE DATABASE IF NOT EXISTS linjiashop DEFAULT CHARSET utf8 COLLATE utf8_general_ci; 
-    CREATE USER 'linjiashop'@'%' IDENTIFIED BY 'linjiashop191028';
+    CREATE USER 'linjiashop'@'%' IDENTIFIED BY 'linjiaSHOP@191028';
     GRANT ALL privileges ON linjiashop.* TO 'linjiashop'@'%';
     flush privileges;
     ```     
@@ -149,6 +149,6 @@ linjiashop包含了后台管理功能和手机端商城业务功能
  
  
 ## 技术交流
-- QQ群：254059156
+- QQ群：254059156(已满) 909904351(2群)
 - [商业支持](../other/xiaomiquan.html)
 - 微信：myenilu,添加请备注：邻家小铺

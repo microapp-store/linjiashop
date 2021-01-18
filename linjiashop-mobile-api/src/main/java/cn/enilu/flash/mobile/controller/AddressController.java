@@ -4,9 +4,7 @@ import cn.enilu.flash.bean.entity.shop.Address;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.AddressService;
-import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.Lists;
-import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -83,7 +81,7 @@ public class AddressController extends BaseController {
             addressService.insert(addressInfo);
         }
 
-        return Rets.success();
+        return Rets.success(addressInfo);
     }
 
 }

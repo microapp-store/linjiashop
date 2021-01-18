@@ -64,9 +64,9 @@ export  default {
       }
     })
   },
-  getShippingInfo:function(shippingSn,shipperCode){
+  getExpressInfo:function(orderSn){
     return request({
-      url:'/shop/order/getShippingInfo/'+shippingSn+'/'+shipperCode,
+      url:'/shop/order/getExpressInfo/'+orderSn,
         method:'get'
     })
   }

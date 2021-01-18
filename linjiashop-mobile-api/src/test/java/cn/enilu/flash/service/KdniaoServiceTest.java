@@ -1,7 +1,7 @@
 package cn.enilu.flash.service;
 
 import cn.enilu.flash.BaseApplicationStartTest;
-import cn.enilu.flash.service.api.KdniaoService;
+import cn.enilu.flash.service.api.express.kdniao.KdniaoService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,7 +14,8 @@ public class KdniaoServiceTest extends BaseApplicationStartTest {
     private KdniaoService kdniaoService;
     @Test
     public void realTimeQuery() {
-        kdniaoService.realTimeQuery("YT4544755661648","YTO");
+//        YT4544755661648
+        kdniaoService.realTimeQuery("YT9420173297830","YTO");
 
     }
 }

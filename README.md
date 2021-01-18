@@ -115,7 +115,7 @@ _商品素材取自小米商城_
 - 创建数据库：linjiashop
      ```sql
     CREATE DATABASE IF NOT EXISTS linjiashop DEFAULT CHARSET utf8 COLLATE utf8_general_ci; 
-    CREATE USER 'linjiashop'@'%' IDENTIFIED BY 'linjiashop191028';
+    CREATE USER 'linjiashop'@'%' IDENTIFIED BY 'linjiaSHOP@191028';
     GRANT ALL privileges ON linjiashop.* TO 'linjiashop'@'%';
     flush privileges;
     ```     
@@ -149,11 +149,9 @@ _商品素材取自小米商城_
         - 启动微信开发工具导入linjiashop-wxapp/dist/wx 目录即可预览小程序
  
 ## 技术交流
-- 关注公众号：嗨客帝国，点击对应的项目菜单进群交流。
+- 关注公众号：<big>嗨客帝国</big>，点击对应的项目菜单进群交流。
 
 ![公众号二维码](doc/guide/img/haike.jpg)
-- 论坛提问：
-[http://bbs.enilu.cn](http://bbs.enilu.cn)
 ## 在线文档
 - 项目文档：[http://microapp.gitee.io/linjiashop](http://microapp.gitee.io/linjiashop/)
 - 该项目克隆并扩展自[web-flash](https://github.com/enilu/web-flash),所以开发的时候多看看web-flash的[在线文档](http://enilu.gitee.io/web-flash)

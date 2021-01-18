@@ -45,6 +45,16 @@ public class WeChatController extends BaseController {
             return Rets.failure("获取微信消息失败");
         }
         ShopUser user = shopUserService.findByWechatOpenId(wechatInfo.getOpenId());
+        if(user==null) {
+
+            user = shopUserService.getCurrentUser();
+            if(user!=null){
+                user.setWechatOpenId(wechatInfo.getOpenId());
+                user.setWechatHeadImgUrl(wechatInfo.getHeadUrl());
+                user.setNickName(wechatInfo.getNickName());
+                shopUserService.update(user);
+            }
+        }
         if(user==null){
             user = shopUserService.registerByWechatInfo(wechatInfo);
         }
@@ -53,6 +63,7 @@ public class WeChatController extends BaseController {
         shopUserService.update(user);
         UserInfo userInfo = new UserInfo();
         BeanUtils.copyProperties(user,userInfo);
+        userInfo.setRefreshWechatInfo(false);
         Map result = Maps.newHashMap(
                 "user",userInfo,
                 "token",token

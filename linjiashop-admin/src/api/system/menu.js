@@ -41,3 +41,10 @@ export function menuTreeListByRoleId(roleId) {
     }
   })
 }
+
+export function getMenuTree() {
+  return request({
+    url: '/menu/tree',
+    method: 'get'
+  })
+}

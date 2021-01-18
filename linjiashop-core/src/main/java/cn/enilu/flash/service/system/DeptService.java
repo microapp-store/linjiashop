@@ -5,8 +5,7 @@ import cn.enilu.flash.bean.vo.node.DeptNode;
 import cn.enilu.flash.bean.vo.node.ZTreeNode;
 import cn.enilu.flash.dao.system.DeptRepository;
 import cn.enilu.flash.service.BaseService;
-import cn.enilu.flash.utils.StringUtil;
-import cn.enilu.flash.utils.ToolUtil;
+import cn.enilu.flash.utils.Lists;
 import com.google.common.base.Strings;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,56 +25,44 @@ public class DeptService extends BaseService<Dept,Long,DeptRepository> {
     private DeptRepository deptRepository;
 
     public List<ZTreeNode> tree() {
-        List<Object[]> list = deptRepository.tree();
-        List<ZTreeNode> nodes = new ArrayList<>();
-        for(Object[] obj:list){
-            ZTreeNode node = transfer(obj);
-            nodes.add(node);
-        }
+        String sql = "SELECT id, pid AS pId, simplename AS NAME, ( CASE WHEN (pId = 0 OR pId IS NULL) THEN 'true' ELSE 'false' END ) AS open FROM t_sys_dept";
+        List nodes = deptRepository.queryObjBySql(sql, ZTreeNode.class);
         return nodes;
     }
 
-    private ZTreeNode transfer(Object[] obj){
-        ZTreeNode node = new ZTreeNode();
-        node.setId(Long.valueOf(obj[0].toString()));
-        node.setpId(Long.valueOf(obj[1].toString()));
-        node.setName(obj[2].toString());
-        node.setIsOpen(Boolean.valueOf(obj[3].toString()));
-        return node;
-    }
+
     public List<Dept> query(String condition) {
-        List<Dept> list = new ArrayList<>();
-        if(Strings.isNullOrEmpty(condition)){
-            list = (List<Dept>) deptRepository.findAll();
-        }else{
-            condition = "%"+condition+"%";
-            list = deptRepository.findBySimplenameLikeOrFullnameLike(condition,condition);
+        List<Dept> list = null;
+        if (Strings.isNullOrEmpty(condition)) {
+            list = deptRepository.findAll();
+        } else {
+            condition = "%" + condition + "%";
+            list = deptRepository.findBySimplenameLikeOrFullnameLike(condition, condition);
         }
         return list;
     }
 
     public void deleteDept(Long deptId) {
         Dept dept = get(deptId);
-
         List<Dept> subDepts = deptRepository.findByPidsLike("%[" + dept.getId() + "]%");
         deptRepository.deleteAll(subDepts);
         deptRepository.delete(dept);
     }
 
     public List<DeptNode> queryAllNode() {
-        List<Dept> list = super.queryAll();
+        List<Dept> list = queryAll();
         return generateTree(list);
     }
 
     public void deptSetPids(Dept dept) {
-        if (dept.getPid() ==null || dept.getPid().intValue() == 0 ) {
+        if (dept.getPid() == null || dept.getPid().intValue() == 0) {
             dept.setPid(0L);
             dept.setPids("[0],");
         } else {
             Long pid = dept.getPid();
             Dept temp = get(pid);
             String pids = "";
-            if(temp!=null){
+            if (temp != null) {
                 pids = temp.getPids();
             }
             dept.setPid(pid);
@@ -83,24 +70,29 @@ public class DeptService extends BaseService<Dept,Long,DeptRepository> {
         }
     }
 
-    private List<DeptNode> generateTree(List<Dept> list){
+    private List<DeptNode> generateTree(List<Dept> list) {
 
         List<DeptNode> nodes = new ArrayList<>(20);
-        for(Dept dept:list){
+        for (Dept dept : list) {
             DeptNode deptNode = new DeptNode();
-            BeanUtils.copyProperties(dept,deptNode);
+            BeanUtils.copyProperties(dept, deptNode);
             nodes.add(deptNode);
         }
-        for(DeptNode deptNode:nodes){
-            for(DeptNode child:nodes){
-                if(child.getPid().intValue() == deptNode.getId().intValue()){
-                    deptNode.getChildren().add(child);
+        for (DeptNode deptNode : nodes) {
+            for (DeptNode child : nodes) {
+                if (child.getPid().intValue() == deptNode.getId().intValue()) {
+                    List<DeptNode> children = deptNode.getChildren();
+                    if (children == null) {
+                        children = Lists.newArrayList();
+                        deptNode.setChildren(children);
+                    }
+                    children.add(child);
                 }
             }
         }
         List<DeptNode> result = new ArrayList<>(20);
-        for(DeptNode node:nodes){
-            if(node.getPid().intValue() == 0){
+        for (DeptNode node : nodes) {
+            if (node.getPid().intValue() == 0) {
                 result.add(node);
             }
         }

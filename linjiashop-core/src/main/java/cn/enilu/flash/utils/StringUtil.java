@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -14,7 +15,6 @@ import java.util.regex.Pattern;
  *
  */
 public class StringUtil {
-
     public static final String EMPTY = "";
     private static final AtomicLong ORDER_SEQ = new AtomicLong(1);
     private static  final Pattern PATERN_IP = Pattern.compile("((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)");
@@ -52,12 +52,18 @@ public class StringUtil {
         }
         return true;
     }
-    /**
-     * 是否包含空字符串
-     *
-     * @param strs 字符串列表
-     * @return 是否包含空字符串
-     */
+
+    public static boolean isMobile(String mobiles) {
+        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
+        Matcher m = p.matcher(mobiles);
+        return m.matches();
+    }
+        /**
+         * 是否包含空字符串
+         *
+         * @param strs 字符串列表
+         * @return 是否包含空字符串
+         */
     public static boolean hasBlank(String... strs) {
         if (CollectionKit.isEmpty(strs)) {
             return true;
@@ -446,4 +452,11 @@ public class StringUtil {
         }
         return result.toString();
     }
+
+    public static String getNewOrderNo() {
+        String orderNo = DateUtil.getAllTime2();
+        orderNo += String.format("%03d", ORDER_SEQ.incrementAndGet() % 999 + 1);
+        return orderNo;
+    }
+
 }

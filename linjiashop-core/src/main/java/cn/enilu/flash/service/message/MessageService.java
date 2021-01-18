@@ -4,8 +4,6 @@ package cn.enilu.flash.service.message;
 import cn.enilu.flash.bean.entity.message.Message;
 import cn.enilu.flash.bean.entity.message.MessageSender;
 import cn.enilu.flash.bean.entity.message.MessageTemplate;
-import cn.enilu.flash.bean.exception.ApplicationException;
-import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.SpringContextHolder;
 import cn.enilu.flash.dao.message.MessageRepository;
 import cn.enilu.flash.dao.message.MessagesenderRepository;
@@ -17,7 +15,6 @@ import cn.enilu.flash.utils.StringUtil;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.text.StrSubstitutor;
-import org.nutz.json.Json;
 import org.nutz.lang.Lang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,18 +66,26 @@ public class MessageService extends BaseService<Message,Long,MessageRepository> 
         String content = getContent(messageTemplate.getContent(), args);
         sendEmailMessage(tplCode,from,to,cc,title,content,messageTemplate,null,null);
     }
+
     public void sendSms(String tplCode, String receiver, String... args) {
+        LinkedHashMap params = new LinkedHashMap();
+        for (int i = 0; i < args.length; i++) {
+            params.put((i + 1) + "", args[i]);
+        }
+        sendSms(tplCode, receiver, params);
+    }
+
+
+    public void sendSms(String tplCode, String receiver, LinkedHashMap params) {
         MessageTemplate messageTemplate = messagetemplateRepository.findByCode(tplCode);
-        String content = getContent(messageTemplate.getContent(), args);
+        String content = getContent(messageTemplate.getContent(), params);
         boolean isSuccess = false;
         try {
-            isSuccess = this.sendSmsMessage(receiver, content, messageTemplate, args);
-        }catch (Exception e){
+            isSuccess = this.sendSmsMessage(receiver, content, messageTemplate, params);
+        } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            throw  new ApplicationException(ApplicationExceptionEnum.SERVER_ERROR);
-
         }
-        saveMessage(0,tplCode,receiver,content,isSuccess);
+        saveMessage(0, tplCode, receiver, content, isSuccess);
     }
     private void sendEmailMessage(String tplCode, String from, String to, String cc, String title,
                                   String content,MessageTemplate messageTemplate,
@@ -130,17 +135,15 @@ public class MessageService extends BaseService<Message,Long,MessageRepository> 
 
 
 
-    private boolean sendSmsMessage( String receiver, String content,  MessageTemplate messageTemplate,String... args) throws Exception {
-        String tplCode = getTpl(messageTemplate);
+    private boolean sendSmsMessage(String receiver, String content, MessageTemplate messageTemplate, LinkedHashMap params) throws Exception {
         SmsSender smsSender = getSmsSender(messageTemplate);
-        logger.info("receiver:{},content:{}\r\n,args:{}",receiver,content, Json.toJson(args));
         boolean success = false;
         String[] receivers = receiver.split(",|;", -1);
         for (String oneReceiver : receivers) {
             try {
 
                 if (StringUtil.isNotEmpty(oneReceiver)) {
-                    success = smsSender.sendSms(tplCode, oneReceiver, args, content);
+                    success = smsSender.sendSms(messageTemplate.getRemoteTplCode(), oneReceiver, params, content);
                 }
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
@@ -175,15 +178,6 @@ public class MessageService extends BaseService<Message,Long,MessageRepository> 
             }
         } else {
             throw new Exception("未配置运营商模版id");
-        }
-    }
-    private String getTpl(MessageTemplate messageTemplate) {
-        MessageSender messageSender = messagesenderRepository.findById(messageTemplate.getIdMessageSender()).get();
-
-        if (messageSender != null && StringUtil.isNotEmpty(messageSender.getTplCode())) {
-            return messageSender.getTplCode();
-        } else {
-            return null;
         }
     }
 }

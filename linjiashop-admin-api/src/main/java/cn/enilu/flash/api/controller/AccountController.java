@@ -1,5 +1,6 @@
 package cn.enilu.flash.api.controller;
 
+import cn.enilu.flash.bean.constant.state.ManagerStatus;
 import cn.enilu.flash.bean.core.AuthorizationUser;
 import cn.enilu.flash.bean.entity.system.User;
 import cn.enilu.flash.bean.vo.JwtUser;
@@ -68,6 +69,11 @@ public class AccountController extends BaseController {
             User user = managerService.findByAccount(userName);
             if (user == null) {
                 return Rets.failure("该用户不存在");
+            }
+            if(user.getStatus() == ManagerStatus.FREEZED.getCode()){
+                return Rets.failure("用户已冻结");
+            }else if(user.getStatus() == ManagerStatus.DELETED.getCode()){
+                return Rets.failure("用户已删除");
             }
             String passwdMd5 = MD5.md5(password, user.getSalt());
             //2,

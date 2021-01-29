@@ -1,5 +1,11 @@
 # Change log
-## Latest
+## latest
+### Issues
+### Fixes
+- Fix 
+## v0.7
+- 主项目：[gitee](https://gitee.com/microapp/linjiashop/releases/v0.7) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.7)
+- linjiashop-uniapp: [gitee](https://gitee.com/microapp/linjiashop-uniapp/releases/v0.7) [github](https://github.com/microapp-store/linjiashop-uniapp/releases/tag/v0.7)
 ### Issues
 - 去掉Menu中无用的status字段
 - 重构菜单功能，增加菜单图标选择，菜单类别等逻辑

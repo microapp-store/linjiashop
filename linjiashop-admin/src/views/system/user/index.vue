@@ -81,7 +81,7 @@
       </el-table-column>
       <el-table-column label="创建时间">
         <template slot-scope="scope">
-          {{ scope.row.createtime }}
+          {{ scope.row.createTime }}
         </template>
       </el-table-column>
       <el-table-column label="状态">

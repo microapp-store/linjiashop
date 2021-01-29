@@ -32,4 +32,9 @@ public class ManagerService extends BaseService<User,Long,UserRepository> {
         return user;
     }
 
+    @Override
+    public User update(User user) {
+        cacheDao.hdel(CacheDao.SESSION,user.getAccount());
+        return super.update(user);
+    }
 }

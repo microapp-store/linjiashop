@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -52,34 +51,19 @@ public class CartService extends BaseService<Cart,Long,CartRepository>  {
         Integer result = 0;
         if(old!=null){
             //判断之前是否添加到购物车，如果已添加，则在原有基础上增加购买数量即可
-            old.setCount(old.getCount().add(new BigDecimal(count)));
+            old.setCount(old.getCount()+count);
             update(old);
 
         }else {
             //购物车新增商品
             Cart cart = new Cart();
             cart.setIdGoods(cartVo.getIdGoods());
-            cart.setCount(new BigDecimal(count));
+            cart.setCount(count);
             cart.setIdUser(cartVo.getIdUser());
             cart.setIdSku(idSku);
             insert(cart);
             result = 1;
         }
-
-        //减库存(添加到购物车暂不减库存)
-//        if(idSku!=null){
-//            GoodsSku goodsSku = goodsSkuRepository.getOne(idSku);
-//            if(goodsSku.getStock()<count){
-//                throw  new RuntimeException("库存不足");
-//            }
-//            goodsSku.setStock(goodsSku.getStock()-count);
-//        }
-//        Goods goods = goodsRepository.getOne(cartVo.getIdGoods());
-//        if(goods.getStock()<count){
-//            throw  new RuntimeException("库存不足");
-//        }
-//        goods.setStock(goods.getStock()-count);
-//        goodsRepository.save(goods);
         return result;
     }
 }

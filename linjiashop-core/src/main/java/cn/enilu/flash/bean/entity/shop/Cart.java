@@ -30,8 +30,8 @@ public class Cart extends ShopBaseEntity {
     @JoinColumn(name="id_sku", insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
     @ManyToOne(fetch = FetchType.LAZY)
     private GoodsSku sku;
-    @Column(columnDefinition = "varchar(16) COMMENT '数量'")
-    private BigDecimal count;
+    @Column(columnDefinition = "INT COMMENT '数量'")
+    private Integer count;
     @Transient
     private BigDecimal price;
     public BigDecimal getPrice(){

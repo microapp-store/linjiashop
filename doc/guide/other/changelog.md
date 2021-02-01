@@ -2,7 +2,14 @@
 ## latest
 ### Issues
 ### Fixes
-- Fix 
+- Fix 用户锁定和删除状态可以登录的问题
+- Fix 修改管理员账号后，清空缓存
+- Fix 修改账号时数据校验问题 
+徐老师，方便不，咨询个事情
+
+哦，就是我想过几年尝试申请上海的居转户
+我看了下上海目前的社保基数是9000多，我想能不能把我的上半个月工资做成1万（目的是超过一倍的上海社保基数）。这样避免以后申请居转户的时候，社保基数缴纳这块成为扣分项
+
 ## v0.7
 - 主项目：[gitee](https://gitee.com/microapp/linjiashop/releases/v0.7) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.7)
 - linjiashop-uniapp: [gitee](https://gitee.com/microapp/linjiashop-uniapp/releases/v0.7) [github](https://github.com/microapp-store/linjiashop-uniapp/releases/tag/v0.7)

@@ -335,6 +335,13 @@ public class DateUtil {
 
 	}
 
+	public static  Date getDateBefore(Integer num,Integer dateType){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(dateType, -num);
+		return calendar.getTime();
+	}
+
 	/**
 	 * 得到n天之后是周几
 	 *

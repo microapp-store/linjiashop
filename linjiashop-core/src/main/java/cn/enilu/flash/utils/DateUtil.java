@@ -419,20 +419,20 @@ public class DateUtil {
 			case "seven":
 				Date last7Date = getPreday(7);
 				start = parseTime(format(last7Date)+" 00:00:00");
-				end = parseTime(nowFormat+" 00:00:00");
+				end = parseTime(nowFormat+" 23:59:59");
 				break;
 			case "thirty":
 				Date last30Date = getPreday(30);
 				start = parseTime(format(last30Date)+" 00:00:00");
-				end = parseTime(nowFormat+" 00:00:00");
+				end = parseTime(nowFormat+" 23:59:59");
 				break;
 			case "month":
 				start = getCurrentMonth();
-				end = parseTime(nowFormat+" 00:00:00");
+				end = parseTime(nowFormat+" 23:59:59");
 				break;
 			case "year":
 				start = getCurrentYear();
-				end = parseTime(nowFormat+" 00:00:00");
+				end = parseTime(nowFormat+" 23:59:59");
 				break;
 
 			default:

@@ -158,4 +158,4 @@ _商品素材取自小米商城_
 - 该项目手机端linjiashop-mobile使用有赞Vant组件库，开发过程可以参考Vant的[在线文档](https://youzan.github.io/vant/#/zh-CN/intro)
 - 该项目微信小程序使用mpvue+vant-weapp，开发过程请参考相关文档：[mpvue文档](http://mpvue.com/),[vant-weapp文档](https://youzan.github.io/vant-weapp/#/intro)
 - 该项目的业务功能和部分功能代码参考复用了[litemall](https://github.com/linlinjava/litemall)，感谢[linlinjava](https://github.com/linlinjava)
-- [视频教程](http://microapp.gitee.io/linjiashop/other/video.html)
+- [视频教程](https://space.bilibili.com/525325274/channel/detail?cid=115895)

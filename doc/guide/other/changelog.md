@@ -1,6 +1,7 @@
 # Change log
-## Latest
+## v1.0
 ### Issues
+- 使用uniapp重写三端（H5,微信小程序，APP(ios,android))
 - 去掉Menu中无用的status字段
 - 重构菜单功能，增加菜单图标选择，菜单类别等逻辑
 - 引入vue-select组件代替el-input+select的下拉选择用法

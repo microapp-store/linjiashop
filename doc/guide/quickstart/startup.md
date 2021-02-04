@@ -5,7 +5,7 @@
 - 启动成功后访问http://localhost:8082/swagger-ui.html
 
 ## 准备测试图片
-- 下载项目测试数据的图片：链接：链接：[https://pan.baidu.com/s/1Ppfgy2wR1nW0l-QMYHFGKw](https://pan.baidu.com/s/1Ppfgy2wR1nW0l-QMYHFGKw) 提取码：wo8q ，将图片存放到t_sys_cfg表中system.file.upload.path配置的目录下；**注意**：该目录路径为绝对路径
+- 下载项目测试数据的图片：链接：https://pan.baidu.com/s/1i06H4dAM1M7mYQU9etBrfw  提取码：mqvf ，将图片存放到t_sys_cfg表中system.file.upload.path配置的目录下；**注意**：该目录路径为绝对路径
 ## 启动后台管理前端界面：linjiashop-admin
 - 进入linjiashop-admin目录
     - 命令行窗口运行 npm install --registry=https://registry.npm.taobao.org

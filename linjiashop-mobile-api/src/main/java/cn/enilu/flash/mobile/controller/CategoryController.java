@@ -12,6 +12,7 @@ import cn.enilu.flash.web.controller.BaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +33,7 @@ public class CategoryController extends BaseController {
     private CategoryBannerRelService categoryBannerRelService;
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public Object list() {
-        List<Category> list = categoryService.queryAll();
+        List<Category> list = categoryService.queryAll(SearchFilter.build("pid", SearchFilter.Operator.ISNULL), Sort.by(Sort.Direction.ASC,"sort"));
         list.forEach(item->{
             List<CategoryBannerRel> relList = categoryBannerRelService.queryAll(SearchFilter.build("idCategory",item.getId()));
             List<Banner> bannerList = Lists.newArrayList();

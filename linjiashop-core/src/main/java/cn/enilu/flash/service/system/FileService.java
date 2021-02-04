@@ -16,6 +16,7 @@ import org.jxls.expression.JexlExpressionEvaluator;
 import org.jxls.transform.Transformer;
 import org.jxls.util.JxlsHelper;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ import java.util.UUID;
 
 @Service
 public class FileService extends BaseService<FileInfo,Long,FileInfoRepository> {
-    private Logger logger;
+    private Logger logger = LoggerFactory.getLogger(FileService.class);
     @Autowired
     private CfgService cfgService;
     @Autowired
@@ -55,7 +56,7 @@ public class FileService extends BaseService<FileInfo,Long,FileInfoRepository> {
             multipartFile.transferTo(file);
             return save(multipartFile.getOriginalFilename(),file);
         } catch (Exception e) {
-
+            e.printStackTrace();
             logger.error("保存文件异常",e);
 
         }

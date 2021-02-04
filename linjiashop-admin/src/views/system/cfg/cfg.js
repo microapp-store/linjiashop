@@ -49,11 +49,11 @@ export default {
       return {
         cfgName: [
           { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
-          { min: 3, max: 20, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
+          { min: 1, max: 128, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
         ],
         cfgValue: [
           { required: true, message: this.$t('config.value') + this.$t('common.isRequired'), trigger: 'blur' },
-          { min: 2,  message: this.$t('config.value') + this.$t('config.lengthValidationCfgValue'), trigger: 'blur' }
+          { min: 1,  message: this.$t('config.value') + this.$t('config.lengthValidationCfgValue'), trigger: 'blur' }
         ]
       }
     }

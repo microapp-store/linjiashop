@@ -133,6 +133,11 @@ public abstract class BaseService<T, ID extends Serializable, R extends BaseRepo
     }
 
     @Override
+    public List<T> queryAll(Sort sort) {
+        return dao.findAll(sort);
+    }
+
+    @Override
     public List<T> queryAll(List<SearchFilter> filters, Sort sort) {
         Specification<T> specification = DynamicSpecifications.bySearchFilter(filters, dao.getDataClass());
         if (sort == null) {

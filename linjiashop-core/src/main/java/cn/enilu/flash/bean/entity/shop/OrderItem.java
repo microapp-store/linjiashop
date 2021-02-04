@@ -30,7 +30,7 @@ public class OrderItem extends ShopBaseEntity {
     @Column(columnDefinition = "VARCHAR(16) COMMENT '单价'")
     private BigDecimal price;
     @Column(columnDefinition = "VARCHAR(16) COMMENT '数量'")
-    private BigDecimal count;
+    private Integer count;
     @Column(columnDefinition = "VARCHAR(16) COMMENT '合计'")
     private BigDecimal totalPrice;
 

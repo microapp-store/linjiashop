@@ -10,7 +10,6 @@ import cn.enilu.flash.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -48,7 +47,7 @@ public class CartController extends BaseController {
     public Object update(@PathVariable("id") Long id,
                           @PathVariable("count") String count){
         Cart cart = cartService.get(id);
-        cart.setCount(new BigDecimal(count));
+        cart.setCount(Integer.valueOf(count));
         CartVo cartVo = new CartVo();
         cartVo.setIdUser(cart.getIdUser());
         //修改订单中的数量的时候统一走cartService.add方法以便进行库存数量判断，避免超卖，

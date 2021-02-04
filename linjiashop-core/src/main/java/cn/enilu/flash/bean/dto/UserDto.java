@@ -19,7 +19,6 @@ public class UserDto{
 
 	@NotBlank(message = "账号不能为空")
 	private String account;
-	@NotBlank(message = "密码不能为空")
 	private String password;
 	private String salt;
 	@NotBlank(message = "姓名不能为空")
@@ -33,7 +32,6 @@ public class UserDto{
 	private Long deptid;
 	private Long eduorgid;
 	private Integer status;
-	private Date createtime;
 	private Integer version;
 	private String avatar;
 

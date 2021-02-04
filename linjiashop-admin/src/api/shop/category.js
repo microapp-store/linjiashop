@@ -33,7 +33,7 @@ export default {
     return request({
       url: '/shop/category',
       method: 'post',
-      params
+      params:params
     })
   },
   remove: function (id) {
@@ -54,6 +54,12 @@ export default {
   setCategoryBanner: function (id, idBanner) {
     return request({
       url: '/shop/category/setBanner/' + id + '/' + idBanner,
+      method: 'post'
+    })
+  },
+  changeShowIndex:function(id,showIndex){
+    return request({
+      url: '/shop/category/changeShowIndex/' + id + '/' + showIndex,
       method: 'post'
     })
   }

@@ -119,7 +119,7 @@ _商品素材取自小米商城_
     GRANT ALL privileges ON linjiashop.* TO 'linjiashop'@'%';
     flush privileges;
     ```     
-- 下载项目测试数据的图片：链接：[https://pan.baidu.com/s/1V1QTSLspuDRuwI7H9TjcOA](https://pan.baidu.com/s/1V1QTSLspuDRuwI7H9TjcOA) 提取码：dyj6 ，将图片存放到t_sys_cfg表中system.file.upload.path配置的目录下(注意该目录为绝对路径，该目录可以通过“系统管理”-“参数管理”进行配置)
+- 下载项目测试数据的图片：链接：https://pan.baidu.com/s/1i06H4dAM1M7mYQU9etBrfw  提取码：mqvf  ，将图片存放到t_sys_cfg表中system.file.upload.path配置的目录下(注意该目录为绝对路径，该目录可以通过“系统管理”-“参数管理”进行配置)
 - 启动后台管理
     - 启动后台管理api服务:linjiashop-admin-api
         - 修改linjiashop-admin-api中数据库连接配置
@@ -158,4 +158,4 @@ _商品素材取自小米商城_
 - 该项目手机端linjiashop-mobile使用有赞Vant组件库，开发过程可以参考Vant的[在线文档](https://youzan.github.io/vant/#/zh-CN/intro)
 - 该项目微信小程序使用mpvue+vant-weapp，开发过程请参考相关文档：[mpvue文档](http://mpvue.com/),[vant-weapp文档](https://youzan.github.io/vant-weapp/#/intro)
 - 该项目的业务功能和部分功能代码参考复用了[litemall](https://github.com/linlinjava/litemall)，感谢[linlinjava](https://github.com/linlinjava)
-- [视频教程](http://microapp.gitee.io/linjiashop/other/video.html)
+- [视频教程](https://space.bilibili.com/525325274/channel/detail?cid=115895)

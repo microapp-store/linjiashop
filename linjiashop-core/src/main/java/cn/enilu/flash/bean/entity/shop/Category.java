@@ -25,8 +25,21 @@ public class Category extends BaseEntity {
     private String name;
     @Column(columnDefinition = "VARCHAR(32) COMMENT '链接地址'")
     private String url;
-    @Column(columnDefinition = "VARCHAR(32) COMMENT '图标'")
+    @Column(columnDefinition = "VARCHAR(64) COMMENT '图标'")
     private String icon;
+    @Column(columnDefinition = "BIGINT COMMENT '父类别'")
+    private Long pid;
+    @Column(columnDefinition = "VARCHAR(64) COMMENT '备注'")
+    private String descript;
+    @Column(columnDefinition = "TINYINT COMMENT '是否删除'")
+    private Boolean isDelete= false;
+    /**
+     * 改字段只对一级菜单生效，也即：只有一级菜单可以显示在首页
+     */
+    @Column(columnDefinition = "TINYINT COMMENT '是否显示在首页'")
+    private Boolean showIndex= true;
+    @Column(columnDefinition = "INT COMMENT '顺序'")
+    private Integer sort;
     @Transient
     private List<Banner> bannerList;
 

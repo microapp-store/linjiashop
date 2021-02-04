@@ -335,6 +335,13 @@ public class DateUtil {
 
 	}
 
+	public static  Date getDateBefore(Integer num,Integer dateType){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		calendar.set(dateType, -num);
+		return calendar.getTime();
+	}
+
 	/**
 	 * 得到n天之后是周几
 	 *
@@ -412,20 +419,20 @@ public class DateUtil {
 			case "seven":
 				Date last7Date = getPreday(7);
 				start = parseTime(format(last7Date)+" 00:00:00");
-				end = parseTime(nowFormat+" 00:00:00");
+				end = parseTime(nowFormat+" 23:59:59");
 				break;
 			case "thirty":
 				Date last30Date = getPreday(30);
 				start = parseTime(format(last30Date)+" 00:00:00");
-				end = parseTime(nowFormat+" 00:00:00");
+				end = parseTime(nowFormat+" 23:59:59");
 				break;
 			case "month":
 				start = getCurrentMonth();
-				end = parseTime(nowFormat+" 00:00:00");
+				end = parseTime(nowFormat+" 23:59:59");
 				break;
 			case "year":
 				start = getCurrentYear();
-				end = parseTime(nowFormat+" 00:00:00");
+				end = parseTime(nowFormat+" 23:59:59");
 				break;
 
 			default:

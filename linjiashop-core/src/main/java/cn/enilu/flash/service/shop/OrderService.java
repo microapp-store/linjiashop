@@ -2,10 +2,7 @@ package cn.enilu.flash.service.shop;
 
 
 import cn.enilu.flash.bean.constant.CfgKey;
-import cn.enilu.flash.bean.entity.shop.ExpressInfo;
-import cn.enilu.flash.bean.entity.shop.Order;
-import cn.enilu.flash.bean.entity.shop.OrderItem;
-import cn.enilu.flash.bean.entity.shop.OrderLog;
+import cn.enilu.flash.bean.entity.shop.*;
 import cn.enilu.flash.bean.enumeration.shop.OrderEnum;
 import cn.enilu.flash.bean.vo.SpringContextHolder;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
@@ -35,6 +32,10 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
     @Autowired
     private ExpressInfoService expressInfoService;
     @Autowired
+    private GoodsService goodsService;
+    @Autowired
+    private GoodsSkuService goodsSkuService;
+    @Autowired
     private CfgService cfgService;
 
     /**
@@ -53,6 +54,34 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
         insert(order);
         for (OrderItem item : itemList) {
             item.setIdOrder(order.getId());
+            //减库存
+            if(item.getIdSku()!=null) {
+                GoodsSku goodsSku = goodsSkuService.get(item.getIdSku());
+                goodsSku.setStock(goodsSku.getStock()-item.getCount());
+                if(goodsSku.getStock()<0){
+                    throw  new RuntimeException("库存不足");
+                }
+                //更新sku的库存
+                goodsSkuService.update(goodsSku);
+
+                //更新商品的库存
+                List<GoodsSku> list = goodsSkuService.queryByIdGoods(item.getIdGoods());
+                int stock = 0;
+                for(GoodsSku sk:list){
+                    stock+= goodsSku.getStock();
+                }
+                Goods goods = goodsService.get(goodsSku.getIdGoods());
+                goodsService.update(goods);
+            }else{
+                Goods goods = goodsService.get(item.getIdGoods());
+                //更新商品库存
+                goods.setStock(goods.getStock()-item.getCount());
+                if(goods.getStock()<0){
+                    throw  new RuntimeException("库存不足");
+                }
+                goodsService.update(goods);
+            }
+
         }
         orderItemRepository.saveAll(itemList);
         OrderLog orderLog = new OrderLog();
@@ -76,7 +105,6 @@ public class OrderService extends BaseService<Order, Long, OrderRepository> {
         order.setStatus(OrderEnum.OrderStatusEnum.CANCEL.getId());
         String descript = "用户取消订单";
         saveOrderLog(order, descript);
-        ;
         updateOrder(order);
 
     }

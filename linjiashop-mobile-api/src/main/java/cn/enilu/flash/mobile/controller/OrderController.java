@@ -1,14 +1,10 @@
 package cn.enilu.flash.mobile.controller;
 
-import cn.enilu.flash.bean.constant.CfgKey;
 import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.entity.shop.*;
 import cn.enilu.flash.bean.enumeration.shop.OrderEnum;
-import cn.enilu.flash.bean.exception.ApplicationException;
-import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
-import cn.enilu.flash.service.api.express.kdniao.KdniaoResponse;
 import cn.enilu.flash.service.api.express.kdniao.KdniaoService;
 import cn.enilu.flash.service.shop.AddressService;
 import cn.enilu.flash.service.shop.CartService;
@@ -106,7 +102,6 @@ public class OrderController extends BaseController {
         Order order = new Order();
         order.setIdUser(idUser);
         Address address = addressService.get(idAddress);
-        order.setIdAddress(idAddress);
         order.setConsignee(address.getName());
         order.setConsigneeAddress(address.getWholeAddressInfo());
         order.setMobile(address.getTel());
@@ -118,7 +113,7 @@ public class OrderController extends BaseController {
             orderItem.setIdSku(cart.getIdSku());
             orderItem.setPrice(cart.getPrice());
             orderItem.setCount(cart.getCount());
-            orderItem.setTotalPrice(orderItem.getPrice().multiply(orderItem.getCount()));
+            orderItem.setTotalPrice(orderItem.getPrice().multiply(new BigDecimal(orderItem.getCount())));
             totalPrice = totalPrice.add(orderItem.getTotalPrice());
             itemList.add(orderItem);
         }

@@ -53,6 +53,12 @@ public interface SelectService <T, ID> {
     List<T> queryAll(List<SearchFilter> filters);
 
     /**
+     * 按指定顺序查询所有结果
+     * @param sort
+     * @return
+     */
+    List<T> queryAll(Sort sort);
+    /**
      * 根据多个条件查询列表数据，并排序
      * @param filters
      * @param sort

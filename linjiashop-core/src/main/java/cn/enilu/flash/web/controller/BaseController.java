@@ -5,7 +5,6 @@ import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.JsonUtil;
 import cn.enilu.flash.utils.StringUtil;
-import cn.enilu.flash.web.ApiConstants;
 import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.slf4j.Logger;
@@ -62,30 +61,6 @@ public class BaseController {
 
     public String getToken() {
         return HttpUtil.getRequest().getHeader("Authorization");
-    }
-
-    /**
-     * 获取客户端ip
-     *
-     * @param req
-     * @return
-     */
-    public String getRealIp(HttpServletRequest req) {
-        String ip = req.getHeader("x-forwarded-for");
-
-        if (ip == null || ip.length() == 0 || ApiConstants.IP_UNKNOW.equalsIgnoreCase(ip)) {
-            ip = req.getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || ApiConstants.IP_UNKNOW.equalsIgnoreCase(ip)) {
-            ip = req.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || ApiConstants.IP_UNKNOW.equalsIgnoreCase(ip)) {
-            ip = req.getRemoteAddr();
-        }
-        if (ip == null || ip.length() == 0 || ApiConstants.IPV6_LOCALHOST.equals(ip)) {
-            ip =ApiConstants.IPV4_LOCALHOST;
-        }
-        return ip;
     }
 
     /**

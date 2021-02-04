@@ -1,7 +1,16 @@
 # Change log
-## v1.0
+## latest
 ### Issues
-- 使用uniapp重写三端（H5,微信小程序，APP(ios,android))
+- Issue 定时取消超时未支付的订单
+### Fixes
+- Fix 用户锁定和删除状态可以登录的问题
+- Fix 修改管理员账号后，清空缓存
+- Fix 修改账号时数据校验问题
+- Fix 提交订单没有减免库存的问题
+## v0.7
+- 主项目：[gitee](https://gitee.com/microapp/linjiashop/releases/v0.7) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.7)
+- linjiashop-uniapp: [gitee](https://gitee.com/microapp/linjiashop-uniapp/releases/v0.7) [github](https://github.com/microapp-store/linjiashop-uniapp/releases/tag/v0.7)
+### Issues
 - 去掉Menu中无用的status字段
 - 重构菜单功能，增加菜单图标选择，菜单类别等逻辑
 - 引入vue-select组件代替el-input+select的下拉选择用法

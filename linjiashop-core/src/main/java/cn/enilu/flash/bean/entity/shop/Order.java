@@ -33,13 +33,13 @@ public class Order extends ShopBaseEntity {
     @Column(columnDefinition = "INT COMMENT '状态'")
     private Integer status;
     /**
-     * 收件人信息使用 下面三个字段代替
+     * 收件人信息使用 下面三个字段(收件人，收件人电话，收件地址）代替
      */
     @Deprecated
     @Column(name="id_address",columnDefinition = "BIGINT COMMENT '收货信息'")
     private Long idAddress;
     /**
-     *  收件人信息使用 下面三个字段代替
+     *  收件人信息使用 下面三个字段(收件人，收件人电话，收件地址）代替
      */
     @Deprecated
     @JoinColumn(name="id_address",  referencedColumnName="id",insertable = false, updatable = false,foreignKey = @ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))

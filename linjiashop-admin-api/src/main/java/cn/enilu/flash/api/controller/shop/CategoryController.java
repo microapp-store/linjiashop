@@ -1,6 +1,5 @@
 package cn.enilu.flash.api.controller.shop;
 
-import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.core.BussinessLog;
 import cn.enilu.flash.bean.entity.cms.Banner;
 import cn.enilu.flash.bean.entity.shop.AttrKey;
@@ -10,13 +9,13 @@ import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.exception.ApplicationExceptionEnum;
 import cn.enilu.flash.bean.vo.front.Rets;
+import cn.enilu.flash.bean.vo.node.CategoryNode;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.AttrKeyService;
 import cn.enilu.flash.service.shop.CategoryBannerRelService;
 import cn.enilu.flash.service.shop.CategoryService;
 import cn.enilu.flash.service.shop.GoodsService;
 import cn.enilu.flash.utils.Lists;
-import cn.enilu.flash.utils.factory.Page;
 import cn.enilu.flash.web.controller.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -41,9 +40,12 @@ public class CategoryController extends BaseController {
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public Object list() {
-		Page<Category> page = new PageFactory<Category>().defaultPage();
-		page = categoryService.queryPage(page);
-		return Rets.success(page);
+//		Page<Category> page = new PageFactory<Category>().defaultPage();
+//		page.setSort(Sort.by(Sort.Direction.ASC,"sort"));
+//		page = categoryService.queryPage(page);
+//		List<Category> list = categoryService.queryAll(Sort.by(Sort.Direction.ASC,"sort"));
+		List<CategoryNode> list = categoryService.getCategories();
+		return Rets.success(list);
 	}
 	@RequestMapping(value = "/getAll",method = RequestMethod.GET)
 	public Object getAll() {
@@ -58,6 +60,9 @@ public class CategoryController extends BaseController {
 		if(category.getId()==null){
 			categoryService.insert(category);
 		}else {
+			Category old = categoryService.get(category.getId());
+			category.setCreateBy(old.getCreateBy());
+			category.setCreateTime(old.getCreateTime());
 			categoryService.update(category);
 		}
 		return Rets.success();
@@ -134,5 +139,16 @@ public class CategoryController extends BaseController {
 		categoryBannerRelService.insert(rel);
 		return Rets.success();
 	}
-
+	@PostMapping(value="/changeShowIndex/{idCategory}/{showIndex}")
+	@RequiresPermissions(value = {Permission.CATEGORY_EDIT})
+	public Object changeShowIndex(@PathVariable("idCategory") Long idCategory,
+							@PathVariable("showIndex") Boolean showIndex){
+		if (idCategory == null) {
+			throw new ApplicationException(ApplicationExceptionEnum.REQUEST_NULL);
+		}
+		Category category = categoryService.get(idCategory);
+		category.setShowIndex(showIndex);
+		categoryService.update(category);
+		return Rets.success();
+	}
 }

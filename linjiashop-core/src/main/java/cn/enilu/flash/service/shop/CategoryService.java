@@ -37,6 +37,9 @@ public class CategoryService extends BaseService<Category,Long,CategoryRepositor
                 if(category.getPid()!=null&&category.getPid().intValue() == node.getId().intValue()){
                     CategoryNode child = new CategoryNode();
                     BeanUtils.copyProperties(category,child);
+                    if(node.getChildren()==null){
+                        node.setChildren(Lists.newArrayList());
+                    }
                     node.getChildren().add(child);
                 }
             }

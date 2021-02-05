@@ -1,9 +1,9 @@
 package cn.enilu.flash.mobile.controller;
 
 import cn.enilu.flash.bean.entity.cms.Banner;
-import cn.enilu.flash.bean.entity.shop.Category;
 import cn.enilu.flash.bean.entity.shop.CategoryBannerRel;
 import cn.enilu.flash.bean.vo.front.Rets;
+import cn.enilu.flash.bean.vo.node.CategoryNode;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.CategoryBannerRelService;
 import cn.enilu.flash.service.shop.CategoryService;
@@ -12,7 +12,6 @@ import cn.enilu.flash.web.controller.BaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +32,8 @@ public class CategoryController extends BaseController {
     private CategoryBannerRelService categoryBannerRelService;
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public Object list() {
-        List<Category> list = categoryService.queryAll(SearchFilter.build("pid", SearchFilter.Operator.ISNULL), Sort.by(Sort.Direction.ASC,"sort"));
+//        List<Category> list = categoryService.queryAll(SearchFilter.build("pid", SearchFilter.Operator.ISNULL), Sort.by(Sort.Direction.ASC,"sort"));
+        List<CategoryNode> list = categoryService.getCategories();
         list.forEach(item->{
             List<CategoryBannerRel> relList = categoryBannerRelService.queryAll(SearchFilter.build("idCategory",item.getId()));
             List<Banner> bannerList = Lists.newArrayList();

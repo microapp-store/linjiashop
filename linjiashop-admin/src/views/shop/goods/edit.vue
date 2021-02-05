@@ -33,17 +33,7 @@
         </el-col>
         <el-col :span="24">
           <el-form-item label="类别">
-            <el-select v-model="form.idCategory" filterable placeholder="请选择">
-              <el-option
-                v-for="item in categories"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id"
-
-              >
-              </el-option>
-            </el-select>
-
+            <treeselect v-model="form.idCategory"  :options="categories"  placeholder="请选择商品类别"/>
           </el-form-item>
         </el-col>
         <el-col :span="24">

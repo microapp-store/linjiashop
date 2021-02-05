@@ -1,13 +1,11 @@
 package cn.enilu.flash.mobile.controller;
 
 import cn.enilu.flash.bean.constant.factory.PageFactory;
-import cn.enilu.flash.bean.entity.shop.AttrKey;
-import cn.enilu.flash.bean.entity.shop.AttrVal;
-import cn.enilu.flash.bean.entity.shop.Goods;
-import cn.enilu.flash.bean.entity.shop.GoodsSku;
+import cn.enilu.flash.bean.entity.shop.*;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.shop.AttrKeyService;
+import cn.enilu.flash.service.shop.CategoryService;
 import cn.enilu.flash.service.shop.GoodsService;
 import cn.enilu.flash.service.shop.GoodsSkuService;
 import cn.enilu.flash.utils.Lists;
@@ -32,6 +30,8 @@ public class GoodsController extends BaseController {
     private GoodsService goodsService;
     @Autowired
     private GoodsSkuService goodsSkuService;
+    @Autowired
+    private CategoryService categoryService;
 
     @Autowired
     private AttrKeyService attrKeyService;
@@ -45,7 +45,16 @@ public class GoodsController extends BaseController {
     @RequestMapping(value = "/queryGoods", method = RequestMethod.GET)
     public Object queryGoods(@RequestParam("idCategory") Long idCategory) {
         Page<Goods> page = new PageFactory<Goods>().defaultPage();
-        page.addFilter(SearchFilter.build("idCategory", SearchFilter.Operator.EQ, idCategory));
+        List<Category> categories = categoryService.queryAll(SearchFilter.build("pid",idCategory));
+        List<Long> ids = Lists.newArrayList(idCategory);
+        categories.forEach(item->{
+            ids.add(item.getId());
+        });
+        if(ids.size()==1) {
+            page.addFilter(SearchFilter.build("idCategory", SearchFilter.Operator.EQ, idCategory));
+        }else{
+            page.addFilter(SearchFilter.build("idCategory", SearchFilter.Operator.IN, ids));
+        }
         page.addFilter(SearchFilter.build("isOnSale", true));
         page = goodsService.queryPage(page);
         return Rets.success(page);

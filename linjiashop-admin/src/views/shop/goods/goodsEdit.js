@@ -40,28 +40,27 @@ export default {
   },
   data() {
     return {
-      spec:'one',
-      specs:[],
-      specDialogFormVisible:false,
-      skuForm:{},
-      attrKeySel:'',
-      attrKeyList:[],
-      attrValList:[],
-      showAddAttrKey:false,
-      attrKeyForm:{attrName:''},
-      attrValForm:{attrVal:''},
-      attrValSel:'',
-      attrValListSel:[],
-      tags:[
-      ],
+      spec: 'one',
+      specs: [],
+      specDialogFormVisible: false,
+      skuForm: {},
+      attrKeySel: '',
+      attrKeyList: [],
+      attrValList: [],
+      showAddAttrKey: false,
+      attrKeyForm: {attrName: ''},
+      attrValForm: {attrVal: ''},
+      attrValSel: '',
+      attrValListSel: [],
+      tags: [],
       form: {
-        pic:'',
-        gallery:[],
-        idCategory:'',
-        isHot:false,
-        isNew:false
+        pic: '',
+        gallery: [],
+        idCategory: '',
+        isHot: false,
+        isNew: false
       },
-      skuList:[],
+      skuList: [],
       uploadUrl: '',
       uploadFileId: '',
       uploadHeaders: {
@@ -120,13 +119,13 @@ export default {
     },
     fetchData() {
       this.listLoading = true
-      if(this.idGoods) {
+      if (this.idGoods) {
         goodsApi.get(this.idGoods).then(response => {
           this.form = response.data.goods
           this.idGoods = this.form.id
           this.skuList = response.data.skuList
-          this.spec = this.skuList.length>0?'more':'one'
-          let galleryArr =this.form .gallery.split(',')
+          this.spec = this.skuList.length > 0 ? 'more' : 'one'
+          let galleryArr = this.form.gallery.split(',')
           for (let i = 0; i < galleryArr.length; i++) {
             if (galleryArr[i] != '') {
               this.galleryList.push({
@@ -137,13 +136,13 @@ export default {
           }
           this.setContent(this.form.detail)
           attrValApi.getAttrBy(this.form.idCategory).then(response2 => {
-              this.attrKeyList = response2.data.keyList
-              this.attrValList = response2.data.valList
+            this.attrKeyList = response2.data.keyList
+            this.attrValList = response2.data.valList
           })
         })
 
       }
-     categoryApi.getCategories().then(response => {
+      categoryApi.getList().then(response => {
         this.categories = response.data
       })
     },
@@ -154,11 +153,11 @@ export default {
     },
     save() {
 
-      if(!this.idGoods && this.active == 0 ){
+      if (!this.idGoods && this.active == 0) {
         //第一步提交的时候先保存下商品以便获取商品id
-        if(this.form.name === '' ||
-        this.form.idCategory === '' ||
-        this.form.descript === ''){
+        if (this.form.name === '' ||
+          this.form.idCategory === '' ||
+          this.form.descript === '') {
           this.$message({
             message: '请输入必要的商品项目',
             type: 'error'
@@ -170,8 +169,8 @@ export default {
           idCategory: this.form.idCategory,
           descript: this.form.descript,
           isNew: this.form.isNew,
-          isHot:this.form.isHot
-        }).then( response => {
+          isHot: this.form.isHot
+        }).then(response => {
           this.idGoods = response.data
         })
         attrValApi.getAttrBy(this.form.idCategory).then(response2 => {
@@ -185,10 +184,10 @@ export default {
       }
       const content = this.getContent()
       const gallery = this.getGallery()
-      if(this.spec === 'more'){
+      if (this.spec === 'more') {
         //如果商品配置多规格，则删除单规格配置
-        this.form.price =''
-        this.form.marketingPrice =''
+        this.form.price = ''
+        this.form.marketingPrice = ''
         this.form.stock = ''
       }
       goodsApi.save({
@@ -204,7 +203,7 @@ export default {
         isOnSale: this.form.isOnSale,
         id: this.idGoods,
         isNew: this.form.isNew,
-        isHot:this.form.isHot
+        isHot: this.form.isHot
       }).then(response => {
         this.$message({
           message: this.$t('common.optionSuccess'),
@@ -330,10 +329,10 @@ export default {
       }
       return ''
     },
-    changeAttrKey(val){
+    changeAttrKey(val) {
       let attrValSel = []
-      for(let i=0;i<this.attrValList.length;i++){
-        if(this.attrValList[i].idAttrKey === val){
+      for (let i = 0; i < this.attrValList.length; i++) {
+        if (this.attrValList[i].idAttrKey === val) {
           attrValSel.push(this.attrValList[i])
         }
       }
@@ -344,25 +343,25 @@ export default {
     addAttrKeyFun() {
       this.showAddAttrKey = !this.showAddAttrKey
     },
-    addToTag(){
-      for(let i=0;i<this.attrValList.length;i++){
-        if(this.attrValList[i].id === this.attrValSel){
+    addToTag() {
+      for (let i = 0; i < this.attrValList.length; i++) {
+        if (this.attrValList[i].id === this.attrValSel) {
           const currentAttrVal = this.attrValList[i]
           let isRepeat = false
           let isRepeatAttrKey = false
-          this.tags.forEach(function(val){
-            if(val.id === currentAttrVal.id ){
+          this.tags.forEach(function (val) {
+            if (val.id === currentAttrVal.id) {
               isRepeat = true
             }
-            if(val.idAttrKey === currentAttrVal.idAttrKey){
+            if (val.idAttrKey === currentAttrVal.idAttrKey) {
               isRepeatAttrKey = true
             }
           })
-          if(isRepeat === false && isRepeatAttrKey === false) {
+          if (isRepeat === false && isRepeatAttrKey === false) {
             this.tags.push(currentAttrVal)
-          }else{
+          } else {
             this.$message({
-              message: isRepeat==true?'请勿选择重复规格':'该属性已经选择一种规格值',
+              message: isRepeat == true ? '请勿选择重复规格' : '该属性已经选择一种规格值',
               type: 'error'
             })
           }
@@ -374,19 +373,19 @@ export default {
       this.tags.splice(this.tags.indexOf(tag), 1);
     },
     submitAttrKeyForm() {
-      if( this.attrKeyForm.attrName != ''){
+      if (this.attrKeyForm.attrName != '') {
         let duplicationKey = false;
-        for(let i=0;i<this.attrKeyList.length;i++){
-          if(this.attrKeyForm.attrName === this.attrKeyList[i].attrName){
+        for (let i = 0; i < this.attrKeyList.length; i++) {
+          if (this.attrKeyForm.attrName === this.attrKeyList[i].attrName) {
             duplicationKey = true;
             break;
           }
         }
-        if(!duplicationKey){
-          const id = this.attrKeyList.length+1;
+        if (!duplicationKey) {
+          const id = this.attrKeyList.length + 1;
           this.attrKeyList.push({
-            id:id,
-            attrName:this.attrKeyForm.attrName
+            id: id,
+            attrName: this.attrKeyForm.attrName
           })
           this.attrKeySel = id;
           this.addAttrKeyFun();
@@ -403,44 +402,44 @@ export default {
     closeAddSkuForm() {
       this.specDialogFormVisible = false
     },
-    getSkuCode(){
+    getSkuCode() {
       let code = ''
       let codeName = ''
-      for(let i =0; i<this.tags.length;i++){
-        if(i===0){
+      for (let i = 0; i < this.tags.length; i++) {
+        if (i === 0) {
           code = this.tags[i].id
           codeName = this.tags[i].attrVal
-        }else{
+        } else {
           code += ',' + this.tags[i].id
           codeName += ',' + this.tags[i].attrVal
         }
       }
-      return {code:code,codeName:codeName}
+      return {code: code, codeName: codeName}
     },
     addSku() {
 
-      if(this.tags.length==0){
+      if (this.tags.length == 0) {
         this.$message({
           message: '请选择商品规格',
           type: 'error'
         })
         return
       }
-      if(!this.skuForm.stock){
+      if (!this.skuForm.stock) {
         this.$message({
           message: '请输入库存数量',
           type: 'error'
         })
         return
       }
-      if(!this.skuForm.marketingPrice){
+      if (!this.skuForm.marketingPrice) {
         this.$message({
           message: '请输入市场价',
           type: 'error'
         })
         return
       }
-      if(!this.skuForm.price){
+      if (!this.skuForm.price) {
         this.$message({
           message: '请输入价格',
           type: 'error'
@@ -449,24 +448,24 @@ export default {
       }
       const skuCodeAndName = this.getSkuCode()
       goodsSku.save({
-        idGoods:this.idGoods,
-        marketingPrice:this.skuForm.marketingPrice,
-        code:skuCodeAndName.code,
-        codeName:skuCodeAndName.codeName,
-        price:this.skuForm.price,
-        stock:this.skuForm.stock
-      }).then( response => {
+        idGoods: this.idGoods,
+        marketingPrice: this.skuForm.marketingPrice,
+        code: skuCodeAndName.code,
+        codeName: skuCodeAndName.codeName,
+        price: this.skuForm.price,
+        stock: this.skuForm.stock
+      }).then(response => {
 
         let sku = response.data
         let updateOldSku = false
-        for(let i=0;i<this.skuList.length;i++){
-          if(this.skuList[i].id === sku.id){
-            this.skuList.splice(i,1,sku)
+        for (let i = 0; i < this.skuList.length; i++) {
+          if (this.skuList[i].id === sku.id) {
+            this.skuList.splice(i, 1, sku)
             updateOldSku = true
             break;
           }
         }
-        if(!updateOldSku){
+        if (!updateOldSku) {
           this.skuList.push(sku)
         }
         this.specDialogFormVisible = false

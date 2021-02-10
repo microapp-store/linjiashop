@@ -18,10 +18,10 @@
 - linjiashop 采用[web-flash](http://enilu.gitee.io/web-flash/)作为底层基础框架搭建，开发过程遇到问题请多阅读该项目文档。
 
 ## 演示
-### 演示环境
-- 用户端H5：[http://linjiashop.microapp.store](http://linjiashop.microapp.store) 演示账号/密码：15011112222/admin 
-- 用户端H5(基于uniapp)[http://linjiashop-uni.microapp.store/](http://linjiashop-uni.microapp.store/)
-- App(基于uniapp)[http://fir.microapp.store/linjiashop](http://fir.microapp.store/linjiashop)
+### 演示环境(没有配置下单发短信等功能)
+- 用户端H5(基于vue.js)：[http://linjiashop-vue.microapp.store](http://linjiashop.microapp.store) 演示账号/密码：15011112222/admin 
+- 用户端H5(基于uniapp)[http://linjiashop.microapp.store/](http://linjiashop-uni.microapp.store/) 演示账号/密码：15011112222/admin
+- App(基于uniapp)[http://fir.microapp.store/linjiashop](http://fir.microapp.store/linjiashop) 演示账号/密码：15011112222/admin
 - 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 管理员账号/密码：admin/admin
 
 ## 真实环境，支持下单支付

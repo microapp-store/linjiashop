@@ -66,29 +66,29 @@ _商品素材取自小米商城_
 <table>
 <tr>
 <td>
-<img src="http://www.enilu.cn/res/img/linjiashop/img/app/home.png" width="300"/></td>
+<img src="https://gitee.com/microapp/linjiashop/raw/master/doc/img/app/home.png" width="300"/></td>
 <td>
-<img src="http://www.enilu.cn/res/img/linjiashop/img/app/find.png" width="300"/></td>
+<img src="https://gitee.com/microapp/linjiashop/raw/master/doc/img/app/find.png" width="300"/></td>
 </tr>
 <tr>
 <td>
-<img src="http://www.enilu.cn/res/img/linjiashop/img/app/guige.jpg" width="300"/></td>
+<img src="https://gitee.com/microapp/linjiashop/raw/master/doc/img/app/guige.jpg" width="300"/></td>
 <td>
-<img src="http://www.enilu.cn/res/img/linjiashop/img/app/login.png" width="300"/></td>
+<img src="https://gitee.com/microapp/linjiashop/raw/master/doc/img/app/login.png" width="300"/></td>
 </tr>
 <tr>
 <td>
-<img src="http://www.enilu.cn/res/img/linjiashop/img/app/mine.png" width="300"/></td>
+<img src="https://gitee.com/microapp/linjiashop/raw/master/doc/img/app/mine.png" width="300"/></td>
 <td>
-<img src="http://www.enilu.cn/res/img/linjiashop/img/app/cart.png" width="300"/></td>
+<img src="https://gitee.com/microapp/linjiashop/raw/master/doc/img/app/cart.png" width="300"/></td>
 </tr>
 </table>
 
 ### Android
-![效果](http://www.enilu.cn/res/img/linjiashop/img/app/mobile.gif)
+![效果](https://gitee.com/microapp/linjiashop/raw/master/doc/img/app/mobile.gif)
 
 ### 后台管理
-![后台管理](http://www.enilu.cn/res/img/linjiashop/guide/img/admin.gif)
+![后台管理](https://gitee.com/microapp/linjiashop/raw/master/doc/guide/img/admin.gif)
 
 ## 技术选型
 - 核心框架：Spring Boot

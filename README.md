@@ -27,7 +27,7 @@
 ## 真实环境，支持下单支付
 - 公众号演示：关注公众号“外滩一号店"进行体验，或者扫描下面二维码关注
 
-    ![外滩一号店](https://gitee.com/microapp/linjiashop/raw/master/doc/img/online/wt1hd.jpg)
+    ![外滩一号店](doc/img/online/wt1hd.jpg)
    
 
 ## 功能模块
@@ -60,35 +60,35 @@ linjiashop包含了后台管理功能和手机端商城业务功能
 ## 运行效果图
 _商品素材取自小米商城_
 ### 手机端H5
-![手机端](https://gitee.com/microapp/linjiashop/raw/master/doc/guide/img/mobile.gif)
+![手机端](doc/guide/img/mobile.gif)
 
 ### IOS
 <table>
 <tr>
 <td>
-<img src="https://gitee.com/microapp/linjiashop/raw/master/doc/img/app/home.png" width="300"/></td>
+<img src="doc/img/app/home.png" width="300"/></td>
 <td>
-<img src="https://gitee.com/microapp/linjiashop/raw/master/doc/img/app/find.png" width="300"/></td>
+<img src="doc/img/app/find.png" width="300"/></td>
 </tr>
 <tr>
 <td>
-<img src="https://gitee.com/microapp/linjiashop/raw/master/doc/img/app/guige.jpg" width="300"/></td>
+<img src="doc/img/app/guige.jpg" width="300"/></td>
 <td>
-<img src="https://gitee.com/microapp/linjiashop/raw/master/doc/img/app/login.png" width="300"/></td>
+<img src="doc/img/app/login.png" width="300"/></td>
 </tr>
 <tr>
 <td>
-<img src="https://gitee.com/microapp/linjiashop/raw/master/doc/img/app/mine.png" width="300"/></td>
+<img src="doc/img/app/mine.png" width="300"/></td>
 <td>
-<img src="https://gitee.com/microapp/linjiashop/raw/master/doc/img/app/cart.png" width="300"/></td>
+<img src="doc/img/app/cart.png" width="300"/></td>
 </tr>
 </table>
 
 ### Android
-![效果](https://gitee.com/microapp/linjiashop/raw/master/doc/img/app/mobile.gif)
+![效果](doc/img/app/mobile.gif)
 
 ### 后台管理
-![后台管理](https://gitee.com/microapp/linjiashop/raw/master/doc/guide/img/admin.gif)
+![后台管理](doc/guide/img/admin.gif)
 
 ## 技术选型
 - 核心框架：Spring Boot

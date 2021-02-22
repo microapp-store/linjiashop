@@ -16,7 +16,7 @@
 - linjiashop 包含了app版本（基于flutter) 仓库地址[gitee](https://gitee.com/microapp/linjiashop-flutter),[github](https://github.com/microapp-store/linjiashop-flutter) 
 - linjiashop 包含了uniapp版本（基于uniapp通过一套代码实现H5,Android，IOS，小程序等多平台 [项目地址](http://microapp.gitee.io/linjiashop/ecosystem/uniapp.html)
 - linjiashop 采用[web-flash](http://enilu.gitee.io/web-flash/)作为底层基础框架搭建，开发过程遇到问题请多阅读该项目文档。
-
+- linjiashop 是一个采用MIT协议的开源商城系统，任何人任何单位可以免费使用该商城和基于该项目开发搭建自己的商城系统。
 ## 演示
 ### 演示环境(没有配置下单发短信等功能)
 - 用户端H5(基于vue.js)：[http://linjiashop-vue.microapp.store](http://linjiashop.microapp.store) 演示账号/密码：15011112222/admin 
@@ -27,7 +27,7 @@
 ## 真实环境，支持下单支付
 - 公众号演示：关注公众号“外滩一号店"进行体验，或者扫描下面二维码关注
 
-    ![外滩一号店](https://gitee.com/microapp/linjiashop/raw/master/doc/img/online/wt1hd.jpg)
+    ![外滩一号店](doc/img/online/wt1hd.jpg)
    
 
 ## 功能模块

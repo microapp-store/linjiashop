@@ -74,11 +74,13 @@ public class OrderController extends BaseController {
         );
         List<Cart> list = cartService.queryAll(filters);
         Address address = null;
-        logger.info("chosenAddressId：{}", chosenAddressId);
         if (chosenAddressId == null || chosenAddressId == 0) {
             address = addressService.getDefaultAddr(idUser);
         } else {
             address = addressService.get(chosenAddressId);
+            if(address==null){
+                address = addressService.getDefaultAddr(idUser);
+            }
         }
         return Rets.success(Maps.newHashMap(
                 "list", list, "addr", address

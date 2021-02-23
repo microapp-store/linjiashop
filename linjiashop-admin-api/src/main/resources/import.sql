@@ -701,8 +701,8 @@ INSERT INTO `t_sys_user` (`id`, `create_by`, `create_time`, `modify_by`, `modify
 -- ----------------------------
 -- Records of t_shop_attr_key.sql
 -- ----------------------------
-INSERT INTO `t_shop_attr_key` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `attr_name`, `id_category`) VALUES (1, 1, '2019-12-10 18:57:57', NULL, NULL, '版本', 1);
-INSERT INTO `t_shop_attr_key` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `attr_name`, `id_category`) VALUES (2, 1, '2019-12-10 18:57:57', NULL, NULL, '颜色', 1);
+INSERT INTO `t_shop_attr_key` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `attr_name`, `id_category`) VALUES (1, 1, '2019-12-10 18:57:57', NULL, NULL, '版本', 19);
+INSERT INTO `t_shop_attr_key` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `attr_name`, `id_category`) VALUES (2, 1, '2019-12-10 18:57:57', NULL, NULL, '颜色', 19);
 -- ----------------------------
 -- Records of t_shop_attr_val.sql
 -- ----------------------------

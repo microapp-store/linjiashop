@@ -713,10 +713,10 @@ INSERT INTO `t_shop_attr_val` (`id`, `create_by`, `create_time`, `modify_by`, `m
 -- ----------------------------
 -- Records of t_shop_goods_sku.sql
 -- ----------------------------
-INSERT INTO `t_shop_goods_sku` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `code_name`, `id_goods`,`is_deleted`, `marketing_price`, `price`, `stock`) VALUES (1, NULL, '2019-12-10 18:57:57', NULL, NULL, '1,3', '3GB+32GB,珊瑚橙', 1, 0,NULL, '69900', 100);
-INSERT INTO `t_shop_goods_sku` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `code_name`, `id_goods`,`is_deleted`, `marketing_price`, `price`, `stock`) VALUES (2, NULL, '2019-12-10 18:57:57', NULL, NULL, '1,4', '3GB+32GB,深海蓝', 1, 0,NULL, '69900', 100);
-INSERT INTO `t_shop_goods_sku` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `code_name`, `id_goods`,`is_deleted`,`marketing_price`, `price`, `stock`) VALUES (3, NULL, '2019-12-10 18:57:57', NULL, NULL, '2,3', '4GB+64GB,珊瑚橙', 1, 0,'79900', '74900', 100);
-INSERT INTO `t_shop_goods_sku` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `code_name`, `id_goods`,`is_deleted`, `marketing_price`, `price`, `stock`) VALUES (4, NULL, '2019-12-10 18:57:57', NULL, NULL, '2,4', '4GB+64GB,深海蓝', 1, 0,'79900', '74900', 100);
+INSERT INTO `t_shop_goods_sku` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `code_name`, `id_goods`,`is_deleted`, `marketing_price`, `price`, `stock`) VALUES (1, NULL, '2019-12-10 18:57:57', NULL, NULL, '1,3', '3GB+32GB,珊瑚橙', 1, 0,NULL, '100', 100);
+INSERT INTO `t_shop_goods_sku` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `code_name`, `id_goods`,`is_deleted`, `marketing_price`, `price`, `stock`) VALUES (2, NULL, '2019-12-10 18:57:57', NULL, NULL, '1,4', '3GB+32GB,深海蓝', 1, 0,NULL, '100', 100);
+INSERT INTO `t_shop_goods_sku` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `code_name`, `id_goods`,`is_deleted`,`marketing_price`, `price`, `stock`) VALUES (3, NULL, '2019-12-10 18:57:57', NULL, NULL, '2,3', '4GB+64GB,珊瑚橙', 1, 0,'300', '200', 100);
+INSERT INTO `t_shop_goods_sku` (`id`, `create_by`, `create_time`, `modify_by`, `modify_time`, `code`, `code_name`, `id_goods`,`is_deleted`, `marketing_price`, `price`, `stock`) VALUES (4, NULL, '2019-12-10 18:57:57', NULL, NULL, '2,4', '4GB+64GB,深海蓝', 1, 0,'300', '200', 100);
 
 
 -- ----------------------------

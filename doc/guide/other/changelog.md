@@ -1,12 +1,24 @@
 # Change log
-## latest
+## v0.8
+- 主项目：[gitee](https://gitee.com/microapp/linjiashop/releases/v0.8) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.8)
+- linjiashop-uniapp: [gitee](https://gitee.com/microapp/linjiashop-uniapp/releases/v0.8) [github](https://github.com/microapp-store/linjiashop-uniapp/releases/tag/v0.8)
 ### Issues
 - Issue 定时取消超时未支付的订单
+- Change 完善默认的收获地址逻辑
+- Issue 商品分类增加二级分类功能
+- Issue 增加定时取消超时未支付的订单功能
 ### Fixes
 - Fix 用户锁定和删除状态可以登录的问题
 - Fix 修改管理员账号后，清空缓存
 - Fix 修改账号时数据校验问题
 - Fix 提交订单没有减免库存的问题
+- Fix 后台管理最近7天的订单查看不到今天和昨天的订单记录的问题
+- Fix 下单成功后无法扣减库存的问题
+- Fix 后台管理修改账号数据校验问题和旧账号信息缓存的问题
+- Fix 后台管理锁定和删除管理员后仍可以登录的问题
+- Fix 修复前端使用反向代理软件导致无法获取用户端真实ip的问题
+
+
 ## v0.7
 - 主项目：[gitee](https://gitee.com/microapp/linjiashop/releases/v0.7) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.7)
 - linjiashop-uniapp: [gitee](https://gitee.com/microapp/linjiashop-uniapp/releases/v0.7) [github](https://github.com/microapp-store/linjiashop-uniapp/releases/tag/v0.7)

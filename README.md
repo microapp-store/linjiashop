@@ -19,8 +19,8 @@
 - linjiashop 是一个采用MIT协议的开源商城系统，任何人任何单位可以免费使用该商城和基于该项目开发搭建自己的商城系统。
 ## 演示
 ### 演示环境(没有配置下单发短信等功能)
-- 用户端H5(基于vue.js)：[http://linjiashop-vue.microapp.store](http://linjiashop.microapp.store) 演示账号/密码：15011112222/admin 
-- 用户端H5(基于uniapp)[http://linjiashop.microapp.store/](http://linjiashop-uni.microapp.store/) 演示账号/密码：15011112222/admin
+- 用户端H5(基于vue.js)：[http://linjiashop-vue.microapp.store](http://linjiashop-vue.microapp.store) 演示账号/密码：15011112222/admin 
+- 用户端H5(基于uniapp)[http://linjiashop.microapp.store/](http://linjiashop.microapp.store/) 演示账号/密码：15011112222/admin
 - App(基于uniapp)[http://fir.microapp.store/linjiashop](http://fir.microapp.store/linjiashop) 演示账号/密码：15011112222/admin
 - 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 管理员账号/密码：admin/admin
 

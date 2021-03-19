@@ -1,4 +1,7 @@
 # Change log
+##latest
+### Issues
+- node-sass替换为dart-sass
 ## v0.8
 - 主项目：[gitee](https://gitee.com/microapp/linjiashop/releases/v0.8) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.8)
 - linjiashop-uniapp: [gitee](https://gitee.com/microapp/linjiashop-uniapp/releases/v0.8) [github](https://github.com/microapp-store/linjiashop-uniapp/releases/tag/v0.8)

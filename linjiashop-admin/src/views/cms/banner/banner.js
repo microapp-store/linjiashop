@@ -168,7 +168,7 @@ export default {
     remove() {
       if (this.checkSel()) {
         var id = this.selRow.id
-        this.$confirm(this.$t('common.deleteConfirm'), this.$t('common.tooltip'), {
+        this.$confirm('该操作将连通商品类别余banner关联关系一并删除，确认该操作？', this.$t('common.tooltip'), {
           confirmButtonText: this.$t('button.submit'),
           cancelButtonText: this.$t('button.cancel'),
           type: 'warning'

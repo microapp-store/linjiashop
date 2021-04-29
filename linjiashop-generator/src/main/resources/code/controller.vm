@@ -5,7 +5,7 @@ import ${table.ServiceFullClassName};
 
 import ${table.basePackageName}.bean.core.BussinessLog;
 import ${table.basePackageName}.bean.constant.factory.PageFactory;
-import ${table.basePackageName}.bean.enumeration.BizExceptionEnum;
+import ${table.basePackageName}.bean.enumeration.ApplicationExceptionEnum;
 import ${table.basePackageName}.bean.exception.ApplicationException;
 import ${table.basePackageName}.bean.vo.front.Rets;
 

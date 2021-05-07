@@ -22,8 +22,8 @@ pageClass: getting-started
 
 ## 演示
 ### 演示环境
-- 用户端H5：[http://linjiashop.microapp.store](http://linjiashop.microapp.store) 演示账号/密码：15011112222/admin 
-- 用户端H5(基于uniapp)[http://linjiashop-uni.microapp.store/](http://linjiashop-uni.microapp.store/)
+- 用户端H5(基于vue.js)：[http://linjiashop-vue.microapp.store](http://linjiashop-vue.microapp.store) 演示账号/密码：15011112222/admin 
+- 用户端H5(基于uniapp)[http://linjiashop.microapp.store/](http://linjiashop.microapp.store/) 演示账号/密码：15011112222/admin
 - App(基于uniapp)[http://fir.microapp.store/linjiashop](http://fir.microapp.store/linjiashop)
 - 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 管理员账号/密码：admin/admin
 

@@ -55,7 +55,7 @@ public class ShopUserService extends BaseService<ShopUser,Long,ShopUserRepositor
             throw  new ApplicationException(ApplicationExceptionEnum.REQUEST_TOO_MANY);
         }
         cacheDao.hset(CacheDao.HOUR,key,smsCode);
-        cacheDao.hset(CacheDao.DAY,timesKey,sendTimes++);
+        cacheDao.hset(CacheDao.DAY,timesKey,++sendTimes);
         logger.info("短信验证码:{}",smsCode);
         messageService.sendSms(MessageTemplateEnum.REGISTER_CODE.getCode(),mobile, Maps.newLinkedHashMap("code",smsCode));
         return true;
@@ -84,7 +84,7 @@ public class ShopUserService extends BaseService<ShopUser,Long,ShopUserRepositor
             throw  new ApplicationException(ApplicationExceptionEnum.REQUEST_TOO_MANY);
         }
         cacheDao.hset(CacheDao.HOUR,key,smsCode);
-        cacheDao.hset(CacheDao.DAY,timesKey,sendTimes++);
+        cacheDao.hset(CacheDao.DAY,timesKey,++sendTimes);
         logger.info("短信验证码:{}",smsCode);
         return smsCode;
     }

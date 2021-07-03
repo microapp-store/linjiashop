@@ -6,6 +6,7 @@ import { getToken } from '@/utils/auth'
 import permission from '@/directive/permission/index.js'
 import { Loading } from 'element-ui'
 export default {
+  name:'category',
   directives: {permission},
   data() {
     return {

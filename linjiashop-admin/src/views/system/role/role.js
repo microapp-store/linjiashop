@@ -1,13 +1,16 @@
 import { remove, getList, save, savePermissons } from '@/api/system/role'
 import { list as getDeptList } from '@/api/system/dept'
 import { menuTreeListByRoleId } from '@/api/system/menu'
+import permission from '@/directive/permission/index.js'
 
 export default {
+  name:'role',
+  directives: { permission },
   data() {
     return {
       formVisible: false,
       formTitle: '添加角色',
-      deptList: [],
+
       roleList: [],
       isAdd: true,
       checkedPermissionKeys: [],
@@ -19,27 +22,16 @@ export default {
       },
       permissonVisible: false,
       deptTree: {
-        show: false,
-        defaultProps: {
-          id: 'id',
-          label: 'simplename',
-          children: 'children'
-        }
+          data: [],
       },
       roleTree: {
-        show: false,
-        defaultProps: {
-          id: 'id',
-          label: 'name',
-          children: 'children'
-        }
+        data:[],
       },
-
       form: {
         tips: '',
         name: '',
         deptid: '',
-        pid: 0,
+        pid: undefined,
         id: '',
         version: '',
         deptName: '',
@@ -57,7 +49,10 @@ export default {
         ]
       },
       listQuery: {
-        name: undefined
+        page: 1,
+        limit: 20,
+        name: undefined,
+        tips:undefined,
       },
       total: 0,
       list: null,
@@ -81,14 +76,15 @@ export default {
   methods: {
     init() {
       getDeptList().then(response => {
-        this.deptList = response.data
+        this.deptTree.data = response.data
       })
       this.fetchData()
     },
     fetchData() {
       this.listLoading = true
       getList(this.listQuery).then(response => {
-        this.list = response.data
+        this.list = response.data.records
+        this.roleTree.data = response.data.records
         this.listLoading = false
         this.total = response.data.total
       })
@@ -100,6 +96,7 @@ export default {
     reset() {
       this.listQuery.name = ''
       this.listQuery.page = 1
+      this.listQuery.tips = ''
       this.fetchData()
     },
     handleFilter() {
@@ -128,11 +125,10 @@ export default {
       this.form = {
         tips: '',
         name: '',
-        deptid: '',
-        pid: 0,
+        deptid: undefined,
+        pid: undefined,
         id: '',
         version: '',
-        deptName: '',
         pName: '',
         num: 1
 
@@ -178,6 +174,11 @@ export default {
       })
       return false
     },
+    editItem(record){
+      this.selRow= Object.assign({},record);
+      console.log('sel',this.selRow);
+      this.edit()
+    },
     edit() {
       if (this.checkSel()) {
         this.isAdd = false
@@ -187,6 +188,10 @@ export default {
         this.formTitle = '修改角色'
         this.formVisible = true
       }
+    },
+    removeItem(record){
+      this.selRow = record
+      this.remove()
     },
     remove() {
       if (this.checkSel()) {
@@ -203,11 +208,18 @@ export default {
             })
             this.fetchData()
           }).catch( err=> {
-
+            this.$notify.error({
+              title: '错误',
+              message:err,
+            })
           })
         }).catch(() => {
         })
       }
+    },
+    openPermissionsItem(record){
+      this.selRow = record
+      this.openPermissions()
     },
     openPermissions() {
       if (this.checkSel()) {
@@ -235,17 +247,6 @@ export default {
           type: 'success'
         })
       })
-    },
-    handleDeptNodeClick(data, node) {
-      this.form.deptid = data.id
-      this.form.deptName = data.simplename
-      this.deptTree.show = false
-    },
-    handleRoleNodeClick(data, node) {
-      this.form.pid = data.id
-      this.form.pName = data.name
-      this.roleTree.show = false
     }
-
   }
 }

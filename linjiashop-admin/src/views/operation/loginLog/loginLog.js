@@ -1,6 +1,7 @@
 import { clear, getList } from '@/api/system/loginLog'
 
 export default {
+  name:'loginLog',
   data() {
     return {
       form: {

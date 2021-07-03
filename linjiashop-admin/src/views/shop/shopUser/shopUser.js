@@ -2,6 +2,7 @@ import {getList, remove, save} from '@/api/shop/shopUser'
 
 import { getApiUrl } from '@/utils/utils'
 export default {
+  name:'shopUser',
   data() {
     return {
       formVisible: false,

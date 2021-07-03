@@ -2,6 +2,7 @@ import orderApi from '@/api/shop/order'
 import expressApi from '@/api/system/express'
 import { getApiUrl } from '@/utils/utils'
 export default {
+  name:'order',
   data() {
     return {
       listQuery: {

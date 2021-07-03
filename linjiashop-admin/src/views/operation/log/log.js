@@ -1,6 +1,7 @@
 import { clear, getList } from '@/api/system/log'
 
 export default {
+  name:'log',
   data() {
     return {
       options: [{

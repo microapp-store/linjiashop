@@ -2,6 +2,7 @@
 import { remove, getList, save } from '@/api/${table.lastPackageName}/${table.entityNameLowerFirstChar}'
 
 export default {
+  name:'${table.entityNameLowerFirstChar}',
   data() {
     return {
       formVisible: false,

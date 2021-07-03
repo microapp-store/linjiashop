@@ -5,6 +5,7 @@ import {getApiUrl} from '@/utils/utils'
 import permission from '@/directive/permission/index.js'
 
 export default {
+  name:'topic',
   directives: {permission},
   data() {
     return {

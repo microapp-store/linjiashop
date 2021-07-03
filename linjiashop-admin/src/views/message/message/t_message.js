@@ -1,6 +1,7 @@
 import { clear, getList, save } from '@/api/message/message'
 
 export default {
+  name:'msg',
   data() {
     return {
       formVisible: false,

@@ -2,6 +2,7 @@ import { remove, getList, save, exportXls,getByPrefix,saveGroup } from '@/api/sy
 import { getApiUrl } from '@/utils/utils'
 
 export default {
+  name:'cfg',
   data() {
     return {
       formVisible: false,

@@ -1,6 +1,7 @@
 import { remove, getList, save } from '@/api/shop/cart'
 
 export default {
+  name:'cart',
   data() {
     return {
       formVisible: false,

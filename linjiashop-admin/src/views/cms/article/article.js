@@ -3,6 +3,7 @@ import articleApi from '@/api/cms/article'
 import { getApiUrl } from '@/utils/utils'
 
 export default {
+  name:'article',
   data() {
     return {
       formVisible: false,

@@ -1,6 +1,7 @@
 import { remove, getList, save } from '@/api/cms/channel'
 
 export default {
+  name:'chnnel',
   data() {
     return {
       formVisible: false,

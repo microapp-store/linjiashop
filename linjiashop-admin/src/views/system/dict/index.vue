@@ -13,9 +13,9 @@
       <br>
       <el-row>
         <el-col :span="24">
-          <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
-          <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
-          <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
+          <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add" v-permission="['/dict/add']">{{ $t('button.add') }}</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit" v-permission="['/dict/update']">{{ $t('button.edit') }}</el-button>
+          <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove" v-permission="['/dict/delete']">{{ $t('button.delete') }}</el-button>
         </el-col>
       </el-row>
     </div>
@@ -38,6 +38,13 @@
           {{scope.row.detail}}
         </template>
       </el-table-column>
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button type="text" size="mini" icon="el-icon-edit" @click.native="editItem(scope.row)" v-permission="['/dict/update']">{{ $t('button.edit') }}</el-button>
+          <el-button type="text" size="mini" icon="el-icon-delete" @click.native="removeItem(scope.row)" v-permission="['/dict/delete']">{{ $t('button.delete') }}</el-button>
+        </template>
+
+      </el-table-column>
 
     </el-table>
 
@@ -46,7 +53,7 @@
       :title="formTitle"
       :visible.sync="formVisible"
       width="60%">
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
 
         <el-form-item label="名称" prop="name">
           <el-input v-model="form.name"  minlength=1></el-input>
@@ -60,14 +67,14 @@
             required: true, message: '不能为空', trigger: 'blur'
           }"
         >
-          <el-col :span="10">
+          <el-col :span="9">
           <el-input v-model="rec.key" placeholder="值"></el-input>
           </el-col>
           <el-col class="line" :span="1">&nbsp; </el-col>
-          <el-col :span="10">
+          <el-col :span="9">
           <el-input v-model="rec.value" placeholder="名称"></el-input>
           </el-col>
-          <el-col :span="3">&nbsp;
+          <el-col :span="4">&nbsp;
           <el-button @click.prevent="removeDetail(rec)" type="danger" icon="el-icon-delete" >{{ $t('button.delete')
             }}</el-button>
           </el-col>

@@ -1,6 +1,7 @@
 import expressApi from '@/api/system/express'
 
 export default {
+  name: 'express',
   data() {
     return {
       formVisible: false,
@@ -177,9 +178,9 @@ export default {
       }
     },
     changeDisabled(data) {
-      expressApi.changeDisabled(data.id,data.disabled).then(response => {
+      expressApi.changeDisabled(data.id, data.disabled).then(response => {
         this.$message({
-          message: data.disabled?'禁用成功':'启用成功',
+          message: data.disabled ? '禁用成功' : '启用成功',
           type: 'success'
         })
       })

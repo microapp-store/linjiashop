@@ -1,6 +1,7 @@
 import { remove, getList, save } from '@/api/shop/favorite'
 
 export default {
+  name:'favorite',
   data() {
     return {
       formVisible: false,

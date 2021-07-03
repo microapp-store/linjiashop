@@ -1,8 +1,10 @@
 import treeTable from '@/components/TreeTable'
 import { list, save, del } from '@/api/system/dept'
+import permission from '@/directive/permission/index.js'
 
 export default {
-  name: 'customTreeTableDemo',
+  directives: { permission },
+  name: 'dept',
   components: { treeTable },
   data() {
     return {
@@ -11,20 +13,15 @@ export default {
       formVisible: false,
       formTitle: '',
       isAdd: false,
-
-      showTree: false,
-      defaultProps: {
-        id: 'id',
-        label: 'simplename',
-        children: 'children'
+      deptTree: {
+        data: [],
       },
       form: {
         id: '',
         simplename: '',
         fullname: '',
-        pid: '',
-        num: '',
-        tips: ''
+        pid: undefined,
+        num: ''
       },
       rules: {
         simplename: [
@@ -50,14 +47,9 @@ export default {
       this.listLoading = true
       list().then(response => {
         this.data = response.data
+         this.deptTree.data = response.data
         this.listLoading = false
       })
-    },
-    handleNodeClick(data, node) {
-      console.log(data)
-      this.form.pid = data.id
-      this.form.pname = data.simplename
-      this.showTree = false
     },
     checkSel() {
       if (this.selRow && this.selRow.id) {
@@ -80,7 +72,7 @@ export default {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           console.log('form', self.form)
-          const menuData = {id:self.form.id,simplename:self.form.simplename,fullname:self.form.fullname,num:self.form.num,pid:self.form.pid,tips:self.form.tips}//self.form
+          const menuData = {id:self.form.id,simplename:self.form.simplename,fullname:self.form.fullname,num:self.form.num,pid:self.form.pid}//self.form
           menuData.parent = null
           save(menuData).then(response => {
             console.log(response)
@@ -96,31 +88,44 @@ export default {
         }
       })
     },
-    edit(row) {
-      this.form = row
-
-      if (row.parent) {
-        this.form.pid = row.parent.id
-        this.form.pname = row.parent.simplename
+    editItem(record){
+      this.selRow= Object.assign({},record);
+      if(this.selRow.pid=='0'){
+      this.selRow.pid = undefined
       }
-      this.formTitle = '编辑部门'
-      this.formVisible = true
-      this.isAdd = false
+      this.edit()
     },
-    remove(row) {
-      this.$confirm('确定删除该记录?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        del(row.id).then(response => {
-          this.$message({
-            message: '删除成功',
-            type: 'success'
+    edit(){
+        if (this.checkSel()) {
+        this.isAdd = false
+        this.form = Object.assign({}, this.selRow);
+        this.form.statusBool = this.form.statusName === '启用'
+        this.form.password = ''
+        this.formTitle = '修改用户'
+        this.formVisible = true
+      }
+    },
+    removeItem(record){
+      this.selRow = record
+      this.remove()
+    },
+    remove() {
+      if(this.checkSel()) {
+        this.$confirm('确定删除该记录?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          const row = this.selRow
+          del(row.id).then(response => {
+            this.$message({
+              message: '删除成功',
+              type: 'success'
+            })
+            this.fetchData()
           })
-          this.fetchData()
         })
-      })
+      }
     }
   }
 }

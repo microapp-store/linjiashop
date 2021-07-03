@@ -9,6 +9,7 @@ import {getToken} from '@/utils/auth'
 import goodsSku from "../../../api/shop/goodsSku";
 
 export default {
+  name:'goodsEdit',
   components: {editorImage},
   props: {
     id: {

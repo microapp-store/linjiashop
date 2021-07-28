@@ -1,4 +1,4 @@
-import { remove, getList, save, disable, enable } from '@/api/system/task'
+import { remove, getList, save, disable, enable, runOnce } from '@/api/system/task'
 import permission from '@/directive/permission/index.js'
 
 export default {
@@ -197,7 +197,22 @@ export default {
         }).catch(() => {
         })
       }
-    }
-
+    },
+    runOnce(id) {
+      this.$confirm('确定立即执行该定时任务?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        runOnce(id).then(response => {
+          this.$message({
+            message: '操作成功',
+            type: 'success'
+          })
+          this.fetchData()
+        })
+      }).catch(() => {
+      })
+    },
   }
 }

@@ -53,3 +53,13 @@ export function disable(id) {
     }
   })
 }
+
+export function runOnce(id) {
+  return request({
+    url: '/task/runOnce/',
+    method: 'POST',
+    params: {
+      taskId: id
+    }
+  })
+}

@@ -113,4 +113,21 @@ public class TaskService extends BaseService<Task,Long,TaskRepository> {
 	public List<Task> queryAllByNameLike(String name) {
 		return taskRepository.findByNameLike("%"+name+"%");
 	}
+
+	public boolean runOnce(Long id) {
+		Task task = get(id);
+		logger.info("运行一次定时任务{}", id.toString());
+
+		try {
+			QuartzJob job = jobService.getJob(task);
+			if (job != null) {
+				TaskUtils.executeJob(job);
+				return true;
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+		return false;
+	}
+
 }

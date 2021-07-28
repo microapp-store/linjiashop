@@ -106,4 +106,16 @@ public class TaskController extends BaseController {
         return Rets.success(page);
     }
 
+
+    @RequestMapping(value = "/runOnce", method = RequestMethod.POST)
+    @BussinessLog(value = "执行一次定时任务", key = "taskId")
+    @RequiresPermissions(value = {Permission.TASK_EDIT})
+    public Object runOnce(@RequestParam Long taskId) {
+        boolean result = taskService.runOnce(taskId);
+        if (result) {
+            return Rets.success();
+        } else {
+            return Rets.failure("执行定时任务发生错误");
+        }
+    }
 }

@@ -8,7 +8,7 @@
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/enilu/linjiashop/blob/master/LICENSE)
 [![Gitee stars](https://gitee.com/microapp/linjiashop/badge/star.svg?theme=social)](https://gitee.com/microapp/linjiashop)
 [![GitHub stars](https://img.shields.io/github/stars/microapp-store/linjiashop.svg?style=social&label=Stars)](https://github.com/microapp-store/linjiashop)
- 
+
 
 
 - linjiashop 是一个基于[Spring Boot](https://spring.io/projects/spring-boot/)和[Vue.js](https://cn.vuejs.org)的web商城系统
@@ -30,7 +30,7 @@
 - 公众号演示：关注公众号“外滩一号店"进行体验，或者扫描下面二维码关注
 
     ![外滩一号店](doc/img/online/wt1hd.jpg)
-   
+
 
 ## 功能模块
 linjiashop包含了后台管理功能和手机端商城业务功能
@@ -120,7 +120,7 @@ _商品素材取自小米商城_
     CREATE USER 'linjiashop'@'%' IDENTIFIED BY 'linjiaSHOP@191028';
     GRANT ALL privileges ON linjiashop.* TO 'linjiashop'@'%';
     flush privileges;
-    ```     
+    ```
 - 下载项目测试数据的图片：链接：https://pan.baidu.com/s/1i06H4dAM1M7mYQU9etBrfw  提取码：mqvf  ，将图片存放到t_sys_cfg表中system.file.upload.path配置的目录下(注意该目录为绝对路径，该目录可以通过“系统管理”-“参数管理”进行配置)
 - 启动后台管理
     - 启动后台管理api服务:linjiashop-admin-api
@@ -129,7 +129,7 @@ _商品素材取自小米商城_
             ## 首次启动需要设置下列配置项设置为create，以便系统可以自动创建表并导入./import.sql测试数据文件
             ## 如果下面配置无法自动建表并导入测试数据文件；则可以手动初始化数据库，手动使用的初始化文件文件位于：doc/database.sql
             spring.jpa.hibernate.ddl-auto=create
-            ```                    
+            ```
         - 启动linjiashop-admin-api主类：cn.enilu.flash.api.AdminApiApplication，访问http://localhost:8082/swagger-ui.html ， 保证api服务启动成功
     - 启动后台管理的前端界面:linjiashop-admin
         - 运行 npm install --registry=https://registry.npm.taobao.org
@@ -149,12 +149,12 @@ _商品素材取自小米商城_
         - 运行  npm install --registry=https://registry.npm.taobao.org
         - 运行npm run dev
         - 启动微信开发工具导入linjiashop-wxapp/dist/wx 目录即可预览小程序
- 
+
 ## 技术交流
 -  qq群：1群：254059156（已满） 2群：909904351；qq群仅为方便网友互相交流，作者基本不会在群里回复，如果需要跟作者提问题，可以通过项目主页提issue；qq群禁止发广告，发者立删
 ## 在线文档
-- 项目文档：[http://microapp.gitee.io/linjiashop](http://microapp.gitee.io/linjiashop/)
-- 该项目克隆并扩展自[web-flash](https://github.com/enilu/web-flash),所以开发的时候多看看web-flash的[在线文档](http://enilu.gitee.io/web-flash)
+- 项目文档：[http://linjiashop.enilu.cn/](http://linjiashop.enilu.cn/)
+- 该项目克隆并扩展自web-flash,所以开发的时候多看看web-flash的[在线文档](http://webflash.enilu.cn)
 - 该项目手机端linjiashop-mobile使用有赞Vant组件库，开发过程可以参考Vant的[在线文档](https://youzan.github.io/vant/#/zh-CN/intro)
 - 该项目微信小程序使用mpvue+vant-weapp，开发过程请参考相关文档：[mpvue文档](http://mpvue.com/),[vant-weapp文档](https://youzan.github.io/vant-weapp/#/intro)
 - 该项目的业务功能和部分功能代码参考复用了[litemall](https://github.com/linlinjava/litemall)，感谢[linlinjava](https://github.com/linlinjava)

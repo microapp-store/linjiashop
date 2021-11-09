@@ -132,7 +132,7 @@ _商品素材取自小米商城_
             ```
         - 启动linjiashop-admin-api主类：cn.enilu.flash.api.AdminApiApplication，访问http://localhost:8082/swagger-ui.html ， 保证api服务启动成功
     - 启动后台管理的前端界面:linjiashop-admin
-        - 运行 npm install --registry=https://registry.npm.taobao.org
+        - 运行 npm install --registry=https://registry.npmmirror.com
         - 运行npm run dev
         - 启动成功后访问 http://localhost:9528 ,登录，用户名密码:admin/admin 
 - 启动手机端商城
@@ -140,13 +140,13 @@ _商品素材取自小米商城_
         - 修改linjiashop-mobile-api中数据库连接欸配置
         - 启动linjiashop-mobile-api主类：cn.enilu.flash.MobileApiApplication,访问http://localhost:8081/swagger-ui.html ， 保证api服务启动成功
     - 启动手机商城的前端:linjiashop-mobile
-        - 运行 npm install --registry=https://registry.npm.taobao.org
+        - 运行 npm install --registry=https://registry.npmmirror.com
         - 运行npm run dev
         - 启动成功后访问 http://localhost:8080/#/index
 - 微信小程序开发
     - 首先启动后台api服务，和h5公用一个后台服务，即：linjiashop-mobile-api
     - 进入linjiashop-wxapp目录
-        - 运行  npm install --registry=https://registry.npm.taobao.org
+        - 运行  npm install --registry=https://registry.npmmirror.com
         - 运行npm run dev
         - 启动微信开发工具导入linjiashop-wxapp/dist/wx 目录即可预览小程序
 

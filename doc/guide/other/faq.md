@@ -11,7 +11,7 @@ java -Dfile.encoding=utf-8 -jar xxxxxxx.jar
 - 删除node_modules目录
 - 使用淘宝源重新下载安装依赖,剩下的交给人品
 ```shell
-npm install --registry=https://registry.npm.taobao.org
+npm install --registry=https://registry.npmmirror.com
 ```
 
 ## 使用代码生成器的时候生成不了代码

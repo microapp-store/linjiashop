@@ -4,10 +4,8 @@ import cn.enilu.flash.bean.constant.factory.PageFactory;
 import cn.enilu.flash.bean.entity.shop.*;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
-import cn.enilu.flash.service.shop.AttrKeyService;
-import cn.enilu.flash.service.shop.CategoryService;
-import cn.enilu.flash.service.shop.GoodsService;
-import cn.enilu.flash.service.shop.GoodsSkuService;
+import cn.enilu.flash.security.JwtUtil;
+import cn.enilu.flash.service.shop.*;
 import cn.enilu.flash.utils.Lists;
 import cn.enilu.flash.utils.Maps;
 import cn.enilu.flash.utils.StringUtil;
@@ -35,6 +33,8 @@ public class GoodsController extends BaseController {
 
     @Autowired
     private AttrKeyService attrKeyService;
+    @Autowired
+    private FavoriteService favoriteService;
 
     /**
      * 获取指定类别下的商品列表
@@ -109,6 +109,7 @@ public class GoodsController extends BaseController {
         ));
 
 
+
         Map skuMap = Maps.newHashMap();
 
         List<Map> tree = Lists.newArrayList();
@@ -161,9 +162,19 @@ public class GoodsController extends BaseController {
         skuMap.put("tree", tree);
         skuMap.put("stock_num", goods.getStock());
         skuMap.put("hide_stock", false);
-        return Rets.success(Maps.newHashMap(
+        Map result = Maps.newHashMap(
                 "goods", goods,
                 "sku", skuMap
-        ));
+        );
+        try {
+            //如果用户已登录，则获取用户是否收藏该商品
+            Long idUser = JwtUtil.getUserId();
+            Favorite favorite = favoriteService.get(idUser, id);
+            result.put("favorite",favorite!=null);
+
+        }catch (Exception e){
+            result.put("favorite",false);
+        }
+        return Rets.success(result);
     }
 }

@@ -66,6 +66,7 @@
                      v-if="scope.row.disabled===true" style="color:gray;">启用</el-button>
           <el-button type="text" icon="el-icon-open" size="mini" @click.native="disable(scope.row.id)" v-permission="['/task/update']"
                      v-if="scope.row.disabled===false" style="color:green;">禁用</el-button>
+          <el-button type="text" icon="el-icon-caret-right" size="mini" @click.native="runOnce(scope.row.id)" v-permission="['/task/update']">立即执行一次</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -121,4 +122,3 @@
 <style rel="stylesheet/scss" lang="scss" scoped>
   @import "src/styles/common.scss";
 </style>
-

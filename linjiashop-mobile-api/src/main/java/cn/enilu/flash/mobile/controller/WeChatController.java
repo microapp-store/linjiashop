@@ -10,6 +10,7 @@ import cn.enilu.flash.security.UserService;
 import cn.enilu.flash.service.api.WeixinService;
 import cn.enilu.flash.service.shop.ShopUserService;
 import cn.enilu.flash.utils.Maps;
+import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.web.controller.BaseController;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,27 +43,32 @@ public class WeChatController extends BaseController {
     public  Object getWxOpenId(String code, HttpServletRequest request) {
         WechatInfo wechatInfo = weixinService.getWechatInfoByCode(code);
         if(wechatInfo==null){
-            return Rets.failure("当前微信用户已绑定其他手机号");
+            return Rets.failure("获取微信消息失败");
         }
-        ShopUser user = shopUserService.findByWechatOpenId(wechatInfo.getOpenId());
-        if(user==null) {
+        ShopUser old = shopUserService.findByWechatOpenId(wechatInfo.getOpenId());
+        if(old==null) {
 
-            user = shopUserService.getCurrentUser();
-            if(user!=null){
-                user.setWechatOpenId(wechatInfo.getOpenId());
-                user.setWechatHeadImgUrl(wechatInfo.getHeadUrl());
-                user.setNickName(wechatInfo.getNickName());
-                shopUserService.update(user);
+           ShopUser currentUser = shopUserService.getCurrentUser();
+           if(currentUser!=null
+                   && StringUtil.isNotEmpty(currentUser.getWechatOpenId())
+                   && !currentUser.getWechatOpenId().equals(wechatInfo.getOpenId())){
+               return Rets.failure("当前微信用户已绑定其他手机号");
+           }
+            if(currentUser!=null){
+                currentUser.setWechatOpenId(wechatInfo.getOpenId());
+                currentUser.setWechatHeadImgUrl(wechatInfo.getHeadUrl());
+                currentUser.setNickName(wechatInfo.getNickName());
+                shopUserService.update(currentUser);
             }
         }
-        if(user==null){
-            user = shopUserService.registerByWechatInfo(wechatInfo);
+        if(old==null){
+            old = shopUserService.registerByWechatInfo(wechatInfo);
         }
-        String token = userService.loginForToken(new JwtUser(user));
-        user.setLastLoginTime(new Date());
-        shopUserService.update(user);
+        String token = userService.loginForToken(new JwtUser(old));
+        old.setLastLoginTime(new Date());
+        shopUserService.update(old);
         UserInfo userInfo = new UserInfo();
-        BeanUtils.copyProperties(user,userInfo);
+        BeanUtils.copyProperties(old,userInfo);
         userInfo.setRefreshWechatInfo(false);
         Map result = Maps.newHashMap(
                 "user",userInfo,

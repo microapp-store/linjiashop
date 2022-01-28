@@ -99,8 +99,12 @@ public class CfgController extends BaseController {
     @BussinessLog(value = "编辑参数", key = "cfgName")
     @RequiresPermissions(value = {Permission.CFG_EDIT})
     public Object save(@ModelAttribute @Valid Cfg cfg){
+        if(cfgService.isRepeat(cfg)){
+            return Rets.failure("请勿与现有参数的名称重复");
+        }
         if(cfg.getId()!=null){
             Cfg old = cfgService.get(cfg.getId());
+
             LogObjectHolder.me().set(old);
             old.setCfgName(cfg.getCfgName());
             old.setCfgValue(cfg.getCfgValue());

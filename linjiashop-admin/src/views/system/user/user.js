@@ -184,7 +184,7 @@ export default {
               //冻结
               form.status = 2
             }
-            form.birthday = parseTime(form.birthday, '{y}-{m}-{d}')
+
             form.createtime = parseTime(form.createtime)
             saveUser(form).then(response => {
               this.$message({

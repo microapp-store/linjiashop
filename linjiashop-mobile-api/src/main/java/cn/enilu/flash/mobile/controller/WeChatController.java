@@ -39,43 +39,56 @@ public class WeChatController extends BaseController {
     @Autowired
     private CacheDao cacheDao;
 
-    @RequestMapping(value = "getWxOpenId",method = RequestMethod.POST)
-    public  Object getWxOpenId(String code, HttpServletRequest request) {
+    @RequestMapping(value = "getWxOpenId", method = RequestMethod.POST)
+    public Object getWxOpenId(String code, HttpServletRequest request) {
         WechatInfo wechatInfo = weixinService.getWechatInfoByCode(code);
-        if(wechatInfo==null){
+        if (wechatInfo == null) {
             return Rets.failure("获取微信消息失败");
         }
-        ShopUser old = shopUserService.findByWechatOpenId(wechatInfo.getOpenId());
-        if(old==null) {
+        ShopUser currentWechatUser = shopUserService.findByWechatOpenId(wechatInfo.getOpenId());
 
-           ShopUser currentUser = shopUserService.getCurrentUser();
-           if(currentUser!=null
-                   && StringUtil.isNotEmpty(currentUser.getWechatOpenId())
-                   && !currentUser.getWechatOpenId().equals(wechatInfo.getOpenId())){
-               return Rets.failure("当前微信用户已绑定其他手机号");
-           }
-            if(currentUser!=null){
-                currentUser.setWechatOpenId(wechatInfo.getOpenId());
-                currentUser.setWechatHeadImgUrl(wechatInfo.getHeadUrl());
-                currentUser.setNickName(wechatInfo.getNickName());
-                shopUserService.update(currentUser);
+        ShopUser loginUser = shopUserService.getCurrentUser();
+        Map result = null;
+        if (currentWechatUser != null) {
+            if (loginUser != null) {
+                if (StringUtil.isNotEmpty(loginUser.getWechatOpenId())
+                        && !loginUser.getWechatOpenId().equals(wechatInfo.getOpenId())) {
+                    return Rets.failure("当前微信用户已绑定其他手机号");
+                }else{
+                    //当前用户通过手机登陆后获取微信信息
+                    loginUser.setWechatOpenId(wechatInfo.getOpenId());
+                    loginUser.setWechatHeadImgUrl(wechatInfo.getHeadUrl());
+                    loginUser.setNickName(wechatInfo.getNickName());
+                    shopUserService.update(loginUser);
+                    result =  login(loginUser);
+                }
+            }else{
+                //当前用户通过微信自动登录
+                result =  login(currentWechatUser);
             }
+        }else{
+            if(loginUser==null){
+                //用户手册通过微信自动登录+注册
+               loginUser =  shopUserService.registerByWechatInfo(wechatInfo);
+            }
+            result = login(loginUser);
         }
-        if(old==null){
-            old = shopUserService.registerByWechatInfo(wechatInfo);
-        }
-        String token = userService.loginForToken(new JwtUser(old));
-        old.setLastLoginTime(new Date());
-        shopUserService.update(old);
-        UserInfo userInfo = new UserInfo();
-        BeanUtils.copyProperties(old,userInfo);
-        userInfo.setRefreshWechatInfo(false);
-        Map result = Maps.newHashMap(
-                "user",userInfo,
-                "token",token
-        );
         return Rets.success(result);
     }
+    private Map login(ShopUser shopUser){
+        String token = userService.loginForToken(new JwtUser(shopUser));
+        shopUser.setLastLoginTime(new Date());
+        shopUserService.update(shopUser);
+        UserInfo userInfo = new UserInfo();
+        BeanUtils.copyProperties(shopUser, userInfo);
+        userInfo.setRefreshWechatInfo(false);
+        Map result = Maps.newHashMap(
+                "user", userInfo,
+                "token", token
+        );
+        return result;
+    }
+
     @RequestMapping(value = "getWxSign", method = RequestMethod.POST)
     public Object getWxSign(@RequestParam("url") String url) {
         Map<String, String> map = weixinService.getSign(url);

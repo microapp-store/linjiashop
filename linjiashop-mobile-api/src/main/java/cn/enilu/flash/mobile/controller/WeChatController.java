@@ -42,7 +42,7 @@ public class WeChatController extends BaseController {
     public  Object getWxOpenId(String code, HttpServletRequest request) {
         WechatInfo wechatInfo = weixinService.getWechatInfoByCode(code);
         if(wechatInfo==null){
-            return Rets.failure("获取微信消息失败");
+            return Rets.failure("当前微信用户已绑定其他手机号");
         }
         ShopUser user = shopUserService.findByWechatOpenId(wechatInfo.getOpenId());
         if(user==null) {

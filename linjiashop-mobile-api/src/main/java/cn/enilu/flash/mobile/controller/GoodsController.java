@@ -45,14 +45,14 @@ public class GoodsController extends BaseController {
     @RequestMapping(value = "/queryGoods", method = RequestMethod.GET)
     public Object queryGoods(@RequestParam("idCategory") Long idCategory) {
         Page<Goods> page = new PageFactory<Goods>().defaultPage();
-        List<Category> categories = categoryService.queryAll(SearchFilter.build("pid",idCategory));
+        List<Category> categories = categoryService.queryAll(SearchFilter.build("pid", idCategory));
         List<Long> ids = Lists.newArrayList(idCategory);
-        categories.forEach(item->{
+        categories.forEach(item -> {
             ids.add(item.getId());
         });
-        if(ids.size()==1) {
+        if (ids.size() == 1) {
             page.addFilter(SearchFilter.build("idCategory", SearchFilter.Operator.EQ, idCategory));
-        }else{
+        } else {
             page.addFilter(SearchFilter.build("idCategory", SearchFilter.Operator.IN, ids));
         }
         page.addFilter(SearchFilter.build("isOnSale", true));
@@ -105,9 +105,8 @@ public class GoodsController extends BaseController {
         Goods goods = goodsService.get(id);
         List<GoodsSku> skuList = goodsSkuService.queryAll(Lists.newArrayList(
                 SearchFilter.build("idGoods", id),
-                SearchFilter.build("isDeleted",false)
+                SearchFilter.build("isDeleted", false)
         ));
-
 
 
         Map skuMap = Maps.newHashMap();
@@ -166,15 +165,16 @@ public class GoodsController extends BaseController {
                 "goods", goods,
                 "sku", skuMap
         );
-        try {
-            //如果用户已登录，则获取用户是否收藏该商品
-            Long idUser = JwtUtil.getUserId();
-            Favorite favorite = favoriteService.get(idUser, id);
-            result.put("favorite",favorite!=null);
 
-        }catch (Exception e){
-            result.put("favorite",false);
+        //如果用户已登录，则获取用户是否收藏该商品
+        Long idUser = JwtUtil.getUserId();
+        if (idUser != null) {
+            Favorite favorite = favoriteService.get(idUser, id);
+            result.put("favorite", favorite != null);
+        } else {
+            result.put("favorite", false);
         }
+
         return Rets.success(result);
     }
 }

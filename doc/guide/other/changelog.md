@@ -1,7 +1,15 @@
 # Change log
 ##latest
 ### Issues
-- node-sass替换为dart-sass
+- Change node-sass替换为dart-sass
+- Change 完善微信用户登录逻辑
+- 升级shrio1.11.0版本到1.11.0,1.11.0版本之前存在权限绕过漏洞风险
+- Change 升级mysql驱动版本
+### Fixes
+- Fix 不同手机号通过绑定统一微信账号问题
+- Fix 系统参数对于新增参数的时候未对同名参数进行校验
+- Fix 修复保存用户的时候如果不输入生日报错的问题
+- Fix 修复用户未登录时查询商品详情懒加载异常的问题
 ## v0.8
 - 主项目：[gitee](https://gitee.com/microapp/linjiashop/releases/v0.8) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.8)
 - linjiashop-uniapp: [gitee](https://gitee.com/microapp/linjiashop-uniapp/releases/v0.8) [github](https://github.com/microapp-store/linjiashop-uniapp/releases/tag/v0.8)

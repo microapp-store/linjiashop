@@ -1,5 +1,6 @@
 # Change log
-##latest
+## v0.9
+- 主项目：[gitee](https://gitee.com/microapp/linjiashop/releases/v0.9) [github](https://github.com/microapp-store/linjiashop/releases/tag/v0.9)
 ### Issues
 - Change node-sass替换为dart-sass
 - Change 完善微信用户登录逻辑

@@ -151,7 +151,8 @@ _商品素材取自小米商城_
         - 启动微信开发工具导入linjiashop-wxapp/dist/wx 目录即可预览小程序
 
 ## 技术交流
--  qq群：1群：254059156（已满） 2群：909904351；qq群仅为方便网友互相交流，作者基本不会在群里回复，如果需要跟作者提问题，可以通过项目主页提issue；qq群禁止发广告，发者立删
+- qq群仅为方便网友互相交流，作者基本不会在群里回复，如果需要跟作者提问题，可以通过项目主页提issue；qq群禁止发广告，发者立删;为了提高加群门槛，请先通过下面链接打赏后加项目作者qq(82552623)，并将打赏截图发过去，作者将邀请你进群，[打赏链接](http://linjiashop.enilu.cn/linjiashop/donate.html),打赏金额随缘
+
 ## 在线文档
 - 项目文档：[http://linjiashop.enilu.cn/](http://linjiashop.enilu.cn/)
 - 该项目克隆并扩展自web-flash,所以开发的时候多看看web-flash的[在线文档](http://webflash.enilu.cn)

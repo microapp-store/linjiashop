@@ -42,9 +42,7 @@ module.exports = {
                     {
                         text: '帮助', items: [
                             {text: '在线资源', link: '/guide/base/resource'},
-                            {text: '问答社区', link: '/guide/other/xiaomiquan'},
                             {text: '视频教程', link: '/guide/other/video'},
-                            {text: 'QQ群(254059156)', link: 'https://jq.qq.com/?_wv=1027&k=5rEmcb6'},
                             {text: '作者blog', link: 'http://blog.enilu.cn'},
                             {text: 'FAQ', link: '/guide/other/faq'},
                             {text: 'Change Log', link: '/guide/other/changelog'}

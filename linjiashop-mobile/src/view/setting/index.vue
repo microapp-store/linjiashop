@@ -18,7 +18,7 @@
             <van-cell icon="share" title="性别" is-link :value="user.genderStr" @click="showGender=true"/>
             <van-cell icon="closed-eye" title="修改密码" is-link to="updatePwd"/>
             <van-cell icon="phone-o" title="更换手机" is-link to="updateMobile"/>
-            <van-cell icon="warning-o" title="关于本项目" is-link url="http://microapp.gitee.io/linjiashop/"/>
+            <van-cell icon="warning-o" title="关于本项目" is-link url="http://linjiashop.enilu.cn/linjiashop/"/>
         </van-cell-group>
         <div class="logout">
         <van-button type="danger" plain round block @click="onLogout">退出登录</van-button>

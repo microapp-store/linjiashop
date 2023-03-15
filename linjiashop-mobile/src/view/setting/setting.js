@@ -24,7 +24,7 @@ export default {
     store,
     data() {
         return {
-            avatarUrl: 'http://microapp.gitee.io/linjiashop/logo.jpg',
+            avatarUrl: 'http://linjiashop.enilu.cn/linjiashop/logo.jpg',
             user: {},
             showGender: false
         }

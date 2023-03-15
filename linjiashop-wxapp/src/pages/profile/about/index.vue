@@ -17,7 +17,7 @@
           linjiashop:邻家小铺，轻量，简洁的商城系统(h5,小程序,app)
 
         </p>
-        <p>http://microapp.gitee.io/linjiashop</p>
+        <p>http://linjiashop.enilu.cn/linjiashop</p>
 
       </van-col>
     </van-row>

@@ -17,8 +17,8 @@ pageClass: getting-started
 - linjiashop 是一个基于[Spring Boot](https://spring.io/projects/spring-boot/)和[Vue.js](https://cn.vuejs.org)的web商城系统
 - linjiashop 包含了商城的后台管理系统,手机h5，小程序版本
 - linjiashop 包含了app版本（基于flutter) 仓库地址[gitee](https://gitee.com/microapp/linjiashop-flutter),[github](https://github.com/microapp-store/linjiashop-flutter)
-- linjiashop 包含了uniapp版本（基于uniapp通过一套代码实现H5,Android，IOS，小程序等多平台 [项目地址](http://microapp.gitee.io/linjiashop/ecosystem/uniapp.html)
-- linjiashop 采用[web-flash](http://enilu.gitee.io/web-flash/)作为底层基础框架搭建，开发过程遇到问题请多阅读该项目文档，本文档重点对业务功能做介绍。 
+- linjiashop 包含了uniapp版本（基于uniapp通过一套代码实现H5,Android，IOS，小程序等多平台 [项目地址](http://linjiashop.enilu.cn/linjiashop/ecosystem/uniapp.html)
+- linjiashop 采用[web-flash](http://webflash.enilu.cn/)作为底层基础框架搭建，开发过程遇到问题请多阅读该项目文档，本文档重点对业务功能做介绍。 
 
 ## 演示
 ### 演示环境

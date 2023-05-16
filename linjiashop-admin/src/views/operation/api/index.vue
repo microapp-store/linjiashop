@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="block">
-      <iframe src="http://linjiashop-admin-api.microapp.store/swagger-ui.html" width="100%" height="768px" frameborder="0" scrolling="auto"></iframe>
+      <iframe src="http://linjiashop-admin.microapp.store/prod-api/swagger-ui.html" width="100%" height="768px" frameborder="0" scrolling="auto"></iframe>
 
 
     </div>

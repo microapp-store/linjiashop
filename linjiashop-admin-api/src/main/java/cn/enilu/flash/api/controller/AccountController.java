@@ -11,10 +11,7 @@ import cn.enilu.flash.core.log.LogTaskFactory;
 import cn.enilu.flash.security.UserService;
 import cn.enilu.flash.service.system.AccountService;
 import cn.enilu.flash.service.system.ManagerService;
-import cn.enilu.flash.utils.HttpUtil;
-import cn.enilu.flash.utils.MD5;
-import cn.enilu.flash.utils.Maps;
-import cn.enilu.flash.utils.StringUtil;
+import cn.enilu.flash.utils.*;
 import cn.enilu.flash.web.controller.BaseController;
 import org.nutz.mapl.Mapl;
 import org.slf4j.Logger;
@@ -75,6 +72,7 @@ public class AccountController extends BaseController {
             }else if(user.getStatus() == ManagerStatus.DELETED.getCode()){
                 return Rets.failure("用户已删除");
             }
+            password = CryptUtil.desEncrypt(password);
             String passwdMd5 = MD5.md5(password, user.getSalt());
             //2,
             if (!user.getPassword().equals(passwdMd5)) {

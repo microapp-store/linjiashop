@@ -6,7 +6,7 @@
 
     <div class="right-menu">
       <template>
-        <a target="_blank" href="http://linjiashop.enilu.cn/linjiashop" style="vertical-align: text-bottom;color:lightblue;">官方文档</a>
+        <a target="_blank" href="http://linjiashop.enilu.cn" style="vertical-align: text-bottom;color:lightblue;">官方文档</a>
       </template>
       <template>
         <lang-select class="international right-menu-item"/>

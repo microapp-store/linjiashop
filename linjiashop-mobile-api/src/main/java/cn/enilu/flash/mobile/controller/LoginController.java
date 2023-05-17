@@ -9,6 +9,7 @@ import cn.enilu.flash.cache.CacheDao;
 import cn.enilu.flash.security.UserService;
 import cn.enilu.flash.service.ApplicationProperties;
 import cn.enilu.flash.service.shop.ShopUserService;
+import cn.enilu.flash.utils.CryptUtil;
 import cn.enilu.flash.utils.MD5;
 import cn.enilu.flash.utils.RandomUtil;
 import cn.enilu.flash.utils.StringUtil;
@@ -127,8 +128,11 @@ public class LoginController extends BaseController {
             if (user == null) {
                 return Rets.failure("该用户不存在");
             }
-
+            try {
+                password = CryptUtil.desEncrypt(password);
+            }catch (Exception e){}
             String passwdMd5 = MD5.md5(password, user.getSalt());
+
             //2,
             if (!user.getPassword().equals(passwdMd5)) {
                 return Rets.failure("输入的密码错误");

@@ -1,6 +1,8 @@
 
 import { isvalidUsername } from '@/utils/validate'
 import LangSelect from '@/components/LangSelect'
+import AesUtil  from "@/utils/aes.js"
+
 export default {
   name: 'login',
   components: { LangSelect },
@@ -51,10 +53,13 @@ export default {
       }
     },
     handleLogin() {
+      const loginForm = this.loginForm
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('user/login', this.loginForm).then(() => {
+
+          let loginBody = {username: loginForm.username, password: AesUtil.encrypt(loginForm.password)}
+          this.$store.dispatch('user/login', loginBody).then(() => {
             this.loading = false
             this.$router.push(this.redirect)
 

@@ -1,6 +1,7 @@
 import loginApi from '@/api/login'
 import store from '@/store'
 import storage  from '@/utils/storage'
+import AesUtil from '@/utils/aes'
 import { Row, Col, Icon, Cell, CellGroup,Field,Button,Toast,
     Tabbar,
     TabbarItem,Dialog} from 'vant';
@@ -76,7 +77,7 @@ export default {
             })
         },
         loginByPass(){
-            loginApi.loginByPassword(this.mobile,this.password).then( response=> {
+            loginApi.loginByPassword(this.mobile, AesUtil.encrypt(this.password)).then( response=> {
                 store.dispatch('app/toggleToken',response.data.token)
                 store.dispatch('app/toggleUser',response.data.user)
                 this.resetForLogin()

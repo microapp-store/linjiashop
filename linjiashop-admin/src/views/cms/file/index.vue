@@ -29,6 +29,12 @@
           {{scope.row.originalFileName}}
         </template>
       </el-table-column>
+      <el-table-column label="缩略图">
+        <template slot-scope="scope">
+          <img style="width:60px" v-if="chkFileType(scope.row.originalFileName,'.jpg,.jpeg,.png,.gif,.bmp')" :src="imgHost+scope.row.realFileName">
+
+        </template>
+      </el-table-column>
       <el-table-column label="上传日期">
         <template slot-scope="scope">
           {{scope.row.createTime}}

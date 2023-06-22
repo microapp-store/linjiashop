@@ -32,8 +32,7 @@ public class CategoryController extends BaseController {
     private CategoryBannerRelService categoryBannerRelService;
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public Object list() {
-//        List<Category> list = categoryService.queryAll(SearchFilter.build("pid", SearchFilter.Operator.ISNULL), Sort.by(Sort.Direction.ASC,"sort"));
-        List<CategoryNode> list = categoryService.getCategories();
+        List<CategoryNode> list = categoryService.getCategories(Lists.newArrayList(SearchFilter.build("showIndex",true)));
         list.forEach(item->{
             List<CategoryBannerRel> relList = categoryBannerRelService.queryAll(SearchFilter.build("idCategory",item.getId()));
             List<Banner> bannerList = Lists.newArrayList();

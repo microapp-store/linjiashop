@@ -3,6 +3,7 @@ package cn.enilu.flash.service.shop;
 
 import cn.enilu.flash.bean.entity.shop.Category;
 import cn.enilu.flash.bean.vo.node.CategoryNode;
+import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.dao.shop.CategoryRepository;
 import cn.enilu.flash.service.BaseService;
 import cn.enilu.flash.utils.Lists;
@@ -16,28 +17,34 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CategoryService extends BaseService<Category,Long,CategoryRepository>  {
+public class CategoryService extends BaseService<Category, Long, CategoryRepository> {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<CategoryNode> getCategories() {
-        List<Category> list = queryAll(Sort.by(Sort.Direction.ASC,"sort"));
+    public List<CategoryNode> getCategories(List<SearchFilter> filters) {
+        List<Category> list = queryAll(Sort.by(Sort.Direction.ASC, "sort"));
+        if (filters != null) {
+            list = queryAll(filters, Sort.by(Sort.Direction.ASC, "sort"));
+        } else {
+            list = queryAll(Sort.by(Sort.Direction.ASC, "sort"));
+        }
+
         List<CategoryNode> nodes = Lists.newArrayList();
-        for(Category category:list){
-            if(category.getPid()==null) {
+        for (Category category : list) {
+            if (category.getPid() == null) {
                 CategoryNode node = new CategoryNode();
                 BeanUtils.copyProperties(category, node);
                 nodes.add(node);
             }
 
         }
-        for(CategoryNode node:nodes){
-            for(Category category:list){
-                if(category.getPid()!=null&&category.getPid().intValue() == node.getId().intValue()){
+        for (CategoryNode node : nodes) {
+            for (Category category : list) {
+                if (category.getPid() != null && category.getPid().intValue() == node.getId().intValue()) {
                     CategoryNode child = new CategoryNode();
-                    BeanUtils.copyProperties(category,child);
-                    if(node.getChildren()==null){
+                    BeanUtils.copyProperties(category, child);
+                    if (node.getChildren() == null) {
                         node.setChildren(Lists.newArrayList());
                     }
                     node.getChildren().add(child);
@@ -45,6 +52,10 @@ public class CategoryService extends BaseService<Category,Long,CategoryRepositor
             }
         }
         return nodes;
+    }
+
+    public List<CategoryNode> getCategories() {
+        return getCategories(null);
     }
 }
 

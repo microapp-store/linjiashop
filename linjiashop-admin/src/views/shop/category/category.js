@@ -25,7 +25,7 @@ export default {
         id: ''
       },
       total: 0,
-      list: null,
+      list: [],
       listLoading: true,
       selRow: {},
       apiUrl: getApiUrl(),
@@ -169,6 +169,7 @@ export default {
 
     },
     bannerMgr(data) {
+      console.log('data',data)
       if (data.pid) {
         this.$message({
           message: '二级菜单不支持该操作',
@@ -184,14 +185,13 @@ export default {
         console.log('banner', this.banner)
       })
     },
-    bannerRemove(id) {
-
-      categoryApi.removeBanner(this.banner.idCategory, id).then(response => {
+    bannerRemove(idBanner) {
+      categoryApi.removeBanner(this.banner.idCategory, idBanner).then(response => {
         this.$message({
           message: this.$t('common.optionSuccess'),
           type: 'success'
         })
-        this.bannerMgr(this.banner.idCategory)
+        this.bannerMgr({id:this.banner.idCategory})
       })
 
     },

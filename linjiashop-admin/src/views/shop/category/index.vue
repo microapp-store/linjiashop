@@ -152,7 +152,7 @@
         </el-tab-pane>
         <el-tab-pane label="预览" name="second">
           <el-carousel indicator-position="outside">
-            <el-carousel-item v-for="item in banner.list" :key="item">
+            <el-carousel-item v-for="item in banner.list" :key="item.idFile">
               <img :src="apiUrl+ '/file/getImgStream?idFile=' +item.idFile" style="width:100%;">
             </el-carousel-item>
           </el-carousel>

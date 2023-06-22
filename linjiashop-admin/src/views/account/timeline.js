@@ -22,7 +22,6 @@ export default {
     },
     queryByUser() {
       queryByUser().then(response => {
-            console.log(response)
             this.activities = response.data
 
           }).catch((err) => {

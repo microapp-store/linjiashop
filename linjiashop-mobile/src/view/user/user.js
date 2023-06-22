@@ -76,7 +76,6 @@ export default {
                 param += '&scope=snsapi_base'
                 param += '&redirect_uri=' + encodeURIComponent(redirectUrl)
                 param += '&state=linjiashop#wechat_redirect'
-                console.log('url:', 'https://open.weixin.qq.com/connect/oauth2/authorize?' + param)
                 window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?' + param
             }).catch(err => {
 

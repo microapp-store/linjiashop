@@ -71,11 +71,9 @@ export default {
       var self = this
       this.$refs['form'].validate((valid) => {
         if (valid) {
-          console.log('form', self.form)
           const menuData = {id:self.form.id,simplename:self.form.simplename,fullname:self.form.fullname,num:self.form.num,pid:self.form.pid}//self.form
           menuData.parent = null
           save(menuData).then(response => {
-            console.log(response)
             this.$message({
               message: '提交成功',
               type: 'success'

@@ -92,7 +92,6 @@ export default {
             }
         },
         onClickRight(){
-            console.log('aa')
             if(this.showEdit === true){
                 this.showEdit = false
                 this.rightText = '编辑'

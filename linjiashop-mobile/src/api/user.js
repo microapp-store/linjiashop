@@ -33,7 +33,6 @@ export default {
         })
     },
     upload:function(file){
-        console.log('file',file)
         return request({
             url: '/file/upload/base64',
             method: 'post',

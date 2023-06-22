@@ -473,7 +473,6 @@ export default {
       })
     },
     removeSku(index) {
-      console.log(index)
       let records = this.skuList.splice(index, 1)
       const record = records[0]
       goodsSku.remove(record.id)

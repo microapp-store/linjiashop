@@ -105,7 +105,6 @@ export default {
             data: self.form.data,
             note: self.form.note
           }).then(response => {
-            console.log(response)
             this.$message({
               message: '提交成功',
               type: 'success'

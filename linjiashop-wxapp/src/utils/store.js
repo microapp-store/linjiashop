@@ -22,12 +22,10 @@ const store = new Vuex.Store({
       obj.count -= 1
     },
     setToken: (state, token) => {
-      console.log('token', token)
       const obj = state
       obj.token = token
     },
     setUser: (state, user) => {
-      console.log('user', user)
       const obj = state
       obj.user = user
     },

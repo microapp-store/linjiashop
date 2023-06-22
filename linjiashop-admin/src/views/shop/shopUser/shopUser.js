@@ -71,7 +71,6 @@ export default {
           }else {
             item.img = getApiUrl() + '/file/getImgStream?idFile=' + item.avatar
           }
-          console.log('img',item.img)
         }
         this.listLoading = false
         this.total = response.data.total

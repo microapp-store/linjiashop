@@ -145,7 +145,6 @@ export default {
           type: 'warning'
         }).then(() => {
           remove(id).then(response => {
-              console.log(response)
               this.$message({
                 message: this.$t('common.optionSuccess'),
                 type: 'success'

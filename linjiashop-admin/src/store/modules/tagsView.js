@@ -84,7 +84,6 @@ const actions = {
   },
 
   delView({ dispatch, state }, view) {
-    console.log('---')
     return new Promise(resolve => {
       dispatch('delVisitedView', view)
       dispatch('delCachedView', view)

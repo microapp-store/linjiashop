@@ -210,7 +210,6 @@ export default {
       this.showArticle = true
     },
     changeDisabled(data) {
-      console.log('data', data)
       topicApi.changeDisabled(data.id,data.disabled).then(response => {
         this.$message({
           message: data.disabled?'禁用成功':'启用成功',
@@ -219,7 +218,6 @@ export default {
       })
     },
     searchGoods(query) {
-      console.log('query',query)
       if (query !== '') {
         this.searchLoading = true
         goodsApi.getList({ page: 1,
@@ -261,10 +259,8 @@ export default {
         })
       })
       this.selectedGoods = selectedGoods
-      console.log('val',val)
     },
     searchArticle(query) {
-      console.log('query',query)
       if (query !== '') {
         this.searchLoading = true
         articleApi.getList({ page: 1,
@@ -272,7 +268,6 @@ export default {
           title:query
         }).then( response => {
           this.articleList = response.data.records
-          console.log('articleList',this.articleList)
           this.searchLoading = false
         })
       } else {

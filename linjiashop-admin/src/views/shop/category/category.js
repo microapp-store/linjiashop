@@ -169,7 +169,6 @@ export default {
 
     },
     bannerMgr(data) {
-      console.log('data',data)
       if (data.pid) {
         this.$message({
           message: '二级菜单不支持该操作',
@@ -182,7 +181,6 @@ export default {
       this.banner.idCategory = data.id
       categoryApi.getBanners(data.id).then(response => {
         this.banner.list = response.data
-        console.log('banner', this.banner)
       })
     },
     bannerRemove(idBanner) {
@@ -194,8 +192,6 @@ export default {
         this.bannerMgr({id:this.banner.idCategory})
       })
 
-    },
-    bannerEdit() {
     },
     addBanner() {
       this.$router.push({path: 'banner', query: {idCategory: this.banner.idCategory}})
@@ -232,7 +228,6 @@ export default {
       })
     },
     attrKeyEdit(item) {
-      console.log('item', item)
       this.$prompt('请输入属性名', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -257,7 +252,6 @@ export default {
 
     },
     attrKeyRemove(id) {
-      console.log('id', id)
       attrKeyApi.remove(id).then(response => {
         this.$message({
           type: 'success',
@@ -272,7 +266,6 @@ export default {
     openAttrValDialog(item) {
       this.attrVal.idAttrKey = item.id
       this.attrVal.visible = true
-      console.log('item', item)
       attrValApi.getAttrVals(this.attrVal.idAttrKey).then(response2 => {
         this.attrVal.list = response2.data
       })
@@ -302,7 +295,6 @@ export default {
       })
     },
     attrValEdit(item) {
-      console.log('item', item)
       this.$prompt('请输入属性名', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -330,7 +322,6 @@ export default {
 
     },
     attrValRemove(id) {
-      console.log('id', id)
       attrValApi.remove(id).then(response => {
         this.$message({
           type: 'success',
@@ -353,7 +344,6 @@ export default {
     handleUploadSuccess(response, raw) {
       this.loadingInstance.close()
       if (response.code === 20000) {
-        console.log('aa',response)
         this.form.icon = response.data.realFileName
       } else {
         this.$message({

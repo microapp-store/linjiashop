@@ -150,8 +150,6 @@ export default {
 
         },
         clickSwipe(index, p2) {
-            console.log(index)
-            console.log(p2)
         },
         viewGoodsDetail(id) {
 

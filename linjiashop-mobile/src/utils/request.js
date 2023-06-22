@@ -67,7 +67,6 @@ service.interceptors.response.use(
         case 500:
           if(error.response.data.message ) {
             if (error.response.data.message.indexOf('relogin') > -1) {
-              console.log('need relogin')
               store.dispatch('app/toggleUser', {})
               store.dispatch('app/toggleToken', '')
               router.replace({

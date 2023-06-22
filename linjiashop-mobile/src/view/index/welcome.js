@@ -139,7 +139,6 @@ export default {
                     item.img = baseApi+'/file/getImgStream?idFile=' + item.article.img
                 }
                 this.topicList = list
-                console.log('topicList',this.topicList)
             })
         },
         clickNav(index, title) {
@@ -148,8 +147,6 @@ export default {
 
         },
         clickSwipe(index, p2) {
-            console.log(index)
-            console.log(p2)
         },
         viewGoodsDetail(id) {
             this.$router.push({path: '/goods/'+id})
@@ -187,7 +184,6 @@ export default {
                 param += '&scope=snsapi_base'
                 param += '&redirect_uri=' + encodeURIComponent(redirectUrl)
                 param += '&state=linjiashop#wechat_redirect'
-                console.log('url:', 'https://open.weixin.qq.com/connect/oauth2/authorize?' + param)
                 window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?' + param
             }).catch(err => {
 

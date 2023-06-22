@@ -3,6 +3,7 @@ import {getList} from '@/api/shop/address'
 import {getApiUrl} from '@/utils/utils'
 
 export default {
+  name:'shopUserDetail',
   data() {
     return {
       userInfo: {info:{}},

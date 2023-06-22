@@ -75,7 +75,6 @@ export default {
       this.selRow = currentRow
     },
     getDetails(list){
-      console.log('list',list)
     },
     resetForm() {
       this.form = {

@@ -53,8 +53,8 @@ public class UserController extends BaseController {
         }
         return Rets.success(userInfo);
     }
-    @RequestMapping(value = "/updateUserName/{userName}",method = RequestMethod.POST)
-    public Object updateUserName(@PathVariable("userName") String userName){
+    @RequestMapping(value = "/updateUserName",method = RequestMethod.POST)
+    public Object updateUserName(@RequestParam("userName") String userName){
         ShopUser user = shopUserService.getCurrentUser();
         user.setNickName(userName);
         shopUserService.update(user);

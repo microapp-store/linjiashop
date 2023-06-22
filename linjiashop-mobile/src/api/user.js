@@ -8,9 +8,11 @@ export default {
         })
     },
     updateUserName: function (userName) {
+        const params = {userName:userName}
         return request({
-            url: '/user/updateUserName/' + userName,
-            method: 'post'
+            url: '/user/updateUserName/',
+            method: 'post',
+            params
         })
     },
     updatePwd: function (params) {

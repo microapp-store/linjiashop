@@ -9,9 +9,11 @@ export default {
         })
     },
     wxPay: function (userName) {
+        const params = {userName:userName}
         return request({
-            url: '/user/updateUserName/' + userName,
-            method: 'post'
+            url: '/user/updateUserName/' ,
+            method: 'post',
+            params
         })
     },
     queryResult:function(orderSn){

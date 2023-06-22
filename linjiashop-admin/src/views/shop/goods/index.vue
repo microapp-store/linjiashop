@@ -53,6 +53,11 @@
           </el-switch>
         </template>
       </el-table-column>
+      <el-table-column label="库存">
+        <template slot-scope="scope">
+          {{scope.row.stock}}
+        </template>
+      </el-table-column>
       <el-table-column label="是否新品推荐">
         <template slot-scope="scope">
           <el-tag type="success" v-show="scope.row.isNew">是</el-tag>

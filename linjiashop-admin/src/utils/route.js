@@ -1,7 +1,7 @@
 
 export function setSideMenus(Menus) {
   /* 存储的是Json 字符串*/
-  localStorage.setItem('sideMenus', JSON.stringfy(Menus))
+  localStorage.setItem('sideMenus', JSON.stringify(Menus))
 }
 
 export function getSideMenus() {

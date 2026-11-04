@@ -27,11 +27,6 @@ pageClass: getting-started
 - App(基于uniapp)[http://fir.microapp.store/linjiashop](http://fir.microapp.store/linjiashop)
 - 后台管理：[http://linjiashop-admin.microapp.store](http://linjiashop-admin.microapp.store) 管理员账号/密码：admin/admin
 
-## 真实环境，支持下单支付
-- 公众号演示：关注公众号“外滩一号店"进行体验，或者扫描下面二维码关注
-
-    ![外滩一号店](https://gitee.com/microapp/linjiashop/raw/master/doc/img/online/wt1hd.jpg)
-
 - [开发教程视频](https://space.bilibili.com/525325274/channel/detail?cid=115895)
 ## 功能模块
 linjiashop包含了后台管理功能和手机端商城业务功能
@@ -149,5 +144,10 @@ linjiashop包含了后台管理功能和手机端商城业务功能
  
  
 ## 技术交流
+
+欢迎关注微信公众号「嗨客帝国」，一起交流技术。扫描下方二维码即可关注：
+
+![嗨客帝国微信公众号二维码](../../img/haikediguo-wechat.jpg)
+
 - qq群仅为方便网友互相交流，作者基本不会在群里回复，如果需要跟作者提问题，可以通过项目主页提issue；qq群禁止发广告，发者立删;为了提高加群门槛，请先通过下面链接打赏后加项目作者qq(82552623)，并将打赏截图发过去，作者将邀请你进群，[打赏链接](http://linjiashop.enilu.cn/linjiashop/donate.html),打赏金额随缘
 
